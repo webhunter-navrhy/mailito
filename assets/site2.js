@@ -42,14 +42,14 @@
   ];
   const feed = $('#heroFeed');
   if (feed) {
-    let i = 0, z = 19, o = 1874, r = 71;
+    let i = 0, z = 86, o = 9874;
     const add = (first) => {
       const [f, m, t] = LEADY[i++ % LEADY.length];
       const li = document.createElement('li'); li.className = 'fi';
       li.innerHTML = `<span class="fi-av">${f.split(' ').map(w => w[0]).slice(0, 2).join('')}</span><p class="fi-h">${f}<small>${first ? (i * 7) + ' min' : 'teraz'}</small></p><p class="fi-t">${m} · ${t}</p>`;
       feed.prepend(li);
       while (feed.children.length > 4) feed.lastElementChild.remove();
-      if (!first) { z++; r++; o += 9 + (Math.random() * 12 | 0); $('#aZ').textContent = z; $('#aR').textContent = r; $('#aO').textContent = fmt(o); }
+      if (!first) { z++; o += 9 + (Math.random() * 12 | 0); $('#aZ').textContent = z; $('#aO').textContent = fmt(o); }
     };
     for (let k = 0; k < 4; k++) add(true);
     if (!reduce) setInterval(() => { if (!document.hidden) add(false); }, 4200);
@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=218505d5').then(r => r.json()), fetch('data/sk_mapa.json?v=218505d5').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=cd07b18e').then(r => r.json()), fetch('data/sk_mapa.json?v=cd07b18e').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -149,7 +149,7 @@
     let W = 0, H = 0, dots = [], cols = 0, rows = 0;
     let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     const order = [...Array(1000).keys()].sort(() => rnd() - .5);
-    const replies = new Set(order.slice(0, 38)), leads = new Set(order.slice(0, 9));
+    const replies = new Set(order.slice(0, 38)), leads = new Set(order.slice(0, 9)), deals = new Set(order.slice(0, 2));
     const sentOrder = [...Array(1000).keys()].sort(() => rnd() - .5); const sentRank = new Map(sentOrder.map((v, i) => [v, i]));
     const layout = () => {
       const r = cv.getBoundingClientRect(); const dpr = Math.min(2, devicePixelRatio || 1);
@@ -160,13 +160,14 @@
       draw();
     };
     const steps = $$('#funSteps li'), pop = $('#funPop'), num = $('#funNum'), lbl = $('#funLbl');
-    const LBL = ['vybraných firiem', 'odoslaných e-mailov', 'odpovedí', 'záujemcov'];
+    const LBL = ['firiem', 'odoslaných e-mailov', 'odpovedí', 'záujemcov', 'zákaziek · ≈ 27 000 €'];
     let last = -1;
     const draw = () => {
       const r = fun.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
-      const st = p < .2 ? 0 : p < .45 ? 1 : p < .7 ? 2 : 3;
-      const t = st === 0 ? p / .2 : st === 1 ? (p - .2) / .25 : st === 2 ? (p - .45) / .25 : Math.min(1, (p - .7) / .2);
+      const B = [0, .17, .37, .57, .77, .95];
+      let st = 0; while (st < 4 && p >= B[st + 1]) st++;
+      const t = Math.min(1, (p - B[st]) / (B[st + 1] - B[st]));
       ctx.clearRect(0, 0, W, H);
       for (let i = 0; i < 1000; i++) {
         const d = dots[i]; if (!d) continue;
@@ -174,15 +175,18 @@
         if (st === 0) { const v = Math.min(1, Math.max(0, (t * 1.2 - i / 1000) * 6)); a = v; }
         else if (st === 1) { c = sentRank.get(i) / 1000 < t ? '#1A1C20' : '#D9DBDF'; }
         else if (st === 2) { if (replies.has(i)) { c = '#3E63DD'; rad = d.r * (1 + .5 * t); } else { c = t > .05 ? `rgba(26,28,32,${Math.max(.12, 1 - t * .9)})` : '#1A1C20'; } }
-        else { if (leads.has(i)) { c = '#1E8455'; rad = d.r * (1.5 + .6 * t); ctx.fillStyle = 'rgba(30,132,85,.16)'; ctx.beginPath(); ctx.arc(d.x, d.y, rad * 2.4 * t, 0, 7); ctx.fill(); }
+        else if (st === 3) { if (leads.has(i)) { c = '#1E8455'; rad = d.r * (1.5 + .6 * t); ctx.fillStyle = 'rgba(30,132,85,.16)'; ctx.beginPath(); ctx.arc(d.x, d.y, rad * 2.4 * t, 0, 7); ctx.fill(); }
                 else if (replies.has(i)) { c = `rgba(62,99,221,${1 - t * .75})`; rad = d.r * 1.5; } else c = 'rgba(26,28,32,.12)'; }
+        else { if (deals.has(i)) { c = '#C08A1E'; rad = d.r * (2.1 + 1.2 * t); ctx.fillStyle = 'rgba(192,138,30,.18)'; ctx.beginPath(); ctx.arc(d.x, d.y, rad * 2.2, 0, 7); ctx.fill(); }
+               else if (leads.has(i)) { c = '#1E8455'; rad = d.r * 2.1; } else c = 'rgba(26,28,32,.10)'; }
         ctx.globalAlpha = a; ctx.fillStyle = c; ctx.beginPath(); ctx.arc(d.x, d.y, rad, 0, 7); ctx.fill();
       }
       ctx.globalAlpha = 1;
-      const n = st === 0 ? 1000 * Math.min(1, t * 1.2) : st === 1 ? 1000 * t : st === 2 ? 38 * t : 9 * t;
-      num.textContent = fmt(st === 0 && t >= .83 ? 1000 : n); lbl.textContent = LBL[st];
+      const n = st === 0 ? 10000 * Math.min(1, t * 1.2) : st === 1 ? 10000 * t : st === 2 ? 380 * t : st === 3 ? 90 * t : 18 * t;
+      num.textContent = fmt(st === 0 && t >= .83 ? 10000 : n); lbl.textContent = LBL[st];
       if (st !== last) { steps.forEach((li, k) => { li.classList.toggle('on', k === st); li.classList.toggle('done', k < st); }); last = st; }
       pop.classList.toggle('on', st === 3 && t > .45);
+      fun.classList.toggle('deal', st === 4);
     };
     let ticking = false, vis = false;
     new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) draw(); }).observe(fun);
@@ -212,7 +216,7 @@
   const indTabs = $('#indTabs'), indPanel = $('#indPanel');
   if (indTabs) {
     let T = null;
-    fetch('data/trh.json?v=218505d5').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    fetch('data/trh.json?v=cd07b18e').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
     indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
     const show = i => {
       const x = IND[i];
