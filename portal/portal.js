@@ -96,7 +96,7 @@
         <div class="card">
           <div class="card-h"><h2>Priebeh po dňoch</h2><span class="muted" style="font-size:.8rem">posledných ${keys.length} dní</span></div>
           ${keys.length ? `<div class="chart">${keys.map(k => `<div class="col" data-t="${esc(k.slice(8, 10) + '. ' + k.slice(5, 7) + '. · ' + days[k].odoslane + ' odoslaných · ' + days[k].zaujemcovia + ' záujemcov')}">${days[k].zaujemcovia ? `<span class="zn">${days[k].zaujemcovia}</span>` : ''}<span class="bar" style="height:${days[k].odoslane / max * 78}%"></span></div>`).join('')}</div>
-          <div class="legend"><span><i style="background:var(--blue)"></i>Odoslané</span><span><i style="background:var(--red);border-radius:50%"></i>Počet záujemcov v daný deň</span></div>` : '<p class="empty">Graf sa zobrazí po spustení kampane.</p>'}
+          <div class="legend"><span><i style="background:#E6EAF0;border-top:2px solid var(--tx)"></i>Odoslané</span><span><i style="background:var(--red);border-radius:50%"></i>Počet záujemcov v daný deň</span></div>` : '<p class="empty">Graf sa zobrazí po spustení kampane.</p>'}
         </div>
         <div class="card">
           <div class="card-h"><h2>Čo sa deje</h2></div>

@@ -9,29 +9,30 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=e8d3fec1">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site2.css?v=72958cab">
 </head>
-<body>
+<body class="sub">
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a href="../" class="logo" aria-label="Mailito – domov">
-      <svg viewBox="0 0 40 28" aria-hidden="true"><rect x="1.5" y="1.5" width="37" height="25" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M3 4l17 12L37 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="34" cy="5" r="5" fill="var(--red)"/></svg>
-      mailito
-    </a>
+    <a href="../" class="logo" aria-label="Mailito – domov"><span class="logo-m" aria-hidden="true"></span>mailito</a>
     <nav class="menu" id="menu" aria-label="Hlavná navigácia">
       <a href="../#ako">Ako to funguje</a>
       <a href="../#trh">Váš trh</a>
       <a href="../#cennik">Cenník</a>
       <a href="../#otazky">Otázky</a>
-      <a href="../portal/" class="menu-portal">Klientsky portál</a>
-      <a href="../#zadanie" class="btn btn-red btn-sm">Spustiť test</a>
+      <a href="../portal/" class="menu-m">Klientsky portál</a>
+      <a href="../#zadanie" class="btn btn-dark menu-m">Spustiť kampaň</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+    <div class="nav-r">
+      <a href="../portal/" class="nav-link">Prihlásiť sa</a>
+      <a href="../#zadanie" class="btn btn-dark btn-sm">Spustiť kampaň</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+    </div>
   </div>
 </header>
 <main id="obsah" class="page"><div class="wrap prose">
-<p class="kicker">Pre adresátov</p>
+<p class="eyebrow">Pre adresátov</p>
 <h1>Prečo ste dostali e-mail</h1>
 <p>Dostali ste e-mail, ktorý sme odoslali v mene jedného z našich klientov – slovenskej alebo českej firmy, ktorá ponúka služby alebo tovar iným firmám. Pre klienta hľadáme firmy, ktorým by jeho ponuka mohla dávať zmysel, a pošleme im krátku osobnú správu.</p>
 
@@ -51,9 +52,9 @@
 <div class="box">
 <form class="form" id="optForm" novalidate>
   <label>E-mailová adresa<input name="email" type="email" required autocomplete="email"></label>
-  <label class="check"><input type="checkbox" name="cela_domena"> Neposielať nič na žiadnu adresu našej firmy (celá doména)</label>
+  <label class="check"><input type="checkbox" name="cela_domena"><span>Neposielať nič na žiadnu adresu našej firmy (celá doména)</span></label>
   <label>Dôvod <small>(nepovinné)</small><input name="dovod"></label>
-  <button class="btn btn-red" type="submit">Odhlásiť</button>
+  <button class="btn btn-dark" type="submit">Odhlásiť</button>
   <p class="form-msg" id="optMsg" role="status"></p>
 </form>
 </div>
@@ -67,29 +68,18 @@ try{const r=await fetch('https://mailito-api.webhunter.workers.dev/api/odhlasit'
 catch(err){m.className='form-msg err';m.textContent=err.message&&err.message!=='Failed to fetch'?err.message:'Nepodarilo sa. Napíšte nám na info@mailito.eu.';}});
 const q=new URLSearchParams(location.search).get('e');if(q)document.querySelector('#optForm [name=email]').value=q;
 </script>
-<div class="airmail" aria-hidden="true"></div>
 <footer class="foot">
   <div class="wrap foot-grid">
     <div>
-      <a href="../" class="logo logo-foot">mailito</a>
-      <p>Noví B2B zákazníci zo Slovenska priamo do schránky.</p>
+      <a href="../" class="logo"><span class="logo-m" aria-hidden="true"></span>mailito</a>
+      <p class="foot-claim">Noví B2B zákazníci zo Slovenska priamo do schránky.</p>
     </div>
-    <div>
-      <p class="foot-h">Služba</p>
-      <a href="../#ako">Ako to funguje</a><a href="../#cennik">Cenník</a><a href="../portal/">Klientsky portál</a>
-    </div>
-    <div>
-      <p class="foot-h">Dôležité</p>
-      <a href="../preco/">Prečo ste dostali e-mail</a><a href="../preco/#odhlasit">Odhlásiť sa</a><a href="../podmienky/">Podmienky a ochrana údajov</a>
-    </div>
-    <div>
-      <p class="foot-h">Kontakt</p>
-      <a href="mailto:info@mailito.eu">info@mailito.eu</a>
-      <p class="foot-small">Prevádzkovateľ: WebHunter s.r.o.<br>IČO 29498511, Praha, Česká republika</p>
-    </div>
+    <div><p class="foot-h">Služba</p><a href="../#ako">Ako to funguje</a><a href="../#cennik">Cenník</a><a href="../portal/">Klientsky portál</a></div>
+    <div><p class="foot-h">Dôležité</p><a href="../preco/">Prečo ste dostali e-mail</a><a href="../preco/#odhlasit">Odhlásiť sa</a><a href="../podmienky/">Podmienky a ochrana údajov</a></div>
+    <div><p class="foot-h">Kontakt</p><a href="mailto:info@mailito.eu">info@mailito.eu</a><p class="foot-small">Prevádzkovateľ: WebHunter s.r.o.<br>IČO 29498511, Praha</p></div>
   </div>
   <p class="wrap foot-copy">© 2026 Mailito</p>
 </footer>
-<script src="../assets/site.js?v=e8d3fec1" defer></script>
+<script src="../assets/site2.js?v=72958cab" defer></script>
 </body>
 </html>
