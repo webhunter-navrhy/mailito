@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-obloha.webp">
-<link rel="stylesheet" href="assets/site2.css?v=fb974448">
+<link rel="stylesheet" href="assets/site2.css?v=469b9b19">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Mailito","url":"https://mailito.eu/","areaServed":"SK","description":"B2B lead generation pre slovenské firmy: e-mailové kampane, vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","parentOrganization":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
@@ -29,6 +29,7 @@
     <a href="./" class="logo" aria-label="Mailito – domov"><span class="logo-m" aria-hidden="true"></span>mailito</a>
     <nav class="menu" id="menu" aria-label="Hlavná navigácia">
       <a href="#ako">Ako to funguje</a>
+      <a href="#portal">Portál</a>
       <a href="#trh">Váš trh</a>
       <a href="#cennik">Cenník</a>
       <a href="#otazky">Otázky</a>
@@ -94,11 +95,42 @@
   <img class="hero-fg" src="assets/img/hero-trava.webp" alt="" aria-hidden="true">
 </section>
 
-<!-- ODVETVIA -->
-<section class="strip">
-  <div class="wrap strip-in">
-    <p>Pomáhame firmám, ktoré predávajú iným firmám</p>
-    <ul><li>Výroba</li><li>Logistika</li><li>IT služby</li><li>Stavebníctvo</li><li>Veľkoobchod</li><li>Účtovníctvo</li><li>BOZP</li><li>Upratovanie</li><li>Reklama a tlač</li></ul>
+<!-- DÔVERA -->
+<section class="trust">
+  <div class="wrap trust-in">
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" /></svg></span><p><b>Dáta z registra</b><span>Register právnických osôb SR</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><p><b>V súlade so zákonom</b><span>§ 116 ods. 15 z. 452/2021 Z. z.</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><p><b>Bez viazanosti</b><span>Žiadne mesačné poplatky</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><p><b>Platíte po schválení</b><span>Nič neodíde bez vášho OK</span></p></div>
+  </div>
+  <div class="wrap trust-ind"><p>Pomáhame firmám, ktoré predávajú iným firmám</p><ul><li>Výroba</li><li>Logistika</li><li>IT služby</li><li>Stavebníctvo</li><li>Veľkoobchod</li><li>Účtovníctvo</li><li>BOZP</li><li>Upratovanie</li><li>Reklama a tlač</li></ul></div>
+</section>
+
+<!-- LIEVIK (scroll) -->
+<section class="fun" id="lievik" aria-label="Ako vyzerá kampaň na 1 000 firiem">
+  <div class="fun-sticky">
+    <div class="wrap fun-grid">
+      <div class="fun-txt">
+        <p class="eyebrow">Kampaň na 1&nbsp;000 firiem</p>
+        <h2>Z tisícky firiem<br><em>sú rozhovory.</em></h2>
+        <ol class="fun-steps" id="funSteps">
+          <li data-s="0"><b>1&nbsp;000</b><span>vybraných firiem z vašej cieľovky</span></li>
+          <li data-s="1"><b>1&nbsp;000</b><span>osobných e-mailov odoslaných postupne</span></li>
+          <li data-s="2"><b>38</b><span>firiem odpovedalo, my sme ich vytriedili</span></li>
+          <li data-s="3"><b>9</b><span>záujemcov s kontaktom vo vašom portáli</span></li>
+        </ol>
+        <p class="fun-note">Ilustračná kampaň s priemernými výsledkami. Výsledok závisí najmä od ponuky.</p>
+      </div>
+      <div class="fun-vis">
+        <canvas id="funCanvas" aria-hidden="true"></canvas>
+        <div class="fun-pop" id="funPop" aria-hidden="true">
+          <p class="fp fp1"><span class="g-dot"></span><b>Plasty Nitra s.r.o.</b>Pošlite cenník.</p>
+          <p class="fp fp2"><span class="g-dot"></span><b>Kovo Záhorie a.s.</b>Chceme ponuku od januára.</p>
+          <p class="fp fp3"><span class="g-dot"></span><b>Tatra Sklad s.r.o.</b>Zavolajte zajtra.</p>
+        </div>
+        <p class="fun-count"><span id="funNum">1&nbsp;000</span><small id="funLbl">vybraných firiem</small></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -167,6 +199,36 @@
   </div>
 </section>
 
+<!-- ODVETVIA – ZÁLOŽKY -->
+<section class="ind" id="odvetvia">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Pre vaše odvetvie</p>
+      <h2>Kto sú vaši budúci<br><em>zákazníci?</em></h2>
+    </header>
+    <div class="ind-tabs" role="tablist" id="indTabs"></div>
+    <div class="ind-panel card" id="indPanel" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- ŽIVÝ PORTÁL -->
+<section class="live-sec" id="portal">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Klientsky portál</p>
+      <h2>Vyskúšajte si ho.<br><em>Priamo tu, naživo.</em></h2>
+      <p class="sec-sub">Toto je skutočný portál s ukážkovými dátami. Kliknite na záujemcu, zmeňte stav obchodu, pozrite si texty kampane.</p>
+    </header>
+    <div class="browser rv">
+      <div class="br-bar"><span class="br-dots"><i></i><i></i><i></i></span><span class="br-url">mailito.eu/portal</span><span class="br-live"><i></i>Interaktívna ukážka</span></div>
+      <div class="br-body" id="brBody">
+        <iframe src="portal/?demo=1&amp;embed=1" title="Ukážka klientskeho portálu Mailito" loading="lazy" tabindex="0"></iframe>
+      </div>
+    </div>
+    <p class="live-cta"><a class="btn btn-line" href="portal/?demo=1" target="_blank" rel="noopener">Otvoriť portál na celú obrazovku</a></p>
+  </div>
+</section>
+
 <!-- TMAVÁ SEKCIA -->
 <section class="talk">
   <div class="wrap talk-head rv">
@@ -206,6 +268,29 @@
     <div class="rv"><b>1,1&nbsp;%</b><span>záujemcov na našich vlastných kampaniach</span></div>
   </div>
   <p class="wrap talk-note">Ilustračné odpovede, mená firiem sú vymyslené. Dáta z verejných katalógov firiem a Registra právnických osôb SR, aktualizované 5.&nbsp;10.&nbsp;2026.</p>
+</section>
+
+<!-- POROVNANIE -->
+<section class="cmp" id="porovnanie">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Porovnanie</p>
+      <h2>Prečo nie reklama<br><em>alebo telefonovanie?</em></h2>
+    </header>
+    <div class="cmp-wrap rv">
+      <table class="cmp-t">
+        <thead><tr><th></th><th>Online reklama</th><th>Telemarketing</th><th>Kúpa databázy</th><th class="me"><span class="logo-m" aria-hidden="true"></span>Mailito</th></tr></thead>
+        <tbody>
+          <tr><th>Čo dostanete</th><td>Kliky a návštevy webu</td><td>Dohodnuté hovory</td><td>Tabuľku kontaktov</td><td class="me">Firmy, ktoré napísali „áno“</td></tr>
+          <tr><th>Kto robí prácu</th><td>Vy a agentúra</td><td>Call centrum</td><td>Vy sami</td><td class="me">My – vy len voláte záujemcom</td></tr>
+          <tr><th>Platíte</th><td>Za každý klik, aj zbytočný</td><td>Mesačne alebo za stretnutie</td><td>Ročné predplatné</td><td class="me">Raz, podľa počtu firiem</td></tr>
+          <tr><th>Prvé výsledky</th><td>Týždne ladenia</td><td>Po zaškolení operátorov</td><td>Až keď ich oslovíte</td><td class="me">Zvyčajne do 7 dní</td></tr>
+          <tr><th>B2B cielenie</th><td>Obmedzené</td><td>Dobré</td><td>Dobré</td><td class="me">1&nbsp;810 odborov, 8 krajov</td></tr>
+          <tr><th>Riziko</th><td>Rozpočet sa minie bez obchodu</td><td>Otrávení adresáti</td><td>GDPR a spam ostáva na vás</td><td class="me">Záruka pri prvej kampani</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
 <!-- TRH -->
@@ -289,6 +374,23 @@
   </div>
 </section>
 
+<!-- ČASOVÁ OS -->
+<section class="tl">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Prvých 14 dní</p>
+      <h2>Od zadania<br><em>po prvý obchod.</em></h2>
+    </header>
+    <ol class="tl-list rv">
+      <li><span class="tl-d">Deň 1</span><h3>Zadanie</h3><p>Vyplníte krátky formulár: čo predávate a komu.</p></li>
+      <li><span class="tl-d">Deň 2–3</span><h3>Návrh v portáli</h3><p>Cieľovka, počet firiem a texty e-mailov na schválenie.</p></li>
+      <li><span class="tl-d">Deň 3</span><h3>Štart</h3><p>Po schválení a úhrade odosielame postupne v pracovnom čase.</p></li>
+      <li class="hot"><span class="tl-d">Deň 3–14</span><h3>Záujemcovia</h3><p>Každú odpoveď vytriedime, záujemca je u vás do 10 minút.</p></li>
+      <li><span class="tl-d">Deň 14</span><h3>Report</h3><p>Čísla, víťazný predmet a odporúčanie, ako pokračovať.</p></li>
+    </ol>
+  </div>
+</section>
+
 <!-- PRAVIDLÁ + FAQ -->
 <section class="faq" id="otazky">
   <div class="wrap faq-grid">
@@ -363,6 +465,6 @@
   <p class="foot-word" aria-hidden="true">mailito</p>
 </footer>
 
-<script src="assets/site2.js?v=fb974448" defer></script>
+<script src="assets/site2.js?v=469b9b19" defer></script>
 </body>
 </html>

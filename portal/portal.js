@@ -19,6 +19,7 @@
   { const sel = document.getElementById('nkPocet'); if (sel) { let o = ''; for (let n = 1000; n <= 20000; n += 500) o += `<option value="${n}" ${n === 3500 ? 'selected' : ''}>${fmt(n)} firiem · ${fmt(cena(n))} €</option>`; sel.innerHTML = o; } }
 
   const demo = new URLSearchParams(location.search).has('demo');
+  const embed = new URLSearchParams(location.search).has('embed');
   let S = { klient: null, kampane: [], leady: [], udalosti: [], leadStat: [] };
   let filt = { stav: 'vsetko', q: '', kampan: '' };
 
@@ -331,7 +332,8 @@
     try { await load(); } catch (err) { if (!demo) { showLogin(); return; } }
     $('#login').hidden = true; $('#app').hidden = false;
     $('#sideClient').textContent = S.klient?.firma || S.klient?.email || '';
-    $('#demoFlag').hidden = !demo;
+    $('#demoFlag').hidden = !demo || embed;
+    if (embed) { $('#btnLogout').hidden = true; document.body.classList.add('embed'); }
     route();
   }
   if (demo || store.get(TK)) start(); else showLogin();

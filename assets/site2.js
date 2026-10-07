@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=fb974448').then(r => r.json()), fetch('data/sk_mapa.json?v=fb974448').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=469b9b19').then(r => r.json()), fetch('data/sk_mapa.json?v=469b9b19').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -140,6 +140,100 @@
     $('#cfgTrh').addEventListener('click', () => { range.value = snap(trhN); cfgRender(); });
     $('#calcCta')?.addEventListener('click', () => { if (trhN && +range.value > trhN) { range.value = Math.max(1000, Math.floor(trhN / 500) * 500); cfgRender(); } });
     cfgRender();
+  }
+
+  // ===== v4: lievik na 1 000 firiem (canvas, natívny scroll) =====
+  const fun = $('#lievik'), cv = $('#funCanvas');
+  if (fun && cv) {
+    const ctx = cv.getContext('2d');
+    let W = 0, H = 0, dots = [], cols = 0, rows = 0;
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const order = [...Array(1000).keys()].sort(() => rnd() - .5);
+    const replies = new Set(order.slice(0, 38)), leads = new Set(order.slice(0, 9));
+    const sentOrder = [...Array(1000).keys()].sort(() => rnd() - .5); const sentRank = new Map(sentOrder.map((v, i) => [v, i]));
+    const layout = () => {
+      const r = cv.getBoundingClientRect(); const dpr = Math.min(2, devicePixelRatio || 1);
+      W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const pad = 26; cols = Math.round(Math.sqrt(1000 * (W - pad * 2) / (H - pad * 2))); rows = Math.ceil(1000 / cols);
+      const gx = (W - pad * 2) / cols, gy = (H - pad * 2 - 40) / rows;
+      dots = [...Array(1000).keys()].map(i => ({ x: pad + gx * (i % cols + .5), y: pad + gy * (Math.floor(i / cols) + .5), r: Math.min(gx, gy) * .3 }));
+      draw();
+    };
+    const steps = $$('#funSteps li'), pop = $('#funPop'), num = $('#funNum'), lbl = $('#funLbl');
+    const LBL = ['vybraných firiem', 'odoslaných e-mailov', 'odpovedí', 'záujemcov'];
+    let last = -1;
+    const draw = () => {
+      const r = fun.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+      const st = p < .2 ? 0 : p < .45 ? 1 : p < .7 ? 2 : 3;
+      const t = st === 0 ? p / .2 : st === 1 ? (p - .2) / .25 : st === 2 ? (p - .45) / .25 : Math.min(1, (p - .7) / .2);
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < 1000; i++) {
+        const d = dots[i]; if (!d) continue;
+        let c = '#D9DBDF', rad = d.r, a = 1;
+        if (st === 0) { const v = Math.min(1, Math.max(0, (t * 1.2 - i / 1000) * 6)); a = v; }
+        else if (st === 1) { c = sentRank.get(i) / 1000 < t ? '#1A1C20' : '#D9DBDF'; }
+        else if (st === 2) { if (replies.has(i)) { c = '#3E63DD'; rad = d.r * (1 + .5 * t); } else { c = t > .05 ? `rgba(26,28,32,${Math.max(.12, 1 - t * .9)})` : '#1A1C20'; } }
+        else { if (leads.has(i)) { c = '#1E8455'; rad = d.r * (1.5 + .6 * t); ctx.fillStyle = 'rgba(30,132,85,.16)'; ctx.beginPath(); ctx.arc(d.x, d.y, rad * 2.4 * t, 0, 7); ctx.fill(); }
+                else if (replies.has(i)) { c = `rgba(62,99,221,${1 - t * .75})`; rad = d.r * 1.5; } else c = 'rgba(26,28,32,.12)'; }
+        ctx.globalAlpha = a; ctx.fillStyle = c; ctx.beginPath(); ctx.arc(d.x, d.y, rad, 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      const n = st === 0 ? 1000 * Math.min(1, t * 1.2) : st === 1 ? 1000 * t : st === 2 ? 38 * t : 9 * t;
+      num.textContent = fmt(st === 0 && t >= .83 ? 1000 : n); lbl.textContent = LBL[st];
+      if (st !== last) { steps.forEach((li, k) => { li.classList.toggle('on', k === st); li.classList.toggle('done', k < st); }); last = st; }
+      pop.classList.toggle('on', st === 3 && t > .45);
+    };
+    let ticking = false, vis = false;
+    new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) draw(); }).observe(fun);
+    addEventListener('scroll', () => { if (!vis || ticking) return; ticking = true; requestAnimationFrame(() => { draw(); ticking = false; }); }, { passive: true });
+    addEventListener('resize', layout);
+    layout();
+  }
+
+  // ===== v4: odvetvia =====
+  const IND = [
+    { s: 'Výroba a priemysel', t: 'Predávate výrobným firmám?', p: 'Servis strojov, materiál, BOZP, upratovanie hál, logistika alebo softvér pre výrobu. Oslovíme strojárov, kovovýrobu, plasty aj potravinárov.',
+      who: ['Strojárstvo', 'Kovovýroba', 'Plasty', 'Potravinárstvo', 'Drevovýroba'], sub: 'Servis CNC strojov do 48 hodín', body: 'Dobrý deň, staráme sa o CNC stroje vo firmách na západnom Slovensku. Pri poruche prídeme do 48 hodín, pravidelný servis plánujeme mimo zmien. Mám Vám poslať cenník servisnej zmluvy?',
+      rf: 'Kovo Záhorie a.s.', rt: 'Máme 6 strojov, pošlite cenník servisnej zmluvy.' },
+    { s: 'Služby pre firmy', t: 'Predávate služby iným firmám?', p: 'Softvér, školenia, poistenie, firemné darčeky alebo personalistika. Oslovíme účtovníkov, poradcov, agentúry a kancelárie.',
+      who: ['Účtovníctvo', 'Poradenstvo', 'Personalistika', 'Upratovanie', 'Školenia'], sub: 'Firemné darčeky s logom do Vianoc', body: 'Dobrý deň, pripravujeme vianočné balíčky s logom pre klientov a zamestnancov, od 20 kusov, s doručením po celom Slovensku. Mám Vám poslať katalóg a ceny?',
+      rf: 'Ekonomik Poradca s.r.o.', rt: 'Potrebujeme 40 balíčkov, pošlite katalóg.' },
+    { s: 'IT, marketing a médiá', t: 'Predávate IT firmám a agentúram?', p: 'Hardvér, nábor, coworking, účtovníctvo alebo právne služby. Oslovíme vývojárov, web štúdiá, agentúry a médiá.',
+      who: ['Vývoj softvéru', 'Web štúdiá', 'Reklamné agentúry', 'IT služby', 'Tlač'], sub: 'Nábor vývojárov bez platby vopred', body: 'Dobrý deň, hľadáme vývojárov pre IT firmy na Slovensku a platíte až za nástup. Ak teraz niekoho hľadáte, pošlem Vám 3 overených kandidátov do týždňa. Môžem?',
+      rf: 'WebSoft s.r.o.', rt: 'Hľadáme 2 Java vývojárov, zavolajte mi.' },
+    { s: 'Stavebníctvo a remeslá', t: 'Predávate stavebným firmám?', p: 'Materiál, požičovňa techniky, lešenia, BOZP, poistenie alebo účtovníctvo. Oslovíme stavebné firmy, remeselníkov aj projektantov.',
+      who: ['Stavebné firmy', 'Projektanti', 'Elektroinštalácie', 'Strechy', 'Inštalatéri'], sub: 'Lešenie s dovozom do 24 hodín', body: 'Dobrý deň, prenajímame fasádne lešenie s montážou a dovozom do 24 hodín v celom Žilinskom kraji. Mám Vám poslať cenu na Vašu najbližšiu stavbu?',
+      rf: 'Stavby Kysuce s.r.o.', rt: 'Potrebujeme 300 m² na november, pošlite cenu.' },
+    { s: 'Logistika a doprava', t: 'Predávate dopravcom a skladom?', p: 'Pneuservis, GPS monitoring, palivové karty, poistenie flotily alebo skladové systémy. Oslovíme dopravcov, špeditérov a sklady.',
+      who: ['Nákladná doprava', 'Špedícia', 'Sklady', 'Kuriéri', 'Medzinárodná preprava'], sub: 'GPS monitoring vozidiel, 3 mesiace zdarma', body: 'Dobrý deň, montujeme GPS jednotky do nákladných áut s knihou jázd a hlásením spotreby. Prvé 3 mesiace sú zdarma. Mám Vám poslať ponuku pre Vašu flotilu?',
+      rf: 'Trans Váh s.r.o.', rt: 'Máme 18 kamiónov, pošlite ponuku.' },
+  ];
+  const indTabs = $('#indTabs'), indPanel = $('#indPanel');
+  if (indTabs) {
+    let T = null;
+    fetch('data/trh.json?v=469b9b19').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
+    const show = i => {
+      const x = IND[i];
+      const n = T ? Object.values(T.matica[x.s] || {}).reduce((a, b) => a + b, 0) : 0;
+      $$('button', indTabs).forEach(b => b.setAttribute('aria-selected', +b.dataset.i === i));
+      indPanel.innerHTML = `<div class="ind-l"><p class="eyebrow">${x.s}</p><h3>${x.t}</h3><p>${x.p}</p>
+        <div class="ind-nums"><div><b>${n ? fmt(n) : '–'}</b><span>firiem s firemným e-mailom</span></div><div><b>${n ? fmt(n * .003) + '–' + fmt(n * .012) : '–'}</b><span>očakávaných záujemcov z celého odvetvia</span></div></div>
+        <div class="ind-who">${x.who.map(w => `<span>${w}</span>`).join('')}</div></div>
+        <div class="ind-r"><div class="ind-mail"><div class="card-h"><p>Ukážka e-mailu</p><span class="pill">Ilustračný príklad</span></div><p class="mail-s"><span>Predmet</span>${x.sub}</p><p class="mail-b">${x.body}</p></div>
+        <div class="ind-reply"><b><span class="g-dot"></span>${x.rf}</b>„${x.rt}“</div></div>`;
+      indPanel.classList.remove('swap'); void indPanel.offsetWidth; indPanel.classList.add('swap');
+    };
+    indTabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  }
+
+  // ===== v4: živý portál v rámčeku – zmenšenie na šírku =====
+  const brBody = $('#brBody');
+  if (brBody) {
+    const ifr = $('iframe', brBody);
+    const fit = () => { const w = brBody.clientWidth, mob = w < 700; ifr.style.width = (mob ? w : 1280) + 'px'; brBody.style.setProperty('--s', mob ? 1 : Math.min(1, w / 1280).toFixed(4)); };
+    fit(); addEventListener('resize', fit);
   }
 
   // formulár zadania
