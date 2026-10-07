@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-obloha.webp">
-<link rel="stylesheet" href="assets/site2.css?v=6054547b">
+<link rel="stylesheet" href="assets/site2.css?v=cd1cb610">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Mailito","url":"https://mailito.eu/","areaServed":"SK","description":"B2B lead generation pre slovenské firmy: e-mailové kampane, vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","parentOrganization":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
@@ -54,13 +54,15 @@
     <p class="badge"><span class="badge-dot"></span>Nové zákazky pre slovenské firmy · <b>každý týždeň</b></p>
     <h1>Vy robíte.<br><em>My vám zháňame zákazky.</em></h1>
     <p class="lead">Nájdeme firmy z celého Slovenska, ktoré vaše služby potrebujú, a oslovíme ich vaším menom. Vy dostanete zákazníkov, ktorí <b>sami chcú vašu ponuku</b> – a firmu, ktorá rastie.</p>
-    <form class="quick" id="quickForm" novalidate>
+    <form class="quick quick3" id="quickForm" novalidate>
       <label class="q-f"><span>Čo predávate?</span><input name="ponuka" required placeholder="napr. upratovanie hál" autocomplete="off"></label>
+      <label class="q-f"><span>Komu?</span><select name="segment" id="qSeg"><option value="">Vyberte odvetvie</option></select></label>
       <label class="q-f"><span>Váš e-mail</span><input name="email" type="email" required placeholder="meno@firma.sk" autocomplete="email"></label>
       <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <button class="btn btn-dark btn-lg" type="submit">Chcem nové zákazky</button>
+      <button class="btn btn-dark btn-lg" type="submit">Chcem zákazky</button>
     </form>
-    <p class="quick-note" id="quickMsg" role="status">Zadarmo vám spočítame, koľko zákaziek vám vieme priniesť, a pripravíme plán. <b>Do 2 dní, bez záväzkov.</b></p>
+    <p class="quick-live" id="qLive" aria-live="polite"></p>
+    <p class="quick-note" id="quickMsg" role="status">Zadarmo vám pošleme plán: koľko firiem oslovíme, koľko zákaziek z toho môže byť a návrh e-mailu. <b>Do 2 dní, bez záväzkov.</b></p>
     <p class="hero-links"><a href="#rast">Ako vyrastie vaša firma</a><span>·</span><a href="#cennik">Cenník</a></p>
   </div>
 
@@ -100,15 +102,14 @@
   <img class="hero-fg" src="assets/img/hero-trava.webp" alt="" aria-hidden="true">
 </section>
 
-<!-- DÔVERA -->
+<!-- ZÁRUKY -->
 <section class="trust">
   <div class="wrap trust-in">
-    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" /></svg></span><p><b>Dáta z registra</b><span>Register právnických osôb SR</span></p></div>
-    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><p><b>V súlade so zákonom</b><span>§ 116 ods. 15 z. 452/2021 Z. z.</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><p><b>Záruka výsledku</b><span>Bez záujemcu ďalších 1&nbsp;000 firiem zadarmo</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><p><b>Platíte až po schválení</b><span>Nič neodíde bez vášho OK</span></p></div>
+    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/></svg></span><p><b>Exkluzivita v regióne</b><span>Vo vašom odbore a kraji len pre vás</span></p></div>
     <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><p><b>Bez viazanosti</b><span>Žiadne mesačné poplatky</span></p></div>
-    <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><p><b>Platíte po schválení</b><span>Nič neodíde bez vášho OK</span></p></div>
   </div>
-  <div class="wrap trust-ind"><p>Pomáhame firmám, ktoré predávajú iným firmám</p><ul><li>Výroba</li><li>Logistika</li><li>IT služby</li><li>Stavebníctvo</li><li>Veľkoobchod</li><li>Účtovníctvo</li><li>BOZP</li><li>Upratovanie</li><li>Reklama a tlač</li></ul></div>
 </section>
 
 <!-- OBCHODNÍK vs MAILITO -->
@@ -210,36 +211,6 @@
   </div>
 </section>
 
-<!-- LIEVIK (scroll) -->
-<section class="fun" id="lievik" aria-label="Ako vyzerá kampaň na 10 000 firiem">
-  <div class="fun-sticky">
-    <div class="wrap fun-grid">
-      <div class="fun-txt">
-        <p class="eyebrow">Jedna kampaň</p>
-        <h2>10&nbsp;000 firiem.<br><em>27&nbsp;000 € obratu.</em></h2>
-        <ol class="fun-steps" id="funSteps">
-          <li data-s="0"><b>10&nbsp;000</b><span>firiem z vášho odboru na celom Slovensku</span></li>
-          <li data-s="1"><b>10&nbsp;000</b><span>osobných e-mailov, postupne a vaším menom</span></li>
-          <li data-s="2"><b>380</b><span>odpovedí, ktoré za vás prečítame</span></li>
-          <li data-s="3"><b>90</b><span>záujemcov s kontaktom vo vašom portáli</span></li>
-          <li data-s="4"><b>18</b><span>nových zákaziek ≈ 27&nbsp;000&nbsp;€ obratu</span></li>
-        </ol>
-        <p class="fun-note">Príklad pri zákazke 1&nbsp;500 € a 20&nbsp;% úspešnosti. Kampaň na 10&nbsp;000 firiem stojí 909 €.</p>
-      </div>
-      <div class="fun-vis">
-        <canvas id="funCanvas" aria-hidden="true"></canvas>
-        <div class="fun-pop" id="funPop" aria-hidden="true">
-          <p class="fp fp1"><span class="g-dot"></span><b>Plasty Nitra s.r.o.</b>Pošlite cenník.</p>
-          <p class="fp fp2"><span class="g-dot"></span><b>Kovo Záhorie a.s.</b>Chceme ponuku od januára.</p>
-          <p class="fp fp3"><span class="g-dot"></span><b>Tatra Sklad s.r.o.</b>Zavolajte zajtra.</p>
-          <p class="fp fp4"><b>Zákazka podpísaná · 4&nbsp;800&nbsp;€</b>Strojárne Dubnica a.s.</p>
-        </div>
-        <p class="fun-count"><span id="funNum">10&nbsp;000</span><small id="funLbl">firiem</small></p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FUNKCIE -->
 <section class="feat" id="ako">
   <div class="wrap">
@@ -305,6 +276,36 @@
   </div>
 </section>
 
+<!-- LIEVIK (scroll) -->
+<section class="fun" id="lievik" aria-label="Ako vyzerá kampaň na 10 000 firiem">
+  <div class="fun-sticky">
+    <div class="wrap fun-grid">
+      <div class="fun-txt">
+        <p class="eyebrow">Jedna kampaň</p>
+        <h2>10&nbsp;000 firiem.<br><em>27&nbsp;000 € obratu.</em></h2>
+        <ol class="fun-steps" id="funSteps">
+          <li data-s="0"><b>10&nbsp;000</b><span>firiem z vášho odboru na celom Slovensku</span></li>
+          <li data-s="1"><b>10&nbsp;000</b><span>osobných e-mailov, postupne a vaším menom</span></li>
+          <li data-s="2"><b>380</b><span>odpovedí, ktoré za vás prečítame</span></li>
+          <li data-s="3"><b>90</b><span>záujemcov s kontaktom vo vašom portáli</span></li>
+          <li data-s="4"><b>18</b><span>nových zákaziek ≈ 27&nbsp;000&nbsp;€ obratu</span></li>
+        </ol>
+        <p class="fun-note">Príklad pri zákazke 1&nbsp;500 € a 20&nbsp;% úspešnosti. Kampaň na 10&nbsp;000 firiem stojí 909 €.</p>
+      </div>
+      <div class="fun-vis">
+        <canvas id="funCanvas" aria-hidden="true"></canvas>
+        <div class="fun-pop" id="funPop" aria-hidden="true">
+          <p class="fp fp1"><span class="g-dot"></span><b>Plasty Nitra s.r.o.</b>Pošlite cenník.</p>
+          <p class="fp fp2"><span class="g-dot"></span><b>Kovo Záhorie a.s.</b>Chceme ponuku od januára.</p>
+          <p class="fp fp3"><span class="g-dot"></span><b>Tatra Sklad s.r.o.</b>Zavolajte zajtra.</p>
+          <p class="fp fp4"><b>Zákazka podpísaná · 4&nbsp;800&nbsp;€</b>Strojárne Dubnica a.s.</p>
+        </div>
+        <p class="fun-count"><span id="funNum">10&nbsp;000</span><small id="funLbl">firiem</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DÔKAZ -->
 <section class="proof">
   <div class="wrap proof-grid">
@@ -321,18 +322,6 @@
         <div><b>Tisíce</b><span>oslovených firiem každý týždeň</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ODVETVIA – ZÁLOŽKY -->
-<section class="ind" id="odvetvia">
-  <div class="wrap">
-    <header class="sec-head center rv">
-      <p class="eyebrow">Pre vaše odvetvie</p>
-      <h2>Kto sú vaši budúci<br><em>zákazníci?</em></h2>
-    </header>
-    <div class="ind-tabs" role="tablist" id="indTabs"></div>
-    <div class="ind-panel card" id="indPanel" role="tabpanel"></div>
   </div>
 </section>
 
@@ -354,45 +343,16 @@
   </div>
 </section>
 
-<!-- TMAVÁ SEKCIA -->
-<section class="talk">
-  <div class="wrap talk-head rv">
-    <p class="eyebrow">Prečo to funguje</p>
-    <h2>Reklama prináša kliky.<br><em>Mailito prináša rozhovory.</em></h2>
+<!-- ODVETVIA – ZÁLOŽKY -->
+<section class="ind" id="odvetvia">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Pre vaše odvetvie</p>
+      <h2>Kto sú vaši budúci<br><em>zákazníci?</em></h2>
+    </header>
+    <div class="ind-tabs" role="tablist" id="indTabs"></div>
+    <div class="ind-panel card" id="indPanel" role="tabpanel"></div>
   </div>
-  <div class="talk-rows" aria-hidden="true">
-    <div class="trow"><div class="ttrack">
-      <p class="tb"><b>Plasty Nitra s.r.o.</b>Pošlite cenník, máme dve haly po 1&nbsp;500&nbsp;m².</p>
-      <p class="tb"><b>Drevotech Považie</b>Zavolajte v stredu po 10:00, nákup – Ing. Šimková.</p>
-      <p class="tb"><b>Kovo Záhorie a.s.</b>Hľadáme dodávateľa od januára.</p>
-      <p class="tb"><b>Tatra Sklad s.r.o.</b>Máme 3 haly, pošlite orientačnú cenu.</p>
-      <p class="tb"><b>Elektro Šariš</b>Zaujíma nás to, ozvite sa zajtra.</p>
-      <p class="tb"><b>Plasty Nitra s.r.o.</b>Pošlite cenník, máme dve haly po 1&nbsp;500&nbsp;m².</p>
-      <p class="tb"><b>Drevotech Považie</b>Zavolajte v stredu po 10:00, nákup – Ing. Šimková.</p>
-      <p class="tb"><b>Kovo Záhorie a.s.</b>Hľadáme dodávateľa od januára.</p>
-      <p class="tb"><b>Tatra Sklad s.r.o.</b>Máme 3 haly, pošlite orientačnú cenu.</p>
-      <p class="tb"><b>Elektro Šariš</b>Zaujíma nás to, ozvite sa zajtra.</p>
-    </div></div>
-    <div class="trow trow-rev"><div class="ttrack">
-      <p class="tb"><b>Stavby Kysuce s.r.o.</b>Pošlite referencie z podobných zákaziek.</p>
-      <p class="tb"><b>TechPark Košice</b>Pošlite PDF, prejdeme to na porade.</p>
-      <p class="tb"><b>Agro Podunajsko</b>Zmluva nám končí v januári, porovnáme.</p>
-      <p class="tb"><b>Strojárne Pohronie</b>Aká je minimálna objednávka?</p>
-      <p class="tb"><b>Logistika Váh s.r.o.</b>Radi by sme sa stretli osobne.</p>
-      <p class="tb"><b>Stavby Kysuce s.r.o.</b>Pošlite referencie z podobných zákaziek.</p>
-      <p class="tb"><b>TechPark Košice</b>Pošlite PDF, prejdeme to na porade.</p>
-      <p class="tb"><b>Agro Podunajsko</b>Zmluva nám končí v januári, porovnáme.</p>
-      <p class="tb"><b>Strojárne Pohronie</b>Aká je minimálna objednávka?</p>
-      <p class="tb"><b>Logistika Váh s.r.o.</b>Radi by sme sa stretli osobne.</p>
-    </div></div>
-  </div>
-  <div class="wrap talk-stats">
-    <div class="rv"><b data-count="374678">374&nbsp;678</b><span>aktívnych slovenských firiem</span></div>
-    <div class="rv"><b data-count="74568">74&nbsp;568</b><span>firemných e-mailových adries</span></div>
-    <div class="rv"><b data-count="1810">1&nbsp;810</b><span>odborov, podľa ktorých cielime</span></div>
-    <div class="rv"><b>1,1&nbsp;%</b><span>záujemcov na našich vlastných kampaniach</span></div>
-  </div>
-  <p class="wrap talk-note">Ilustračné odpovede, mená firiem sú vymyslené. Dáta z verejných katalógov firiem a Registra právnických osôb SR, aktualizované 5.&nbsp;10.&nbsp;2026.</p>
 </section>
 
 <!-- POROVNANIE -->
@@ -495,6 +455,11 @@
         <p class="cfg-guar">Prvá kampaň so zárukou: ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p>
       </aside>
     </div>
+    <div class="excl rv">
+      <div class="excl-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/></svg></div>
+      <div><h3>Jeden odbor, jeden kraj, jedna firma.</h3><p>Vo vašom odbore a kraji pracujeme vždy len pre jednu firmu. Firmy, ktoré oslovíme pre vás, neoslovíme pre vašu konkurenciu. Kto príde prvý, má región pre seba.</p></div>
+      <a href="#zadanie" class="btn btn-dark">Overiť voľný región</a>
+    </div>
     <div class="tiers rv">
       <div><b>prvých 1&nbsp;000</b><span>0,149 € za firmu</span></div>
       <div><b>1&nbsp;001 – 3&nbsp;000</b><span>0,10 € za firmu</span></div>
@@ -508,8 +473,8 @@
 <section class="faq" id="otazky">
   <div class="wrap faq-grid">
     <div class="rv">
-      <p class="eyebrow">Férové pravidlá</p>
-      <h2>Oslovujeme slušne. <em>Preto nám odpovedajú.</em></h2>
+      <p class="eyebrow">Ešte váhate?</p>
+      <h2>Rozumieme.<br><em>Toto sa pýta každý.</em></h2>
       <ul class="rules">
         <li><b>Len zverejnené firemné adresy.</b> Žiadne súkromné schránky ani spotrebitelia.</li>
         <li><b>Najviac 3 správy.</b> Kto odpovie, tomu automat už nepíše.</li>
@@ -519,12 +484,13 @@
       </ul>
     </div>
     <div class="faq-list rv">
-      <details><summary>Je to spam?</summary><p>Nie. Píšeme jednotlivým firmám, ktorým vaša ponuka dáva zmysel, na firemné adresy, ktoré samy zverejnili. Každý e-mail má identifikáciu odosielateľa a dá sa odhlásiť jedným slovom. Slovenský zákon o elektronických komunikáciách (§ 116 ods. 15) takéto oslovenie firiem povoľuje.</p></details>
-      <details><summary>Z akej adresy sa e-maily posielajú?</summary><p>Z vlastných schránok, ktoré pre vašu kampaň pripravíme a zahrejeme. Vystupujete pod svojím menom a firmou, ale vaša hlavná doména nie je ohrozená. Odpovede čítame my a záujemcov vám hneď odovzdáme.</p></details>
-      <details><summary>Kto je „záujemca“?</summary><p>Firma, ktorá odpíše, že chce ponuku, cenník, stretnutie alebo telefonát. Odpovede „nie“, „neskôr“ či automatické odpovede za záujemcov nepovažujeme.</p></details>
-      <details><summary>Koľko záujemcov môžem čakať?</summary><p>Pri dobrej ponuke a správne vybranej cieľovke 0,3 až 1,2 % z oslovených firiem, teda 3 až 12 záujemcov na 1&nbsp;000 firiem. Najviac rozhoduje ponuka: konkrétny prínos, cena alebo termín.</p></details>
-      <details><summary>Ako rýchlo kampaň spustíte?</summary><p>Návrh textov a cieľovky máte v portáli do 2 pracovných dní od zadania. Po schválení a úhrade začíname odosielať a prvé odpovede zvyčajne prídu v ten istý deň.</p></details>
-      <details><summary>Čo GDPR?</summary><p>Oslovujeme firmy na verejne dostupných firemných adresách v súvislosti s ich podnikaním. Každý adresát vie, odkiaľ máme kontakt, a môže sa kedykoľvek odhlásiť. Podrobnosti sú na stránke <a href="preco/">Prečo ste dostali e-mail</a>.</p></details>
+      <p class="faq-h">„Ale veď…“</p>
+      <details open><summary>„…na e-maily nikto neodpovedá.“</summary><p>Na hromadné letáky nie. Na krátky osobný e-mail od konkrétneho človeka, ktorý ponúka presne to, čo firma rieši, áno. Na našich vlastných kampaniach odpíše so záujmom okolo 1,1&nbsp;% firiem – pri 3&nbsp;500 firmách sú to desiatky rozhovorov.</p></details>
+      <details><summary>„…nebude to vyzerať ako spam?“</summary><p>Nie. Každý e-mail je osobný, podpísaný vaším menom, s identifikáciou firmy a odhlásením jedným slovom. Oslovujeme len zverejnené firemné adresy a len firmy, ktorým vaša ponuka dáva zmysel. Slovenský zákon (§ 116 ods. 15 z. 452/2021) takéto oslovenie firiem výslovne povoľuje.</p></details>
+      <details><summary>„…skúšali sme to a nefungovalo to.“</summary><p>Väčšina kampaní stroskotá na troch veciach: zlý zoznam, zlý text a nikto nečíta odpovede. My máme 374&nbsp;678 overených slovenských firiem, texty testujeme A/B a každú odpoveď spracujeme do 10 minút. A ak z prvých 1&nbsp;000 firiem nepríde nikto, ďalších 1&nbsp;000 oslovíme zadarmo.</p></details>
+      <details><summary>„…nepoškodí to našu doménu?“</summary><p>Nie. Posielame z vlastných zahriatych schránok, nie z vašej firemnej pošty. Vaša doména a e-maily ostanú úplne bez rizika.</p></details>
+      <details><summary>„…nemáme kapacitu na veľa zákaziek.“</summary><p>Tempo určujete vy. Kampaň môžeme pozastaviť jedným klikom alebo spustiť len na 1&nbsp;000 firiem. A keď zákaziek bude viac, než stíhate – to je presne moment, keď firma začne rásť.</p></details>
+      <details><summary>„…koľko to celé stojí?“</summary><p>Od 149&nbsp;€ za 1&nbsp;000 firiem, jednorazovo, bez viazanosti. Platíte až po schválení textov. Jedna nová zákazka zvyčajne zaplatí celú kampaň niekoľkokrát.</p></details>
     </div>
   </div>
 </section>
@@ -536,7 +502,14 @@
     <div class="brief-txt">
       <p class="eyebrow">Zadanie kampane</p>
       <h2>Ko<span class="dk">ľ</span>ko zákaziek vám<br><em>vieme priniesť?</em></h2>
-      <p>Do 2 pracovných dní vám pošleme plán: koľko firiem vo vašom odbore oslovíme, koľko zákaziek z toho môže byť a návrh e-mailu. Nič neplatíte, kým plán neschválite.</p>
+      <p>Zadarmo a do 2 pracovných dní dostanete:</p>
+      <ul class="stack">
+        <li><b>Počet firiem</b> vo vašom odbore a kraji</li>
+        <li><b>Odhad zákaziek</b> a návratnosti</li>
+        <li><b>Návrh e-mailu</b> napísaný pre vašu ponuku</li>
+        <li><b>Overenie exkluzivity</b> vo vašom regióne</li>
+      </ul>
+      <p class="stack-n">Nič neplatíte, kým plán neschválite.</p>
     </div>
     <form class="form card" id="briefForm" novalidate>
       <div class="f2">
@@ -579,6 +552,6 @@
 </footer>
 
 <a href="#zadanie" class="mcta" id="mcta">Chcem nové zákazky – zadarmo plán</a>
-<script src="assets/site2.js?v=6054547b" defer></script>
+<script src="assets/site2.js?v=cd1cb610" defer></script>
 </body>
 </html>
