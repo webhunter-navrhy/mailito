@@ -32,7 +32,14 @@
 
   // jemné odhalenie
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec-head, .feat, .fact, .cmp, .qt, .calc, .faq-list, .end-txt, .form').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .form').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+
+  // návštevník z nášho e-mailu: „práve ste to zažili“
+  const qp = new URLSearchParams(location.search), fm = $('#fromMail');
+  if (fm && (qp.get('z') === 'mail' || /mail/i.test(qp.get('utm_medium') || ''))) {
+    let zav = false; try { zav = sessionStorage.getItem('fmX') === '1'; } catch (e) {}
+    if (!zav) { fm.hidden = false; $('#fromMailX').addEventListener('click', () => { fm.hidden = true; try { sessionStorage.setItem('fmX', '1'); } catch (e) {} }); }
+  }
 
   // ===== ukážka portálu: prichádzajú noví záujemcovia =====
   const NOVI = [
@@ -77,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=24376b1b').then(r => r.json()).then(d => {
+  fetch('data/trh.json?v=85d55c71').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     qSeg.innerHTML = '<option value="">Komu? Odvetvie</option>' + segs.map(x => `<option>${x}</option>`).join('');

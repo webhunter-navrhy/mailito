@@ -493,3 +493,55 @@ input[type=range]:focus-visible{outline:0}
   .ib .tag{opacity:1;transform:none}
   .pipe li small{opacity:1}
 }
+
+/* ===== v13: dôkaz ===== */
+.proof-line{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 9px;margin-top:22px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:.84rem;color:var(--mut);text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:border-color .2s}
+.proof-line:hover{border-color:#cdcdc8}
+.proof-line b{color:var(--ink);font-weight:560}
+.proof-line .pl-win{padding:2px 7px;border-radius:6px;background:var(--lime);color:var(--ink)}
+.proof-line svg{width:12px;height:12px;color:var(--mut2)}
+.fun{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
+.fun-c{position:relative;display:flex;flex-direction:column;min-height:250px;padding:clamp(18px,2.4vw,28px);border-right:1px solid var(--line2)}
+.fun-c:last-child{border-right:0}
+.fun-c small{font:500 .7rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--mut)}
+.fun-c b{margin-top:14px;font-size:clamp(2.4rem,4.4vw,3.8rem);font-weight:580;letter-spacing:-.055em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.fun-c span{margin-top:8px;font-size:.84rem;color:var(--mut)}
+.fun-c i{position:absolute;left:0;right:0;bottom:0;height:calc(84px * var(--w));background:linear-gradient(180deg,#E9EEE3,#DCE5D3);transform-origin:bottom;transform:scaleY(0);transition:transform 1s var(--ease)}
+.fun-win i{background:linear-gradient(180deg,var(--lime),#B5E04E)}
+.fun.in .fun-c i{transform:none}
+.fun.in .fun-c:nth-child(2) i{transition-delay:.15s}.fun.in .fun-c:nth-child(3) i{transition-delay:.3s}.fun.in .fun-c:nth-child(4) i{transition-delay:.45s}
+.fun-c::after{content:"";position:absolute;right:-7px;top:50%;width:12px;height:12px;border:solid var(--line);border-width:1px 1px 0 0;background:var(--card);transform:rotate(45deg);z-index:2}
+.fun-c:last-child::after{display:none}
+.replies{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,20px);margin-top:clamp(12px,1.6vw,20px)}
+.rep{display:flex;flex-direction:column;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.rep-h{display:flex;align-items:center;gap:8px;font-size:.8rem}
+.rep-h b{font-weight:550;color:var(--ink)}
+.rep-h span{color:var(--mut2)}
+.rep-h .tag{margin-left:auto}
+.rep blockquote{margin:16px 0 14px;font-size:1.12rem;font-weight:500;letter-spacing:-.02em;line-height:1.4;color:var(--ink)}
+.rep figcaption{margin-top:auto;padding-top:12px;border-top:1px solid var(--line2);font:400 .72rem/1.3 var(--mono);color:var(--mut)}
+.meta{display:flex;align-items:center;gap:14px;margin-top:clamp(12px,1.6vw,20px);padding:16px 20px;border-radius:14px;background:var(--forest);color:rgba(255,255,255,.72);font-size:.92rem;line-height:1.5}
+.meta b{color:var(--lime);font-weight:550}
+.meta .logo-m{width:30px;height:30px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(200,241,105,.3)}
+.meta .logo-m::before{left:7px;right:7px;top:9px;height:12px}
+.meta .logo-m::after{left:10.5px;top:8px;width:7px;height:7px}
+.from-mail{position:fixed;left:50%;bottom:20px;z-index:120;display:flex;align-items:center;gap:12px;width:min(640px,calc(100% - 24px));padding:12px 14px;border-radius:14px;background:var(--forest);color:rgba(255,255,255,.75);font-size:.88rem;line-height:1.45;box-shadow:0 24px 60px -18px rgba(0,0,0,.5);transform:translateX(-50%);animation:fm .6s 1.2s var(--ease) both}
+.from-mail[hidden]{display:none}
+.from-mail b{color:var(--lime);font-weight:550}
+.from-mail button{margin-left:auto;flex:none;width:28px;height:28px;border:0;border-radius:7px;background:rgba(255,255,255,.08);color:#fff;font-size:1.1rem;cursor:pointer}
+@keyframes fm{from{opacity:0;transform:translate(-50%,20px)}}
+@media (max-width:900px){
+  .fun{grid-template-columns:1fr 1fr}
+  .fun-c{min-height:190px}
+  .fun-c:nth-child(2){border-right:0}
+  .fun-c:nth-child(-n+2){border-bottom:1px solid var(--line2)}
+  .fun-c::after{display:none}
+  .replies{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .proof-line{font-size:.78rem;padding:8px 10px}
+  .proof-line>span:nth-child(2){width:100%;text-align:center}
+  .meta{align-items:flex-start;font-size:.86rem}
+  .from-mail{bottom:72px}
+}
+@media (prefers-reduced-motion:reduce){.fun-c i{transform:none}}
