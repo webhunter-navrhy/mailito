@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klientsky portál – Mailito</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css?v=e4197359">
+<link rel="stylesheet" href="portal.css?v=e4197359">
+</head>
+<body class="app-body">
+
+<!-- prihlásenie -->
+<section class="login" id="login" hidden>
+  <div class="login-card">
+    <a href="../" class="logo">
+      <svg viewBox="0 0 40 28" aria-hidden="true"><rect x="1.5" y="1.5" width="37" height="25" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M3 4l17 12L37 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="34" cy="5" r="5" fill="var(--red)"/></svg>
+      mailito
+    </a>
+    <h1>Klientsky portál</h1>
+    <p class="muted">Prihláste sa údajmi, ktoré ste dostali e-mailom pri spustení kampane.</p>
+    <form id="loginForm" class="form login-form">
+      <label>E-mail<input name="email" type="email" autocomplete="username" required></label>
+      <label>Heslo<input name="heslo" type="password" autocomplete="current-password" required></label>
+      <button class="btn btn-red btn-block" type="submit">Prihlásiť sa <span aria-hidden="true">→</span></button>
+      <p class="form-msg" id="loginMsg" role="status"></p>
+    </form>
+    <p class="login-alt">Ešte nemáte kampaň? <a href="./?demo=1">Pozrite si ukážku portálu</a> alebo <a href="../#zadanie">pošlite zadanie</a>.</p>
+    <p class="login-alt">Zabudli ste heslo? Napíšte na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.</p>
+  </div>
+  <div class="login-art" aria-hidden="true">
+    <div class="airmail-v"></div>
+    <p class="la-big">Vaši záujemcovia<br><em>na jednom mieste.</em></p>
+  </div>
+</section>
+
+<!-- aplikácia -->
+<div class="app" id="app" hidden>
+  <aside class="side" id="side">
+    <a href="../" class="logo logo-side">
+      <svg viewBox="0 0 40 28" aria-hidden="true"><rect x="1.5" y="1.5" width="37" height="25" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M3 4l17 12L37 4" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="34" cy="5" r="5" fill="var(--red)"/></svg>
+      mailito
+    </a>
+    <nav class="side-nav" aria-label="Portál">
+      <a href="#prehlad" data-v="prehlad"><i class="ic ic-home"></i>Prehľad</a>
+      <a href="#zaujemcovia" data-v="zaujemcovia"><i class="ic ic-lead"></i>Záujemcovia <b class="badge" id="badgeNew" hidden></b></a>
+      <a href="#kampane" data-v="kampane"><i class="ic ic-camp"></i>Kampane</a>
+      <a href="#ucet" data-v="ucet"><i class="ic ic-user"></i>Účet</a>
+    </nav>
+    <button class="btn btn-red btn-block" id="btnNova" type="button">+ Nová kampaň</button>
+    <div class="side-foot">
+      <p class="side-client" id="sideClient"></p>
+      <button class="linkbtn" id="btnLogout" type="button">Odhlásiť sa</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="burger side-burger" id="sideBurger" aria-label="Menu"><span></span><span></span></button>
+      <h1 class="top-h" id="topH">Preh<span class="dk">ľ</span>ad</h1>
+      <p class="demo-flag" id="demoFlag" hidden>Ukážka · zmeny sa neukladajú · <a href="../#zadanie">Chcem vlastnú kampaň</a></p>
+    </header>
+    <div class="view" id="view"></div>
+  </div>
+</div>
+
+<!-- detail záujemcu -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-bg" data-close></div>
+  <aside class="drawer-in" role="dialog" aria-modal="true" aria-labelledby="dwTitle">
+    <button class="drawer-x" data-close aria-label="Zavrieť">×</button>
+    <div id="drawerBody"></div>
+  </aside>
+</div>
+
+<!-- nová kampaň -->
+<div class="drawer" id="modalNova" hidden>
+  <div class="drawer-bg" data-close></div>
+  <aside class="drawer-in" role="dialog" aria-modal="true" aria-labelledby="nkTitle">
+    <button class="drawer-x" data-close aria-label="Zavrieť">×</button>
+    <p class="kicker">Nová kampaň</p>
+    <h2 id="nkTitle" class="dw-h">Komu chcete predávať teraz?</h2>
+    <p class="muted">Návrh cieľovky a textov vám pripravíme do 2 pracovných dní. Objaví sa v sekcii Kampane na schválenie.</p>
+    <form id="novaForm" class="form form-flat">
+      <label>Čo ponúkate?<textarea name="ponuka" rows="3" required></textarea></label>
+      <label>Kto je ideálny zákazník?<textarea name="zakaznik" rows="3"></textarea></label>
+      <label>Balík
+        <select name="balik"><option value="test">Test · 149 €</option><option value="kampan" selected>Kampaň · 390 €</option><option value="vykon">Výkon · 39 € za záujemcu</option></select>
+      </label>
+      <label>Poznámka<textarea name="poznamka" rows="2" placeholder="Kraje, veľkosť firiem, čo sa osvedčilo…"></textarea></label>
+      <button class="btn btn-red btn-block" type="submit">Poslať zadanie</button>
+      <p class="form-msg" id="novaMsg" role="status"></p>
+    </form>
+  </aside>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="portal.js?v=e4197359" defer></script>
+</body>
+</html>
