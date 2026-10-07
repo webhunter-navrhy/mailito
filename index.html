@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mailito – noví B2B zákazníci zo Slovenska priamo do schránky</title>
-<meta name="description" content="Oslovíme za vás slovenské firmy, ktoré vaše služby potrebujú. Odpovede vyhodnotíme a do portálu vám pošleme len firmy so záujmom. Platíte podľa počtu oslovených firiem, od 149 € za 1 000.">
+<meta name="description" content="Voláte len firmám, ktoré povedali áno. Oslovíme za vás slovenské firmy, ktoré vaše služby potrebujú. Odpovede vyhodnotíme a do portálu vám pošleme len firmy so záujmom. Platíte podľa počtu oslovených firiem, od 149 € za 1 000.">
 <meta property="og:title" content="Mailito – noví B2B zákazníci priamo do schránky">
 <meta property="og:description" content="374 678 slovenských firiem. Oslovíme tie správne a vám pošleme len záujemcov.">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-obloha.webp">
-<link rel="stylesheet" href="assets/site2.css?v=469b9b19">
+<link rel="stylesheet" href="assets/site2.css?v=218505d5">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Mailito","url":"https://mailito.eu/","areaServed":"SK","description":"B2B lead generation pre slovenské firmy: e-mailové kampane, vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","parentOrganization":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
@@ -50,13 +50,17 @@
 <section class="hero">
   <img class="hero-bg" src="assets/img/hero-obloha.webp" alt="" aria-hidden="true">
   <div class="wrap hero-txt">
-    <p class="badge"><span class="badge-dot"></span><b>374&nbsp;678</b> slovenských firiem v databáze</p>
-    <h1>Noví zákazníci.<br><em>Priamo do schránky.</em></h1>
-    <p class="lead">Oslovíme za vás slovenské firmy, ktoré vaše služby potrebujú. Odpovede prečítame a&nbsp;do&nbsp;portálu vám pošleme len tie, kde je záujem.</p>
-    <div class="hero-cta">
-      <a href="#cennik" class="btn btn-dark btn-lg">Spočítať cenu kampane</a>
-      <a href="portal/?demo=1" class="btn btn-glass btn-lg">Pozrieť portál</a>
-    </div>
+    <p class="badge"><span class="badge-dot"></span>Pre slovenské B2B firmy · <b>od 149 €</b> · bez viazanosti</p>
+    <h1>Voláte len firmám,<br><em>ktoré povedali áno.</em></h1>
+    <p class="lead">Oslovíme za vás stovky slovenských firiem z vášho odboru, prečítame odpovede a pošleme vám len záujemcov – s menom, kontaktom a tým, čo chcú. Prvých máte zvyčajne do 7&nbsp;dní.</p>
+    <form class="quick" id="quickForm" novalidate>
+      <label class="q-f"><span>Čo predávate?</span><input name="ponuka" required placeholder="napr. upratovanie výrobných hál" autocomplete="off"></label>
+      <label class="q-f"><span>Váš e-mail</span><input name="email" type="email" required placeholder="meno@firma.sk" autocomplete="email"></label>
+      <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn-dark btn-lg" type="submit">Zistiť zadarmo</button>
+    </form>
+    <p class="quick-note" id="quickMsg" role="status">Do 2 pracovných dní pošleme, koľko firiem vo vašom odbore vieme osloviť, a návrh e-mailu. <b>Zadarmo, bez záväzkov.</b></p>
+    <p class="hero-links"><a href="#cennik">Pozrieť cenník</a><span>·</span><a href="#portal">Vyskúšať portál</a></p>
   </div>
 
   <div class="wrap hero-app">
@@ -104,6 +108,23 @@
     <div class="tr-i"><span class="tr-ic"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span><p><b>Platíte po schválení</b><span>Nič neodíde bez vášho OK</span></p></div>
   </div>
   <div class="wrap trust-ind"><p>Pomáhame firmám, ktoré predávajú iným firmám</p><ul><li>Výroba</li><li>Logistika</li><li>IT služby</li><li>Stavebníctvo</li><li>Veľkoobchod</li><li>Účtovníctvo</li><li>BOZP</li><li>Upratovanie</li><li>Reklama a tlač</li></ul></div>
+</section>
+
+<!-- BOLESŤ -->
+<section class="pain">
+  <div class="wrap">
+    <header class="sec-head center rv">
+      <p class="eyebrow">Poznáte to?</p>
+      <h2>H<span class="dk">ľ</span>adať nových zákazníkov<br><em>je tá najhoršia práca.</em></h2>
+    </header>
+    <div class="pain-grid">
+      <article class="pn rv"><span class="pn-ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg></span><h3>Volanie naslepo</h3><p>Obchodník obvolá 50 firiem a počuje 49× „nemáme záujem“. Po týždni to vzdá.</p></article>
+      <article class="pn rv"><span class="pn-ic"><svg viewBox="0 0 24 24"><path d="M17 6.5A7 7 0 1017 17.5M4 10h9M4 14h9"/></svg></span><h3>Reklama za kliky</h3><p>Platíte za návštevy webu od ľudí, ktorí nič nekúpia. B2B zákazníka tak nájdete ťažko.</p></article>
+      <article class="pn rv"><span class="pn-ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0113.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 01-13.7 5.7L4 16M4 20v-4h4"/></svg></span><h3>Odporúčania vyschnú</h3><p>Zákazky z odporúčaní sú super, ale nedajú sa naplánovať. Raz sú, raz nie sú.</p></article>
+      <article class="pn rv"><span class="pn-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></span><h3>Nie je na to čas</h3><p>Popri zákazkách nemáte kedy hľadať nových klientov. Kým je robota, nikto nehľadá.</p></article>
+    </div>
+    <p class="pain-sol rv"><span class="logo-m" aria-hidden="true"></span><b>Mailito to robí za vás.</b> My hľadáme a oslovujeme, vy telefonujete len tým, ktorí sami napísali, že chcú vašu ponuku.</p>
+  </div>
 </section>
 
 <!-- LIEVIK (scroll) -->
@@ -195,6 +216,24 @@
         </div>
         <div class="bx-cap"><p class="num">03</p><h3>Každú odpoveď prečítame za vás</h3><p>„Nie“, „neskôr“ aj dovolenkové odpovede vytriedime. Vám ostanú len rozhovory.</p></div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- DÔKAZ -->
+<section class="proof">
+  <div class="wrap proof-grid">
+    <div class="proof-txt rv">
+      <p class="eyebrow">Overené na sebe</p>
+      <h2>Ten istý systém<br><em>používame každý deň.</em></h2>
+      <p>Mailito nie je teória. Rovnakým spôsobom oslovujeme slovenské firmy pre vlastné projekty každý pracovný deň – a odpovedajú. Okolo 1,1&nbsp;% oslovených firiem odpíše so záujmom.</p>
+      <div class="proof-stat"><b>1,1&nbsp;%</b><span>oslovených firiem odpíše<br>so záujmom</span></div>
+    </div>
+    <div class="proof-q">
+      <p class="small-label">Skutočné odpovede z našich kampaní · anonymizované</p>
+      <blockquote class="pq rv"><p>„Môžete to spustiť.“</p><footer><span class="g-dot"></span>Realitná kancelária, Malacky · objednávka deň po prvom e-maile</footer></blockquote>
+      <blockquote class="pq rv"><p>„Ozvite sa začiatkom roka, podobnú kampaň sme práve ukončili.“</p><footer><span class="g-dot g-later"></span>Realitná kancelária, Trnava · v portáli ako „neskôr“ s pripomienkou na január</footer></blockquote>
+      <blockquote class="pq rv"><p>„Zaujímavé, pracujem v Nitre a v Zlatých Moravciach… premyslím si to.“</p><footer><span class="g-dot g-later"></span>Maklérka, Zlaté Moravce · otázka zodpovedaná ešte v ten deň</footer></blockquote>
     </div>
   </div>
 </section>
@@ -361,6 +400,11 @@
           <div><dt>Očakávaní záujemcovia</dt><dd id="cfgLeads">11 – 42</dd></div>
           <div><dt>Vychádza na záujemcu</dt><dd id="cfgCpl">9 – 35 €</dd></div>
         </dl>
+        <div class="roi">
+          <label class="roi-f"><span>Priemerná hodnota jednej zákazky</span><span class="roi-in"><input type="number" id="roiVal" min="50" step="50" value="1500" inputmode="numeric">€</span></label>
+          <label class="roi-f"><span>Zo záujemcov sa stane zákazníkom</span><span class="roi-in"><input type="number" id="roiConv" min="1" max="100" step="1" value="20" inputmode="numeric">%</span></label>
+          <p class="roi-out"><span>Očakávaný obrat z kampane</span><b id="roiRev">–</b><small id="roiX"></small></p>
+        </div>
         <a href="#zadanie" class="btn btn-dark btn-block btn-lg" id="cfgCta">Objednať 3&nbsp;500 firiem</a>
         <p class="cfg-guar">Prvá kampaň so zárukou: ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p>
       </aside>
@@ -422,7 +466,7 @@
   <div class="wrap brief-grid">
     <div class="brief-txt">
       <p class="eyebrow">Zadanie kampane</p>
-      <h2>Napíšte nám, komu predávate.<br><em>Zvyšok je na nás.</em></h2>
+      <h2>Zistite zadarmo, ko<span class="dk">ľ</span>ko zákazníkov<br><em>na vás čaká.</em></h2>
       <p>Do 2 pracovných dní vám pošleme počet firiem vo vašej cieľovke a návrh e-mailu. Nič neplatíte, kým texty neschválite.</p>
     </div>
     <form class="form card" id="briefForm" novalidate>
@@ -443,7 +487,7 @@
       </div>
       <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label class="check"><input type="checkbox" name="suhlas" required><span>Súhlasím so <a href="podmienky/" target="_blank">spracovaním údajov</a> na účely prípravy ponuky.</span></label>
-      <button type="submit" class="btn btn-dark btn-block btn-lg">Poslať zadanie</button>
+      <button type="submit" class="btn btn-dark btn-block btn-lg">Chcem bezplatný návrh</button>
       <p class="form-msg" id="formMsg" role="status"></p>
     </form>
   </div>
@@ -465,6 +509,7 @@
   <p class="foot-word" aria-hidden="true">mailito</p>
 </footer>
 
-<script src="assets/site2.js?v=469b9b19" defer></script>
+<a href="#zadanie" class="mcta" id="mcta">Zistiť zadarmo, koľko firiem vieme osloviť</a>
+<script src="assets/site2.js?v=218505d5" defer></script>
 </body>
 </html>

@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=469b9b19').then(r => r.json()), fetch('data/sk_mapa.json?v=469b9b19').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=218505d5').then(r => r.json()), fetch('data/sk_mapa.json?v=218505d5').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -212,7 +212,7 @@
   const indTabs = $('#indTabs'), indPanel = $('#indPanel');
   if (indTabs) {
     let T = null;
-    fetch('data/trh.json?v=469b9b19').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    fetch('data/trh.json?v=218505d5').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
     indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
     const show = i => {
       const x = IND[i];
@@ -234,6 +234,48 @@
     const ifr = $('iframe', brBody);
     const fit = () => { const w = brBody.clientWidth, mob = w < 700; ifr.style.width = (mob ? w : 1280) + 'px'; brBody.style.setProperty('--s', mob ? 1 : Math.min(1, w / 1280).toFixed(4)); };
     fit(); addEventListener('resize', fit);
+  }
+
+  // ===== v5: rýchly formulár v hero =====
+  const qf = $('#quickForm');
+  if (qf) {
+    const qm = $('#quickMsg'), q0 = qm.innerHTML, qs = new URLSearchParams(location.search);
+    qf.addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = Object.fromEntries(new FormData(qf));
+      if (!f.ponuka || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email || '')) { qm.className = 'quick-note err'; qm.textContent = 'Napíšte, čo predávate, a platný e-mail.'; return; }
+      const btn = $('button', qf); btn.disabled = true; btn.textContent = 'Odosielam…';
+      try {
+        const r = await fetch(API + '/api/brief', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...f, balik: 'neviem', zdroj: 'hero:' + (qs.get('utm_source') || qs.get('k') || document.referrer || 'web') }) });
+        const j = await r.json(); if (!j.ok) throw new Error(j.chyba || 'Chyba');
+        qf.reset(); qm.className = 'quick-note ok'; qm.textContent = 'Ďakujeme! Do 2 pracovných dní vám pošleme počet firiem vo vašom odbore a návrh e-mailu.';
+      } catch (err) { qm.className = 'quick-note err'; qm.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.'; }
+      finally { btn.disabled = false; btn.textContent = 'Zistiť zadarmo'; }
+    });
+  }
+
+  // ===== v5: návratnosť (ROI) =====
+  const roiVal = $('#roiVal'), roiConv = $('#roiConv');
+  const roi = () => {
+    if (!roiVal || !range) return;
+    const n = +range.value, p = cena(n), v = Math.max(0, +roiVal.value || 0), c = Math.min(100, Math.max(0, +roiConv.value || 0)) / 100;
+    const lo = Math.max(1, Math.round(n * .003)), hi = Math.max(2, Math.round(n * .012));
+    const rl = lo * c * v, rh = hi * c * v;
+    $('#roiRev').textContent = v && c ? `${fmt(rl)} – ${fmt(rh)} €` : '–';
+    $('#roiX').textContent = v && c ? (rl >= p ? `Kampaň za ${fmt(p)} € sa vám vráti ${(rl / p).toFixed(1).replace('.', ',')}× až ${(rh / p).toFixed(0)}×.` : `Kampaň sa vráti už pri ${Math.ceil(p / (c * v))} záujemcoch.`) : '';
+  };
+  roiVal?.addEventListener('input', roi); roiConv?.addEventListener('input', roi); range?.addEventListener('input', roi);
+  $$('.cfg-quick button').forEach(b => b.addEventListener('click', () => setTimeout(roi)));
+  roi();
+
+  // ===== v5: mobilné lepkavé tlačidlo =====
+  const mcta = $('#mcta'), heroEl = $('.hero'), briefEl = $('#zadanie');
+  if (mcta) {
+    let inHero = true, inBrief = false;
+    const upd = () => mcta.classList.toggle('on', !inHero && !inBrief);
+    new IntersectionObserver(es => { inHero = es[0].isIntersecting; upd(); }).observe(heroEl);
+    new IntersectionObserver(es => { inBrief = es[0].isIntersecting; upd(); }).observe(briefEl);
   }
 
   // formulár zadania
