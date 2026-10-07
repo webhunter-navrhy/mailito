@@ -47,9 +47,39 @@
   for (let k = 0; k < 4; k++) addLead(true);
   if (!reduce) setInterval(() => { if (!document.hidden) addLead(false); }, 4200);
 
+  // ===== v11: kroky – postup obálky a rozsvecovanie =====
+  const stepsEl = $('#steps'), stepEls = $$('.step', stepsEl);
+  const mailEl = $('#typeMail'); let typed = false;
+  const typeMail = () => {
+    if (typed || reduce) return; typed = true;
+    const t = mailEl.dataset.t; let k = 0;
+    const st = () => { k += 2; mailEl.innerHTML = t.slice(0, k) + (k < t.length ? '<span class="caret"></span>' : ''); if (k < t.length) setTimeout(st, 22); };
+    mailEl.innerHTML = '<span class="caret"></span>'; setTimeout(st, 300);
+  };
+  const stepTick = () => {
+    const r = stepsEl.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight * .78 - r.top) / (r.height * .9)));
+    stepsEl.style.setProperty('--p', p.toFixed(3));
+    stepEls.forEach((el, k) => el.classList.toggle('on', p >= [0, .42, .85][k]));
+    if (p >= .42) typeMail();
+  };
+  addEventListener('scroll', () => requestAnimationFrame(stepTick), { passive: true }); stepTick();
+
+  // ===== v11: počítadlá vo výsledkoch =====
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, to = parseFloat(el.dataset.count), suf = el.dataset.suf || '', dec = String(el.dataset.count).includes('.');
+    if (reduce) return;
+    const t0 = performance.now();
+    const st = now => { const q = Math.min(1, (now - t0) / 1400), v = to * (1 - Math.pow(1 - q, 3));
+      el.innerHTML = (dec ? v.toFixed(1).replace('.', ',') : Math.round(v)) + suf; if (q < 1) requestAnimationFrame(st); };
+    requestAnimationFrame(st);
+  }), { threshold: .6 });
+  $$('[data-count]').forEach(el => cio.observe(el));
+
   // úvodný formulár: odvetvie → odhad, odoslanie
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=fcd5e120').then(r => r.json()).then(d => {
+  fetch('data/trh.json?v=a3db8d53').then(r => r.json()).then(d => {
     qSeg.innerHTML = '<option value="">Vyberte odvetvie</option>' + d.segmenty.filter(x => x !== 'Ostatné').map(x => `<option>${x}</option>`).join('');
     qSeg.addEventListener('change', () => {
       const v = qSeg.value; qMsg.className = 'hero-note';
@@ -81,6 +111,7 @@
     const lo = Math.max(1, Math.round(n * .003)), hi = Math.max(2, Math.round(n * .012));
     const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2));
     $('#cfgN').textContent = fmt(n); $('#cfgPrice').textContent = fmt(p);
+    const pr = $('.c-price'); pr.classList.add('bump'); clearTimeout(calc.t); calc.t = setTimeout(() => pr.classList.remove('bump'), 160);
     $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + ' €';
     $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;
     $('#cfgDeals').textContent = dl === dh ? fmt(dl) : `${fmt(dl)} – ${fmt(dh)}`;

@@ -298,3 +298,86 @@ h2{font-size:clamp(2.5rem,5vw,4.2rem);line-height:1}
   .faq-list summary{font-size:1.3rem}
 }
 @media (max-width:600px){.c-res .big dd{font-size:1.45rem;white-space:nowrap}.c-res div{flex-wrap:wrap}}
+
+/* ===================== v11: remeslo ===================== */
+/* číslovanie sekcií */
+.kicker span{font-weight:500;color:var(--forest);padding:.25rem .45rem;border-radius:6px;background:var(--lime);margin-right:.1rem;letter-spacing:.02em}
+.kicker::before{display:none}
+.dark .kicker span,.cta .kicker span{background:var(--lime);color:var(--forest)}
+
+/* tlačidlá – šípka */
+.btn{gap:.55rem}
+.btn::after{content:"→";display:inline-block;transition:transform .25s var(--ease)}
+.btn:hover::after{transform:translateX(4px)}
+.nav .btn::after,.c-quick button::after{content:none}
+
+/* hero – plávajúce notifikácie + 3D */
+.toast{position:absolute;z-index:4;display:flex;gap:.75rem;align-items:center;padding:.8rem 1rem;border-radius:16px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.95);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 24px 60px -20px rgba(20,40,60,.45);font-size:12.5px;animation:bob 6s ease-in-out infinite}
+.toast small{display:block;font-size:11px;color:var(--mu)}
+.toast b{display:block;font:400 1.7rem/1.1 var(--serif);color:var(--forest)}
+.toast .t-name{font-size:1.25rem}
+.toast span:not(.t-ic){color:var(--ink2)}
+.t-ic{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--forest);color:var(--lime);font:600 16px/1 var(--sans)}
+.t-ic2{background:var(--lime);color:var(--forest)}
+.toast-l{left:-3.5rem;top:-3.2rem;animation-delay:-2s}
+.toast-r{right:-3rem;top:12rem;max-width:17rem}
+@keyframes bob{50%{transform:translateY(-9px)}}
+@supports (animation-timeline: view()){
+  .hero-app .app{transform-origin:50% 0;animation:tilt linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  @keyframes tilt{from{transform:perspective(1800px) rotateX(14deg) scale(.95)}to{transform:none}}
+}
+@media (max-width:1250px){.toast-l{left:0}.toast-r{right:0}}
+@media (max-width:900px){.toast{display:none}}
+
+/* kroky – spojnica s obálkou */
+.steps{position:relative}
+.flow{position:absolute;left:16.5%;right:16.5%;top:120px;height:2px;z-index:2;pointer-events:none}
+.flow-line{position:absolute;inset:0;background:repeating-linear-gradient(90deg,var(--line2) 0 6px,transparent 6px 12px)}
+.flow-line::after{content:"";position:absolute;inset:0;background:var(--forest);transform-origin:left;transform:scaleX(var(--p,0));transition:transform .2s linear}
+.flow-env{position:absolute;top:50%;left:calc(var(--p,0) * 100%);width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;background:var(--lime);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(200,241,105,.35),0 10px 24px -8px rgba(15,42,31,.5)}
+.flow-env svg{width:18px;height:18px;fill:none;stroke:var(--forest);stroke-width:1.8;stroke-linejoin:round}
+.step-ui{position:relative;overflow:hidden;transition:background .5s var(--ease)}
+.step .ui-card{transition:transform .6s var(--ease),box-shadow .6s var(--ease),opacity .6s var(--ease);opacity:.55;transform:scale(.96)}
+.step.on .ui-card{opacity:1;transform:none;box-shadow:var(--sh-lg)}
+.step.on .step-ui{background:#E7EEDC}
+.step.on .step-n{color:var(--forest)}
+.step-n{transition:color .4s}
+.caret{display:inline-block;width:2px;height:1em;background:var(--forest);vertical-align:-.15em;margin-left:1px;animation:blink 1s steps(2) infinite}
+.step:nth-child(4) .ui-card{transform:translateY(16px) scale(.96)}
+.step:nth-child(4).on .ui-card{transform:none}
+@media (max-width:900px){.flow{display:none}.step .ui-card{opacity:1;transform:none}}
+
+/* výsledky – fotka */
+.dark{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,4vw,3.5rem);align-items:stretch}
+.dark .head{margin-bottom:2.2rem}
+.dark-l .nums{grid-template-columns:1fr;border-top:0}
+.dark-l .nums>div{display:grid;grid-template-columns:9.5rem 1fr;align-items:baseline;gap:1.4rem;padding:1.3rem 0;border-top:1px solid rgba(255,255,255,.12);border-left:0}
+.dark-l .nums>div+div{padding-left:0;border-left:0;margin-top:0}
+.dark-l .nums b{font-size:clamp(2.8rem,4.6vw,4rem)}
+.dark-l .nums p{margin:0;font-size:1.05rem}
+.dark-r{position:relative;margin:0;border-radius:20px;overflow:hidden;min-height:440px}
+.dark-r img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;transition:transform 1.2s var(--ease)}
+.dark-r:hover img{transform:scale(1.03)}
+.dark-r::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,42,31,0) 45%,rgba(15,42,31,.55))}
+.glass{position:absolute;left:1.2rem;right:1.2rem;bottom:1.2rem;z-index:2;padding:1rem 1.15rem;border-radius:16px;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:var(--ink);box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+.g-top{display:flex;align-items:center;gap:.45rem;font-size:12.5px;font-weight:500}
+.g-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(31,122,77,.18)}
+.g-sum{font:400 2.6rem/1.05 var(--serif);color:var(--forest);margin:.3rem 0 .1rem}
+.g-who{font-size:12px;color:var(--mu)}
+.g-bar{height:5px;border-radius:3px;background:var(--soft);margin-top:.8rem;overflow:hidden}
+.g-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--forest),var(--lime2));border-radius:3px;transition:width 1.6s var(--ease) .3s}
+.dark.in .g-bar i{width:100%}
+.dark .quote{grid-column:1/-1}
+@media (max-width:900px){.dark{grid-template-columns:1fr}.dark-r{min-height:380px}.dark-l .nums>div{grid-template-columns:1fr;gap:.4rem}}
+
+/* jemné interakcie */
+.step-ui,.calc,.faq-list summary{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.c-price span{display:inline-block;transition:transform .2s var(--ease)}
+.c-price.bump span{transform:scale(1.04)}
+.faq-list summary:hover{color:var(--forest2)}
+.flow{left:0;right:0;top:calc(240px + 1.6rem + .4rem);z-index:0}
+.step{position:relative;z-index:1}
+.step-n{position:relative;display:inline-block;background:var(--bg);padding-right:.8rem;z-index:1}
+.flow-env{z-index:2}
+.toast-l{top:-5.6rem;left:-4.5rem}
+@media (max-width:1250px){.toast-l{left:-.5rem}}

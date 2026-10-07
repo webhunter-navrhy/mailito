@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-obloha.webp">
-<link rel="stylesheet" href="assets/site3.css?v=fcd5e120">
+<link rel="stylesheet" href="assets/site3.css?v=a3db8d53">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Mailito","url":"https://mailito.eu/","areaServed":"SK","description":"Nové B2B zákazky pre slovenské firmy: oslovenie firiem, vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","parentOrganization":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
@@ -62,6 +62,8 @@
   </div>
 
   <div class="wrap hero-app">
+    <div class="toast toast-l" aria-hidden="true"><span class="t-ic">€</span><div><small>Nová zákazka · podpísaná</small><b>+&nbsp;4&nbsp;800&nbsp;€</b><span>Strojárne Dubnica a.s.</span></div></div>
+    <div class="toast toast-r" aria-hidden="true"><span class="t-ic t-ic2">@</span><div><small>Nový záujemca · pred 2 min</small><b class="t-name">Kovo Záhorie a.s.</b><span>„Pošlite nám ponuku, máme záujem.“</span></div></div>
     <div class="app" aria-label="Ilustračná ukážka klientskeho portálu">
       <aside class="app-side" aria-hidden="true">
         <p class="app-logo"><span class="logo-m"></span>mailito</p>
@@ -98,10 +100,11 @@
 <section class="sec" id="ako">
   <div class="wrap">
     <header class="head rv">
-      <p class="kicker">Ako to funguje</p>
+      <p class="kicker"><span>01</span>Ako to funguje</p>
       <h2>Tri kroky. <em>Prácu robíme my.</em></h2>
     </header>
-    <div class="steps">
+    <div class="steps" id="steps">
+      <div class="flow" aria-hidden="true"><i class="flow-line"></i><span class="flow-env"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span></div>
       <article class="step rv">
         <div class="step-ui">
           <div class="ui-card">
@@ -121,7 +124,7 @@
           <div class="ui-card">
             <p class="ui-l">E-mail na schválenie</p>
             <p class="ui-subj">Upratovanie haly bez odstávky výroby</p>
-            <p class="ui-mail">Dobrý deň, upratujeme výrobné haly v noci a cez víkendy. Mám Vám poslať orientačnú cenu?</p>
+            <p class="ui-mail" id="typeMail" data-t="Dobrý deň, upratujeme výrobné haly v noci a cez víkendy. Mám Vám poslať orientačnú cenu?">Dobrý deň, upratujeme výrobné haly v noci a cez víkendy. Mám Vám poslať orientačnú cenu?</p>
             <p class="ui-btns"><span class="on">Schváliť</span><span>Pripomienka</span></p>
           </div>
         </div>
@@ -150,15 +153,26 @@
 <section class="sec" id="vysledky">
   <div class="wrap">
     <div class="dark rv">
-      <header class="head">
-        <p class="kicker">Čo vám to prinesie</p>
-        <h2>Zákazky, ktoré by ste <em>inak nikdy nedostali.</em></h2>
-      </header>
-      <div class="nums">
-        <div><b>24×</b><p>lacnejšie ako obchodník.<br><span>Obchodník za 2&nbsp;100&nbsp;€ mesačne osloví ~800 firiem. Mailito 3&nbsp;500 za 389&nbsp;€.</span></p></div>
-        <div><b>7 dní</b><p>do prvých záujemcov.<br><span>Bez zaúčania, bez náboru. Štart do 3 dní od zadania.</span></p></div>
-        <div><b>1,1&nbsp;%</b><p>firiem odpíše so záujmom.<br><span>Na našich vlastných kampaniach. Pri 3&nbsp;500 firmách sú to desiatky rozhovorov.</span></p></div>
+      <div class="dark-l">
+        <header class="head">
+          <p class="kicker"><span>02</span>Čo vám to prinesie</p>
+          <h2>Zákazky, ktoré by ste <em>inak nikdy nedostali.</em></h2>
+        </header>
+        <div class="nums">
+          <div><b data-count="24" data-suf="×">24×</b><p>lacnejšie ako obchodník<span>Obchodník za 2&nbsp;100&nbsp;€ mesačne osloví ~800 firiem. Mailito 3&nbsp;500 za 389&nbsp;€.</span></p></div>
+          <div><b data-count="7" data-suf=" dní">7 dní</b><p>do prvých záujemcov<span>Bez zaúčania a náboru. Štart do 3 dní od zadania.</span></p></div>
+          <div><b data-count="1.1" data-suf="&nbsp;%">1,1&nbsp;%</b><p>firiem odpíše so záujmom<span>Na našich vlastných kampaniach. Pri 3&nbsp;500 firmách desiatky rozhovorov.</span></p></div>
+        </div>
       </div>
+      <figure class="dark-r">
+        <img src="assets/img/sklad.webp" alt="Vedúci skladu telefonuje s novým zákazníkom" loading="lazy">
+        <figcaption class="glass">
+          <p class="g-top"><span class="g-dot"></span>Nová zákazka podpísaná</p>
+          <p class="g-sum">4&nbsp;800&nbsp;€</p>
+          <p class="g-who">Strojárne Dubnica a.s. · z kampane „Servis strojov“</p>
+          <div class="g-bar"><i></i></div>
+        </figcaption>
+      </figure>
       <blockquote class="quote">
         <p>„Môžete to spustiť.“</p>
         <footer>Realitná kancelária, Malacky · objednávka deň po prvom e-maile z nášho systému</footer>
@@ -171,7 +185,7 @@
 <section class="sec" id="cena">
   <div class="wrap">
     <header class="head rv">
-      <p class="kicker">Cena</p>
+      <p class="kicker"><span>03</span>Cena</p>
       <h2>Vyberte, ko<span class="dk">ľ</span>ko firiem osloviť. <em>Hneď vidíte, čo to prinesie.</em></h2>
     </header>
     <div class="calc rv">
@@ -206,7 +220,7 @@
 <section class="sec" id="otazky">
   <div class="wrap faq">
     <header class="head rv">
-      <p class="kicker">Otázky</p>
+      <p class="kicker"><span>04</span>Otázky</p>
       <h2>Čo sa pýta <em>každý.</em></h2>
     </header>
     <div class="faq-list rv">
@@ -225,7 +239,7 @@
   <div class="wrap">
     <div class="cta">
       <div class="cta-txt">
-        <p class="kicker">Začnite zadarmo</p>
+        <p class="kicker"><span>05</span>Začnite zadarmo</p>
         <h2>Ko<span class="dk">ľ</span>ko zákaziek <em>vám vieme priniesť?</em></h2>
         <p>Vyplňte krátky formulár. Do 2 pracovných dní dostanete plán: koľko firiem oslovíme, koľko zákaziek môže byť a návrh e-mailu. Nič neplatíte, kým plán neschválite.</p>
       </div>
@@ -261,6 +275,6 @@
 </footer>
 
 <a href="#zadanie" class="mcta" id="mcta">Chcem nové zákazky</a>
-<script src="assets/site3.js?v=fcd5e120" defer></script>
+<script src="assets/site3.js?v=a3db8d53" defer></script>
 </body>
 </html>
