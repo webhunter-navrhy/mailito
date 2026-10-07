@@ -782,3 +782,43 @@ h3{font-size:clamp(1.9rem,3vw,2.6rem);line-height:1.05}
   .proof-row{grid-template-columns:1fr 1fr 1fr}
 }
 @media (max-width:600px){.proof-row{grid-template-columns:1fr}.ba-col li{grid-template-columns:3.2rem 1fr}}
+
+/* ===== v7: rast firmy ===== */
+.hero h1{max-width:16ch}
+.grow{padding:var(--sec) 0 0}
+.grow-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.ladder{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:.9rem}
+.ladder::before{content:"";position:absolute;left:1.15rem;top:1.5rem;bottom:1.5rem;width:2px;background:linear-gradient(180deg,var(--line2),var(--ok))}
+.ladder li{position:relative;margin-left:3.2rem;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.3rem;box-shadow:var(--sh)}
+.ladder li:nth-child(2){margin-left:4.2rem}.ladder li:nth-child(3){margin-left:5.2rem}.ladder li:nth-child(4){margin-left:6.2rem}
+.ladder li::before{content:"";position:absolute;left:-2.55rem;top:1.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--card);border:2px solid var(--tx)}
+.ladder li:nth-child(2)::before{left:-3.55rem}.ladder li:nth-child(3)::before{left:-4.55rem}.ladder li:nth-child(4)::before{left:-5.55rem}
+.ladder li.top{background:linear-gradient(160deg,#F3FAF6,#fff);border-color:#CFE7DA;box-shadow:0 26px 60px -26px rgba(30,132,85,.45)}
+.ladder li.top::before{background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 5px rgba(30,132,85,.15)}
+.ld-m{font:500 .74rem/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--mu)}
+.ladder h3{font-size:1.6rem;margin:.45rem 0 .3rem}
+.ladder p{color:var(--tx2);font-size:.93rem}
+.plan{padding:clamp(1.5rem,3vw,2.3rem);box-shadow:var(--sh-lg)}
+.pl-q{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin:.9rem 0 1rem}
+.pl-q span{font:400 1.45rem/1.2 var(--serif)}
+.pl-q output{font:400 3rem/1 var(--serif);color:var(--ok);font-variant-numeric:tabular-nums}
+#plRange{--p:13%;-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ok) var(--p),var(--line) var(--p));cursor:pointer;margin:0}
+#plRange::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--card);border:1px solid var(--line2);box-shadow:0 2px 8px rgba(15,16,18,.18),0 0 0 4px rgba(30,132,85,.12)}
+#plRange::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--card);border:1px solid var(--line2)}
+.pl-v{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.2rem;font-size:.9rem;color:var(--tx2)}
+.pl-in{display:flex;align-items:center;gap:.35rem}
+.pl-in input{width:6rem;text-align:right;font:400 1rem var(--sans);color:var(--tx);background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:.45rem .6rem}
+.pl-chart{display:flex;align-items:flex-end;gap:5px;height:150px;margin:1.6rem 0 .4rem;padding-top:1.4rem;border-bottom:1px solid var(--line);position:relative}
+.pl-chart i{flex:1;position:relative;background:linear-gradient(180deg,#5FBF8B,#1E8455);border-radius:4px 4px 0 0;height:var(--h);transition:height .5s var(--ease);opacity:calc(.45 + var(--o))}
+.pl-chart i::after{content:attr(data-m);position:absolute;left:0;right:0;bottom:-1.3rem;text-align:center;font:400 9.5px/1 var(--mono);color:var(--mu)}
+.pl-chart i:last-child::before{content:attr(data-v);position:absolute;right:0;bottom:calc(100% + .35rem);white-space:nowrap;font:500 11px/1 var(--mono);color:var(--ok)}
+.pl-out{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.8rem}
+.pl-out div{border:1px solid var(--line);border-radius:12px;padding:.8rem .9rem}
+.pl-out small{display:block;font-size:.78rem;color:var(--mu)}
+.pl-out b{font:400 1.9rem/1.15 var(--serif);font-variant-numeric:tabular-nums}
+.pl-out .hot{background:#F2F8F4;border-color:#CFE7DA}
+.pl-out .hot b{color:var(--ok)}
+.pl-how{font-size:.84rem;color:var(--mu);margin:1rem 0 1.2rem;line-height:1.5}
+.pl-how b{color:var(--tx);font-weight:500}
+@media (max-width:960px){.grow-grid{grid-template-columns:1fr}.ladder li,.ladder li:nth-child(n){margin-left:3.2rem}.ladder li::before,.ladder li:nth-child(n)::before{left:-2.55rem}}
+@media (max-width:520px){.pl-q span{font-size:1.2rem}.pl-q output{font-size:2.4rem}}

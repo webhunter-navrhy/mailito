@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=cd07b18e').then(r => r.json()), fetch('data/sk_mapa.json?v=cd07b18e').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=6054547b').then(r => r.json()), fetch('data/sk_mapa.json?v=6054547b').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -216,7 +216,7 @@
   const indTabs = $('#indTabs'), indPanel = $('#indPanel');
   if (indTabs) {
     let T = null;
-    fetch('data/trh.json?v=cd07b18e').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    fetch('data/trh.json?v=6054547b').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
     indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
     const show = i => {
       const x = IND[i];
@@ -280,6 +280,28 @@
     const upd = () => mcta.classList.toggle('on', !inHero && !inBrief);
     new IntersectionObserver(es => { inHero = es[0].isIntersecting; upd(); }).observe(heroEl);
     new IntersectionObserver(es => { inBrief = es[0].isIntersecting; upd(); }).observe(briefEl);
+  }
+
+  // ===== v7: plán rastu =====
+  const plR = $('#plRange'), plV = $('#plVal'), plC = $('#plChart');
+  if (plR) {
+    const LEAD = .0075, CONV = .2;
+    plC.innerHTML = Array.from({ length: 12 }, (_, i) => `<i data-m="M${i + 1}"></i>`).join('');
+    const bars = $$('i', plC);
+    const plan = () => {
+      const d = +plR.value, v = Math.max(0, +plV.value || 0);
+      plR.style.setProperty('--p', ((d - plR.min) / (plR.max - plR.min) * 100) + '%');
+      const firms = Math.min(20000, Math.max(1000, Math.ceil(d / (LEAD * CONV) / 500) * 500));
+      const mesacne = cena(firms), rok = d * 12, obrat = rok * v;
+      $('#plN').textContent = d;
+      $('#plYear').textContent = `${fmt(rok)} zákaziek`;
+      $('#plRev').textContent = v ? `${fmt(obrat)} €` : '–';
+      bars.forEach((b, i) => { const val = d * (i + 1) * v; b.style.setProperty('--h', ((i + 1) / 12 * 100) + '%'); b.style.setProperty('--o', ((i + 1) / 12 * .55).toFixed(2)); b.dataset.v = v ? fmt(val) + ' €' : ''; });
+      $('#plHow').innerHTML = `Každý mesiac oslovíme <b>${fmt(firms)} firiem</b> z vášho odboru za <b>${fmt(mesacne)} €</b>. ` +
+        (v ? `Ročne investujete ${fmt(mesacne * 12)} € a získate zákazky za ${fmt(obrat)} € – <b>${(obrat / (mesacne * 12)).toFixed(0)}× viac</b>, než stoja.` : '') +
+        ` Odhad: 0,75&nbsp;% oslovených firiem má záujem, 20&nbsp;% z nich sa stane zákazkou.`;
+    };
+    plR.addEventListener('input', plan); plV.addEventListener('input', plan); plan();
   }
 
   // formulár zadania
