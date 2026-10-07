@@ -2,7 +2,7 @@
   const API = 'https://mailito-api.webhunter.workers.dev';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const fmt = n => Math.round(n).toLocaleString('sk-SK').replace(/ /g, ' ');
+  const fmt = n => Math.round(n).toLocaleString('sk-SK').replace(/[\u00a0\u202f ]/g, '\u00a0');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // nav
@@ -111,6 +111,7 @@
     const base = Math.min(n, 1000);
     $('#crLeads').textContent = n ? `${Math.max(1, Math.round(base * .003))} – ${Math.max(2, Math.round(base * .012))}` : '–';
     $('#crLeadsAll').textContent = n ? `${fmt(Math.max(1, n * .003))} – ${fmt(Math.max(2, n * .012))}` : '–';
+    window.mailitoTrh && window.mailitoTrh(n);
     const v = $('#fVyber');
     if (v) v.value = n ? `${[...selSeg].join(', ')} | ${kraje.length === 8 ? 'celé Slovensko' : kraje.join(', ')} | ${fmt(n)} firiem` : '';
   };
@@ -124,7 +125,7 @@
     numRaf = requestAnimationFrame(st);
   }
   if (chipsEl && mapEl) {
-    fetch('data/trh.json?v=e4197359').then(r => r.json()).then(d => {
+    fetch('data/trh.json?v=31a2ef42').then(r => r.json()).then(d => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s} <small></small></button>`).join('');
       mapEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj" data-k="${k}" style="grid-area:${AREAS[k]}" aria-pressed="false"><span class="kraj-in"><b>${k}</b><small></small></span></button>`).join('');
@@ -136,10 +137,59 @@
     }).catch(() => { $('#crSub').textContent = 'Dáta sa nepodarilo načítať.'; });
   }
 
-  // balík z cenníka
-  $$('[data-balik]').forEach(b => b.addEventListener('click', () => {
-    const s = $('#briefForm select[name=balik]'); if (s) s.value = b.dataset.balik;
-  }));
+  // cenník podľa počtu firiem – pásma: 1. tisíc 0,149 €, do 3 000 0,10 €, do 10 000 0,08 €, nad 0,06 €
+  const cena = n => {
+    const pasma = [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]];
+    let p = 0, od = 0;
+    for (const [do_, c] of pasma) { if (n > od) p += (Math.min(n, do_) - od) * c; od = do_; }
+    return Math.round(p / 10) * 10 - 1;
+  };
+  window.mailitoCena = cena;
+  const range = $('#cfgRange');
+  const fPocet = $('#fPocet');
+  if (fPocet) {
+    const opts = [];
+    for (let n = 1000; n <= 20000; n += 500) opts.push(`<option value="${n}">${fmt(n)} firiem · ${fmt(cena(n))} €</option>`);
+    fPocet.innerHTML = opts.join('') + '<option value="neviem">Ešte neviem</option>';
+  }
+  let trhN = 0;
+  const cfgRender = () => {
+    if (!range) return;
+    const n = +range.value, p = cena(n);
+    range.style.setProperty('--p', ((n - range.min) / (range.max - range.min) * 100) + '%');
+    $('#cfgN').textContent = fmt(n);
+    $('#cfgPrice').textContent = fmt(p);
+    $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { minimumFractionDigits: 2, maximumFractionDigits: 3 }) + ' €';
+    const lo = Math.max(1, Math.round(n * .003)), hi = Math.max(2, Math.round(n * .012));
+    $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;
+    $('#cfgCpl').textContent = `${fmt(p / hi)} – ${fmt(p / lo)} €`;
+    $('#cfgCta').firstChild.textContent = `Objednať ${fmt(n)} firiem `;
+    $$('.cfg-quick [data-n]').forEach(b => b.classList.toggle('on', +b.dataset.n === n));
+    $('#cfgTrh').classList.toggle('on', trhN && n === Math.min(20000, Math.max(1000, Math.round(trhN / 500) * 500)));
+    const t = $$('.tiers div');
+    t.forEach((d, i) => d.classList.toggle('on', i === (n <= 1000 ? 0 : n <= 3000 ? 1 : n <= 10000 ? 2 : 3)));
+    $('#cfgHint').innerHTML = trhN && n > trhN
+      ? `Vo vašom výbere v kalkulačke je <b>${fmt(trhN)}</b> firiem – rozšírte odvetvia alebo kraje, alebo znížte počet.`
+      : trhN ? `Z vášho výberu (${fmt(trhN)} firiem) oslovíme ${fmt(n)}.` : '';
+    if (fPocet && fPocet.querySelector(`option[value="${n}"]`)) fPocet.value = n;
+  };
+  if (range) {
+    range.addEventListener('input', cfgRender);
+    $$('.cfg-quick [data-n]').forEach(b => b.addEventListener('click', () => { range.value = b.dataset.n; cfgRender(); }));
+    $('#cfgTrh').addEventListener('click', () => { range.value = Math.min(20000, Math.max(1000, Math.round(trhN / 500) * 500)); cfgRender(); });
+    $('#cfgCta').addEventListener('click', () => { if (fPocet) fPocet.value = range.value; });
+    cfgRender();
+  }
+  // kalkulačka trhu → konfigurátor
+  window.mailitoTrh = n => {
+    trhN = n;
+    const b = $('#cfgTrh'); if (b) { b.hidden = !n; b.textContent = `Celý môj výber · ${fmt(Math.min(20000, n))}`; }
+    cfgRender();
+  };
+  $('#calcCta')?.addEventListener('click', () => {
+    if (!range || !trhN) return;
+    range.value = Math.min(+range.value, Math.max(1000, Math.floor(trhN / 500) * 500)); cfgRender();
+  });
 
   // formulár zadania
   const form = $('#briefForm');

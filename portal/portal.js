@@ -13,7 +13,10 @@
   const STAVY = { novy: 'Nový', kontaktovany: 'Kontaktovaný', stretnutie: 'Stretnutie', ponuka: 'Ponuka', obchod: 'Obchod', neaktualny: 'Neaktuálny', reklamacia: 'Reklamácia' };
   const CSTAV = { priprava: 'V príprave', na_schvalenie: 'Na schválenie', schvalena: 'Schválená', bezi: 'Beží', pauza: 'Pozastavená', hotova: 'Dokončená' };
   const TEPL = { horuci: 'Horúci', teply: 'Teplý', neskor: 'Neskôr' };
-  const BALIK = { test: 'Test · 149 €', kampan: 'Kampaň · 390 €', vykon: 'Výkon · platba za záujemcu' };
+  const cena = n => { let p = 0, od = 0; for (const [d, c] of [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]]) { if (n > od) p += (Math.min(n, d) - od) * c; od = d; } return Math.round(p / 10) * 10 - 1; };
+  const BALIK = { test: '1 000 firiem · 149 €', kampan: '3 500 firiem · 389 €', vykon: 'Platba za záujemcu' };
+  const balik = b => BALIK[b] || (/^\d+$/.test(b || '') ? `${fmt(+b)} firiem · ${fmt(cena(+b))} €` : b);
+  { const sel = document.getElementById('nkPocet'); if (sel) { let o = ''; for (let n = 1000; n <= 20000; n += 500) o += `<option value="${n}" ${n === 3500 ? 'selected' : ''}>${fmt(n)} firiem · ${fmt(cena(n))} €</option>`; sel.innerHTML = o; } }
 
   const demo = new URLSearchParams(location.search).has('demo');
   let S = { klient: null, kampane: [], leady: [], udalosti: [], leadStat: [] };
@@ -206,7 +209,7 @@
           <dt>Kontakt</dt><dd>${esc(k.meno || '–')}</dd>
           <dt>E-mail</dt><dd>${esc(k.email || '–')}</dd>
           <dt>IČO</dt><dd>${esc(k.ico || '–')}</dd>
-          <dt>Balík</dt><dd>${esc(BALIK[k.balik] || k.balik || '–')}</dd>
+          <dt>Posledná objednávka</dt><dd>${esc(balik(k.balik) || '–')}</dd>
           ${k.balik === 'vykon' ? `<dt>Kredit</dt><dd>${fmt((k.kredit_cent || 0) / 100)} € · ${fmt((k.cena_leadu_cent || 3900) / 100)} € za záujemcu</dd>` : ''}
         </dl>
         <p class="muted" style="font-size:.85rem;margin-top:1.2rem">Zmenu fakturačných údajov alebo balíka nám napíšte na <a href="mailto:info@mailito.eu" style="color:var(--red)">info@mailito.eu</a>.</p>
@@ -371,6 +374,6 @@
       { ts: iso(26), typ: 'info', text: 'Odoslaných ďalších 142 e-mailov.', campaign_id: 'c1' },
       { ts: iso(380), typ: 'info', text: 'Kampaň dokončená: 1 000 oslovených, 9 záujemcov.', campaign_id: 'c3' },
     ].sort((a, b) => b.ts.localeCompare(a.ts));
-    return { klient: { id: 'demo', firma: 'Čistá Hala s.r.o. (ukážka)', meno: 'Martin Kováč', email: 'ukazka@mailito.eu', balik: 'kampan', ico: '00 000 000' }, kampane, leady, udalosti, leadStat: [] };
+    return { klient: { id: 'demo', firma: 'Čistá Hala s.r.o. (ukážka)', meno: 'Martin Kováč', email: 'ukazka@mailito.eu', balik: '3500', ico: '00 000 000' }, kampane, leady, udalosti, leadStat: [] };
   }
 })();

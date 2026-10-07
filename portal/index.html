@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=e4197359">
-<link rel="stylesheet" href="portal.css?v=e4197359">
+<link rel="stylesheet" href="../assets/site.css?v=31a2ef42">
+<link rel="stylesheet" href="portal.css?v=31a2ef42">
 </head>
 <body class="app-body">
 
@@ -88,8 +88,8 @@
     <form id="novaForm" class="form form-flat">
       <label>Čo ponúkate?<textarea name="ponuka" rows="3" required></textarea></label>
       <label>Kto je ideálny zákazník?<textarea name="zakaznik" rows="3"></textarea></label>
-      <label>Balík
-        <select name="balik"><option value="test">Test · 149 €</option><option value="kampan" selected>Kampaň · 390 €</option><option value="vykon">Výkon · 39 € za záujemcu</option></select>
+      <label>Počet firiem
+        <select name="balik" id="nkPocet"></select>
       </label>
       <label>Poznámka<textarea name="poznamka" rows="2" placeholder="Kraje, veľkosť firiem, čo sa osvedčilo…"></textarea></label>
       <button class="btn btn-red btn-block" type="submit">Poslať zadanie</button>
@@ -100,6 +100,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="portal.js?v=e4197359" defer></script>
+<script src="portal.js?v=31a2ef42" defer></script>
 </body>
 </html>
