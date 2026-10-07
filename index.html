@@ -5,18 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mailito – nové zákazky pre vašu firmu z celého Slovenska</title>
 <meta name="description" content="Vy robíte, my vám zháňame zákazky. Mailito osloví slovenské firmy, ktoré vaše služby potrebujú, prečíta ich odpovede a do portálu vám pošle len tie so záujmom. Od 149 €.">
-<meta property="og:title" content="Mailito – nové zákazky pre vašu firmu">
-<meta property="og:description" content="Vy robíte. My vám zháňame zákazky. Od 149 €, bez viazanosti.">
+<meta property="og:title" content="Mailito – nové zákazky pre vašu firmu z celého Slovenska">
+<meta property="og:description" content="Vy robíte, my vám zháňame zákazky. Mailito osloví slovenské firmy, ktoré vaše služby potrebujú, prečíta ich odpovede a do portálu vám pošle len tie so záujmom. Od 149 €.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mailito.eu/">
 <link rel="canonical" href="https://mailito.eu/">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site4.css?v=6a3b9c45">
+<link rel="stylesheet" href="./assets/site4.css?v=ae9f72db">
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mailito","url":"https://mailito.eu/","applicationCategory":"BusinessApplication","operatingSystem":"Web","areaServed":"SK","description":"Nové B2B zákazky pre slovenské firmy: výber firiem, oslovenie, AI vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","publisher":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mailito","url":"https://mailito.eu/","applicationCategory":"BusinessApplication","operatingSystem":"Web","areaServed":"SK","description":"Nové B2B zákazky pre slovenské firmy: AI nastavenie kampane, výber firiem, oslovenie, AI vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","publisher":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
 </head>
 <body>
@@ -41,28 +42,27 @@
   <div class="nav-in">
     <a href="./" class="logo" aria-label="Mailito – domov"><span class="logo-m" aria-hidden="true"></span>mailito</a>
     <nav class="menu" id="menu" aria-label="Hlavná navigácia">
-      <a href="#dokaz">Výsledky</a>
-      <a href="#ako">Produkt</a>
-      <a href="#vysledky">Porovnanie</a>
-      <a href="#cena">Cenník</a>
-      <a href="#otazky">Otázky</a>
-      <a href="portal/" class="menu-m">Prihlásiť sa do portálu</a>
+      <a href="./ako-to-funguje/">Ako to funguje</a>
+      <a href="./vysledky/">Výsledky</a>
+      <a href="./cennik/">Cenník</a>
+      <a href="./otazky/">Otázky</a>
+      <a href="./portal/" class="menu-m">Prihlásiť sa do portálu</a>
+      <a href="./objednat/" class="menu-m menu-cta">Objednať kampaň</a>
     </nav>
     <div class="nav-r">
-      <a href="portal/" class="nav-link">Prihlásiť sa</a>
-      <a href="#zadanie" class="btn btn-sm">Začať</a>
+      <a href="./portal/" class="nav-link">Prihlásiť sa</a>
+      <a href="./objednat/" class="btn btn-sm">Objednať<svg><use href="#i-arr"/></svg></a>
       <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
     </div>
   </div>
 </header>
 
 <main id="obsah" class="frame">
-
 <!-- ÚVOD -->
 <section class="hero">
-  <div class="stage">
+  <div class="stage" data-hero3d>
     <div class="hero-txt">
-      <a href="#cena" class="pill"><span class="pill-new">+100</span>Ku každej kampani 100 firiem zadarmo<svg><use href="#i-arr"/></svg></a>
+      <a href="./cennik/" class="pill"><span class="pill-new">+100</span>Ku každej kampani 100 firiem zadarmo<svg><use href="#i-arr"/></svg></a>
       <h1>Vy robíte.<br><span class="h-em">My vám zháňame zákazky.</span></h1>
       <p class="lead">Mailito osloví slovenské firmy, ktoré vaše služby potrebujú, prečíta ich odpovede a do portálu vám pošle len tie, ktoré napísali: „Áno, pošlite ponuku.“</p>
       <form class="quick" id="quickForm" novalidate>
@@ -70,19 +70,16 @@
         <label class="q-f q-sel"><span class="sr">Komu?</span><select name="segment" id="qSeg"><option value="">Komu? Odvetvie</option></select><svg><use href="#i-down"/></svg></label>
         <label class="q-f"><span class="sr">Váš e-mail</span><input name="email" type="email" required placeholder="meno@firma.sk" autocomplete="email"></label>
         <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn" type="submit">Získať plán<svg><use href="#i-arr"/></svg></button>
+        <button class="btn" type="submit">Pripraviť kampaň<svg><use href="#i-arr"/></svg></button>
       </form>
-      <p class="hero-note" id="quickMsg" role="status">Plán zadarmo do 2 pracovných dní: koľko firiem oslovíme a koľko zákaziek z toho môže byť.</p>
+      <p class="hero-note" id="quickMsg" role="status">Pokračujete do objednávky – AI vám za pár minút pripraví cieľovku aj e-maily.</p>
     </div>
-    <div class="scene">
-      <picture><source media="(max-width:700px)" srcset="assets/img/clay-hero-m.webp"><img class="stage-img" src="assets/img/clay-hero.webp" alt="Miniatúra slovenskej krajiny: zelená schránka Mailito posiela obálky firmám v dedinách" width="1440" height="1220" fetchpriority="high"></picture>
-      <svg class="fly" viewBox="0 0 1440 1220" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g opacity="0"><g class="env"><rect x="-13" y="-9" width="26" height="18" rx="3" fill="#fff" stroke="#C9D3CC"/><path d="M-12-7.5L0 1.5 12-7.5" fill="none" stroke="#B9C4BD" stroke-width="1.4"/></g><animateMotion dur="6s" begin="0s" repeatCount="indefinite" path="M1080 735C900 560 600 560 430 850" keyTimes="0;1" keySplines=".4 0 .6 1" calcMode="spline"/><animate attributeName="opacity" dur="6s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.1;.85;1"/></g><g opacity="0"><g class="env"><rect x="-13" y="-9" width="26" height="18" rx="3" fill="#fff" stroke="#C9D3CC"/><path d="M-12-7.5L0 1.5 12-7.5" fill="none" stroke="#B9C4BD" stroke-width="1.4"/></g><animateMotion dur="5s" begin="1.5s" repeatCount="indefinite" path="M1080 735C950 600 760 640 735 905" keyTimes="0;1" keySplines=".4 0 .6 1" calcMode="spline"/><animate attributeName="opacity" dur="5s" begin="1.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.1;.85;1"/></g><g opacity="0"><g class="env"><rect x="-13" y="-9" width="26" height="18" rx="3" fill="#fff" stroke="#C9D3CC"/><path d="M-12-7.5L0 1.5 12-7.5" fill="none" stroke="#B9C4BD" stroke-width="1.4"/></g><animateMotion dur="7s" begin="3s" repeatCount="indefinite" path="M1080 735C860 470 420 520 255 825" keyTimes="0;1" keySplines=".4 0 .6 1" calcMode="spline"/><animate attributeName="opacity" dur="7s" begin="3s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.1;.85;1"/></g><g opacity="0"><g class="env"><rect x="-13" y="-9" width="26" height="18" rx="3" fill="#fff" stroke="#C9D3CC"/><path d="M-12-7.5L0 1.5 12-7.5" fill="none" stroke="#B9C4BD" stroke-width="1.4"/></g><animateMotion dur="6s" begin="4.5s" repeatCount="indefinite" path="M1080 735C920 620 620 600 520 875" keyTimes="0;1" keySplines=".4 0 .6 1" calcMode="spline"/><animate attributeName="opacity" dur="6s" begin="4.5s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;.1;.85;1"/></g></svg>
-    </div>
+    <picture class="hero-fb" aria-hidden="true"><source media="(max-width:700px)" srcset="./assets/img/clay-hero-m.webp"><img src="./assets/img/clay-hero.webp" alt="" width="1440" height="1220" fetchpriority="high"></picture>
   </div>
 
   <div class="under">
     <ul class="ticks"><li><svg><use href="#i-ok"/></svg>Test 1&nbsp;000 firiem za 149&nbsp;€ + 100 zadarmo</li><li><svg><use href="#i-ok"/></svg>Platíte až po schválení</li><li><svg><use href="#i-ok"/></svg>Bez viazanosti</li></ul>
-    <a href="#dokaz" class="proof-line"><span class="dot dot-live"></span><span>Naša kampaň za posledných 10 dní:</span><b>2&nbsp;373 realitiek</b><svg><use href="#i-arr"/></svg><b>39 záujemcov</b><svg><use href="#i-arr"/></svg><b class="pl-win">5 objednávok</b></a>
+    <a href="./vysledky/" class="proof-line"><span class="dot dot-live"></span><span>Naša kampaň za posledných 10 dní:</span><b>2&nbsp;373 realitiek</b><svg><use href="#i-arr"/></svg><b>39 záujemcov</b><svg><use href="#i-arr"/></svg><b class="pl-win">5 objednávok</b></a>
   </div>
 
   <div class="shot">
@@ -146,14 +143,11 @@
   </div>
 </section>
 
-<!-- DÔKAZ -->
+<!-- DÔKAZ (skrátený) -->
 <section class="proof" id="dokaz">
-  <div class="proof-top">
   <div class="sec-head">
     <p class="label"><span>01</span>Overené na nás</p>
-    <h2>Najprv sme to vyskúšali na sebe. <span class="h-mut">Jedna kampaň pre realitné kancelárie na Slovensku. Desať dní. Toto sú čísla z nášho CRM.</span></h2>
-  </div>
-  <figure class="clay-card"><img src="assets/img/clay-funnel.webp" alt="Obálky padajú do lievika, von vychádzajú mince a podpísaná zmluva" width="1216" height="832" loading="lazy"></figure>
+    <h2>Najprv sme to vyskúšali na sebe. <span class="h-mut">Desať dní, jedna kampaň pre realitné kancelárie na Slovensku. Čísla z nášho CRM.</span></h2>
   </div>
   <div class="fun" id="fun">
     <div class="fun-c" style="--w:1"><small>Oslovené kancelárie</small><b data-count="2373">2&nbsp;373</b><span>28. 9. – 7. 10.</span><i></i></div>
@@ -161,236 +155,70 @@
     <div class="fun-c" style="--w:.4"><small>Záujemcovia v jednaní</small><b data-count="39">39</b><span>1,6&nbsp;% oslovených</span><i></i></div>
     <div class="fun-c fun-win" style="--w:.22"><small>Objednávky</small><b data-count="5">5</b><span>za prvých 10 dní</span><i></i></div>
   </div>
-  <div class="replies">
-    <figure class="rep"><p class="rep-h"><i class="av" style="--h:152">RK</i><b>Realitná kancelária</b><span>Malacky</span><em class="tag t-hot">Objednávka</em></p><blockquote>„Môžete to spustiť.“</blockquote><figcaption>Deň po prvom e-maile</figcaption></figure>
-    <figure class="rep"><p class="rep-h"><i class="av" style="--h:30">RK</i><b>Realitná maklérka</b><span>Nitra</span><em class="tag t-warm">Ponuka</em></p><blockquote>„Zaujímavé, pracujem v Nitre a v Zlatých Moravciach… premyslím si to.“</blockquote><figcaption>Otázka zodpovedaná ešte v ten deň</figcaption></figure>
-    <figure class="rep"><p class="rep-h"><i class="av" style="--h:212">RK</i><b>Realitná kancelária</b><span>Trnava</span><em class="tag t-grey">Neskôr · január</em></p><blockquote>„Ozvite sa začiatkom roka, podobnú kampaň sme práve ukončili.“</blockquote><figcaption>Pripomienka nastavená na január</figcaption></figure>
-  </div>
-  <p class="meta"><span class="logo-m" aria-hidden="true"></span><span><b>Prišli ste z nášho e-mailu?</b> Tak ste to práve zažili. Presne takýto krátky e-mail dostanú vaši budúci zákazníci – a odpovede prečítame za vás.</span></p>
+  <a href="./vysledky/" class="more">Celý príbeh a skutočné odpovede<svg><use href="#i-arr"/></svg></a>
 </section>
 
-<!-- PRODUKT -->
-<section class="prod" id="ako">
+<!-- AKO TO FUNGUJE (skrátené) -->
+<section class="steps-s" id="ako">
   <div class="sec-head">
     <p class="label"><span>02</span>Ako to funguje</p>
-    <h2>Celé obchodné oddelenie v&nbsp;jednom softvéri. <span class="h-mut">Vyberie firmy, osloví ich, prečíta odpovede a vy len podpíšete zákazku.</span></h2>
+    <h2>Kampaň nastaví AI. <span class="h-mut">Vy ju len skontrolujete a objednáte. Celé to trvá päť minút.</span></h2>
   </div>
-  <div class="prod-grid">
-    <nav class="prod-nav" aria-label="Kroky">
-      <a href="#cielenie" class="on"><span>01</span>Cielenie</a>
-      <a href="#oslovenie"><span>02</span>Oslovenie</a>
-      <a href="#odpovede"><span>03</span>Odpovede</a>
-      <a href="#zakazky"><span>04</span>Zákazky</a>
-    </nav>
-    <div class="prod-list">
-
-      <article class="feat" id="cielenie">
-        <h3>Vyberieme firmy, ktoré vás potrebujú. <span class="h-mut">Pod<span class="dk">ľ</span>a odvetvia a kraja, z celej slovenskej databázy. Počty sú skutočné – vyskúšajte.</span></h3>
-        <div class="canvas">
-          <div class="ui ui-aud">
-            <div class="ui-h"><p>Nová kampaň · Cieľová skupina</p><span class="ui-step">Krok 1 z 3</span></div>
-            <p class="ui-lbl">Odvetvie</p>
-            <div class="chips" id="audSeg"></div>
-            <p class="ui-lbl">Kraj</p>
-            <div class="chips" id="audKraj"></div>
-            <div class="aud-res">
-              <div><small>Firmy v cieľovej skupine</small><b id="audN">10&nbsp;240</b></div>
-              <div><small>Odhad záujemcov</small><b id="audL">31 – 123</b></div>
-              <div><small>Cena kampane</small><b id="audP">–</b></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="feat" id="oslovenie">
-        <h3>Napíšeme e-mail, aký by ste napísali vy. <span class="h-mut">Krátky, osobný, po slovensky a vaším menom. Nič neodíde, kým ho v portáli neschválite.</span></h3>
-        <div class="canvas">
-          <div class="ui ui-seq">
-            <div class="seq">
-              <p class="ui-lbl">Postupnosť</p>
-              <div class="seq-i on"><span class="seq-d">Deň 1</span><b>Prvý e-mail</b><small>Osobná ponuka</small></div>
-              <div class="seq-i"><span class="seq-d">Deň 4</span><b>Pripomienka</b><small>Len ak neodpísali</small></div>
-              <div class="seq-i"><span class="seq-d">Deň 9</span><b>Posledná správa</b><small>Krátke zhrnutie</small></div>
-            </div>
-            <div class="mail">
-              <p class="mail-r"><span>Komu</span><b><code>{firma}</code> · 2&nbsp;418 firiem</b></p>
-              <p class="mail-r"><span>Predmet</span><b>Upratovanie haly bez odstávky výroby</b></p>
-              <div class="mail-b">
-                <p>Dobrý deň,</p>
-                <p>upratujeme výrobné haly v noci a cez víkendy, takže výroba v <code>{firma}</code> nemusí stáť ani hodinu. Pracujeme pre firmy v <code>{mesto}</code> a okolí.</p>
-                <p>Mám vám poslať orientačnú cenu pre vašu halu?</p>
-                <p>Martin Hrubý<br><span class="t-mut">Upratovanie Hrubý s.r.o.</span></p>
-              </div>
-              <div class="mail-f"><span class="a-btn a-btn-p"><svg><use href="#i-ok"/></svg>Schváliť kampaň</span><span class="a-btn">Pripomienka</span><span class="mail-wait"><span class="dot dot-amb"></span>Čaká na vaše schválenie</span></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <article class="feat" id="odpovede">
-        <h3>Odpovede čítame za vás. <span class="h-mut">AI roztriedi každú odpoveď za pár sekúnd. Odmietnutia a automatické odpovede vybavíme, vy vidíte len záujem.</span></h3>
-        <div class="canvas">
-          <div class="ui ui-inbox" id="inbox">
-            <div class="ui-h"><p>Doručené odpovede</p><span class="ui-step"><svg><use href="#i-spark"/></svg>Triedi AI</span></div>
-            <div class="ib"><i class="av" style="--h:152">KZ</i><div><b>Kovo Záhorie a.s.</b><p>Od januára hľadáme nového dodávateľa, pošlite ponuku…</p></div><em class="tag t-hot">Záujem → portál</em></div>
-            <div class="ib"><i class="av" style="--h:60">TM</i><div><b>Tlačiareň Martin s.r.o.</b><p>Automatická odpoveď: som mimo kancelárie do 14. 10.</p></div><em class="tag t-grey">Automat · zopakujeme</em></div>
-            <div class="ib"><i class="av" style="--h:212">LV</i><div><b>Logistika Váh s.r.o.</b><p>Pošlite cenu za 2&nbsp;000 m² mesačne, ďakujem.</p></div><em class="tag t-hot">Záujem → portál</em></div>
-            <div class="ib"><i class="av" style="--h:0">BK</i><div><b>Betón Kysuce s.r.o.</b><p>Nemáme záujem, ďakujeme.</p></div><em class="tag t-grey">Nie · odhlásené</em></div>
-            <div class="ib"><i class="av" style="--h:260">AP</i><div><b>Agro Podunajsko s.r.o.</b><p>Teraz nie, ale zmluva nám končí v januári.</p></div><em class="tag t-warm">Neskôr · január</em></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="feat" id="zakazky">
-        <h3>Vy len zavoláte a podpíšete. <span class="h-mut">Záujemca je v portáli do 10 minút aj s kontaktom a tým, čo chce. Upozornenie vám príde e-mailom.</span></h3>
-        <div class="canvas">
-          <div class="ui-deal" id="deal">
-            <div class="ui note">
-              <p class="note-h"><span class="logo-m" aria-hidden="true"></span><b>Mailito</b><span class="t-mut">10:42</span></p>
-              <p class="note-s">Nový záujemca: Logistika Váh s.r.o.</p>
-              <p class="note-t">„Pošlite cenu za 2&nbsp;000 m² mesačne.“ Kontakt a celú odpoveď nájdete v portáli.</p>
-            </div>
-            <div class="ui lead-card">
-              <div class="d-head"><i class="av av-lg" style="--h:212">LV</i><div><p class="d-firm">Logistika Váh s.r.o.</p><p class="d-meta">Hlohovec · Trnavský kraj</p></div></div>
-              <ol class="pipe">
-                <li><i></i>Nový<small>po 10:42</small></li>
-                <li><i></i>Kontaktovaný<small>ut 14:10</small></li>
-                <li><i></i>Ponuka<small>st 09:30</small></li>
-                <li><i></i>Obchod<small>pi 16:05</small></li>
-              </ol>
-              <div class="lead-v"><small>Hodnota obchodu</small><b id="dealV">4&nbsp;800&nbsp;€</b></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-    </div>
+  <div class="step-grid">
+    <article class="step-card step-ai"><p class="sc-n"><span>00</span><svg><use href="#i-spark"/></svg></p><h3>AI asistent</h3><p>Nahráte web alebo prezentáciu. AI pochopí, čo predávate, a celú kampaň nastaví za vás.</p></article>
+    <article class="step-card"><p class="sc-n"><span>01</span><svg><use href="#i-search"/></svg></p><h3>Cielenie</h3><p>Vyberie firmy podľa odvetvia a kraja zo 74&nbsp;568 slovenských firiem.</p></article>
+    <article class="step-card"><p class="sc-n"><span>02</span><svg><use href="#i-send"/></svg></p><h3>Oslovenie</h3><p>Napíše krátke osobné e-maily vaším menom. Nič neodíde bez vášho súhlasu.</p></article>
+    <article class="step-card"><p class="sc-n"><span>03</span><svg><use href="#i-inbox"/></svg></p><h3>Odpovede</h3><p>AI prečíta každú odpoveď. Odmietnutia vybaví, vy vidíte len záujem.</p></article>
+    <article class="step-card"><p class="sc-n"><span>04</span><svg><use href="#i-user"/></svg></p><h3>Zákazky</h3><p>Záujemca je v portáli do 10 minút aj s kontaktom a tým, čo chce.</p></article>
   </div>
+  <a href="./ako-to-funguje/" class="more">Pozrite si celý postup v ukážkach<svg><use href="#i-arr"/></svg></a>
 </section>
 
-<!-- VÝSLEDKY -->
-<section class="dark" id="vysledky">
-  <div class="sec-head">
-    <p class="label"><span>03</span>Výsledky</p>
-    <h2><span data-count="24" data-suf="×">24×</span> lacnejšie ako obchodník. <span class="h-mut">Bez náboru, zaúčania a mesačných výplat. Prvé odpovede do 24 hodín.</span></h2>
-  </div>
-  <div class="cmp-grid">
-    <div class="cmp" role="table" aria-label="Porovnanie obchodníka a Mailito">
-      <div class="cmp-r cmp-h" role="row"><span role="columnheader"></span><span role="columnheader">Obchodník</span><span role="columnheader" class="cmp-m"><span class="logo-m" aria-hidden="true"></span>Mailito</span></div>
-      <div class="cmp-r" role="row"><span role="rowheader">Cena</span><span role="cell">2&nbsp;100&nbsp;€ mesačne</span><span role="cell" class="cmp-m">389&nbsp;€ jednorazovo</span></div>
-      <div class="cmp-r" role="row"><span role="rowheader">Oslovené firmy</span><span role="cell">~800 za mesiac</span><span role="cell" class="cmp-m">3&nbsp;500 za kampaň</span></div>
-      <div class="cmp-r" role="row"><span role="rowheader">Cena za firmu</span><span role="cell">2,63&nbsp;€</span><span role="cell" class="cmp-m">0,11&nbsp;€</span></div>
-      <div class="cmp-r" role="row"><span role="rowheader">Štart</span><span role="cell">2 – 3 mesiace</span><span role="cell" class="cmp-m">do 3 dní</span></div>
-      <div class="cmp-r" role="row"><span role="rowheader">Viazanosť</span><span role="cell">pracovná zmluva</span><span role="cell" class="cmp-m">žiadna</span></div>
+<!-- CENA (teaser) -->
+<section class="teaser-s" id="cena">
+  <div class="teaser">
+    <div class="teaser-l">
+      <p class="label"><span>03</span>Cenník</p>
+      <h2>Od 149&nbsp;€. <span class="h-mut">Platíte za oslovené firmy, nie za mesiace ani licencie.</span></h2>
+      <ul class="ticks"><li><svg><use href="#i-ok"/></svg>Jednorazovo, bez viazanosti</li><li><svg><use href="#i-ok"/></svg>Cena za firmu klesá s objemom až na 0,06&nbsp;€</li><li><svg><use href="#i-ok"/></svg>Záruka pri prvej kampani</li></ul>
     </div>
-    <figure class="qt">
-      <p class="qt-tag"><span class="dot dot-live"></span>Skutočná odpoveď z našej kampane</p>
-      <blockquote>„Môžete to spustiť.“</blockquote>
-      <figcaption>Realitná kancelária, Malacky · objednávka deň po prvom e-maile</figcaption>
-      <div class="qt-n"><div><b data-count="5">5</b><small>objednávok za 10 dní</small></div><div><b>24&nbsp;h</b><small>do prvých odpovedí</small></div></div>
-    </figure>
-  </div>
-</section>
-
-<!-- CENNÍK -->
-<section class="price" id="cena">
-  <div class="sec-head">
-    <p class="label"><span>04</span>Cenník</p>
-    <h2>Platíte za oslovené firmy. <span class="h-mut">Žiadne licencie ani mesačné poplatky. Posuňte a hneď uvidíte, čo vám kampaň prinesie.</span></h2>
-  </div>
-  <div class="calc">
-    <div class="calc-l">
-      <div class="c-top"><label class="c-lbl" for="cfgRange">Počet oslovených firiem</label><p class="c-num"><output id="cfgN">3&nbsp;500</output></p></div>
-      <input type="range" id="cfgRange" min="1000" max="20000" step="500" value="3500">
-      <div class="c-scale" aria-hidden="true"><span>1&nbsp;000</span><span>20&nbsp;000</span></div>
-      <div class="c-quick" role="group" aria-label="Rýchly výber"><button type="button" data-n="1000">1&nbsp;000 · test</button><button type="button" data-n="3500">3&nbsp;500</button><button type="button" data-n="10000">10&nbsp;000</button><button type="button" data-n="20000">20&nbsp;000</button></div>
-      <label class="c-val"><span>Priemerná hodnota vašej zákazky</span><span class="c-in"><input type="number" id="roiVal" min="50" step="50" value="1500" inputmode="numeric"><i>€</i></span></label>
-      <div class="tiers" id="tiers">
-        <p class="c-lbl">Cena za firmu klesá s objemom</p>
-        <div class="tier" data-od="0"><span>do 1&nbsp;000</span><b>0,149&nbsp;€</b></div>
-        <div class="tier" data-od="1000"><span>1&nbsp;001 – 3&nbsp;000</span><b>0,10&nbsp;€</b></div>
-        <div class="tier" data-od="3000"><span>3&nbsp;001 – 10&nbsp;000</span><b>0,08&nbsp;€</b></div>
-        <div class="tier" data-od="10000"><span>nad 10&nbsp;000</span><b>0,06&nbsp;€</b></div>
-      </div>
-    </div>
-    <div class="calc-r" aria-live="polite">
+    <div class="teaser-r">
       <span class="sticker" aria-hidden="true"><b>+100</b>firiem<br>zadarmo</span>
-      <p class="c-lbl">Cena kampane</p>
-      <p class="c-price"><span id="cfgPrice">389</span><i>€</i></p>
-      <p class="c-sub">jednorazovo · bez DPH · <span id="cfgPer">0,111 €</span> za firmu</p>
-      <p class="c-bonus"><svg><use href="#i-spark"/></svg>Oslovíme <b id="cfgTot">3&nbsp;600</b> firiem – 100 navyše zadarmo</p>
-      <dl class="c-res">
-        <div><dt>Záujemcovia</dt><dd id="cfgLeads">11 – 42</dd></div>
-        <div><dt>Nové zákazky</dt><dd id="cfgDeals">2 – 8</dd></div>
-        <div class="big"><dt>Hodnota zákaziek</dt><dd id="cfgRev">3&nbsp;300 – 12&nbsp;600 €</dd></div>
-      </dl>
-      <p class="c-x" id="cfgX"></p>
-      <a href="#zadanie" class="btn btn-lime btn-block" id="cfgCta">Chcem túto kampaň<svg><use href="#i-arr"/></svg></a>
-      <ul class="incl"><li><svg><use href="#i-ok"/></svg>Výber firiem a texty</li><li><svg><use href="#i-ok"/></svg>E-mail + 2 pripomienky</li><li><svg><use href="#i-ok"/></svg>AI vyhodnotenie odpovedí</li><li><svg><use href="#i-ok"/></svg>Klientsky portál a export</li><li><svg><use href="#i-ok"/></svg>+100 firiem zadarmo</li><li><svg><use href="#i-ok"/></svg>Záruka pri prvej kampani</li></ul>
-      <p class="c-guar"><b>Záruka:</b> ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p>
+      <p class="c-lbl">Test · 1&nbsp;000 firiem</p>
+      <p class="c-price"><span>149</span><i>€</i></p>
+      <p class="c-sub">jednorazovo · bez DPH · oslovíme 1&nbsp;100 firiem</p>
+      <div class="teaser-acts"><a href="./objednat/?pocet=1000" class="btn btn-lime btn-block">Objednať test<svg><use href="#i-arr"/></svg></a><a href="./cennik/" class="btn btn-ghost btn-block">Spočítať cenu pre viac firiem</a></div>
     </div>
   </div>
-  <p class="calc-note">Odhad: 0,3 – 1,2&nbsp;% oslovených firiem má záujem, 20&nbsp;% z nich sa stane zákazkou.</p>
 </section>
 
-<!-- OTÁZKY -->
-<section class="faq" id="otazky">
-  <div class="sec-head">
-    <p class="label"><span>05</span>Otázky</p>
-    <h2>Čo sa pýta každý. <span class="h-mut">Niečo chýba? Napíšte na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.</span></h2>
-  </div>
-  <div class="faq-list">
-    <details><summary>Nie je to spam?</summary><p>Nie. Každý e-mail je osobný, podpísaný vaším menom, s identifikáciou firmy a odhlásením jedným slovom. Oslovujeme len zverejnené firemné adresy firiem, ktorým vaša ponuka dáva zmysel. Slovenský zákon (§&nbsp;116 ods.&nbsp;15 z.&nbsp;452/2021) takéto oslovenie firiem povoľuje.</p></details>
-    <details><summary>Odpovedajú vôbec firmy na e-maily?</summary><p>Na hromadné letáky nie. Na krátky osobný e-mail s konkrétnou ponukou áno – na našich vlastných kampaniach odpíše so záujmom okolo 1,1&nbsp;% firiem.</p></details>
-    <details><summary>Nepoškodí to našu doménu?</summary><p>Nie. Posielame z vlastných zahriatych schránok, nie z vašej firemnej pošty. Odpovede čítame my a záujemcov vám odovzdáme v portáli.</p></details>
-    <details><summary>Dostanem zoznam oslovených firiem?</summary><p>Nie, zoznamy nepredávame. Dostanete všetky firmy, ktoré odpovedali so záujmom, s kontaktom a pôvodnou odpoveďou. Kedykoľvek si ich stiahnete do CSV.</p></details>
-    <details><summary>Ako rýchlo to spustíte?</summary><p>Plán a návrh e-mailu máte do 2 pracovných dní. Po schválení a úhrade začíname odosielať, prvé odpovede zvyčajne prídu ešte v ten deň.</p></details>
-    <details><summary>Čo znamená 100 firiem zadarmo?</summary><p>Ku každej kampani od 1&nbsp;000 firiem oslovíme 100 firiem navyše a neplatíte za ne. Objednáte 1&nbsp;000, oslovíme 1&nbsp;100.</p></details>
-    <details><summary>Čo ak nikto neodpovie?</summary><p>Pri prvej kampani platí záruka: ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p></details>
-  </div>
-</section>
-
-<!-- ZADANIE -->
+<!-- ZÁVER -->
 <section class="end" id="zadanie">
   <div class="end-txt">
-    <p class="label"><span>06</span>Začnite zadarmo</p>
+    <p class="label"><span>●</span>Začnite dnes</p>
     <h2>Prvé zákazky<br>o 7 dní.</h2>
-    <p>Vyplňte krátky formulár. Do 2 pracovných dní dostanete plán: koľko firiem oslovíme, koľko zákaziek môže byť a návrh e-mailu. Nič neplatíte, kým plán neschválite.</p>
-    <ul class="ticks"><li><svg><use href="#i-ok"/></svg>Plán zadarmo</li><li><svg><use href="#i-ok"/></svg>Platíte až po schválení</li><li><svg><use href="#i-ok"/></svg>+100 firiem zadarmo ku každej kampani</li></ul>
-    <img class="end-img" src="assets/img/clay-box.webp" alt="Zelená schránka Mailito plná obálok" width="1024" height="1024" loading="lazy">
+    <p>Zaregistrujte sa, AI vám za 5 minút pripraví kampaň: vyberie firmy a napíše e-maily. Vy ich len skontrolujete. Faktúru pošleme e-mailom.</p>
+    <div class="end-acts"><a href="./objednat/" class="btn btn-lg">Objednať kampaň<svg><use href="#i-arr"/></svg></a><a href="./cennik/" class="btn btn-ghost btn-lg">Spočítať cenu</a></div>
+    <ul class="ticks"><li><svg><use href="#i-ok"/></svg>Bez dopytov a čakania</li><li><svg><use href="#i-ok"/></svg>+100 firiem zadarmo ku každej kampani</li><li><svg><use href="#i-ok"/></svg>Záruka pri prvej kampani</li></ul>
   </div>
-  <form class="form" id="briefForm" novalidate>
-    <div class="f2">
-      <label>Meno a priezvisko<input name="meno" autocomplete="name" required></label>
-      <label>Firma<input name="firma" autocomplete="organization"></label>
-    </div>
-    <div class="f2">
-      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
-      <label><span>Telefón <small>nepovinné</small></span><input name="telefon" type="tel" autocomplete="tel"></label>
-    </div>
-    <label>Čo predávate?<textarea name="ponuka" rows="2" required placeholder="Napr. upratovanie výrobných hál, účtovníctvo pre s.r.o.…"></textarea></label>
-    <label>Komu chcete predávať?<textarea name="zakaznik" rows="2" placeholder="Napr. výrobné firmy na západnom Slovensku"></textarea></label>
-    <label>Počet firiem<select name="balik" id="fPocet"></select></label>
-    <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <label class="check"><input type="checkbox" name="suhlas" required><span>Súhlasím so <a href="podmienky/" target="_blank">spracovaním údajov</a> na účely prípravy ponuky.</span></label>
-    <button type="submit" class="btn btn-block">Chcem plán zadarmo<svg><use href="#i-arr"/></svg></button>
-    <p class="form-msg" id="formMsg" role="status"></p>
-  </form>
+  <figure class="end-art"><img src="./assets/img/clay-box.webp" alt="Zelená schránka Mailito plná obálok" width="1024" height="1024" loading="lazy"></figure>
 </section>
 
 </main>
 
 <footer class="foot">
   <div class="foot-in">
-    <div class="foot-brand"><a href="./" class="logo"><span class="logo-m" aria-hidden="true"></span>mailito</a><p>Nové B2B zákazky pre slovenské firmy.</p></div>
-    <nav class="foot-col" aria-label="Produkt"><p>Produkt</p><a href="#ako">Ako to funguje</a><a href="#cena">Cenník</a><a href="portal/">Klientsky portál</a></nav>
-    <nav class="foot-col" aria-label="Firma"><p>Firma</p><a href="podmienky/">Podmienky a GDPR</a><a href="preco/">Prečo ste dostali e-mail</a><a href="mailto:info@mailito.eu">info@mailito.eu</a></nav>
+    <div class="foot-brand"><a href="./" class="logo"><span class="logo-m" aria-hidden="true"></span>mailito</a><p>Nové B2B zákazky pre slovenské firmy.</p><a href="./objednat/" class="btn btn-sm foot-cta">Objednať kampaň<svg><use href="#i-arr"/></svg></a></div>
+    <nav class="foot-col" aria-label="Produkt"><p>Produkt</p><a href="./ako-to-funguje/">Ako to funguje</a><a href="./vysledky/">Výsledky</a><a href="./cennik/">Cenník</a><a href="./otazky/">Otázky</a></nav>
+    <nav class="foot-col" aria-label="Firma"><p>Firma</p><a href="./objednat/">Objednať kampaň</a><a href="./portal/">Klientsky portál</a><a href="./podmienky/">Podmienky a GDPR</a><a href="./preco/">Prečo ste dostali e-mail</a><a href="mailto:info@mailito.eu">info@mailito.eu</a></nav>
   </div>
   <p class="foot-word" aria-hidden="true">mailito</p>
   <p class="foot-small">© 2026 Mailito · prevádzkovateľ WebHunter s.r.o., IČO 29498511, Praha</p>
 </footer>
 
-<a href="#zadanie" class="mcta" id="mcta">Chcem nové zákazky</a>
-<script src="assets/site4.js?v=6a3b9c45" defer></script>
+<a href="./objednat/" class="mcta" id="mcta">Objednať kampaň</a>
+<script src="./assets/site4.js?v=ae9f72db" defer></script>
+
+<script type="module" src="./assets/hero3d.js?v=ae9f72db"></script>
 </body>
 </html>

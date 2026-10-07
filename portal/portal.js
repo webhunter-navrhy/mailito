@@ -11,7 +11,7 @@
   const ago = s => { if (!s) return ''; const d = new Date(s.includes('T') ? s : s.replace(' ', 'T') + 'Z'); const m = Math.round((Date.now() - d) / 60000); if (m < 60) return `pred ${Math.max(1, m)} min`; if (m < 1440) return `pred ${Math.round(m / 60)} h`; return dt(s); };
 
   const STAVY = { novy: 'Nový', kontaktovany: 'Kontaktovaný', stretnutie: 'Stretnutie', ponuka: 'Ponuka', obchod: 'Obchod', neaktualny: 'Neaktuálny', reklamacia: 'Reklamácia' };
-  const CSTAV = { priprava: 'V príprave', na_schvalenie: 'Na schválenie', schvalena: 'Schválená', bezi: 'Beží', pauza: 'Pozastavená', hotova: 'Dokončená' };
+  const CSTAV = { objednana: 'Objednaná · čaká na úhradu', priprava: 'V príprave', na_schvalenie: 'Na schválenie', schvalena: 'Schválená', bezi: 'Beží', pauza: 'Pozastavená', hotova: 'Dokončená' };
   const TEPL = { horuci: 'Horúci', teply: 'Teplý', neskor: 'Neskôr' };
   const cena = n => { let p = 0, od = 0; for (const [d, c] of [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]]) { if (n > od) p += (Math.min(n, d) - od) * c; od = d; } return Math.round(p / 10) * 10 - 1; };
   const BALIK = { test: '1 000 firiem · 149 €', kampan: '3 500 firiem · 389 €', vykon: 'Platba za záujemcu' };

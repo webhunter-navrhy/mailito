@@ -1,17 +1,12 @@
 (() => {
-  const API = 'https://mailito-api.webhunter.workers.dev';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const fmt = n => Math.round(n).toLocaleString('sk-SK').replace(/[\s  ]/g, ' ');
+  const BASE = new URL('../', (document.currentScript || {}).src || location.href).href;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   // cenník – rovnaký výpočet je v portal.js a engine/sync.py
   const cena = n => { let p = 0, od = 0; for (const [d, c] of [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]]) { if (n > od) p += (Math.min(n, d) - od) * c; od = d; } return Math.round(p / 10) * 10 - 1; };
-  const src = () => { const q = new URLSearchParams(location.search); return q.get('utm_source') || q.get('k') || document.referrer || 'web'; };
-  const post = async body => {
-    const r = await fetch(API + '/api/brief', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-    const j = await r.json(); if (!j.ok) throw new Error(j.chyba || 'Chyba'); return j;
-  };
-  const errText = e => e.message && e.message !== 'Failed to fetch' ? e.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.';
+  const OBJ = BASE + 'objednat/';
   const once = (el, fn, threshold = .45) => { if (!el) return; const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { o.disconnect(); fn(); } }, { threshold }); o.observe(el); };
   const tween = (el, to, ms = 900, f = fmt, suf = '') => {
     const from = parseFloat(el.dataset.v || 0); el.dataset.v = to;
@@ -23,16 +18,17 @@
 
   // navigácia
   const nav = $('#nav');
-  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 10);
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  if (nav) { const onScroll = () => nav.classList.toggle('scrolled', scrollY > 10); addEventListener('scroll', onScroll, { passive: true }); onScroll(); }
   const burger = $('#burger'), menu = $('#menu');
-  const closeMenu = () => { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); document.body.style.overflow = ''; };
-  burger.addEventListener('click', () => { const o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; });
-  $$('a', menu).forEach(a => a.addEventListener('click', closeMenu));
+  if (burger && menu) {
+    const closeMenu = () => { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); document.body.style.overflow = ''; };
+    burger.addEventListener('click', () => { const o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; });
+    $$('a', menu).forEach(a => a.addEventListener('click', closeMenu));
+  }
 
   // jemné odhalenie
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .form').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .end-art, .step-card, .teaser').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
 
   // návštevník z nášho e-mailu: „práve ste to zažili“
   const qp = new URLSearchParams(location.search), fm = $('#fromMail');
@@ -49,6 +45,7 @@
     ['KZ', 152, 'Kovo Záhorie a.s.', 'Senica', 'Trnavský kraj', 'Dodávateľa od januára, 2 haly', 'hot', 'Hľadajú nového dodávateľa upratovania od januára. Dve výrobné haly, ponuku chcú do piatku.', 'Ing. Peter Kováč', 'konateľ', 'Dobrý deň, ďakujem za správu. Od januára hľadáme nového dodávateľa, máme dve haly. Pošlite nám prosím ponuku do piatku.', 'p.kovac'],
   ];
   const rows = $('#aRows'), det = $('.a-det');
+  if (rows) {
   let ni = 0, cZ = 86, cN = 6, cO = 9874;
   const tagH = t => t === 'hot' ? '<em class="tag t-hot">Horúci</em>' : '<em class="tag t-warm">Teplý</em>';
   const pridaj = () => {
@@ -76,6 +73,7 @@
   let heroOn = true;
   new IntersectionObserver(es => { heroOn = es[0].isIntersecting; }).observe($('.win'));
   if (!reduce) setInterval(() => { if (heroOn && !document.hidden) pridaj(); }, 5200);
+  }
 
   // ===== produkt: aktívny krok v ľavom menu =====
   const pLinks = $$('.prod-nav a');
@@ -83,10 +81,11 @@
   $$('.feat').forEach(f => spy.observe(f));
 
   // ===== cielenie so skutočnými počtami =====
-  const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=6a3b9c45').then(r => r.json()).then(d => {
+  const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=ae9f72db').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
+    if (qSeg) {
     qSeg.innerHTML = '<option value="">Komu? Odvetvie</option>' + segs.map(x => `<option>${x}</option>`).join('');
     qSeg.addEventListener('change', () => {
       const v = qSeg.value; qSeg.classList.toggle('has', !!v); qMsg.className = 'hero-note';
@@ -94,11 +93,13 @@
       const n = Object.values(d.matica[v] || {}).reduce((a, b) => a + b, 0), base = Math.min(n, 3500);
       qMsg.innerHTML = `<b>${fmt(n)} firiem</b> z odvetvia ${v.toLowerCase()} · prvá kampaň ≈ <b>${Math.max(1, Math.round(base * .003 * .2))} – ${Math.max(2, Math.round(base * .012 * .2))} nových zákaziek</b>`;
     });
+    }
     // výber cieľovej skupiny
     const selS = new Set(['Výroba a priemysel']), selK = new Set();
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'Banská Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const kr = d.kraje, sum = (s, ks) => (ks.size ? [...ks] : kr).reduce((a, k) => a + ((d.matica[s] || {})[k] || 0), 0);
     const boxS = $('#audSeg'), boxK = $('#audKraj');
+    if (!boxS || !boxK) return;
     const draw = () => {
       boxS.innerHTML = segs.map(s => `<button type="button" class="chip${selS.has(s) ? ' on' : ''}" data-s="${s}">${s}<small>${fmt(sum(s, selK))}</small></button>`).join('');
       boxK.innerHTML = `<button type="button" class="chip${selK.size ? '' : ' on'}" data-k="">Celé Slovensko</button>` + kr.map(k => `<button type="button" class="chip${selK.has(k) ? ' on' : ''}" data-k="${k}">${KR[k] || k}</button>`).join('');
@@ -124,7 +125,8 @@
 
   // ===== zákazky: priebeh obchodu =====
   once($('#deal'), () => {
-    const pipe = $('.pipe'), li = $$('li', pipe), v = $('#dealV');
+    const pipe = $('.pipe'), li = pipe ? $$('li', pipe) : [], v = $('#dealV');
+    if (!pipe || !v) return;
     v.textContent = '0 €';
     li.forEach((l, k) => setTimeout(() => { l.classList.add('on'); pipe.style.setProperty('--pp', k / 3); if (k === 3) tween(v, 4800, 1000, fmt, ' €'); }, reduce ? 0 : 300 + k * 550));
   }, .5);
@@ -135,24 +137,20 @@
     tween(el, to, 1300, v => dec ? v.toFixed(1).replace('.', ',') : fmt(v), suf);
   }, .6));
 
-  // úvodný formulár
+  // úvodný formulár → objednávka (bez dopytu, všetko sa nastaví v objednávke)
   const qf = $('#quickForm');
-  qf.addEventListener('submit', async e => {
+  if (qf) qf.addEventListener('submit', e => {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(qf));
+    if (f.web_url) return;
     if (!f.ponuka || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email || '')) { qMsg.className = 'hero-note err'; qMsg.textContent = 'Napíšte, čo predávate, a platný e-mail.'; return; }
-    const btn = $('button', qf), bt = btn.innerHTML; btn.disabled = true; btn.textContent = 'Odosielam…';
-    try {
-      await post({ ...f, segmenty: f.segment ? [f.segment] : [], balik: 'neviem', zdroj: 'hero:' + src() });
-      qf.reset(); qSeg.classList.remove('has'); qMsg.className = 'hero-note ok'; qMsg.textContent = 'Ďakujeme! Do 2 pracovných dní vám pošleme plán nových zákaziek.';
-    } catch (err) { qMsg.className = 'hero-note err'; qMsg.textContent = errText(err); }
-    finally { btn.disabled = false; btn.innerHTML = bt; }
+    const q = new URLSearchParams(); ['ponuka', 'segment', 'email'].forEach(k => f[k] && q.set(k, f[k].trim()));
+    location.href = OBJ + '?' + q.toString();
   });
 
   // kalkulačka ceny a zákaziek
-  const range = $('#cfgRange'), val = $('#roiVal'), fPocet = $('#fPocet'), tiers = $$('.tier');
-  let opt = ''; for (let n = 1000; n <= 20000; n += 500) opt += `<option value="${n}">${fmt(n)} + 100 zadarmo · ${fmt(cena(n))} €</option>`;
-  fPocet.innerHTML = opt + '<option value="neviem">Ešte neviem</option>';
+  const range = $('#cfgRange'), val = $('#roiVal'), tiers = $$('.tier'), cta = $('#cfgCta');
+  if (range && val) {
   const calc = () => {
     const n = +range.value, p = cena(n), v = Math.max(0, +val.value || 0);
     range.style.setProperty('--p', ((n - range.min) / (range.max - range.min) * 100) + '%');
@@ -160,38 +158,28 @@
     const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2));
     $('#cfgN').textContent = fmt(n); $('#cfgTot').textContent = fmt(n + 100); $('#cfgPrice').textContent = fmt(p);
     const pr = $('.c-price'); pr.classList.add('bump'); clearTimeout(calc.t); calc.t = setTimeout(() => pr.classList.remove('bump'), 160);
-    $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + ' €';
+    $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + '\u00a0€';
     $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;
     $('#cfgDeals').textContent = dl === dh ? fmt(dl) : `${fmt(dl)} – ${fmt(dh)}`;
-    $('#cfgRev').textContent = v ? `${fmt(dl * v)} – ${fmt(dh * v)} €` : '–';
+    $('#cfgRev').textContent = v ? `${fmt(dl * v)} – ${fmt(dh * v)}\u00a0€` : '–';
     $('#cfgX').innerHTML = v ? `Kampaň za ${fmt(p)}&nbsp;€ sa vám vráti <b>${(dl * v / p).toFixed(1).replace('.', ',')}× až ${Math.round(dh * v / p)}×</b>.` : '';
     $$('.c-quick [data-n]').forEach(b => b.classList.toggle('on', +b.dataset.n === n));
     tiers.forEach((t, k) => { const od = +t.dataset.od, nx = tiers[k + 1] ? +tiers[k + 1].dataset.od : Infinity; t.classList.toggle('used', n > od); t.classList.toggle('on', n > od && n <= nx); });
-    fPocet.value = n;
+    if (cta) cta.href = OBJ + '?pocet=' + n;
   };
   range.addEventListener('input', calc); val.addEventListener('input', calc);
   $$('.c-quick [data-n]').forEach(b => b.addEventListener('click', () => { range.value = b.dataset.n; calc(); }));
+  const qn = +new URLSearchParams(location.search).get('pocet'); if (qn >= 1000 && qn <= 20000) range.value = Math.round(qn / 500) * 500;
   calc();
-
-  // záverečný formulár
-  const form = $('#briefForm'), msg = $('#formMsg');
-  form.addEventListener('submit', async e => {
-    e.preventDefault(); msg.className = 'form-msg'; msg.textContent = '';
-    const f = Object.fromEntries(new FormData(form));
-    if (!f.meno || !f.email || !f.ponuka) { msg.className = 'form-msg err'; msg.textContent = 'Vyplňte meno, e-mail a čo predávate.'; return; }
-    if (!form.suhlas.checked) { msg.className = 'form-msg err'; msg.textContent = 'Potvrďte, prosím, súhlas so spracovaním údajov.'; return; }
-    const btn = $('button[type=submit]', form), bt = btn.innerHTML; btn.disabled = true; btn.textContent = 'Odosielam…';
-    try {
-      await post({ ...f, zdroj: src() });
-      form.reset(); calc();
-      msg.className = 'form-msg ok'; msg.textContent = 'Ďakujeme! Do 2 pracovných dní vám pošleme plán nových zákaziek.';
-    } catch (err) { msg.className = 'form-msg err'; msg.textContent = errText(err); }
-    finally { btn.disabled = false; btn.innerHTML = bt; }
-  });
+  }
 
   // mobilné lepkavé tlačidlo (mimo úvodu a formulára)
-  const mcta = $('#mcta'); let inHero = true, inForm = false;
-  const upd = () => mcta.classList.toggle('on', !inHero && !inForm);
-  new IntersectionObserver(es => { inHero = es[0].isIntersecting; upd(); }).observe($('.hero'));
-  new IntersectionObserver(es => { inForm = es[0].isIntersecting; upd(); }).observe($('#zadanie'));
+  const mcta = $('#mcta'), topEl = $('.hero, .phero'), endEl = $('#zadanie');
+  if (mcta) {
+    let inHero = !!topEl, inForm = false;
+    const upd = () => mcta.classList.toggle('on', !inHero && !inForm);
+    if (topEl) new IntersectionObserver(es => { inHero = es[0].isIntersecting; upd(); }).observe(topEl);
+    if (endEl) new IntersectionObserver(es => { inForm = es[0].isIntersecting; upd(); }).observe(endEl);
+    upd();
+  }
 })();
