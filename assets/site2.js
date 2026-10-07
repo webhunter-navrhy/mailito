@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=72958cab').then(r => r.json()), fetch('data/sk_mapa.json?v=72958cab').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=fb974448').then(r => r.json()), fetch('data/sk_mapa.json?v=fb974448').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
