@@ -849,3 +849,151 @@ h3{font-size:clamp(1.9rem,3vw,2.6rem);line-height:1.05}
 .quick-live .g-dot{display:inline-block;vertical-align:middle;margin:-2px .45rem 0 0}
 .faq-list{border-top:0}
 .faq-h{padding-bottom:1rem;border-bottom:1px solid var(--line2);margin-bottom:0}
+
+/* ===================== v9: značka – lesná zelená + limetka ===================== */
+:root{--forest:#0E2A1F;--forest-2:#163A2B;--forest-3:#1F4A37;--lime:#C8F169;--lime-2:#B4E04F;--ok:#1F7A4D;--okbg:#E6F2EA}
+body{background:#F5F6F1}
+h2{font-size:clamp(2.6rem,5.6vw,5rem);line-height:.98;letter-spacing:-.03em}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--forest);font-weight:500}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 3px rgba(200,241,105,.35)}
+.btn-dark{background:var(--forest);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 8px 20px -10px rgba(14,42,31,.6)}
+.btn-dark:hover{background:var(--forest-2)}
+.btn-lime{background:var(--lime);color:var(--forest);font-weight:600}
+.btn-lime:hover{background:#D6F78A;transform:translateY(-1px)}
+
+/* rozdelená hlavička sekcie */
+.sec-head.split{display:grid;grid-template-columns:1.25fr .75fr;gap:1rem 4rem;align-items:end;max-width:none;text-align:left}
+.sec-head.split .eyebrow{grid-column:1/-1;margin-bottom:.4rem}
+.sec-head.split h2{grid-column:1}
+.sec-head.split .sec-sub{grid-column:2;margin:0;padding-bottom:.5rem;font-size:1.02rem;color:var(--tx2)}
+@media (max-width:860px){.sec-head.split{grid-template-columns:1fr}.sec-head.split .sec-sub{grid-column:1}}
+
+/* hero – tlačidlá a formulár v značke */
+.quick .btn{background:var(--forest)}
+.badge-dot{background:var(--lime-2);box-shadow:0 0 0 3px rgba(180,224,79,.3)}
+.kpi-hot{background:linear-gradient(180deg,#F1F9E2,#fff);border-color:#DCEFB7}
+.kpi .up{color:var(--ok)}
+
+/* pás istôt */
+.trust{background:#F5F6F1;padding:2.6rem 0 0}
+.tr-ic{background:var(--forest);border-color:var(--forest)}
+.tr-ic svg{stroke:var(--lime)}
+
+/* VS – lesná */
+.vs{background:var(--forest)}
+.vs::before{background:radial-gradient(closest-side,rgba(200,241,105,.16),transparent 70%)}
+.vs-head{text-align:left;align-items:flex-start}
+.vs h2{max-width:22ch}
+.vs h2 em{color:var(--lime)}
+.vs .eyebrow{color:rgba(238,242,238,.7)}
+.vs-x{background:var(--lime);color:var(--forest);box-shadow:0 0 0 10px rgba(200,241,105,.14),0 0 70px rgba(200,241,105,.4)}
+.vs-new{background:linear-gradient(160deg,#FFFFFF,#F1F9E2)}
+.vs-new .vs-k,.vs-new .vs-per b{color:var(--forest)}
+.vs-new li::before{color:var(--forest)}
+.vs-punch b{color:var(--lime)}
+.vs-old{background:rgba(255,255,255,.04)}
+
+/* rast */
+.ladder::before{background:linear-gradient(180deg,var(--line2),var(--forest))}
+.ladder li.top{background:linear-gradient(160deg,#F1F9E2,#fff);border-color:#DCEFB7;box-shadow:0 26px 60px -26px rgba(14,42,31,.45)}
+.ladder li.top::before{background:var(--lime);border-color:var(--forest);box-shadow:0 0 0 5px rgba(200,241,105,.35)}
+.pl-q output,.pl-out .hot b{color:var(--forest)}
+#plRange{background:linear-gradient(90deg,var(--forest) var(--p),var(--line) var(--p))}
+.pl-chart i{background:linear-gradient(180deg,var(--lime),var(--forest-3))}
+.pl-chart i:last-child::before{color:var(--forest)}
+.pl-out .hot{background:#F1F9E2;border-color:#DCEFB7}
+
+/* pred/po */
+.ba-aft{border-color:#DCEFB7}
+.ba-aft b{color:var(--forest)}
+.ba-aft .ba-t .g-dot{background:var(--lime-2)}
+
+/* bento – fotky s lesným tónom */
+.bx-photo::after{background:linear-gradient(180deg,rgba(14,42,31,0) 38%,rgba(14,42,31,.82) 100%)}
+.bx-ui{background:linear-gradient(180deg,#EEF1E8 0%,#F5F6F1 70%)}
+.g-act span{background:var(--forest)}
+
+/* dôkaz – tmavý blok s limetkou */
+.proof{padding:var(--sec) 0}
+.proof .wrap{background:var(--forest);color:#EEF2EE;border-radius:28px;padding:clamp(2rem,5vw,4.5rem);position:relative;overflow:hidden}
+.proof .wrap::before{content:"";position:absolute;right:-10%;top:-40%;width:700px;height:700px;background:radial-gradient(closest-side,rgba(200,241,105,.16),transparent 70%);pointer-events:none}
+.proof h2{color:#fff}.proof h2 em{color:var(--lime)}
+.proof .eyebrow{color:rgba(238,242,238,.7)}
+.proof-txt>p:not(.eyebrow){color:rgba(238,242,238,.75)}
+.pq{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:none}
+.pq p{color:#fff}
+.pq footer{color:rgba(238,242,238,.6)}
+.pq .g-dot{background:var(--lime)}
+.proof-row div{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:none}
+.proof-row b{color:var(--lime)}
+.proof-row span{color:rgba(238,242,238,.65)}
+
+/* porovnanie */
+.cmp-t .me{background:#F1F9E2}
+.cmp-t td.me::before{color:var(--forest)}
+.cmp-t thead .me .logo-m{background:var(--forest)}
+
+/* trh */
+.chip[aria-pressed=true],.kraj-b[aria-pressed=true]{background:var(--forest);border-color:var(--forest)}
+.m-dot.on{fill:var(--forest)}
+.m-dot.on.hov{fill:var(--forest-3)}
+.calc-r{background:#F1F9E2;border-left-color:#DCEFB7}
+
+/* cenník – celý v lesnej s limetkovým panelom */
+.pricing{background:var(--forest);border:0;color:#EEF2EE;position:relative;overflow:hidden}
+.pricing::before{content:"";position:absolute;left:-15%;bottom:-40%;width:900px;height:900px;background:radial-gradient(closest-side,rgba(200,241,105,.12),transparent 70%);pointer-events:none}
+.pricing .wrap{position:relative}
+.pricing h2{color:#fff}.pricing h2 em{color:var(--lime)}
+.pricing .eyebrow{color:rgba(238,242,238,.7)}
+.pricing .cfg{border:0;box-shadow:0 40px 90px -30px rgba(0,0,0,.5)}
+.cfg-r{background:var(--lime);color:var(--forest)}
+.cfg-r .small-label{color:rgba(14,42,31,.6)}
+.cfg-per{color:rgba(14,42,31,.7)}
+.cfg-r .calc-dl{border-color:rgba(14,42,31,.15)}
+.cfg-r .calc-dl dt{color:rgba(14,42,31,.65)}
+.cfg-r .btn-dark{background:var(--forest);color:#fff}
+.cfg-r .btn-dark:hover{background:var(--forest-2)}
+.cfg-guar{color:rgba(14,42,31,.7)}
+.roi-f{color:rgba(14,42,31,.7)}
+.roi-in{color:var(--forest)}
+.roi-in input{color:var(--forest);background:rgba(255,255,255,.55);border-color:rgba(14,42,31,.2)}
+.roi-out{background:rgba(255,255,255,.5);border-color:rgba(14,42,31,.15)}
+.roi-out span{color:rgba(14,42,31,.7)}.roi-out b{color:var(--forest)}.roi-out small{color:var(--forest);font-weight:500}
+#cfgRange{background:linear-gradient(90deg,var(--forest) var(--p),var(--line) var(--p))}
+.cfg-quick button.on{background:var(--forest);border-color:var(--forest)}
+.tiers{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+.tiers div+div{border-color:rgba(255,255,255,.1)}
+.tiers b{color:#fff}.tiers span{color:rgba(238,242,238,.55)}
+.tiers div.on{background:rgba(200,241,105,.12)}
+.tiers div.on b::after{color:var(--lime)}
+.incl li::before{background-color:#F1F9E2}
+
+/* FAQ */
+.faq-list summary::after{background:linear-gradient(var(--forest),var(--forest)) center/12px 1.5px no-repeat,linear-gradient(var(--forest),var(--forest)) center/1.5px 12px no-repeat}
+
+/* záverečná výzva – limetkový pás */
+.brief{background:var(--lime)}
+.brief-bg,.brief::after{display:none}
+.brief h2{color:var(--forest)}.brief h2 em{color:var(--forest-3)}
+.brief .eyebrow{color:var(--forest)}
+.brief .eyebrow::before{background:var(--forest);box-shadow:none}
+.brief-txt p:not(.eyebrow){color:rgba(14,42,31,.8)}
+.stack li{color:var(--forest)}
+.stack li::before{background-color:var(--forest)}
+.brief .form{border:0;box-shadow:0 40px 80px -30px rgba(14,42,31,.45)}
+
+/* päta – lesná */
+.foot{background:var(--forest);color:rgba(238,242,238,.7)}
+.foot .logo{color:#fff}
+.foot .logo-m{background:var(--lime)}
+.foot .logo-m::before,.foot .logo-m::after{border-color:var(--forest)}
+.foot-grid a{color:rgba(238,242,238,.75)}.foot-grid a:hover{color:var(--lime)}
+.foot-h,.foot-small,.foot-claim{color:rgba(238,242,238,.5)}
+.foot-copy{border-color:rgba(255,255,255,.1);color:rgba(238,242,238,.4)}
+.foot-word{background:linear-gradient(180deg,rgba(200,241,105,.22),rgba(200,241,105,0) 85%);-webkit-background-clip:text;background-clip:text}
+
+/* mobilné CTA */
+.mcta{background:var(--forest)}
+.pricing .cfg-l{color:var(--tx)}
+.pricing .sec-head.split .sec-sub{color:rgba(238,242,238,.72)}
+.logo-m{background:var(--forest)}
