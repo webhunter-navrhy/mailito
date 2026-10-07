@@ -84,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=85d55c71').then(r => r.json()).then(d => {
+  fetch('data/trh.json?v=6a3b9c45').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     qSeg.innerHTML = '<option value="">Komu? Odvetvie</option>' + segs.map(x => `<option>${x}</option>`).join('');
@@ -151,14 +151,14 @@
 
   // kalkulačka ceny a zákaziek
   const range = $('#cfgRange'), val = $('#roiVal'), fPocet = $('#fPocet'), tiers = $$('.tier');
-  let opt = ''; for (let n = 1000; n <= 20000; n += 500) opt += `<option value="${n}">${fmt(n)} firiem · ${fmt(cena(n))} €</option>`;
+  let opt = ''; for (let n = 1000; n <= 20000; n += 500) opt += `<option value="${n}">${fmt(n)} + 100 zadarmo · ${fmt(cena(n))} €</option>`;
   fPocet.innerHTML = opt + '<option value="neviem">Ešte neviem</option>';
   const calc = () => {
     const n = +range.value, p = cena(n), v = Math.max(0, +val.value || 0);
     range.style.setProperty('--p', ((n - range.min) / (range.max - range.min) * 100) + '%');
     const lo = Math.max(1, Math.round(n * .003)), hi = Math.max(2, Math.round(n * .012));
     const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2));
-    $('#cfgN').textContent = fmt(n); $('#cfgPrice').textContent = fmt(p);
+    $('#cfgN').textContent = fmt(n); $('#cfgTot').textContent = fmt(n + 100); $('#cfgPrice').textContent = fmt(p);
     const pr = $('.c-price'); pr.classList.add('bump'); clearTimeout(calc.t); calc.t = setTimeout(() => pr.classList.remove('bump'), 160);
     $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + ' €';
     $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;

@@ -15,8 +15,8 @@
   const TEPL = { horuci: 'Horúci', teply: 'Teplý', neskor: 'Neskôr' };
   const cena = n => { let p = 0, od = 0; for (const [d, c] of [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]]) { if (n > od) p += (Math.min(n, d) - od) * c; od = d; } return Math.round(p / 10) * 10 - 1; };
   const BALIK = { test: '1 000 firiem · 149 €', kampan: '3 500 firiem · 389 €', vykon: 'Platba za záujemcu' };
-  const balik = b => BALIK[b] || (/^\d+$/.test(b || '') ? `${fmt(+b)} firiem · ${fmt(cena(+b))} €` : b);
-  { const sel = document.getElementById('nkPocet'); if (sel) { let o = ''; for (let n = 1000; n <= 20000; n += 500) o += `<option value="${n}" ${n === 3500 ? 'selected' : ''}>${fmt(n)} firiem · ${fmt(cena(n))} €</option>`; sel.innerHTML = o; } }
+  const balik = b => BALIK[b] || (/^\d+$/.test(b || '') ? `${fmt(+b)} + 100 firiem · ${fmt(cena(+b))} €` : b);
+  { const sel = document.getElementById('nkPocet'); if (sel) { let o = ''; for (let n = 1000; n <= 20000; n += 500) o += `<option value="${n}" ${n === 3500 ? 'selected' : ''}>${fmt(n)} + 100 firiem · ${fmt(cena(n))} €</option>`; sel.innerHTML = o; } }
 
   const demo = new URLSearchParams(location.search).has('demo');
   const embed = new URLSearchParams(location.search).has('embed');
