@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mailito – koncept C · Kobalt</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--co:#2234FF;--co2:#1626D6;--ink:#0A0B12;--pa:#F3F2EE;--ye:#EEFF3E;--mu:#5E6070;--f:"Archivo",ui-sans-serif,system-ui,sans-serif;--m:"JetBrains Mono",ui-monospace,monospace;--w:min(1320px,100% - 2.5rem);--e:cubic-bezier(.22,.8,.24,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pa);color:var(--ink);font:400 16px/1.6 var(--f);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.w{width:var(--w);margin:0 auto}
+.ko{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);z-index:50;font:600 12px/1 var(--m);background:var(--ye);color:var(--ink);padding:.65rem 1rem;border-radius:999px;display:flex;gap:.8rem;border:2px solid var(--ink)}
+.ko a{text-decoration:underline}
+.hero{background:var(--co);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 85% 20%,rgba(255,255,255,.14),transparent 70%);pointer-events:none}
+nav .nv{display:flex;align-items:center;justify-content:space-between;height:80px;position:relative;z-index:2}
+.lg{font:900 1.6rem/1 var(--f);font-stretch:125%;letter-spacing:-.03em}
+.lg span{color:var(--ye)}
+.nl{display:flex;gap:2rem;font:500 .92rem var(--f)}
+.nl a{opacity:.85}.nl a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.bt{display:inline-flex;align-items:center;gap:.6rem;height:52px;padding:0 1.5rem;border-radius:999px;font:800 .95rem/1 var(--f);font-stretch:110%;text-transform:uppercase;letter-spacing:.02em;transition:transform .2s var(--e),background .2s,color .2s}
+.bt-ye{background:var(--ye);color:var(--ink)}
+.bt-ye:hover{transform:translateY(-2px) rotate(-1deg)}
+.bt-wh{border:2px solid rgba(255,255,255,.7);color:#fff}
+.bt-wh:hover{background:#fff;color:var(--co)}
+.hg{position:relative;z-index:2;padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
+h1{font:900 clamp(3rem,9.4vw,9.6rem)/.95 var(--f);font-stretch:118%;letter-spacing:-.035em;text-transform:uppercase;margin:0}
+h1 .y{color:var(--ye)}
+h1 .ln{display:block;overflow:hidden;padding-top:.16em;margin-top:-.16em}
+h1 .ln span{display:inline-block;transform:translateY(105%);animation:up .9s var(--e) forwards}
+h1 .ln:nth-child(2) span{animation-delay:.1s}h1 .ln:nth-child(3) span{animation-delay:.2s}
+@keyframes up{to{transform:none}}
+.row{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,4vw,4rem);margin-top:clamp(2.2rem,5vw,3.5rem);align-items:start}
+.sub{font-size:clamp(1.05rem,1.4vw,1.3rem);line-height:1.5;max-width:30rem;opacity:.92}
+.cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}
+.mail{background:#fff;color:var(--ink);border-radius:18px;box-shadow:14px 14px 0 var(--ink);overflow:hidden;transform:rotate(-1.2deg)}
+.mt{display:flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;background:var(--ink);color:#fff;font:600 12px/1 var(--m)}
+.mt i{width:10px;height:10px;border-radius:50%;background:#3A3D4D}.mt i:first-child{background:var(--ye)}
+.mt span{margin-left:.6rem;opacity:.8}
+.mf{display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;padding:1rem 1.2rem;border-bottom:1px solid #E6E6EC;font:500 13px/1.5 var(--m);color:var(--mu)}
+.mf b{color:var(--ink);font-weight:600}
+.mb{padding:1.1rem 1.2rem 1.3rem;font-size:1rem;line-height:1.6;min-height:13.5rem;white-space:pre-wrap}
+.mb .cur{display:inline-block;width:2px;height:1.1em;background:var(--co);vertical-align:-.15em;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.ms{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 1.2rem;border-top:1px solid #E6E6EC;background:#F7F7FA;font:600 13px/1 var(--m)}
+.ms b{font:900 1.4rem/1 var(--f);font-stretch:115%;color:var(--co);font-variant-numeric:tabular-nums}
+.sendb{background:var(--co);color:#fff;border-radius:999px;padding:.6rem 1rem;font:800 12px/1 var(--f);text-transform:uppercase;letter-spacing:.04em}
+.replies{position:relative;height:15rem;margin-top:.5rem}
+.rp{position:absolute;right:-1rem;width:min(20rem,80%);background:var(--ye);color:var(--ink);border:2px solid var(--ink);border-radius:16px 16px 4px 16px;padding:.7rem .9rem;font-size:.86rem;line-height:1.4;box-shadow:5px 5px 0 var(--ink);animation:pop .5s var(--e) both}
+.rp b{display:block;font:800 .8rem/1.3 var(--f);text-transform:uppercase;letter-spacing:.02em}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.9)}}
+.mq{background:var(--ink);color:var(--pa);overflow:hidden;white-space:nowrap;padding:1rem 0;border-block:3px solid var(--ink)}
+.mq div{display:inline-flex;animation:mq 30s linear infinite}
+.mq span{font:800 clamp(1.1rem,2vw,1.5rem)/1 var(--f);font-stretch:115%;text-transform:uppercase;padding:0 1.5rem}
+.mq span:nth-child(odd){color:var(--ye)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.pr{padding:clamp(5rem,10vw,8rem) 0}
+.lbl{font:600 12px/1 var(--m);text-transform:uppercase;letter-spacing:.14em;color:var(--co)}
+h2{font:900 clamp(2.4rem,6vw,5.6rem)/.9 var(--f);font-stretch:115%;text-transform:uppercase;letter-spacing:-.03em;margin:1rem 0 3rem}
+h2 mark{background:var(--ye);padding:0 .1em;color:inherit}
+.cf{display:grid;grid-template-columns:1.2fr .8fr;border:3px solid var(--ink);border-radius:24px;overflow:hidden;background:#fff;box-shadow:12px 12px 0 var(--co)}
+.cl{padding:clamp(1.6rem,3vw,2.8rem)}
+.n{font:900 clamp(3.4rem,8vw,7.5rem)/.9 var(--f);font-stretch:120%;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin:.8rem 0 0}
+.n small{font:700 .2em var(--m);letter-spacing:0;color:var(--mu);font-stretch:100%;vertical-align:middle}
+input[type=range]{--p:10%;-webkit-appearance:none;appearance:none;width:100%;height:18px;border-radius:999px;border:3px solid var(--ink);background:linear-gradient(90deg,var(--co) var(--p),#fff var(--p));margin:2rem 0 1.2rem;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:40px;height:40px;border-radius:50%;background:var(--ye);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;background:var(--ye);border:3px solid var(--ink)}
+.q{display:flex;gap:.45rem;flex-wrap:wrap}
+.q button{font:800 .82rem/1 var(--f);text-transform:uppercase;padding:.65rem .95rem;border-radius:999px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.q button.on{background:var(--ink);color:var(--ye)}
+.inc{list-style:none;padding:1.6rem 0 0;margin:1.8rem 0 0;border-top:2px solid var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.4rem;font-size:.95rem}
+.inc li::before{content:"✚ ";color:var(--co);font-weight:900}
+.cr{background:var(--ink);color:#fff;padding:clamp(1.6rem,3vw,2.8rem);display:flex;flex-direction:column}
+.cr .l{font:600 12px/1 var(--m);text-transform:uppercase;letter-spacing:.12em;color:#9EA1B5}
+.cr .p{font:900 clamp(3.6rem,7vw,6.4rem)/.9 var(--f);font-stretch:120%;letter-spacing:-.04em;color:var(--ye);margin:.7rem 0 .5rem}
+.cr .mu{color:#B7BACB;font-size:.9rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.6rem 0;padding:1.3rem 0;border-block:1px solid #2A2C3A}
+.two small{font:600 11px/1 var(--m);text-transform:uppercase;letter-spacing:.08em;color:#9EA1B5}
+.two b{display:block;font:900 1.6rem/1.2 var(--f);font-stretch:110%;margin-top:.4rem}
+.cr .bt{margin-top:auto;justify-content:center}
+.g{font-size:.82rem;color:#B7BACB;margin-top:1rem}
+@media(max-width:980px){.row,.cf{grid-template-columns:1fr}.nl{display:none}.mail{transform:none}}
+@media(max-width:560px){.inc{grid-template-columns:1fr}.cta .bt{width:100%;justify-content:center}.rp{right:0}.mail{box-shadow:8px 8px 0 var(--ink)}nav .bt{display:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <nav><div class="w nv">
+    <a href="#" class="lg">mailito<span>.</span></a>
+    <div class="nl"><a href="#">Ako to funguje</a><a href="#">Váš trh</a><a href="#cennik">Cenník</a><a href="#">Portál</a></div>
+    <a class="bt bt-ye" href="#cennik">Spustiť kampaň</a>
+  </div></nav>
+  <div class="w hg">
+    <h1><span class="ln"><span>Píšeme firmám.</span></span><span class="ln"><span class="y">Vy zbierate</span></span><span class="ln"><span class="y">zákazky.</span></span></h1>
+    <div class="row">
+      <div>
+        <p class="sub">Za vás oslovíme slovenské firmy, ktoré vaše služby potrebujú. Odpovede prečítame, vytriedime a vám pošleme len tých, ktorí chcú ponuku.</p>
+        <div class="cta"><a class="bt bt-ye" href="#cennik">Spočítať cenu →</a><a class="bt bt-wh" href="#">Ukážka portálu</a></div>
+      </div>
+      <div>
+        <div class="mail" aria-label="Ukážka e-mailu kampane">
+          <div class="mt"><i></i><i></i><i></i><span>Nová správa · kampaň „Upratovanie hál“</span></div>
+          <div class="mf"><span>Komu:</span><b id="mTo">info@logistikavah.sk</b><span>Predmet:</span><b>Upratovanie haly bez odstávky výroby</b></div>
+          <div class="mb" id="mBody"></div>
+          <div class="ms"><span>Odoslané firmám <b id="mCnt">0</b></span><span class="sendb">Odoslať</span></div>
+        </div>
+        <div class="replies" id="rep"></div>
+      </div>
+    </div>
+  </div>
+  <div class="mq" aria-hidden="true"><div>
+    <span>374 678 firiem</span><span>Výroba</span><span>Logistika</span><span>IT</span><span>Stavebníctvo</span><span>Veľkoobchod</span><span>Účtovníctvo</span><span>od 149 €</span>
+    <span>374 678 firiem</span><span>Výroba</span><span>Logistika</span><span>IT</span><span>Stavebníctvo</span><span>Veľkoobchod</span><span>Účtovníctvo</span><span>od 149 €</span>
+  </div></div>
+</header>
+
+<section class="pr" id="cennik">
+  <div class="w">
+    <p class="lbl">Cenník</p>
+    <h2>Ko<span class="dk">ľ</span>ko firiem? <mark>To<span class="dk">ľ</span>ko zaplatíte.</mark></h2>
+    <div class="cf" id="cf">
+      <div class="cl">
+        <p class="lbl" style="color:var(--mu)">Počet oslovených firiem</p>
+        <p class="n"><span data-o="n">3 500</span> <small>firiem</small></p>
+        <input type="range" min="1000" max="20000" step="500" value="3500" aria-label="Počet firiem">
+        <div class="q"><button data-n="1000">1 000 · test</button><button data-n="3500">3 500</button><button data-n="10000">10 000</button><button data-n="20000">20 000</button></div>
+        <ul class="inc"><li>Úvod + 2 pripomienky</li><li>Výber firiem a texty</li><li>Vyhodnotenie odpovedí</li><li>A/B test od 3 000</li><li>Portál a upozornenia</li><li>Export do CSV</li></ul>
+      </div>
+      <div class="cr">
+        <p class="l">Cena kampane</p>
+        <p class="p"><span data-o="cena">389</span>&nbsp;€</p>
+        <p class="mu"><span data-o="per"></span> za firmu · jednorazovo, bez DPH</p>
+        <div class="two"><div><small>Záujemcovia</small><b data-o="leady"></b></div><div><small>Za záujemcu</small><b data-o="cpl"></b></div></div>
+        <a class="bt bt-ye" href="#">Objednať <span data-o="n"></span>&nbsp;firiem →</a>
+        <p class="g">Záruka: ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ko"><a href="../a/">A</a><a href="../b/">B</a>Koncept C · Kobalt<a href="../">všetky</a></div>
+
+<script src="../k.js"></script>
+<script>
+(() => {
+  const TEXT = 'Dobrý deň,\n\nupratujeme výrobné haly a sklady v noci a cez víkendy, aby výroba nemusela stáť. Pre firmy v okolí Piešťan máme od novembra voľné kapacity.\n\nMám Vám poslať orientačnú cenu podľa rozlohy?';
+  const body = document.getElementById('mBody'), cnt = document.getElementById('mCnt'), rep = document.getElementById('rep');
+  const to = ['info@logistikavah.sk', 'obchod@kovozahorie.sk', 'info@plastynitra.sk', 'nakup@drevotech.sk', 'info@tatrasklad.sk'];
+  let sent = 0, i = 0;
+  const type = () => {
+    if (K.reduce) { body.textContent = TEXT; return; }
+    let k = 0; body.innerHTML = '<span class="cur"></span>';
+    const st = () => { k += 2; body.innerHTML = TEXT.slice(0, k).replace(/[<>&]/g, '') + '<span class="cur"></span>'; if (k < TEXT.length) setTimeout(st, 18); else setTimeout(burst, 600); };
+    st();
+  };
+  const burst = () => {
+    const t0 = performance.now(), from = sent, add = 1000;
+    const tick = now => { const q = Math.min(1, (now - t0) / 1800); sent = Math.round(from + add * q); cnt.textContent = K.fmt(sent); if (q < 1) requestAnimationFrame(tick); else replies(); };
+    requestAnimationFrame(tick);
+    let j = 0; const it = setInterval(() => { document.getElementById('mTo').textContent = to[j++ % to.length]; if (j > 12) clearInterval(it); }, 140);
+  };
+  const replies = () => {
+    rep.innerHTML = '';
+    K.LEADY.slice(i, i + 3).forEach((l, n) => setTimeout(() => {
+      const d = document.createElement('div'); d.className = 'rp'; d.style.top = (14 + n * 78) + 'px'; d.style.right = (n % 2 ? '2rem' : '-1rem');
+      d.innerHTML = `<b>↩ ${l[0]}</b>${l[2]}`; rep.appendChild(d);
+    }, n * 700));
+    i = (i + 3) % K.LEADY.length;
+    setTimeout(type, 5200);
+  };
+  type();
+  K.konfigurator(document.getElementById('cf'));
+})();
+</script>
+</body>
+</html>
