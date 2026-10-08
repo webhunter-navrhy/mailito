@@ -48,7 +48,7 @@
   ];
   const rows = $('#aRows'), det = $('.a-det');
   if (rows) {
-  let ni = 0, cZ = 86, cN = 6, cO = 9874;
+  let ni = 0, cZ = 296, cN = 14, cO = 9874;
   const tagH = t => t === 'hot' ? '<em class="tag t-hot">Horúci</em>' : '<em class="tag t-warm">Teplý</em>';
   const pridaj = () => {
     const [ini, h, firma, mesto, kraj, co, t, ai, osoba, rola, txt, mail] = NOVI[ni++ % NOVI.length];
@@ -84,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=ae3ae0bb').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=e0a91a87').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -155,7 +155,7 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=ae3ae0bb').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=e0a91a87').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const selS = new Set(['Výroba a priemysel', 'Logistika a doprava']), selK = new Set();
@@ -212,7 +212,8 @@
     $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;
     $('#cfgDeals').textContent = dl === dh ? fmt(dl) : `${fmt(dl)} – ${fmt(dh)}`;
     $('#cfgRev').textContent = v ? `${fmt(dl * v)} – ${fmt(dh * v)}\u00a0€` : '–';
-    $('#cfgX').innerHTML = v ? `Kampaň za ${fmt(p)}&nbsp;€ sa vám vráti <b>až ${Math.round(dh * v / p)}×</b>.` : '';
+    if ($('#cfgYear')) $('#cfgYear').textContent = v ? `${fmt(dl * v * 2)} – ${fmt(dh * v * 2)}\u00a0€` : '–';
+    $('#cfgX').innerHTML = v ? `Kampaň za ${fmt(p)}&nbsp;€ sa vám vráti <b>viac ako ${fmt(dl * v / p)}×</b>.` : '';
     $$('.c-quick [data-n]').forEach(b => b.classList.toggle('on', +b.dataset.n === n));
     tiers.forEach((t, k) => { const od = +t.dataset.od, nx = tiers[k + 1] ? +tiers[k + 1].dataset.od : Infinity; t.classList.toggle('used', n > od); t.classList.toggle('on', n > od && n <= nx); });
     if (cta) cta.href = OBJ + '?pocet=' + n;

@@ -341,9 +341,9 @@
   // ---------- ukážkové dáta ----------
   function demoData() {
     const now = Date.now(), iso = (h) => new Date(now - h * 3600e3).toISOString();
-    const denne = (n, base, z) => { const o = {}; for (let i = n; i >= 0; i--) { const d = new Date(now - i * 864e5); if ([0, 6].includes(d.getDay())) continue; const s = Math.round(base * (0.8 + Math.random() * 0.4)); o[d.toISOString().slice(0, 10)] = { odoslane: s, odpovede: Math.round(s * 0.04), zaujemcovia: Math.round(s * z * (0.5 + Math.random())) }; } return o; };
+    const denne = (n, base, z) => { const o = {}; for (let i = n; i >= 0; i--) { const d = new Date(now - i * 864e5); if ([0, 6].includes(d.getDay())) continue; const s = Math.round(base * (0.8 + Math.random() * 0.4)); o[d.toISOString().slice(0, 10)] = { odoslane: s, odpovede: Math.round(s * 0.06), zaujemcovia: Math.round(s * z * (0.5 + Math.random())) }; } return o; };
     const kampane = [
-      { id: 'c1', nazov: 'Upratovanie hál – západ', stav: 'bezi', ciel: 'Výrobné a logistické firmy s halami, Trnavský, Nitriansky a Trenčiansky kraj', segmenty: ['Výroba a priemysel', 'Logistika a doprava'], kraje: ['Trnavský', 'Nitriansky', 'Trenčiansky'], pocet_firiem: 2418, odoslane: 1874, odpovede: 71, zaujemcovia: 19, odhlasenia: 23, start: '2026-09-22', denne: denne(16, 140, 0.011),
+      { id: 'c1', nazov: 'Upratovanie hál – západ', stav: 'bezi', ciel: 'Výrobné a logistické firmy s halami, Trnavský, Nitriansky a Trenčiansky kraj', segmenty: ['Výroba a priemysel', 'Logistika a doprava'], kraje: ['Trnavský', 'Nitriansky', 'Trenčiansky'], pocet_firiem: 2418, odoslane: 1874, odpovede: 112, zaujemcovia: 58, odhlasenia: 23, start: '2026-09-22', denne: denne(16, 140, 0.031),
         texty: [
           { predmet: 'Upratovanie haly bez odstávky výroby', text: 'Dobrý deň,\n\nupratujeme výrobné haly a sklady v noci a cez víkendy, aby výroba nemusela stáť. Pre firmy v okolí Trnavy, Nitry a Trenčína máme od novembra voľné kapacity.\n\nMôžem Vám poslať orientačnú cenu podľa rozlohy? Stačí odpísať „áno“ a rozlohu haly.\n\nS pozdravom\nMartin Kováč\nČistá Hala s.r.o.' },
           { predmet: '', po_dnoch: 4, text: 'Dobrý deň,\n\nlen krátko pripomínam – ak by Vás zaujímala cena upratovania haly, pošlem ju do hodiny. Ak to nie je pre Vás aktuálne, odpíšte „nie“ a už Vás nebudem rušiť.\n\nMartin Kováč' },
@@ -354,7 +354,7 @@
           { predmet: '', po_dnoch: 3, text: 'Dobrý deň,\n\nnadväzujem na môj e-mail. Ak by sa Vám hodila cenová ponuka na upratovanie kancelárie, pošlem ju ešte dnes.\n\nMartin Kováč' },
           { predmet: '', po_dnoch: 5, text: 'Dobrý deň,\n\nposledná správa ode mňa – ak upratovanie teraz neriešite, rozumiem. Keby sa to zmenilo, stačí odpísať na tento e-mail.\n\nMartin Kováč' },
         ] },
-      { id: 'c3', nazov: 'Test – sklady Žilina', stav: 'hotova', ciel: 'Sklady a veľkoobchody v Žilinskom kraji', segmenty: ['Veľkoobchod a distribúcia'], kraje: ['Žilinský'], pocet_firiem: 1000, odoslane: 1000, odpovede: 38, zaujemcovia: 9, odhlasenia: 12, start: '2026-09-01', denne: {}, texty: [] },
+      { id: 'c3', nazov: 'Test – sklady Žilina', stav: 'hotova', ciel: 'Sklady a veľkoobchody v Žilinskom kraji', segmenty: ['Veľkoobchod a distribúcia'], kraje: ['Žilinský'], pocet_firiem: 1000, odoslane: 1000, odpovede: 61, zaujemcovia: 34, odhlasenia: 12, start: '2026-09-01', denne: {}, texty: [] },
     ];
     const L = [
       ['Logistika Váh s.r.o.', 'Ing. Peter Mráz', 'Hlohovec', 'Trnavský', 'Pošlite cenu za 2 000 m² mesačne, ideálne aj termín obhliadky. Ďakujem, Mráz', 'Chce cenu za 2 000 m² mesačne a termín obhliadky.', 'horuci', 'stretnutie', 'c1', 3],
@@ -374,7 +374,7 @@
       ...leady.slice(0, 6).map(l => ({ ts: l.vytvorene, typ: 'zaujemca', text: 'Nový záujemca: ' + l.firma, campaign_id: l.campaign_id })),
       { ts: iso(5), typ: 'info', text: 'Návrh kampane „Upratovanie kancelárií – Bratislava“ je pripravený na schválenie.', campaign_id: 'c2' },
       { ts: iso(26), typ: 'info', text: 'Odoslaných ďalších 142 e-mailov.', campaign_id: 'c1' },
-      { ts: iso(380), typ: 'info', text: 'Kampaň dokončená: 1 000 oslovených, 9 záujemcov.', campaign_id: 'c3' },
+      { ts: iso(380), typ: 'info', text: 'Kampaň dokončená: 1 000 oslovených, 34 záujemcov.', campaign_id: 'c3' },
     ].sort((a, b) => b.ts.localeCompare(a.ts));
     return { klient: { id: 'demo', firma: 'Čistá Hala s.r.o. (ukážka)', meno: 'Martin Kováč', email: 'ukazka@mailito.eu', balik: '3500', ico: '00 000 000' }, kampane, leady, udalosti, leadStat: [] };
   }

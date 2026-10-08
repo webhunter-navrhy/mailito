@@ -118,7 +118,7 @@ function boxScene(host) {
   const isl = island(M, 4.3); world.add(isl);
   const { mb, flag, slot } = mailbox(M); mb.scale.setScalar(0.78); mb.position.set(0.2, 2.35, 0); mb.rotation.y = 0.55; world.add(mb);
   [[-2.6, -1.2, 0.95, 0], [2.7, -1.6, 0.8, 1], [-1.4, 2.4, 0.75, 1], [2.3, 1.9, 1.0, 0], [-3.2, 1.2, 0.6, 0]].forEach(([x, z, s, k]) => { const tr = tree(M, s, k); tr.position.set(x, 0.35, z); world.add(tr); });
-  const cl = [[-4.3, 5.6, -3, 0.75], [4.4, 6.2, -4, 0.85], [4.2, 2.6, 1.5, 0.45]].map(([x, y, z, s]) => { const c = cloud(M, s); c.position.set(x, y, z); S.scene.add(c); return c; });
+  const cl = [[-3.6, 5.6, -3, 0.7], [3.5, 6.1, -4, 0.75], [3.5, 2.8, 1.5, 0.4]].map(([x, y, z, s]) => { const c = cloud(M, s); c.position.set(x, y, z); S.scene.add(c); return c; });
   const geo = new THREE.BoxGeometry(1, 0.66, 0.06), lety = [], pool = [];
   const out = () => {
     const m = pool.pop() || sh(new THREE.Mesh(geo, E.white)); m.material = E.white;
@@ -205,7 +205,47 @@ function funnelScene(host) {
   };
 }
 
-const SC = { box: boxScene, funnel: funnelScene };
+// ---------- scéna: rastúce stĺpce mincí (obálka dopadne → minca) ----------
+function coinsScene(host) {
+  const S = stage(host, { fov: 30, cam: [0, 6, 19], look: [0, 1.6, 0] }), M = mats(), E = envMats();
+  const world = new THREE.Group(); S.scene.add(world);
+  const isl = island(M, 4.4); isl.position.y = -0.9; world.add(isl);
+  const base = -0.9 + 0.36;
+  [[-3.1, -1.6, 0.85, 1], [3.2, -1.4, 0.8, 0], [-2.9, 2.2, 0.7, 0]].forEach(([x, z, s, k]) => { const tr = tree(M, s, k); tr.position.set(x, base - 0.02, z); world.add(tr); });
+  const coinG = new THREE.CylinderGeometry(0.48, 0.48, 0.15, 30);
+  const stlpy = [-1.8, -0.6, 0.6, 1.8].map((x, i) => ({ x, z: 0.4 - Math.abs(x) * 0.15, max: 5 + i * 5, n: 0, list: [] }));
+  stlpy.forEach(q => { while (q.n < q.max * 0.5) { const c = sh(new THREE.Mesh(coinG, M.gold)); c.position.set(q.x, base + q.n * 0.16 + 0.08, q.z); c.rotation.y = rnd(0, 6); c.userData.g = 1; world.add(c); q.list.push(c); q.n++; } });
+  const geo = new THREE.BoxGeometry(1, 0.66, 0.06), lety = [], pool = [];
+  const cl = [[-3.5, 5.8, -3, 0.7], [3.4, 6.3, -4, 0.75]].map(([x, y, z, s]) => { const c = cloud(M, s); c.position.set(x, y, z); S.scene.add(c); return c; });
+  const drop = () => {
+    const s = stlpy.filter(q => q.n < q.max); if (!s.length) { stlpy.forEach(q => { q.list.forEach(c => world.remove(c)); q.list = []; q.n = 0; }); return; }
+    const q = s[(Math.random() * s.length) | 0];
+    const m = pool.pop() || sh(new THREE.Mesh(geo, E.white)); m.material = Math.random() < 0.3 ? E.lime : E.white;
+    const to = new THREE.Vector3(q.x, base + q.n * 0.16 + 0.3, q.z), from = new THREE.Vector3(q.x + rnd(-3, 3), 8.5, q.z - 2);
+    const mid = from.clone().lerp(to, 0.5); mid.y += 1;
+    m.userData = { c: new THREE.QuadraticBezierCurve3(from, mid, to), t: 0, d: rnd(1.1, 1.5), q, spin: rnd(-1, 1) };
+    S.scene.add(m); lety.push(m);
+  };
+  let next = 0;
+  S.tick = (dt, t) => {
+    world.rotation.y = Math.sin(t * 0.25) * 0.22; world.position.y = Math.sin(t * 1.1) * 0.1;
+    cl.forEach((c, i) => { c.position.x += Math.sin(t * 0.4 + i) * 0.004; });
+    if (t > next) { drop(); next = t + rnd(0.25, 0.45); }
+    for (let i = lety.length - 1; i >= 0; i--) {
+      const m = lety[i], u = m.userData; u.t += dt / u.d; const k = Math.min(1, u.t);
+      m.position.copy(u.c.getPoint(k * k)); m.position.y += world.position.y;
+      m.rotation.set(Math.sin(t * 2 + u.spin) * 0.4, t * u.spin, 0); m.scale.setScalar(0.55 * (1 - Math.max(0, k - 0.85) / 0.15) + 0.001);
+      if (u.t >= 1) {
+        S.scene.remove(m); pool.push(m); lety.splice(i, 1);
+        const q = u.q, c = sh(new THREE.Mesh(coinG, M.gold)); c.position.set(q.x + rnd(-0.03, 0.03), base + q.n * 0.16 + 0.08, q.z); c.rotation.y = rnd(0, 6); c.scale.setScalar(0.2); c.userData.g = 0;
+        world.add(c); q.list.push(c); q.n++;
+      }
+    }
+    stlpy.forEach(q => q.list.forEach(c => { if (c.userData.g < 1) { c.userData.g = Math.min(1, c.userData.g + dt * 5); c.scale.setScalar(0.2 + 0.8 * (1 - (1 - c.userData.g) ** 3)); } }));
+  };
+}
+
+const SC = { box: boxScene, funnel: funnelScene, coins: coinsScene };
 if (webgl) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); (SC[e.target.dataset['3d']] || boxScene)(e.target); } }), { rootMargin: '300px' });
   document.querySelectorAll('[data-3d]').forEach(el => io.observe(el));
