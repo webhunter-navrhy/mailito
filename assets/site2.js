@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=dd2775a9').then(r => r.json()), fetch('data/sk_mapa.json?v=dd2775a9').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=b4c759c0').then(r => r.json()), fetch('data/sk_mapa.json?v=b4c759c0').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -216,7 +216,7 @@
   const indTabs = $('#indTabs'), indPanel = $('#indPanel');
   if (indTabs) {
     let T = null;
-    fetch('data/trh.json?v=dd2775a9').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    fetch('data/trh.json?v=b4c759c0').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
     indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
     const show = i => {
       const x = IND[i];
@@ -243,7 +243,7 @@
   // ===== v8: personalizovaný odhad v hero =====
   const qSeg = $('#qSeg'), qLive = $('#qLive');
   if (qSeg) {
-    fetch('data/trh.json?v=dd2775a9').then(r => r.json()).then(d => {
+    fetch('data/trh.json?v=b4c759c0').then(r => r.json()).then(d => {
       qSeg.innerHTML = '<option value="">Vyberte odvetvie</option>' + d.segmenty.filter(x => x !== 'Ostatné').map(x => `<option>${x}</option>`).join('');
       const upd = () => {
         const v = qSeg.value; if (!v) { qLive.classList.remove('on'); return; }

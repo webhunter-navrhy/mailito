@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /portal/
+Disallow: /koncepty/
+
+Sitemap: https://mailito.eu/sitemap.xml

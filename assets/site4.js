@@ -84,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=dd2775a9').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=b4c759c0').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -155,10 +155,11 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=dd2775a9').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=b4c759c0').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
-    const selS = new Set(['Výroba a priemysel', 'Logistika a doprava']), selK = new Set();
+    const JA = window.MAILITO_JA;
+    const selS = new Set(JA?.ciel?.length ? JA.ciel : ['Výroba a priemysel', 'Logistika a doprava']), selK = new Set(JA?.kraj ? [JA.kraj] : []);
     const sum = (s, ks) => (ks.size ? [...ks] : kr).reduce((a, k) => a + ((d.matica[s] || {})[k] || 0), 0);
     const boxK = $('#potKraj'), vIn = $('#potV');
     const rng = (a, b, suf = '') => (a === b ? fmt(a) : fmt(a) + ' – ' + fmt(b)) + suf;

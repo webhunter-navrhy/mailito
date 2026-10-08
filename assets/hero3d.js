@@ -5,12 +5,15 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.m
 const host = document.querySelector('[data-hero3d]');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile = matchMedia('(max-width: 700px)').matches;
+// slabšie zariadenia: menšie rozlíšenie, menej stromov; šetrenie dát = bez 3D (zostane CSS krajina)
+const slabe = mobile || (navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+const setri = navigator.connection?.saveData || matchMedia('(prefers-reduced-data: reduce)').matches;
 
 function webgl() { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } }
 
-if (host && webgl()) {
+if (host && webgl() && !setri) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.5 : 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, slabe ? 1.25 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -27,7 +30,7 @@ if (host && webgl()) {
   const sun = new THREE.DirectionalLight(0xfff2de, 2.4);
   sun.position.set(-26, 38, 22);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(mobile ? 1024 : 2048, mobile ? 1024 : 2048);
+  sun.shadow.mapSize.set(slabe ? 1024 : 2048, slabe ? 1024 : 2048);
   Object.assign(sun.shadow.camera, { left: -48, right: 48, top: 30, bottom: -30, near: 1, far: 120 });
   sun.shadow.bias = -0.0004; sun.shadow.radius = 6;
   scene.add(sun);
@@ -113,7 +116,7 @@ if (host && webgl()) {
     .slice(0, mobile ? 11 : 16).forEach(a => house(...a));
   const zakaz = (x, z) => firmy.some(f => Math.hypot(f.g.position.x - x, f.g.position.z - z) < 2.4) || Math.hypot(x - (mobile ? 8 : 13), z - 4) < 4.5;
   let n = 0;
-  while (n < (mobile ? 34 : 60)) { const x = rnd(-40, 32), z = rnd(-26, 18); if (zakaz(x, z)) continue; (Math.random() < 0.62 ? pine : round)(x, z, rnd(0.75, 1.3)); n++; }
+  while (n < (mobile ? 34 : slabe ? 44 : 60)) { const x = rnd(-40, 32), z = rnd(-26, 18); if (zakaz(x, z)) continue; (Math.random() < 0.62 ? pine : round)(x, z, rnd(0.75, 1.3)); n++; }
 
   // ---------- schránka Mailito ----------
   const mb = new THREE.Group();
@@ -186,12 +189,14 @@ if (host && webgl()) {
   }
   new ResizeObserver(size).observe(host); size();
 
-  let vidno = true, last = performance.now(), nextEnv = 0, t = 0;
+  let vidno = true, last = performance.now(), nextEnv = 0, t = 0, fpsN = 0, fpsT = 0, znizene = false;
   new IntersectionObserver(es => { vidno = es[0].isIntersecting; }).observe(host);
   function frame(now) {
     requestAnimationFrame(frame);
     if (!vidno || document.hidden) { last = now; return; }
-    const dt = Math.min(0.05, (now - last) / 1000); last = now; t += dt;
+    const raw = (now - last) / 1000, dt = Math.min(0.05, raw); last = now; t += dt;
+    // ak sa scéna seká, znížiť kvalitu (raz): rozlíšenie 1×, bez tieňov
+    if (!znizene && t > 1) { fpsN++; fpsT += raw; if (fpsN === 90) { znizene = true; if (fpsT / fpsN > 1 / 38) { renderer.setPixelRatio(1); renderer.shadowMap.enabled = false; scene.traverse(o => { if (o.material) [].concat(o.material).forEach(m => (m.needsUpdate = true)); }); size(); } } }
     sx += (mx - sx) * 0.04; sy += (my - sy) * 0.04;
     camera.position.set(base.x + sx * 5 + Math.sin(t * 0.15) * 0.8, base.y - sy * 2.2 + Math.sin(t * 0.21) * 0.3, base.z);
     camera.lookAt(target);

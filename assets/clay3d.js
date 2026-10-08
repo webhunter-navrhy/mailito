@@ -1,10 +1,14 @@
 // Mailito – malé hlinené 3D scény (Three.js) namiesto obrázkov.
 // <div data-3d="box"> schránka na ostrovčeku posiela obálky, vracajú sa limetkové odpovede
 // <div data-3d="funnel"> obálky padajú do lievika, von padajú mince
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
+// Three.js sa načíta až pri prvej viditeľnej scéne
+let THREE;
+const nacitaj = () => THREE ? Promise.resolve() : import('https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js').then(m => { THREE = m; });
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile = matchMedia('(max-width: 700px)').matches;
+const slabe = mobile || (navigator.deviceMemory && navigator.deviceMemory <= 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+const setri = navigator.connection?.saveData || matchMedia('(prefers-reduced-data: reduce)').matches;
 const webgl = (() => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; } })();
 
 const clay = (color, rough = 0.9) => new THREE.MeshStandardMaterial({ color, roughness: rough, metalness: 0 });
@@ -78,7 +82,7 @@ function mailbox(M) {
 
 function stage(host, { fov = 30, cam = [0, 6, 18], look = [0, 1.6, 0] } = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.5 : 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, slabe ? 1.25 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -87,7 +91,7 @@ function stage(host, { fov = 30, cam = [0, 6, 18], look = [0, 1.6, 0] } = {}) {
   const camera = new THREE.PerspectiveCamera(fov, 1, 0.1, 200);
   scene.add(new THREE.HemisphereLight(0xeef4ff, 0x7a9563, 1.4));
   const sun = new THREE.DirectionalLight(0xfff1dc, 2.5); sun.position.set(-8, 14, 9); sun.castShadow = true;
-  sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, { left: -10, right: 10, top: 10, bottom: -10, near: 1, far: 50 }); sun.shadow.radius = 5; sun.shadow.bias = -0.0005;
+  sun.shadow.mapSize.set(slabe ? 512 : 1024, slabe ? 512 : 1024); Object.assign(sun.shadow.camera, { left: -10, right: 10, top: 10, bottom: -10, near: 1, far: 50 }); sun.shadow.radius = 5; sun.shadow.bias = -0.0005;
   scene.add(sun);
   const base = new THREE.Vector3(...cam), target = new THREE.Vector3(...look);
   let mx = 0, my = 0, sx = 0, sy = 0;
@@ -246,7 +250,7 @@ function coinsScene(host) {
 }
 
 const SC = { box: boxScene, funnel: funnelScene, coins: coinsScene };
-if (webgl) {
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); (SC[e.target.dataset['3d']] || boxScene)(e.target); } }), { rootMargin: '300px' });
+if (webgl && !setri) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); nacitaj().then(() => (SC[e.target.dataset['3d']] || boxScene)(e.target)).catch(() => {}); } }), { rootMargin: '400px' });
   document.querySelectorAll('[data-3d]').forEach(el => io.observe(el));
 }

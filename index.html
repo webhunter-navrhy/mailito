@@ -13,9 +13,12 @@
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/site4.css?v=dd2775a9">
+<link rel="stylesheet" href="./assets/site4.css?v=b4c759c0">
+<script defer src="./assets/ev.js?v=b4c759c0"></script>
 
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" crossorigin>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Mailito","url":"https://mailito.eu/","applicationCategory":"BusinessApplication","operatingSystem":"Web","areaServed":"SK","description":"Nové B2B zákazky pre slovenské firmy: AI nastavenie kampane, výber firiem, oslovenie, AI vyhodnotenie odpovedí a záujemcovia v klientskom portáli.","publisher":{"@type":"Organization","name":"WebHunter s.r.o.","taxID":"29498511"},"offers":{"@type":"AggregateOffer","lowPrice":"149","highPrice":"1509","priceCurrency":"EUR"}}
 </script>
@@ -85,6 +88,7 @@
   </div>
 
   <div class="shot">
+    <a href="./portal/?demo=1" class="shot-live"><span class="dot dot-live"></span>Vyskúšajte si portál naživo<svg><use href="#i-arr"/></svg></a>
     <div class="win" aria-label="Ilustračná ukážka klientskeho portálu Mailito">
       <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span class="win-url">mailito.eu/portal</span></div>
       <div class="app" aria-hidden="true">
@@ -145,11 +149,38 @@
   </div>
 </section>
 
+<!-- VYSKÚŠAJTE AI -->
+<section class="try-s" id="vyskusat">
+  <div class="try">
+    <div class="try-l">
+      <p class="label"><span><svg><use href="#i-spark"/></svg></span>Vyskúšajte to hneď</p>
+      <h2>Napíšte, čo predávate. <span class="h-mut">AI vám za pár sekúnd napíše prvý e-mail pre vašich budúcich zákazníkov.</span></h2>
+      <form class="try-f" id="tryForm" novalidate>
+        <label class="sr" for="tryIn">Váš web alebo čo predávate</label>
+        <input id="tryIn" name="v" autocomplete="off" placeholder="napr. upratovanie hál alebo vasweb.sk">
+        <button class="btn btn-lg" type="submit">Napísať e-mail<svg><use href="#i-arr"/></svg></button>
+      </form>
+      <div class="try-ex"><span>Skúste:</span><button type="button" class="chip" data-try="Upratovanie výrobných hál">Upratovanie hál</button><button type="button" class="chip" data-try="Účtovníctvo pre s.r.o.">Účtovníctvo</button><button type="button" class="chip" data-try="Tvorba webov pre firmy">Tvorba webov</button><button type="button" class="chip" data-try="IT správa a servis počítačov pre firmy">IT správa</button></div>
+      <p class="try-note">Zadarmo, bez registrácie. Nič sa neodosiela.</p>
+    </div>
+    <div class="try-r">
+      <div class="try-mail" id="tryOut">
+        <div class="tm-bar" aria-hidden="true"><i></i><i></i><i></i><span>Nová správa</span></div>
+        <p class="tm-row"><span>Komu</span><b><mark>Kovo Záhorie</mark> a ďalšie firmy</b></p>
+        <p class="tm-row"><span>Predmet</span><b id="trySubj">Čaká na vašu ponuku</b></p>
+        <p class="tm-steps" id="trySteps">Napíšte vľavo, čo predávate, a sledujte, ako AI píše.</p>
+        <div class="tm-body" id="tryBody" aria-live="polite"><i></i><i></i><i></i><i></i></div>
+        <div class="tm-foot" id="tryFoot" hidden><p id="tryN"></p><a href="./objednat/" class="btn btn-lime" id="tryCta">Nastaviť celú kampaň<svg><use href="#i-arr"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRE KOHO -->
 <section class="who" aria-label="Pre koho je Mailito">
   <p class="who-h">Nové zákazky zháňame firmám, ktoré robia napríklad</p>
-  <div class="mq"><div class="mq-t"><a href="./objednat/?ponuka=Upratovanie%20h%C3%A1l">Upratovanie hál</a><a href="./objednat/?ponuka=%C3%9A%C4%8Dtovn%C3%ADctvo%20pre%20s.r.o.">Účtovníctvo pre s.r.o.</a><a href="./objednat/?ponuka=Tvorba%20webov">Tvorba webov</a><a href="./objednat/?ponuka=Stroj%C3%A1rska%20v%C3%BDroba">Strojárska výroba</a><a href="./objednat/?ponuka=BOZP%20a%20po%C5%BEiarna%20ochrana">BOZP a požiarna ochrana</a><a href="./objednat/?ponuka=Firemn%C3%A9%20%C5%A1kolenia">Firemné školenia</a><a href="./objednat/?ponuka=IT%20spr%C3%A1va">IT správa</a><a href="./objednat/?ponuka=Preklady">Preklady</a><a href="./objednat/?ponuka=Ochrana%20objektov">Ochrana objektov</a><a href="./objednat/?ponuka=Catering%20na%20akcie">Catering na akcie</a><a href="./objednat/?ponuka=Upratovanie%20h%C3%A1l">Upratovanie hál</a><a href="./objednat/?ponuka=%C3%9A%C4%8Dtovn%C3%ADctvo%20pre%20s.r.o.">Účtovníctvo pre s.r.o.</a><a href="./objednat/?ponuka=Tvorba%20webov">Tvorba webov</a><a href="./objednat/?ponuka=Stroj%C3%A1rska%20v%C3%BDroba">Strojárska výroba</a><a href="./objednat/?ponuka=BOZP%20a%20po%C5%BEiarna%20ochrana">BOZP a požiarna ochrana</a><a href="./objednat/?ponuka=Firemn%C3%A9%20%C5%A1kolenia">Firemné školenia</a><a href="./objednat/?ponuka=IT%20spr%C3%A1va">IT správa</a><a href="./objednat/?ponuka=Preklady">Preklady</a><a href="./objednat/?ponuka=Ochrana%20objektov">Ochrana objektov</a><a href="./objednat/?ponuka=Catering%20na%20akcie">Catering na akcie</a></div></div>
-  <div class="mq mq-r"><div class="mq-t"><a href="./objednat/?ponuka=Reklamn%C3%A9%20predmety">Reklamné predmety</a><a href="./objednat/?ponuka=Person%C3%A1lna%20agent%C3%BAra">Personálna agentúra</a><a href="./objednat/?ponuka=Fotovoltika%20pre%20firmy">Fotovoltika pre firmy</a><a href="./objednat/?ponuka=Kamerov%C3%A9%20syst%C3%A9my">Kamerové systémy</a><a href="./objednat/?ponuka=Pracovn%C3%A9%20odevy">Pracovné odevy</a><a href="./objednat/?ponuka=Energetick%C3%A9%20audity">Energetické audity</a><a href="./objednat/?ponuka=Firemn%C3%A9%20dar%C4%8Deky">Firemné darčeky</a><a href="./objednat/?ponuka=Pren%C3%A1jom%20techniky">Prenájom techniky</a><a href="./objednat/?ponuka=Kancel%C3%A1rske%20potreby">Kancelárske potreby</a><a href="./objednat/?ponuka=Autopo%C5%BEi%C4%8Dov%C5%88a%20pre%20firmy">Autopožičovňa pre firmy</a><a href="./objednat/?ponuka=Reklamn%C3%A9%20predmety">Reklamné predmety</a><a href="./objednat/?ponuka=Person%C3%A1lna%20agent%C3%BAra">Personálna agentúra</a><a href="./objednat/?ponuka=Fotovoltika%20pre%20firmy">Fotovoltika pre firmy</a><a href="./objednat/?ponuka=Kamerov%C3%A9%20syst%C3%A9my">Kamerové systémy</a><a href="./objednat/?ponuka=Pracovn%C3%A9%20odevy">Pracovné odevy</a><a href="./objednat/?ponuka=Energetick%C3%A9%20audity">Energetické audity</a><a href="./objednat/?ponuka=Firemn%C3%A9%20dar%C4%8Deky">Firemné darčeky</a><a href="./objednat/?ponuka=Pren%C3%A1jom%20techniky">Prenájom techniky</a><a href="./objednat/?ponuka=Kancel%C3%A1rske%20potreby">Kancelárske potreby</a><a href="./objednat/?ponuka=Autopo%C5%BEi%C4%8Dov%C5%88a%20pre%20firmy">Autopožičovňa pre firmy</a></div></div>
+  <div class="mq"><div class="mq-t"><a href="./pre/upratovanie-hal/">Upratovanie hál</a><a href="./pre/uctovnictvo/">Účtovníctvo pre s.r.o.</a><a href="./pre/tvorba-webov/">Tvorba webov</a><a href="./pre/strojarska-vyroba/">Strojárska výroba</a><a href="./pre/bozp-a-po/">BOZP a požiarna ochrana</a><a href="./pre/firemne-skolenia/">Firemné školenia</a><a href="./pre/it-sprava/">IT správa</a><a href="./pre/preklady/">Preklady</a><a href="./pre/ochrana-objektov/">Ochrana objektov</a><a href="./pre/catering/">Catering na akcie</a><a href="./pre/upratovanie-hal/">Upratovanie hál</a><a href="./pre/uctovnictvo/">Účtovníctvo pre s.r.o.</a><a href="./pre/tvorba-webov/">Tvorba webov</a><a href="./pre/strojarska-vyroba/">Strojárska výroba</a><a href="./pre/bozp-a-po/">BOZP a požiarna ochrana</a><a href="./pre/firemne-skolenia/">Firemné školenia</a><a href="./pre/it-sprava/">IT správa</a><a href="./pre/preklady/">Preklady</a><a href="./pre/ochrana-objektov/">Ochrana objektov</a><a href="./pre/catering/">Catering na akcie</a></div></div>
+  <div class="mq mq-r"><div class="mq-t"><a href="./pre/reklamne-predmety/">Reklamné predmety</a><a href="./pre/personalna-agentura/">Personálna agentúra</a><a href="./pre/fotovoltika/">Fotovoltika pre firmy</a><a href="./pre/kamerove-systemy/">Kamerové systémy</a><a href="./pre/pracovne-odevy/">Pracovné odevy</a><a href="./pre/energeticke-audity/">Energetické audity</a><a href="./pre/firemne-darceky/">Firemné darčeky</a><a href="./pre/prenajom-techniky/">Prenájom techniky</a><a href="./pre/kancelarske-potreby/">Kancelárske potreby</a><a href="./pre/autopozicovna/">Autopožičovňa pre firmy</a><a href="./pre/reklamne-predmety/">Reklamné predmety</a><a href="./pre/personalna-agentura/">Personálna agentúra</a><a href="./pre/fotovoltika/">Fotovoltika pre firmy</a><a href="./pre/kamerove-systemy/">Kamerové systémy</a><a href="./pre/pracovne-odevy/">Pracovné odevy</a><a href="./pre/energeticke-audity/">Energetické audity</a><a href="./pre/firemne-darceky/">Firemné darčeky</a><a href="./pre/prenajom-techniky/">Prenájom techniky</a><a href="./pre/kancelarske-potreby/">Kancelárske potreby</a><a href="./pre/autopozicovna/">Autopožičovňa pre firmy</a></div></div>
 </section>
 
 <!-- POTENCIÁL -->
@@ -352,14 +383,14 @@
   </div>
   <div class="end-art g3d" data-3d="box" aria-label="3D ilustrácia: zelená schránka Mailito posiela obálky"></div>
 </section>
-<script type="module" src="./assets/clay3d.js?v=dd2775a9"></script>
+<script type="module" src="./assets/clay3d.js?v=b4c759c0"></script>
 
 </main>
 
 <footer class="foot">
   <div class="foot-in">
     <div class="foot-brand"><a href="./" class="logo"><span class="logo-m" aria-hidden="true"></span>mailito</a><p>Nové B2B zákazky pre slovenské firmy.</p><a href="./objednat/" class="btn btn-sm foot-cta">Objednať kampaň<svg><use href="#i-arr"/></svg></a></div>
-    <nav class="foot-col" aria-label="Produkt"><p>Produkt</p><a href="./ako-to-funguje/">Ako to funguje</a><a href="./vysledky/">Výsledky</a><a href="./cennik/">Cenník</a><a href="./otazky/">Otázky</a></nav>
+    <nav class="foot-col" aria-label="Produkt"><p>Produkt</p><a href="./ako-to-funguje/">Ako to funguje</a><a href="./vysledky/">Výsledky</a><a href="./cennik/">Cenník</a><a href="./otazky/">Otázky</a><a href="./pre/">Pre koho</a></nav>
     <nav class="foot-col" aria-label="Firma"><p>Firma</p><a href="./objednat/">Objednať kampaň</a><a href="./portal/">Klientsky portál</a><a href="./podmienky/">Podmienky a GDPR</a><a href="./preco/">Prečo ste dostali e-mail</a><a href="mailto:info@mailito.eu">info@mailito.eu</a></nav>
   </div>
   <p class="foot-word" aria-hidden="true">mailito</p>
@@ -367,8 +398,9 @@
 </footer>
 
 <a href="./objednat/" class="mcta" id="mcta"><span class="mcta-t"><b>1&nbsp;100 firiem</b> za 149&nbsp;€</span><span class="mcta-b">Chcem zákazky<svg><use href="#i-arr"/></svg></span></a>
-<script src="./assets/site4.js?v=dd2775a9" defer></script>
+<script src="./assets/plus.js?v=b4c759c0" defer></script>
+<script src="./assets/site4.js?v=b4c759c0" defer></script>
 
-<script type="module" src="./assets/hero3d.js?v=dd2775a9"></script>
+<script type="module" src="./assets/hero3d.js?v=b4c759c0"></script>
 </body>
 </html>

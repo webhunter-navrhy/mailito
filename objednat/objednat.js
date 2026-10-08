@@ -25,6 +25,8 @@
   if (q.get('segment')) { const qs = q.get('segment').split(/\s*,\s*/).filter(s => SEGS.includes(s)); if (qs.length) { S.chceSeg = qs; if (!S.segmenty.length) S.segmenty = qs; } }
   if (q.get('kraje')) S.chceKraje = q.get('kraje').split(/\s*,\s*/);
   if (q.get('web')) S.web = q.get('web');
+  // prišiel z nášho osobného odkazu (assets/plus.js uloží firmu do sessionStorage)
+  try { const ja = JSON.parse(sessionStorage.getItem('mailito_ja') || 'null'); if (ja) { if (!S.web && !S.popis && ja.web) S.web = ja.web; if (!S.odos?.firma && ja.firma) S.odos = { ...(S.odos || {}), firma: ja.firma }; } } catch {}
 
   // ---------- AI úlohy (spracuje engine cez Claude) ----------
   async function job(typ, vstup, maxS = 200) {
@@ -49,6 +51,7 @@
     stepsNav.forEach(li => { const n = +li.dataset.s; li.classList.toggle('on', n === step || (step === 'ai' && n === 0)); li.classList.toggle('past', typeof step === 'number' && n < S.max && n !== step || step === 'done'); });
     if (step === 1) renderAud(); if (step === 2) renderMails(); if (step === 3) renderRange(); if (step === 4) renderOrder();
     if (typeof step === 'number' || step === 'done') assistStep(step);
+    if (typeof step === 'number') window.mailitoEv?.('wizard_krok_' + step);
     save(); scrollTo({ top: 0, behavior: 'smooth' });
   }
   stepsNav.forEach(li => li.addEventListener('click', () => { const n = +li.dataset.s; if (n <= S.max && S.step !== 'done' && S.step !== 'ai') go(n, { force: n < S.step }); }));
@@ -319,6 +322,7 @@
       if (j.token) store.set(TK, j.token);
       $('#doneTxt').textContent = `Objednali ste ${fmt(S.pocet)} + ${BONUS} firiem za ${fmt(j.cena_eur)} € bez DPH. Kampaň aj e-maily nájdete v portáli.`;
       $('#doneMail').textContent = body.firma.email_faktura;
+      window.mailitoEv?.('objednavka_odoslana');
       store.set(KEY, null); S = { ...S0, chat: [] }; go('done', { force: true });
     } catch (err) { m.className = 'form-msg err'; m.textContent = err.message === 'Failed to fetch' ? 'Spojenie zlyhalo. Skúste to znova alebo napíšte na info@mailito.eu.' : err.message; }
     finally { btn.disabled = false; if (S.step !== 'done') btn.textContent = bt; }
@@ -358,7 +362,7 @@
     } catch (e) { t.remove(); say('Teraz neviem odpovedať. Skúste to o chvíľu, alebo napíšte na info@mailito.eu.'); }
   }
   $('#aiF').addEventListener('submit', e => { e.preventDefault(); const i = $('#aiIn'); const v = i.value; i.value = ''; ask(v); });
-  fab.addEventListener('click', () => { ai.classList.add('open'); fab.classList.remove('ping'); $('#aiIn').focus(); });
+  fab.addEventListener('click', () => { window.mailitoEv?.('asistent_otvoreny'); ai.classList.add('open'); fab.classList.remove('ping'); $('#aiIn').focus(); });
   $('#aiX').addEventListener('click', () => ai.classList.remove('open'));
 
   // ---------- štart ----------
