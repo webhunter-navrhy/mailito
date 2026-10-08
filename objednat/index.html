@@ -11,9 +11,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site4.css?v=64b85a10">
+<link rel="stylesheet" href="../assets/site4.css?v=ae3ae0bb">
 
-<link rel="stylesheet" href="objednat.css?v=64b85a10">
+<link rel="stylesheet" href="objednat.css?v=ae3ae0bb">
 </head>
 <body class="wz-body">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -70,7 +70,7 @@
     <!-- AI PRACUJE -->
     <section class="wz-step" data-step="ai">
       <div class="work">
-        <div class="work-art" aria-hidden="true"><img src="../assets/img/clay-box.webp" alt=""><i></i><i></i><i></i></div>
+        <div class="work-art g3d" data-3d="box" aria-hidden="true"></div>
         <h1>AI pripravuje <span class="h-mut">vašu kampaň.</span></h1>
         <ol class="work-list" id="workList">
           <li>Čítam váš web a podklady</li>
@@ -152,7 +152,7 @@
         <div class="sc-grid">
           <div><small>Cena kampane</small><b id="rP">149&nbsp;€</b><span id="rPer">0,149 € za firmu · bez DPH</span></div>
           <div><small>Oslovíme spolu</small><b id="rTot">1&nbsp;100</b><span>z toho 100 zadarmo</span></div>
-          <div><small>Odhad záujemcov</small><b id="rL">17 – 39</b><span>1,5 – 3,5 % oslovených</span></div>
+          <div><small>Odhad záujemcov</small><b id="rL">22 – 44</b><span>2 – 4 % oslovených</span></div>
         </div>
         <label class="c-val"><span>Priemerná hodnota vašej zákazky</span><span class="c-in"><input type="number" id="rVal" min="50" step="50" value="1500" inputmode="numeric"><i>€</i></span></label>
         <p class="sc-roi" id="rRoi"></p>
@@ -223,14 +223,15 @@
 
   <!-- ASISTENT -->
   <aside class="ai" id="ai" aria-label="Mailito asistent">
-    <div class="ai-h"><span class="ai-av"><img src="../assets/img/clay-box.webp" alt=""></span><div><b>Mailito asistent</b><small><i class="dot dot-live"></i>Pomôže vám s objednávkou</small></div><button type="button" class="ai-x" id="aiX" aria-label="Zavrieť asistenta"><svg><use href="#i-x"/></svg></button></div>
+    <div class="ai-h"><span class="ai-av ai-av-m"><span class="logo-m"></span></span><div><b>Mailito asistent</b><small><i class="dot dot-live"></i>Pomôže vám s objednávkou</small></div><button type="button" class="ai-x" id="aiX" aria-label="Zavrieť asistenta"><svg><use href="#i-x"/></svg></button></div>
     <div class="ai-log" id="aiLog" aria-live="polite"></div>
     <div class="ai-sug" id="aiSug"></div>
     <form class="ai-f" id="aiF"><input id="aiIn" placeholder="Opýtajte sa čokoľvek…" autocomplete="off"><button type="submit" aria-label="Odoslať"><svg><use href="#i-send"/></svg></button></form>
   </aside>
-  <button type="button" class="ai-fab" id="aiFab"><span class="ai-av"><img src="../assets/img/clay-box.webp" alt=""></span>Asistent</button>
+  <button type="button" class="ai-fab" id="aiFab"><span class="ai-av ai-av-m"><span class="logo-m"></span></span>Asistent</button>
 </main>
 
-<script src="objednat.js?v=64b85a10" defer></script>
+<script src="objednat.js?v=ae3ae0bb" defer></script>
+<script type="module" src="../assets/clay3d.js?v=ae3ae0bb"></script>
 </body>
 </html>

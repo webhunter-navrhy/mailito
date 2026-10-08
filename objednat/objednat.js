@@ -185,7 +185,7 @@
   function showCount(r) {
     $('#aBusy').hidden = true; $('#aBusy').textContent = 'prepočítavam…';
     tween($('#aN'), r.pocet || 0);
-    $('#aL').textContent = r.pocet ? `odhad záujemcov ${fmt(Math.max(1, r.pocet * .015))} – ${fmt(Math.max(2, r.pocet * .035))}` : 'vyberte odvetvie';
+    $('#aL').textContent = r.pocet ? `odhad záujemcov ${fmt(Math.max(1, r.pocet * .02))} – ${fmt(Math.max(2, r.pocet * .04))}` : 'vyberte odvetvie';
     const e = Object.entries(r.kraje || {}).sort((a, b) => b[1] - a[1]).slice(0, 8), mx = Math.max(1, ...e.map(x => x[1]));
     $('#aKr').innerHTML = e.map(([k, n]) => `<div class="kr"><span>${KR[k] || k}</span><i style="--w:${(n / mx * 100).toFixed(0)}%"></i><b>${fmt(n)}</b></div>`).join('') || '<div class="kr"><span>–</span><i></i><b></b></div>';
   }
@@ -247,9 +247,9 @@
     rg.style.setProperty('--p', ((n - rg.min) / Math.max(1, rg.max - rg.min) * 100) + '%');
     $('#rN').textContent = fmt(n); $('#rP').textContent = fmt(p) + ' €'; $('#rPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + ' € za firmu · bez DPH';
     const tot = Math.min(n + BONUS, S.odhad?.pocet ?? n + BONUS); $('#rTot').textContent = fmt(tot);
-    const lo = Math.max(1, Math.round(tot * .015)), hi = Math.max(2, Math.round(tot * .035)); $('#rL').textContent = `${fmt(lo)} – ${fmt(hi)}`;
-    const dl = Math.max(1, Math.round(lo * .3)), dh = Math.max(1, Math.round(hi * .3));
-    $('#rRoi').innerHTML = v ? `Pri zákazke za ${fmt(v)} € je to <b>${dl === dh ? dl : dl + ' – ' + dh} nových zákaziek</b> v hodnote <b>${fmt(dl * v)} – ${fmt(dh * v)} €</b>. Kampaň sa vám vráti <b>až ${Math.round(dh * v / p)}×</b>.` : '';
+    const lo = Math.max(1, Math.round(tot * .02)), hi = Math.max(2, Math.round(tot * .04)); $('#rL').textContent = `${fmt(lo)} – ${fmt(hi)}`;
+    const dl = Math.max(1, Math.round(lo * .33)), dh = Math.max(1, Math.round(hi * .33));
+    $('#rRoi').innerHTML = v ? `Pri zákazke za ${fmt(v)} € je to <b>${dl === dh ? dl : dl + ' – ' + dh} nových zákazníkov</b> v hodnote <b>${fmt(dl * v)} – ${fmt(dh * v)} €</b>. Kampaň sa vám vráti <b>až ${Math.round(dh * v / p)}×</b>.` : '';
   }
   rg.addEventListener('input', calc); rVal.addEventListener('input', calc);
 

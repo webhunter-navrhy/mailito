@@ -230,3 +230,9 @@
   .sc .c-top{margin-right:70px}
 }
 [hidden]{display:none!important}
+
+/* v19: 3D namiesto obrázkov */
+.work-art.g3d{width:260px;height:220px;margin-bottom:12px}
+.work-art.g3d canvas{width:100%!important;height:100%!important}
+.ai-av-m{display:grid;place-items:center;background:var(--forest,#0F2A1F)}
+.ai-av-m .logo-m{width:22px;height:22px}

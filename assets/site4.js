@@ -7,6 +7,8 @@
   // cenník – rovnaký výpočet je v portal.js a engine/sync.py
   const cena = n => { let p = 0, od = 0; for (const [d, c] of [[1000, .149], [3000, .10], [10000, .08], [Infinity, .06]]) { if (n > od) p += (Math.min(n, d) - od) * c; od = d; } return Math.round(p / 10) * 10 - 1; };
   const OBJ = BASE + 'objednat/';
+  // odhad (Rafael 8. 10.: optimisticky) – rovnako v objednat/objednat.js
+  const LO = .02, HI = .04, KONV = .33;
   const once = (el, fn, threshold = .45) => { if (!el) return; const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { o.disconnect(); fn(); } }, { threshold }); o.observe(el); };
   const tween = (el, to, ms = 900, f = fmt, suf = '') => {
     const from = parseFloat(el.dataset.v || 0); el.dataset.v = to;
@@ -28,7 +30,7 @@
 
   // jemné odhalenie
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .end-art, .step-card, .teaser, .pot-card, .vs, .risk-l, .teaser-r, .replies').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .step-card, .teaser, .pot-card, .vs, .risk-l, .teaser-r, .replies, .pf-l, .mails, .tl, .pp').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
 
   // návštevník z nášho e-mailu: „práve ste to zažili“
   const qp = new URLSearchParams(location.search), fm = $('#fromMail');
@@ -82,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=64b85a10').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=ae3ae0bb').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -91,7 +93,7 @@
       const v = qSeg.value; qSeg.classList.toggle('has', !!v); qMsg.className = 'hero-note';
       if (!v) { qMsg.innerHTML = q0; return; }
       const n = Object.values(d.matica[v] || {}).reduce((a, b) => a + b, 0), base = Math.min(n, 3500);
-      qMsg.innerHTML = `<b>${fmt(n)} firiem</b> z odvetvia ${v.toLowerCase()} · prvá kampaň ≈ <b>${Math.max(1, Math.round(base * .015 * .3))} – ${Math.max(2, Math.round(base * .035 * .3))} nových zákaziek</b>`;
+      qMsg.innerHTML = `<b>${fmt(n)} firiem</b> z odvetvia ${v.toLowerCase()} · prvá kampaň ≈ <b>${Math.max(1, Math.round(base * LO * KONV))} – ${Math.max(2, Math.round(base * HI * KONV))} nových zákaziek</b>`;
     });
     }
     // výber cieľovej skupiny
@@ -105,7 +107,7 @@
       boxK.innerHTML = `<button type="button" class="chip${selK.size ? '' : ' on'}" data-k="">Celé Slovensko</button>` + kr.map(k => `<button type="button" class="chip${selK.has(k) ? ' on' : ''}" data-k="${k}">${KR[k] || k}</button>`).join('');
       const n = [...selS].reduce((a, s) => a + sum(s, selK), 0);
       tween($('#audN'), n, 700);
-      $('#audL').textContent = `${fmt(Math.max(1, n * .015))} – ${fmt(Math.max(2, n * .035))}`;
+      $('#audL').textContent = `${fmt(Math.max(1, n * LO))} – ${fmt(Math.max(2, n * HI))}`;
       $('#audP').textContent = fmt(cena(Math.max(1000, n))) + ' €';
     };
     boxS.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; const s = b.dataset.s; if (selS.has(s)) { if (selS.size > 1) selS.delete(s); } else selS.add(s); draw(); });
@@ -153,7 +155,7 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=64b85a10').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=ae3ae0bb').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const selS = new Set(['Výroba a priemysel', 'Logistika a doprava']), selK = new Set();
@@ -165,24 +167,27 @@
       boxK.innerHTML = `<button type="button" class="chip${selK.size ? '' : ' on'}" data-k="">Celé Slovensko</button>` + kr.map(k => `<button type="button" class="chip${selK.has(k) ? ' on' : ''}" data-k="${k}">${KR[k] || k}</button>`).join('');
       calc();
     };
+    let rep = 2;
     const calc = () => {
       const n = [...selS].reduce((a, s) => a + sum(s, selK), 0);
       const pocet = Math.max(1000, Math.min(3000, Math.floor((n - 100) / 100) * 100)), oslov = pocet + 100, p = cena(pocet);
-      const lo = Math.max(1, Math.round(oslov * .015)), hi = Math.max(2, Math.round(oslov * .035));
-      const dl = Math.max(1, Math.round(lo * .3)), dh = Math.max(1, Math.round(hi * .3)), v = +vIn.value;
-      tween($('#potN'), n, 700);
+      const lo = Math.max(1, Math.round(oslov * LO)), hi = Math.max(2, Math.round(oslov * HI));
+      const dl = Math.max(1, Math.round(lo * KONV)), dh = Math.max(1, Math.round(hi * KONV)), v = +vIn.value;
+      const rok = Math.min(n, oslov * 12), yl = Math.max(dl, Math.round(rok * LO * KONV)), yh = Math.max(dh, Math.round(rok * HI * KONV));
+      tween($('#potBig'), yh * v * rep, 800);
+      $('#potN').textContent = fmt(n);
       $('#potP').textContent = fmt(pocet); $('#potC').textContent = fmt(p) + '\u00a0€';
       $('#potL').textContent = rng(lo, hi); $('#potD').textContent = rng(dl, dh);
-      $('#potR').textContent = rng(dl * v, dh * v, '\u00a0€');
-      const rok = Math.min(n, oslov * 12); $('#potY').innerHTML = `<b>${rng(Math.max(dl, Math.round(rok * .015 * .3)) * v, Math.max(dh, Math.round(rok * .035 * .3)) * v, '\u00a0€')}</b>`;
+      $('#potY').innerHTML = `<b>${rng(yl, yh)} zákazníkov</b>`;
       $('#potVv').textContent = fmt(v) + '\u00a0€';
       vIn.style.setProperty('--p', ((v - vIn.min) / (vIn.max - vIn.min) * 100) + '%');
-      const x1 = dl * v / p, x2 = dh * v / p, f1 = x => x < 10 ? x.toFixed(1).replace('.', ',') : fmt(x);
-      $('#potX').textContent = x2 < 1 ? 'pri väčšej zákazke' : `až ${f1(x2)}×`;
+      const x1 = dl * v / p;
+      $('#potX').textContent = x1 < 1 ? 'pri väčšej zákazke' : `viac ako ${fmt(x1)}×`;
       const q = new URLSearchParams({ pocet }); q.set('segment', [...selS].join(', ')); if (selK.size) q.set('kraje', [...selK].join(', '));
       $('#potCta').href = OBJ + '?' + q.toString();
       $('#potCta').firstChild.textContent = `Osloviť ${fmt(oslov)} firiem `;
     };
+    $('#potRep').addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (!b) return; rep = +b.dataset.r; $$('#potRep .chip').forEach(c => c.classList.toggle('on', c === b)); calc(); });
     potSeg.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; const s = b.dataset.s; if (selS.has(s)) { if (selS.size > 1) selS.delete(s); } else selS.add(s); draw(); });
     boxK.addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; const k = b.dataset.k; if (!k) selK.clear(); else if (selK.has(k)) selK.delete(k); else selK.add(k); if (selK.size === kr.length) selK.clear(); draw(); });
     vIn.addEventListener('input', calc);
@@ -199,8 +204,8 @@
   const calc = () => {
     const n = +range.value, p = cena(n), v = Math.max(0, +val.value || 0);
     range.style.setProperty('--p', ((n - range.min) / (range.max - range.min) * 100) + '%');
-    const lo = Math.max(1, Math.round(n * .015)), hi = Math.max(2, Math.round(n * .035));
-    const dl = Math.max(1, Math.round(lo * .3)), dh = Math.max(1, Math.round(hi * .3));
+    const lo = Math.max(1, Math.round(n * LO)), hi = Math.max(2, Math.round(n * HI));
+    const dl = Math.max(1, Math.round(lo * KONV)), dh = Math.max(1, Math.round(hi * KONV));
     $('#cfgN').textContent = fmt(n); $('#cfgTot').textContent = fmt(n + 100); $('#cfgPrice').textContent = fmt(p);
     const pr = $('.c-price'); pr.classList.add('bump'); clearTimeout(calc.t); calc.t = setTimeout(() => pr.classList.remove('bump'), 160);
     $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + '\u00a0€';
