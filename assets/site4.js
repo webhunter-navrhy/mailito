@@ -82,7 +82,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=de998839').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=64b85a10').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -91,7 +91,7 @@
       const v = qSeg.value; qSeg.classList.toggle('has', !!v); qMsg.className = 'hero-note';
       if (!v) { qMsg.innerHTML = q0; return; }
       const n = Object.values(d.matica[v] || {}).reduce((a, b) => a + b, 0), base = Math.min(n, 3500);
-      qMsg.innerHTML = `<b>${fmt(n)} firiem</b> z odvetvia ${v.toLowerCase()} · prvá kampaň ≈ <b>${Math.max(1, Math.round(base * .003 * .2))} – ${Math.max(2, Math.round(base * .012 * .2))} nových zákaziek</b>`;
+      qMsg.innerHTML = `<b>${fmt(n)} firiem</b> z odvetvia ${v.toLowerCase()} · prvá kampaň ≈ <b>${Math.max(1, Math.round(base * .015 * .3))} – ${Math.max(2, Math.round(base * .035 * .3))} nových zákaziek</b>`;
     });
     }
     // výber cieľovej skupiny
@@ -105,7 +105,7 @@
       boxK.innerHTML = `<button type="button" class="chip${selK.size ? '' : ' on'}" data-k="">Celé Slovensko</button>` + kr.map(k => `<button type="button" class="chip${selK.has(k) ? ' on' : ''}" data-k="${k}">${KR[k] || k}</button>`).join('');
       const n = [...selS].reduce((a, s) => a + sum(s, selK), 0);
       tween($('#audN'), n, 700);
-      $('#audL').textContent = `${fmt(Math.max(1, n * .003))} – ${fmt(Math.max(2, n * .012))}`;
+      $('#audL').textContent = `${fmt(Math.max(1, n * .015))} – ${fmt(Math.max(2, n * .035))}`;
       $('#audP').textContent = fmt(cena(Math.max(1000, n))) + ' €';
     };
     boxS.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; const s = b.dataset.s; if (selS.has(s)) { if (selS.size > 1) selS.delete(s); } else selS.add(s); draw(); });
@@ -153,7 +153,7 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=de998839').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=64b85a10').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const selS = new Set(['Výroba a priemysel', 'Logistika a doprava']), selK = new Set();
@@ -168,16 +168,17 @@
     const calc = () => {
       const n = [...selS].reduce((a, s) => a + sum(s, selK), 0);
       const pocet = Math.max(1000, Math.min(3000, Math.floor((n - 100) / 100) * 100)), oslov = pocet + 100, p = cena(pocet);
-      const lo = Math.max(1, Math.round(oslov * .003)), hi = Math.max(2, Math.round(oslov * .012));
-      const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2)), v = +vIn.value;
+      const lo = Math.max(1, Math.round(oslov * .015)), hi = Math.max(2, Math.round(oslov * .035));
+      const dl = Math.max(1, Math.round(lo * .3)), dh = Math.max(1, Math.round(hi * .3)), v = +vIn.value;
       tween($('#potN'), n, 700);
       $('#potP').textContent = fmt(pocet); $('#potC').textContent = fmt(p) + '\u00a0€';
       $('#potL').textContent = rng(lo, hi); $('#potD').textContent = rng(dl, dh);
       $('#potR').textContent = rng(dl * v, dh * v, '\u00a0€');
+      const rok = Math.min(n, oslov * 12); $('#potY').innerHTML = `<b>${rng(Math.max(dl, Math.round(rok * .015 * .3)) * v, Math.max(dh, Math.round(rok * .035 * .3)) * v, '\u00a0€')}</b>`;
       $('#potVv').textContent = fmt(v) + '\u00a0€';
       vIn.style.setProperty('--p', ((v - vIn.min) / (vIn.max - vIn.min) * 100) + '%');
       const x1 = dl * v / p, x2 = dh * v / p, f1 = x => x < 10 ? x.toFixed(1).replace('.', ',') : fmt(x);
-      $('#potX').textContent = x2 < 1 ? 'pri väčšej zákazke' : `${f1(x1)}× až ${f1(x2)}×`;
+      $('#potX').textContent = x2 < 1 ? 'pri väčšej zákazke' : `až ${f1(x2)}×`;
       const q = new URLSearchParams({ pocet }); q.set('segment', [...selS].join(', ')); if (selK.size) q.set('kraje', [...selK].join(', '));
       $('#potCta').href = OBJ + '?' + q.toString();
       $('#potCta').firstChild.textContent = `Osloviť ${fmt(oslov)} firiem `;
@@ -198,15 +199,15 @@
   const calc = () => {
     const n = +range.value, p = cena(n), v = Math.max(0, +val.value || 0);
     range.style.setProperty('--p', ((n - range.min) / (range.max - range.min) * 100) + '%');
-    const lo = Math.max(1, Math.round(n * .003)), hi = Math.max(2, Math.round(n * .012));
-    const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2));
+    const lo = Math.max(1, Math.round(n * .015)), hi = Math.max(2, Math.round(n * .035));
+    const dl = Math.max(1, Math.round(lo * .3)), dh = Math.max(1, Math.round(hi * .3));
     $('#cfgN').textContent = fmt(n); $('#cfgTot').textContent = fmt(n + 100); $('#cfgPrice').textContent = fmt(p);
     const pr = $('.c-price'); pr.classList.add('bump'); clearTimeout(calc.t); calc.t = setTimeout(() => pr.classList.remove('bump'), 160);
     $('#cfgPer').textContent = (p / n).toLocaleString('sk-SK', { maximumFractionDigits: 3 }) + '\u00a0€';
     $('#cfgLeads').textContent = `${fmt(lo)} – ${fmt(hi)}`;
     $('#cfgDeals').textContent = dl === dh ? fmt(dl) : `${fmt(dl)} – ${fmt(dh)}`;
     $('#cfgRev').textContent = v ? `${fmt(dl * v)} – ${fmt(dh * v)}\u00a0€` : '–';
-    $('#cfgX').innerHTML = v ? `Kampaň za ${fmt(p)}&nbsp;€ sa vám vráti <b>${(dl * v / p).toFixed(1).replace('.', ',')}× až ${Math.round(dh * v / p)}×</b>.` : '';
+    $('#cfgX').innerHTML = v ? `Kampaň za ${fmt(p)}&nbsp;€ sa vám vráti <b>až ${Math.round(dh * v / p)}×</b>.` : '';
     $$('.c-quick [data-n]').forEach(b => b.classList.toggle('on', +b.dataset.n === n));
     tiers.forEach((t, k) => { const od = +t.dataset.od, nx = tiers[k + 1] ? +tiers[k + 1].dataset.od : Infinity; t.classList.toggle('used', n > od); t.classList.toggle('on', n > od && n <= nx); });
     if (cta) cta.href = OBJ + '?pocet=' + n;
