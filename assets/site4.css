@@ -1135,3 +1135,4 @@ input[type=range].pot-range::-webkit-slider-thumb{border:0;box-shadow:0 0 0 5px 
 .faq-g b{color:var(--ink)}
 .faq-list a{color:var(--forest)}
 @media (max-width:900px){.frame>.faq-2{grid-template-columns:1fr}.faq-side{position:static;order:2}}
+.pf-you a{color:#fff;text-underline-offset:3px}
