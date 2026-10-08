@@ -297,6 +297,7 @@
       <div><dt>E-maily</dt><dd>${S.texty.filter(t => t.text.trim()).length} v sérii · podpis ${esc(S.odos.meno || '–')}</dd></div>
       <div><dt>Oslovené firmy</dt><dd>${fmt(S.pocet)} + ${BONUS} zadarmo = ${fmt(tot)}</dd></div>
       <div class="tot"><dt>Cena bez DPH</dt><dd>${fmt(p)} €</dd></div></dl>
+      <div class="sum-exp"><p>Čo môžete čakať</p><div><b>${fmt(Math.max(1, tot * .02))} – ${fmt(Math.max(2, tot * .04))}</b><span>záujemcov</span></div><div><b>${fmt(Math.max(1, tot * .02 * .33))} – ${fmt(Math.max(1, tot * .04 * .33))}</b><span>nových zákazníkov</span></div><div><b>${S.hodnota ? fmt(Math.max(1, Math.round(tot * .04 * .33)) * S.hodnota) + ' €' : '–'}</b><span>až toľko zo zákaziek</span></div></div>
       <p>Faktúru pošleme e-mailom, splatnosť 7 dní. Kampaň spustíme hneď po úhrade. Záruka: ak z prvých 1 000 firiem nepríde ani jeden záujemca, ďalších 1 000 oslovíme zadarmo.</p>`;
     $('#ordGo').textContent = `Záväzne objednať za ${fmt(p)} € bez DPH`;
   }

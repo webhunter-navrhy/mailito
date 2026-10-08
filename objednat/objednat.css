@@ -236,3 +236,14 @@
 .work-art.g3d canvas{width:100%!important;height:100%!important}
 .ai-av-m{display:grid;place-items:center;background:var(--forest,#0F2A1F)}
 .ai-av-m .logo-m{width:22px;height:22px}
+
+/* v27: očakávania a dôvera pri objednávke */
+.sum-exp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px;padding:14px;border-radius:14px;background:var(--forest,#0F2A1F)}
+.sum-exp p{grid-column:1/-1;font:500 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.55)}
+.sum-exp div{display:flex;flex-direction:column;gap:2px}
+.sum-exp b{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;color:var(--lime,#C8F169)}
+.sum-exp span{font-size:.76rem;color:rgba(255,255,255,.7)}
+.ord-trust{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 16px;margin-top:14px;font-size:.8rem;color:var(--mut,#6A6F6B)}
+.ord-trust li{display:flex;align-items:center;gap:6px}
+.ord-trust svg{width:14px;height:14px;color:var(--ok,#1E8E4E)}
+@media (max-width:700px){.sum-exp{grid-template-columns:1fr}.ord-trust{justify-content:flex-start}}

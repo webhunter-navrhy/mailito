@@ -15,8 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/site4.css?v=f426aa9c">
-<script defer src="./assets/ev.js?v=f426aa9c"></script>
+<link rel="stylesheet" href="./assets/site4.css?v=24a01036">
+<script defer src="./assets/ev.js?v=24a01036"></script>
 
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" crossorigin>
 <script type="application/ld+json">
@@ -57,11 +57,11 @@
       <a href="./cennik/">Cenník</a>
       <a href="./otazky/">Otázky</a>
       <a href="./portal/" class="menu-m">Prihlásiť sa do portálu</a>
-      <a href="./objednat/" class="menu-m menu-cta">Objednať kampaň</a>
+      <a href="./objednat/" class="menu-m menu-cta">Začať zadarmo</a>
     </nav>
     <div class="nav-r">
       <a href="./portal/" class="nav-link">Prihlásiť sa</a>
-      <a href="./objednat/" class="btn btn-sm">Objednať<svg><use href="#i-arr"/></svg></a>
+      <a href="./objednat/" class="btn btn-sm">Začať zadarmo<svg><use href="#i-arr"/></svg></a>
       <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
     </div>
   </div>
@@ -80,6 +80,7 @@
         <input type="text" name="web_url" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn btn-lg" type="submit">Chcem nové zákazky<svg><use href="#i-arr"/></svg></button>
       </form>
+      <p class="hero-alt"><a href="#ako">Ako to funguje<svg><use href="#i-down"/></svg></a><a href="./portal/?demo=1">Portál naživo<svg><use href="#i-arr"/></svg></a></p>
       <p class="hero-note" id="quickMsg" role="status"><b>Zadarmo</b> a za 2 minúty uvidíte, koľko firiem vás potrebuje a čo im napíšeme. Platíte, až keď sa rozhodnete.</p>
     </div>
   </div>
@@ -91,6 +92,7 @@
       <li><b>1 zákazka</b><span>a kampaň máte zaplatenú aj 10×</span></li>
       <li><b><svg><use href="#i-shield"/></svg>Záruka</b><span>nikto neodpíše? Ďalších 1&nbsp;000 firiem zadarmo</span></li>
     </ul>
+    <ul class="trust"><li><svg><use href="#i-shield"/></svg>Prevádzkuje WebHunter s.r.o., IČO 29498511</li><li><svg><use href="#i-ok"/></svg>Legálne podľa § 116 z. 452/2021</li><li><svg><use href="#i-ok"/></svg>Bez viazanosti a mesačných poplatkov</li><li><svg><use href="#i-ok"/></svg>Platíte faktúrou až po objednaní</li></ul>
     <a href="#potencial" class="proof-line"><span class="dot dot-live"></span><span>Test 1&nbsp;100 firiem za 149&nbsp;€:</span><b>22 – 44 záujemcov</b><svg><use href="#i-arr"/></svg><b class="pl-win">7 – 15 nových zákazníkov</b></a>
   </div>
 
@@ -156,33 +158,6 @@
   </div>
 </section>
 
-<!-- VYSKÚŠAJTE AI -->
-<section class="try-s" id="vyskusat">
-  <div class="try">
-    <div class="try-l">
-      <p class="label"><span><svg><use href="#i-spark"/></svg></span>Vyskúšajte to hneď</p>
-      <h2>Napíšte, čo predávate. <span class="h-mut">AI vám za pár sekúnd napíše prvý e-mail pre vašich budúcich zákazníkov.</span></h2>
-      <form class="try-f" id="tryForm" novalidate>
-        <label class="sr" for="tryIn">Váš web alebo čo predávate</label>
-        <input id="tryIn" name="v" autocomplete="off" placeholder="napr. upratovanie hál alebo vasweb.sk">
-        <button class="btn btn-lg" type="submit">Napísať e-mail<svg><use href="#i-arr"/></svg></button>
-      </form>
-      <div class="try-ex"><span>Skúste:</span><button type="button" class="chip" data-try="Upratovanie výrobných hál">Upratovanie hál</button><button type="button" class="chip" data-try="Účtovníctvo pre s.r.o.">Účtovníctvo</button><button type="button" class="chip" data-try="Tvorba webov pre firmy">Tvorba webov</button><button type="button" class="chip" data-try="IT správa a servis počítačov pre firmy">IT správa</button></div>
-      <p class="try-note">Zadarmo, bez registrácie. Nič sa neodosiela.</p>
-    </div>
-    <div class="try-r">
-      <div class="try-mail" id="tryOut">
-        <div class="tm-bar" aria-hidden="true"><i></i><i></i><i></i><span>Nová správa</span></div>
-        <p class="tm-row"><span>Komu</span><b><mark>Kovo Záhorie</mark> a ďalšie firmy</b></p>
-        <p class="tm-row"><span>Predmet</span><b id="trySubj">Čaká na vašu ponuku</b></p>
-        <p class="tm-steps" id="trySteps">Napíšte vľavo, čo predávate, a sledujte, ako AI píše.</p>
-        <div class="tm-body" id="tryBody" aria-live="polite"><i></i><i></i><i></i><i></i></div>
-        <div class="tm-foot" id="tryFoot" hidden><p id="tryN"></p><a href="./objednat/" class="btn btn-lime" id="tryCta">Nastaviť celú kampaň<svg><use href="#i-arr"/></svg></a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRE KOHO -->
 <section class="who" aria-label="Pre koho je Mailito">
   <p class="who-h">Nové zákazky zháňame firmám, ktoré robia napríklad</p>
@@ -190,45 +165,10 @@
   <div class="mq mq-r"><div class="mq-t"><a href="./pre/reklamne-predmety/">Reklamné predmety</a><a href="./pre/personalna-agentura/">Personálna agentúra</a><a href="./pre/fotovoltika/">Fotovoltika pre firmy</a><a href="./pre/kamerove-systemy/">Kamerové systémy</a><a href="./pre/pracovne-odevy/">Pracovné odevy</a><a href="./pre/energeticke-audity/">Energetické audity</a><a href="./pre/firemne-darceky/">Firemné darčeky</a><a href="./pre/prenajom-techniky/">Prenájom techniky</a><a href="./pre/kancelarske-potreby/">Kancelárske potreby</a><a href="./pre/autopozicovna/">Autopožičovňa pre firmy</a><a href="./pre/reklamne-predmety/">Reklamné predmety</a><a href="./pre/personalna-agentura/">Personálna agentúra</a><a href="./pre/fotovoltika/">Fotovoltika pre firmy</a><a href="./pre/kamerove-systemy/">Kamerové systémy</a><a href="./pre/pracovne-odevy/">Pracovné odevy</a><a href="./pre/energeticke-audity/">Energetické audity</a><a href="./pre/firemne-darceky/">Firemné darčeky</a><a href="./pre/prenajom-techniky/">Prenájom techniky</a><a href="./pre/kancelarske-potreby/">Kancelárske potreby</a><a href="./pre/autopozicovna/">Autopožičovňa pre firmy</a></div></div>
 </section>
 
-<!-- POTENCIÁL -->
-<section class="dark pot" id="potencial">
-  <div class="pot-l">
-    <p class="label"><span>01</span>Váš trh</p>
-    <h2>Na trhu na vás čakajú tisíce zákaziek. <span class="h-mut">Spočítajte si, ko<span class="dk">ľ</span>ko.</span></h2>
-    <p class="pot-sub">Vyberte, komu predávate a koľko máte z jedného zákazníka. Ukážeme vám, koľko firiem vás potrebuje a koľko vám môžu zarobiť. Počty firiem sú zo skutočnej databázy.</p>
-    <div class="pot-f">
-      <p class="pot-q">Komu predávate</p>
-      <div class="pot-chips" id="potSeg"></div>
-      <p class="pot-q">Kde</p>
-      <div class="pot-chips" id="potKraj"></div>
-      <p class="pot-q">Priemerná zákazka <b id="potVv">1&nbsp;500&nbsp;€</b></p>
-      <input type="range" class="pot-range" id="potV" min="200" max="20000" step="100" value="1500" aria-label="Priemerná hodnota zákazky v eurách">
-      <p class="pot-q">Koľkokrát ročne u vás zákazník nakúpi</p>
-      <div class="pot-chips pot-rep" id="potRep"><button type="button" class="chip" data-r="1">1×</button><button type="button" class="chip on" data-r="2">2×</button><button type="button" class="chip" data-r="4">4×</button><button type="button" class="chip" data-r="12">každý mesiac</button></div>
-    </div>
-  </div>
-  <div class="pot-r">
-    <div class="pot-card">
-      <p class="pot-k">Noví zákazníci vám môžu zarobiť ročne</p>
-      <p class="pot-big"><span id="potBig">–</span><i>€</i></p>
-      <dl class="pot-dl">
-        <div><dt>Firiem vo vašej cieľovke</dt><dd id="potN">–</dd></div>
-        <div><dt>Prvá kampaň</dt><dd><span id="potP">3&nbsp;000</span> + 100 zadarmo · <b id="potC">349&nbsp;€</b></dd></div>
-        <div><dt>Záujemcovia z prvej kampane</dt><dd id="potL">–</dd></div>
-        <div><dt>Noví stáli zákazníci</dt><dd id="potD">–</dd></div>
-        <div><dt>Za rok, kampaň každý mesiac</dt><dd id="potY">–</dd></div>
-      </dl>
-      <div class="pot-x"><span>Prvá kampaň sa vám vráti</span><b id="potX">–</b></div>
-      <a href="./objednat/" class="btn btn-lime btn-block" id="potCta">Osloviť tieto firmy<svg><use href="#i-arr"/></svg></a>
-      <p class="pot-note">Odhad: 2 – 4&nbsp;% oslovených firiem prejaví záujem, každý tretí záujemca sa stane zákazníkom a nakupuje u vás tak často, ako ste zvolili.</p>
-    </div>
-  </div>
-</section>
-
 <!-- PRED / PO -->
 <section class="pp-s" id="zmena">
   <div class="sec-head">
-    <p class="label"><span>02</span>Čo sa zmení</p>
+    <p class="label"><span>01</span>Čo sa zmení</p>
     <h2>Prestaňte naháňať zákazky. <span class="h-mut">Nech sa firmy ozývajú vám.</span></h2>
   </div>
   <div class="pp">
@@ -256,50 +196,13 @@
   </div>
 </section>
 
-<!-- DÔKAZ -->
-<section class="pf-s" id="dokaz">
-  <div class="pf">
-    <div class="pf-l">
-      <p class="label"><span>03</span>Čo prinesie kampaň</p>
-      <h2>Obálky dnu, zákazky von. <span class="h-mut">Takto počítame bežnú kampaň pre 3&nbsp;500 firiem.</span></h2>
-      <p class="pf-big"><b data-count="48">48</b><span>až toľko nových zákazníkov<br>vám prinesie jedna kampaň.</span></p>
-      <ol class="pf-fun" id="fun">
-        <li style="--w:1"><b>3&nbsp;600</b><span>oslovených firiem, 100 z nich zadarmo</span><i></i></li>
-        <li style="--w:.72"><b>72 – 144</b><span>záujemcov napíše „pošlite ponuku“</span><i></i></li>
-        <li style="--w:.5"><b>24 – 48</b><span>nových zákazníkov</span><i></i></li>
-        <li class="pf-win" style="--w:.34"><b>144 tis.&nbsp;€</b><span>až toľko ročne pri zákazke za 1&nbsp;500&nbsp;€</span><i></i></li>
-      </ol>
-      <p class="pf-you"><svg><use href="#i-spark"/></svg><span>Počítame s <b>2 – 4&nbsp;% záujemcov</b> a každým tretím ako novým zákazníkom. <a href="#potencial">Spočítajte si to pre vaše odvetvie</a>.</span></p>
-    </div>
-    <div class="pf-r"><div class="g3d g3d-fun" data-3d="funnel" aria-label="3D ilustrácia: obálky padajú do lievika, von padajú mince"></div><p class="pf-cap"><span class="dot dot-live"></span>Obálky dnu, zákazky von</p></div>
-  </div>
-  <a href="./vysledky/" class="more">Všetky výsledky, s ktorými počítame<svg><use href="#i-arr"/></svg></a>
-</section>
-
-<!-- POROVNANIE -->
-<section class="vs-s" id="porovnanie">
-  <div class="sec-head">
-    <p class="label"><span>04</span>Porovnanie</p>
-    <h2>Obchodník vás stojí 2&nbsp;100&nbsp;€ mesačne. <span class="h-mut">Mailito 149&nbsp;€ raz. A osloví 4× viac firiem.</span></h2>
-  </div>
-  <div class="vs" role="table" aria-label="Porovnanie obchodníka, reklamy a Mailito">
-    <div class="vs-r vs-h" role="row"><span role="columnheader"></span><span role="columnheader">Obchodník</span><span role="columnheader">Online reklama</span><span role="columnheader" class="vs-m"><span class="logo-m" aria-hidden="true"></span>Mailito</span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Cena</span><span role="cell">2&nbsp;100&nbsp;€ každý mesiac</span><span role="cell">rozpočet + správa každý mesiac</span><span role="cell" class="vs-m"><b>od 149&nbsp;€</b> raz</span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Kto začína</span><span role="cell">vy voláte, oni nedvíhajú</span><span role="cell">čakáte, kým vás niekto nájde</span><span role="cell" class="vs-m">firmy píšu vám</span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Prvé výsledky</span><span role="cell">o 2 – 3 mesiace</span><span role="cell">po týždňoch ladenia</span><span role="cell" class="vs-m"><b>do 24 hodín</b></span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Za čo platíte</span><span role="cell">výplatu, aj keď nepredá</span><span role="cell">kliky, aj bez dopytu</span><span role="cell" class="vs-m">oslovené firmy, záujemcovia navyše zadarmo</span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Vaša práca</span><span role="cell">nábor, zaúčanie, kontrola</span><span role="cell">texty, bannery, rozpočty</span><span role="cell" class="vs-m">5 minút s AI asistentom</span></div>
-    <div class="vs-r" role="row"><span role="rowheader">Viazanosť</span><span role="cell">pracovná zmluva</span><span role="cell">mesačné platby</span><span role="cell" class="vs-m"><b>žiadna</b></span></div>
-  </div>
-</section>
-
 <!-- PRÍBEH: cesta e-mailu (3D pri skrolovaní; bez WebGL ostáva časová os nižšie) -->
 <section class="story" data-story hidden aria-label="Ako to funguje: od objednávky k zákazkám">
   <div class="story-pin">
     <div class="story-gl" aria-hidden="true"></div>
     <div class="story-ui">
       <div class="story-head">
-        <p class="label"><span>05</span>Ako to funguje</p>
+        <p class="label"><span>02</span>Ako to funguje</p>
         <h2>Od objednávky k zákazkám <span class="h-mut">za 7 dní.</span></h2>
       </div>
       <ol class="story-steps">
@@ -317,7 +220,7 @@
 <!-- AKO TO FUNGUJE: 7 dní -->
 <section class="tl-s" id="ako">
   <div class="sec-head">
-    <p class="label"><span>05</span>Ako to funguje</p>
+    <p class="label"><span>02</span>Ako to funguje</p>
     <h2>Od objednávky k prvým zákazkám za 7 dní. <span class="h-mut">Vás to stojí 5 minút.</span></h2>
   </div>
   <ol class="tl" id="tl">
@@ -354,12 +257,91 @@
   <a href="./ako-to-funguje/" class="more">Pozrite si celý postup v ukážkach<svg><use href="#i-arr"/></svg></a>
 </section>
 
+<!-- VYSKÚŠAJTE AI -->
+<section class="try-s" id="vyskusat">
+  <div class="try">
+    <div class="try-l">
+      <p class="label"><span><svg><use href="#i-spark"/></svg></span>Vyskúšajte to hneď</p>
+      <h2>Napíšte, čo predávate. <span class="h-mut">AI vám za pár sekúnd napíše prvý e-mail pre vašich budúcich zákazníkov.</span></h2>
+      <form class="try-f" id="tryForm" novalidate>
+        <label class="sr" for="tryIn">Váš web alebo čo predávate</label>
+        <input id="tryIn" name="v" autocomplete="off" placeholder="napr. upratovanie hál alebo vasweb.sk">
+        <button class="btn btn-lg" type="submit">Napísať e-mail<svg><use href="#i-arr"/></svg></button>
+      </form>
+      <div class="try-ex"><span>Skúste:</span><button type="button" class="chip" data-try="Upratovanie výrobných hál">Upratovanie hál</button><button type="button" class="chip" data-try="Účtovníctvo pre s.r.o.">Účtovníctvo</button><button type="button" class="chip" data-try="Tvorba webov pre firmy">Tvorba webov</button><button type="button" class="chip" data-try="IT správa a servis počítačov pre firmy">IT správa</button></div>
+      <p class="try-note">Zadarmo, bez registrácie. Nič sa neodosiela.</p>
+    </div>
+    <div class="try-r">
+      <div class="try-mail" id="tryOut">
+        <div class="tm-bar" aria-hidden="true"><i></i><i></i><i></i><span>Nová správa</span></div>
+        <p class="tm-row"><span>Komu</span><b><mark>Kovo Záhorie</mark> a ďalšie firmy</b></p>
+        <p class="tm-row"><span>Predmet</span><b id="trySubj">Čaká na vašu ponuku</b></p>
+        <p class="tm-steps" id="trySteps">Napíšte vľavo, čo predávate, a sledujte, ako AI píše.</p>
+        <div class="tm-body" id="tryBody" aria-live="polite"><i></i><i></i><i></i><i></i></div>
+        <div class="tm-foot" id="tryFoot" hidden><p id="tryN"></p><a href="./objednat/" class="btn btn-lime" id="tryCta">Nastaviť celú kampaň<svg><use href="#i-arr"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POTENCIÁL -->
+<section class="dark pot" id="potencial">
+  <div class="pot-l">
+    <p class="label"><span>03</span>Váš trh</p>
+    <h2>Na trhu na vás čakajú tisíce zákaziek. <span class="h-mut">Spočítajte si, ko<span class="dk">ľ</span>ko.</span></h2>
+    <p class="pot-sub">Vyberte, komu predávate a koľko máte z jedného zákazníka. Ukážeme vám, koľko firiem vás potrebuje a koľko vám môžu zarobiť. Počty firiem sú zo skutočnej databázy.</p>
+    <div class="pot-f">
+      <p class="pot-q">Komu predávate</p>
+      <div class="pot-chips" id="potSeg"></div>
+      <p class="pot-q">Kde</p>
+      <div class="pot-chips" id="potKraj"></div>
+      <p class="pot-q">Priemerná zákazka <b id="potVv">1&nbsp;500&nbsp;€</b></p>
+      <input type="range" class="pot-range" id="potV" min="200" max="20000" step="100" value="1500" aria-label="Priemerná hodnota zákazky v eurách">
+      <p class="pot-q">Koľkokrát ročne u vás zákazník nakúpi</p>
+      <div class="pot-chips pot-rep" id="potRep"><button type="button" class="chip" data-r="1">1×</button><button type="button" class="chip on" data-r="2">2×</button><button type="button" class="chip" data-r="4">4×</button><button type="button" class="chip" data-r="12">každý mesiac</button></div>
+    </div>
+  </div>
+  <div class="pot-r">
+    <div class="pot-card">
+      <p class="pot-k">Noví zákazníci vám môžu zarobiť ročne</p>
+      <p class="pot-big"><span id="potBig">–</span><i>€</i></p>
+      <dl class="pot-dl">
+        <div><dt>Firiem vo vašej cieľovke</dt><dd id="potN">–</dd></div>
+        <div><dt>Prvá kampaň</dt><dd><span id="potP">3&nbsp;000</span> + 100 zadarmo · <b id="potC">349&nbsp;€</b></dd></div>
+        <div><dt>Záujemcovia z prvej kampane</dt><dd id="potL">–</dd></div>
+        <div><dt>Noví stáli zákazníci</dt><dd id="potD">–</dd></div>
+        <div><dt>Za rok, kampaň každý mesiac</dt><dd id="potY">–</dd></div>
+      </dl>
+      <div class="pot-x"><span>Prvá kampaň sa vám vráti</span><b id="potX">–</b></div>
+      <a href="./objednat/" class="btn btn-lime btn-block" id="potCta">Osloviť tieto firmy<svg><use href="#i-arr"/></svg></a>
+      <p class="pot-note">Odhad: 2 – 4&nbsp;% oslovených firiem prejaví záujem, každý tretí záujemca sa stane zákazníkom a nakupuje u vás tak často, ako ste zvolili.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POROVNANIE -->
+<section class="vs-s" id="porovnanie">
+  <div class="sec-head">
+    <p class="label"><span>04</span>Porovnanie</p>
+    <h2>Obchodník vás stojí 2&nbsp;100&nbsp;€ mesačne. <span class="h-mut">Mailito 149&nbsp;€ raz. A osloví 4× viac firiem.</span></h2>
+  </div>
+  <div class="vs" role="table" aria-label="Porovnanie obchodníka, reklamy a Mailito">
+    <div class="vs-r vs-h" role="row"><span role="columnheader"></span><span role="columnheader">Obchodník</span><span role="columnheader">Online reklama</span><span role="columnheader" class="vs-m"><span class="logo-m" aria-hidden="true"></span>Mailito</span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Cena</span><span role="cell">2&nbsp;100&nbsp;€ každý mesiac</span><span role="cell">rozpočet + správa každý mesiac</span><span role="cell" class="vs-m"><b>od 149&nbsp;€</b> raz</span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Kto začína</span><span role="cell">vy voláte, oni nedvíhajú</span><span role="cell">čakáte, kým vás niekto nájde</span><span role="cell" class="vs-m">firmy píšu vám</span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Prvé výsledky</span><span role="cell">o 2 – 3 mesiace</span><span role="cell">po týždňoch ladenia</span><span role="cell" class="vs-m"><b>do 24 hodín</b></span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Za čo platíte</span><span role="cell">výplatu, aj keď nepredá</span><span role="cell">kliky, aj bez dopytu</span><span role="cell" class="vs-m">oslovené firmy, záujemcovia navyše zadarmo</span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Vaša práca</span><span role="cell">nábor, zaúčanie, kontrola</span><span role="cell">texty, bannery, rozpočty</span><span role="cell" class="vs-m">5 minút s AI asistentom</span></div>
+    <div class="vs-r" role="row"><span role="rowheader">Viazanosť</span><span role="cell">pracovná zmluva</span><span role="cell">mesačné platby</span><span role="cell" class="vs-m"><b>žiadna</b></span></div>
+  </div>
+</section>
+
 <!-- ZÁRUKA + CENA -->
 <section class="risk-s" id="cena">
   <div class="risk">
     <div class="risk-l">
       <div class="seal" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="sealP" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#sealP" textLength="486" lengthAdjust="spacing">ZÁRUKA PRVEJ KAMPANE · BEZ RIZIKA · </textPath></text></svg><span><svg><use href="#i-shield"/></svg></span></div>
-      <p class="label"><span>06</span>Bez rizika</p>
+      <p class="label"><span>05</span>Bez rizika</p>
       <h2>Nemáte čo stratiť. <span class="h-mut">Riziko nesieme my, vy zbierate zákazky.</span></h2>
       <ul class="promise">
         <li><svg><use href="#i-shield"/></svg><p><b>Záruka prvej kampane.</b> Ak z prvých 1&nbsp;000 firiem neodpíše ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p></li>
@@ -372,6 +354,7 @@
       <p class="c-lbl">Test · 1&nbsp;000 firiem</p>
       <p class="c-price"><span>149</span><i>€</i></p>
       <p class="c-sub">jednorazovo · bez DPH · oslovíme 1&nbsp;100 firiem</p>
+      <p class="c-anchor"><s>Obchodník 2&nbsp;100&nbsp;€ / mesiac</s></p>
       <p class="c-roi">Pri zákazke za 1&nbsp;500&nbsp;€ stačí <b>jeden nový zákazník</b> a máte kampaň 10× zaplatenú.</p>
       <ul class="c-inc"><li><svg><use href="#i-ok"/></svg>AI cieľovka a 3 e-maily vaším menom</li><li><svg><use href="#i-ok"/></svg>Úvodný e-mail + 2 pripomienky</li><li><svg><use href="#i-ok"/></svg>AI triedenie odpovedí a portál</li><li><svg><use href="#i-ok"/></svg>Všetci záujemcovia bez príplatku</li></ul>
       <div class="teaser-acts"><a href="./objednat/?pocet=1000" class="btn btn-lime btn-block">Chcem prvých záujemcov<svg><use href="#i-arr"/></svg></a><a href="./cennik/" class="btn btn-ghost btn-block">Väčšia kampaň = nižšia cena za firmu</a></div>
@@ -382,7 +365,7 @@
 <!-- OTÁZKY -->
 <section class="faq" id="otazky">
   <div class="sec-head">
-    <p class="label"><span>07</span>Otázky</p>
+    <p class="label"><span>06</span>Otázky</p>
     <h2>Čo sa pýta každý <span class="h-mut">pred prvou kampaňou.</span></h2>
     <div class="faq-ask">
       <p class="faq-ask-h"><span class="ai-dot"><svg><use href="#i-spark"/></svg></span>Mailito asistent</p>
@@ -396,6 +379,7 @@
     <details><summary>Odpovedajú vôbec firmy na e-maily?</summary><p>Na hromadné letáky nie. Na krátky osobný e-mail s konkrétnou ponukou áno. Počítame s tým, že 2 – 4&nbsp;% oslovených firiem prejaví záujem a každý tretí z nich sa stane vaším zákazníkom.</p></details>
     <details><summary>Čo ak nikto neodpovie?</summary><p>Pri prvej kampani platí záruka: ak z prvých 1&nbsp;000 firiem nepríde ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p></details>
     <details><summary>Ako rýchlo to spustíte?</summary><p>Kampaň si s AI asistentom nastavíte za pár minút. Po objednaní dostanete faktúru e-mailom a odosielanie spustíme do 3 pracovných dní. Prvé odpovede zvyčajne prídu ešte v ten deň.</p></details>
+    <details><summary>Pre koho Mailito nie je?</summary><p>Pre firmy, ktoré predávajú spotrebiteľom (nie iným firmám), a pre pôžičky, krypto, MLM či hazard. Takéto kampane nespúšťame. Ak predávate firmám služby alebo tovar, Mailito je presne pre vás.</p></details>
     <details><summary>Musím niečo robiť počas kampane?</summary><p>Nie. Firmy vyberieme, e-maily rozošleme, odpovede prečítame a odmietnutia vybavíme za vás. Vy len odpíšete záujemcom, ktorých vám pošleme.</p></details>
   </div>
 </section>
@@ -411,7 +395,7 @@
   </div>
   <div class="end-art g3d" data-3d="box" aria-label="3D ilustrácia: zelená schránka Mailito posiela obálky"></div>
 </section>
-<script type="module" src="./assets/clay3d.js?v=f426aa9c"></script>
+<script type="module" src="./assets/clay3d.js?v=24a01036"></script>
 
 </main>
 
@@ -426,10 +410,10 @@
 </footer>
 
 <a href="./objednat/" class="mcta" id="mcta"><span class="mcta-t"><b>1&nbsp;100 firiem</b> za 149&nbsp;€</span><span class="mcta-b">Chcem zákazky<svg><use href="#i-arr"/></svg></span></a>
-<script src="./assets/plus.js?v=f426aa9c" defer></script>
-<script src="./assets/site4.js?v=f426aa9c" defer></script>
+<script src="./assets/plus.js?v=24a01036" defer></script>
+<script src="./assets/site4.js?v=24a01036" defer></script>
 
-<script type="module" src="./assets/hero3d.js?v=f426aa9c"></script>
-<script type="module" src="./assets/story3d.js?v=f426aa9c"></script>
+<script type="module" src="./assets/hero3d.js?v=24a01036"></script>
+<script type="module" src="./assets/story3d.js?v=24a01036"></script>
 </body>
 </html>
