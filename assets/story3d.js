@@ -1,7 +1,7 @@
 // Mailito – príbeh jedného e-mailu pri skrolovaní (Three.js, natívny scroll, bez knižníc).
 // 0 AI pripraví kampaň · 1 obálky letia k firmám · 2 firmy odpisujú · 3 zákazky = mince
-import { nacitaj, mats, envMats, island, tree, cloud, mailbox, sh, rnd, webgl, setri, slabe, reduce } from './clay3d.js?v=24a01036';
-import * as M3 from './clay3d.js?v=24a01036';
+import { nacitaj, mats, envMats, island, tree, cloud, mailbox, sh, rnd, webgl, setri, slabe, reduce } from './clay3d.js?v=04c83c0d';
+import * as M3 from './clay3d.js?v=04c83c0d';
 
 const sec = document.querySelector('[data-story]');
 const fallback = document.getElementById('ako');
@@ -29,7 +29,7 @@ if (sec && webgl && !setri && !reduce) {
   function start() {
     const THREE = M3.THREE;
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, slabe ? 1.25 : 1.75));
+    renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 700 ? 2 : slabe ? 1.25 : 1.75));
     renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     host.appendChild(renderer.domElement);
@@ -101,7 +101,7 @@ if (sec && webgl && !setri && !reduce) {
       const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
       renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w / h < 0.9 ? 48 : 32; camera.updateProjectionMatrix();
       // na desktope posunúť obraz doprava, vľavo je text
-      camera.setViewOffset(w, h, w / h > 1.1 ? -w * 0.16 : 0, h / w > 1.1 ? h * 0.12 : 0, w, h);
+      camera.setViewOffset(w, h, w / h > 1.1 ? -w * 0.16 : 0, h / w > 1.1 ? h * 0.2 : 0, w, h);
     };
     new ResizeObserver(size).observe(host); size();
     let vidno = false; new IntersectionObserver(es => { vidno = es[0].isIntersecting; }).observe(pin);

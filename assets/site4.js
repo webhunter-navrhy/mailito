@@ -84,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=24a01036').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=04c83c0d').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -155,7 +155,7 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=24a01036').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=04c83c0d').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const JA = window.MAILITO_JA;

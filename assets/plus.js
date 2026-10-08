@@ -132,6 +132,9 @@
         <form class="asi-f"><input name="q" autocomplete="off" placeholder="Napíšte otázku…" aria-label="Vaša otázka"><button class="btn btn-sm" type="submit" aria-label="Odoslať"><svg><use href="#i-arr"/></svg></button></form>
       </div>`;
     document.body.appendChild(w);
+    // mobil: AI tlačidlo je súčasťou spodnej lišty (žiadna plávajúca bublina cez obsah)
+    const mc = $('#mcta');
+    if (mc) { const bar = document.createElement('div'); bar.className = 'mbar'; mc.parentNode.insertBefore(bar, mc); const ai = document.createElement('button'); ai.type = 'button'; ai.className = 'mbar-ai'; ai.setAttribute('aria-label', 'Opýtať sa AI asistenta'); ai.innerHTML = '<svg><use href="#i-spark"/></svg>AI'; bar.append(ai, mc); ai.addEventListener('click', () => otvor(true)); }
     const fab = $('.asi-fab', w), pan = $('.asi-panel', w), log = $('.asi-log', w), chips = $('.asi-chips', w), f = $('.asi-f', w);
     let hist = ss.get('mailito_asi') || [];
     const add = (kto, text, cta) => {

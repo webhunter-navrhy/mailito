@@ -82,7 +82,7 @@ function mailbox(M) {
 
 function stage(host, { fov = 30, cam = [0, 6, 18], look = [0, 1.6, 0] } = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, slabe ? 1.25 : 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 2 : slabe ? 1.25 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;

@@ -13,7 +13,7 @@ function webgl() { try { const c = document.createElement('canvas'); return !!(c
 
 if (host && webgl() && !setri) {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, slabe ? 1.25 : 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 2 : slabe ? 1.25 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -23,7 +23,7 @@ if (host && webgl() && !setri) {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0xd9e4ea, 70, 150);
-  const camera = new THREE.PerspectiveCamera(mobile ? 38 : 26, 1, 0.1, 400);
+  const camera = new THREE.PerspectiveCamera(mobile ? 30 : 26, 1, 0.1, 400);
 
   // svetlo – mäkké, teplé, ako v ateliéri
   scene.add(new THREE.HemisphereLight(0xe6f0ff, 0x6f8f55, 1.35));
@@ -47,7 +47,7 @@ if (host && webgl() && !setri) {
 
   // ---------- krajina ----------
   const H = (x, z) => 2.2 * Math.sin(x * 0.11 + 1.2) * Math.cos(z * 0.13) + 1.6 * Math.sin((x + z) * 0.07) + 0.9 * Math.cos(x * 0.23 - z * 0.05)
-    + 3.4 * Math.exp(-((x - (mobile ? 8 : 13)) ** 2 + (z - 4) ** 2) / 70) - 0.06 * Math.max(0, z - 6) ** 1.4 * 0.0;
+    + 3.4 * Math.exp(-((x - (mobile ? 4 : 13)) ** 2 + (z - 4) ** 2) / 70) - 0.06 * Math.max(0, z - 6) ** 1.4 * 0.0;
   const ground = new THREE.PlaneGeometry(220, 140, mobile ? 110 : 180, mobile ? 70 : 120);
   ground.rotateX(-Math.PI / 2);
   const pos = ground.attributes.position, col = [];
@@ -114,7 +114,7 @@ if (host && webgl() && !setri) {
   [[-16, 4, 0.3, 1, 0], [-12.5, 7, -0.2, 0.95, 0], [-19, 9, 0.5, 1.05, 1], [-9, 1, 0.1, 0.9, 0], [-14, -3, -0.4, 1, 1], [-4, 6, 0.2, 0.9, 0], [-22, 0, 0.2, 0.9, 0],
    [-6, -6, -0.3, 1.1, 1], [2, -2, 0.4, 0.85, 0], [-26, -6, 0.1, 1, 1], [5, -12, -0.2, 1, 1], [-10, -12, 0.3, 0.9, 0], [-2, 11, 0.6, 0.9, 0], [-18, -14, 0, 1, 0], [9, -4, 0.3, 0.85, 0], [-28, 8, -0.3, 1, 0]]
     .slice(0, mobile ? 11 : 16).forEach(a => house(...a));
-  const zakaz = (x, z) => firmy.some(f => Math.hypot(f.g.position.x - x, f.g.position.z - z) < 2.4) || Math.hypot(x - (mobile ? 8 : 13), z - 4) < 4.5;
+  const zakaz = (x, z) => firmy.some(f => Math.hypot(f.g.position.x - x, f.g.position.z - z) < 2.4) || Math.hypot(x - (mobile ? 4 : 13), z - 4) < 4.5;
   let n = 0;
   while (n < (mobile ? 34 : slabe ? 44 : 60)) { const x = rnd(-40, 32), z = rnd(-26, 18); if (zakaz(x, z)) continue; (Math.random() < 0.62 ? pine : round)(x, z, rnd(0.75, 1.3)); n++; }
 
@@ -131,7 +131,7 @@ if (host && webgl() && !setri) {
   const flagPole = shadowy(new THREE.Mesh(new THREE.BoxGeometry(0.16, 1.7, 0.16), M.boxDark)); flagPole.position.set(0.7, 2.3, 1.3); mb.add(flagPole);
   const flag = shadowy(new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.55, 0.12), M.boxDark)); flag.position.set(1.05, 2.95, 1.3); mb.add(flag);
   const post = shadowy(new THREE.Mesh(new THREE.BoxGeometry(0.6, 2.4, 0.6), M.trunk)); post.position.set(0, -1.2, 0); mb.add(post);
-  const MBX = mobile ? 8 : 13; mb.scale.setScalar(mobile ? 1.1 : 1.25); mb.position.set(MBX, H(MBX, 4) + 2.2, 4); mb.rotation.y = 0.35;
+  const MBX = mobile ? 4 : 13; mb.scale.setScalar(mobile ? 1.1 : 1.25); mb.position.set(MBX, H(MBX, 4) + 2.2, 4); mb.rotation.y = 0.35;
   scene.add(mb);
   const vystup = new THREE.Vector3(-2.1, 2.3, 0);
 
@@ -177,17 +177,22 @@ if (host && webgl() && !setri) {
   }
 
   // ---------- kamera, veľkosť, pohyb ----------
-  const target = new THREE.Vector3(mobile ? 1 : -3, 0, -4);
-  const base = new THREE.Vector3(mobile ? 3 : 0, mobile ? 24 : 17, mobile ? 58 : 64);
+  const target = new THREE.Vector3(mobile ? -1 : -3, mobile ? 2 : 0, mobile ? -2 : -4);
+  const base = new THREE.Vector3(mobile ? -10 : 0, mobile ? 16 : 17, mobile ? 52 : 64);
+  // ladenie kamery (len vývoj): ?hc=x,y,z,tx,ty,tz,fov
+  const hc = new URLSearchParams(location.search).get('hc');
+  if (hc) { const v = hc.split(',').map(Number); base.set(v[0], v[1], v[2]); target.set(v[3], v[4], v[5]); if (v[6]) { camera.fov = v[6]; camera.updateProjectionMatrix(); } }
   let mx = 0, my = 0, sx = 0, sy = 0;
   addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
   function size() {
-    const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h, false);
+    // na mobile má plátno vlastnú výšku (spodok úvodu), meriame ho, nie celý úvod
+    const el = renderer.domElement, w = (mobile && el.clientWidth) || host.clientWidth, h = (mobile && el.clientHeight) || host.clientHeight;
+    renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.updateProjectionMatrix();
     // na širokých obrazovkách posunúť pohľad, aby obloha zostala pre nadpis
-    camera.setViewOffset(w, h, 0, -h * (mobile ? 0.05 : 0.46), w, h);
+    camera.setViewOffset(w, h, 0, mobile ? 0 : -h * 0.46, w, h);
   }
-  new ResizeObserver(size).observe(host); size();
+  const ro = new ResizeObserver(size); ro.observe(host); ro.observe(renderer.domElement); size();
 
   let vidno = true, last = performance.now(), nextEnv = 0, t = 0, fpsN = 0, fpsT = 0, znizene = false;
   new IntersectionObserver(es => { vidno = es[0].isIntersecting; }).observe(host);
