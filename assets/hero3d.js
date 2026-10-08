@@ -179,6 +179,7 @@ if (host && webgl() && !setri) {
   // ---------- kamera, veľkosť, pohyb ----------
   const target = new THREE.Vector3(mobile ? -1 : -3, mobile ? 2 : 0, mobile ? -2 : -4);
   const base = new THREE.Vector3(mobile ? -10 : 0, mobile ? 16 : 17, mobile ? 52 : 64);
+  const HO = +(new URLSearchParams(location.search).get('ho') || 0.12);
   // ladenie kamery (len vývoj): ?hc=x,y,z,tx,ty,tz,fov
   const hc = new URLSearchParams(location.search).get('hc');
   if (hc) { const v = hc.split(',').map(Number); base.set(v[0], v[1], v[2]); target.set(v[3], v[4], v[5]); if (v[6]) { camera.fov = v[6]; camera.updateProjectionMatrix(); } }
@@ -190,7 +191,7 @@ if (host && webgl() && !setri) {
     renderer.setSize(w, h, false);
     camera.aspect = w / h; camera.updateProjectionMatrix();
     // na širokých obrazovkách posunúť pohľad, aby obloha zostala pre nadpis
-    camera.setViewOffset(w, h, 0, mobile ? 0 : -h * 0.46, w, h);
+    camera.setViewOffset(w, h, 0, mobile ? 0 : -h * HO, w, h);
   }
   const ro = new ResizeObserver(size); ro.observe(host); ro.observe(renderer.domElement); size();
 

@@ -30,7 +30,7 @@
 
   // jemné odhalenie
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .step-card, .teaser, .pot-card, .vs, .risk-l, .teaser-r, .replies, .pf-l, .mails, .tl, .pp').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .step-card, .teaser, .pot-card, .vs, .risk-l, .teaser-r, .replies, .pf-l, .mails, .tl, .pp, .ch-t, .ch-v, .fd').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
 
   // návštevník z nášho e-mailu: „práve ste to zažili“
   const qp = new URLSearchParams(location.search), fm = $('#fromMail');
@@ -84,7 +84,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=04c83c0d').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=346b9b1c').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -155,7 +155,7 @@
 
   // ===== potenciál trhu (domov) =====
   const potSeg = $('#potSeg');
-  if (potSeg) fetch(BASE + 'data/trh.json?v=04c83c0d').then(r => r.json()).then(d => {
+  if (potSeg) fetch(BASE + 'data/trh.json?v=346b9b1c').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
     const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
     const JA = window.MAILITO_JA;

@@ -1406,3 +1406,143 @@ body:has(.mcta.on) .from-mail{display:none}
   .nav-r .btn-sm{padding:0 10px;font-size:.82rem}
   .kpis b{font-size:1.3rem}
 }
+
+/* =====================================================================
+   v29: nový vzhľad podľa clay.com – 3D úvod s nadpisom na tráve, farebné kapitoly
+   ===================================================================== */
+/* plávajúca navigácia */
+.nav{top:10px;left:12px;right:12px;max-width:1264px;margin:0 auto;border-radius:16px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 30px -18px rgba(15,42,31,.35)}
+.nav.scrolled{border-color:var(--line)}
+.nav-in{height:56px;padding:0 8px 0 18px!important}
+.nav-r .btn-sm{height:38px;padding:0 15px;border-radius:10px}
+html{scroll-padding-top:84px}
+
+/* úvod */
+.stage{height:100svh;min-height:760px;max-height:1020px}
+.stage::after{height:100%;top:0;background:linear-gradient(180deg,rgba(24,70,42,0) 38%,rgba(24,70,42,.42) 58%,rgba(17,50,32,.86) 80%,#0F2A1F 100%)}
+.hero .stage .hero-txt{position:absolute;left:0;right:0;bottom:0;z-index:2;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(32px,5vw,80px);align-items:end;text-align:left;padding:0 max(var(--pad),calc((100% - 1180px)/2)) 128px}
+.ht-l,.ht-r{min-width:0}
+.hero .stage .pill{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.hero .stage .pill svg{color:rgba(255,255,255,.7)}
+.hero .stage h1{margin-top:22px;font-size:clamp(3rem,6.4vw,6rem);line-height:.98;letter-spacing:-.055em;color:#fff;text-shadow:0 2px 30px rgba(10,30,20,.25);text-wrap:initial}
+.hero .stage h1 .h-em{color:var(--lime)}
+.hero .stage .lead{margin:0;max-width:none;font-size:clamp(1.02rem,1.25vw,1.15rem);line-height:1.55;color:rgba(255,255,255,.82)}
+.hero .stage .lead b{color:#fff;font-weight:560}
+.hero .stage .quick-1{margin-top:22px;max-width:none;width:100%;border:0;box-shadow:0 24px 50px -20px rgba(0,0,0,.5)}
+.hero .stage .hero-note{margin-top:12px;color:rgba(255,255,255,.66);font-size:.84rem}
+.hero .stage .hero-note b{color:var(--lime)}
+.hero .stage .hero-note.hero-ja{background:rgba(255,255,255,.1);color:#fff;box-shadow:none}
+.hero .stage .hero-note.hero-ja b{color:var(--lime)}
+.frame>.hero{padding-bottom:0}
+.hero .under{position:relative;z-index:4;margin-top:-62px;padding:0 max(12px,calc((100% - 1240px)/2))}
+.hero .under .kpis{max-width:none}
+
+/* kapitoly */
+.frame>.chs{padding:clamp(72px,9vw,120px) max(12px,calc((100% - 1264px)/2)) 0!important;border-top:0}
+.chs-h{max-width:860px;padding:0 clamp(8px,2.4vw,40px);margin-bottom:clamp(28px,4vw,48px)}
+.ch{--cb:#E7F1DA;--cv:#D5E8BF;--ca:#3A7A17;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(24px,4vw,64px);align-items:center;margin-top:16px;padding:clamp(24px,4.4vw,64px);border-radius:32px;background:var(--cb);overflow:hidden}
+.ch-b{--cb:#E3EBF6;--cv:#CBDAF0;--ca:#2556C9}
+.ch-o{--cb:#FBE8DC;--cv:#F5D3BE;--ca:#C24A14}
+.ch-y{--cb:#F6EFCF;--cv:#EDE1AA;--ca:#866500}
+.ch-tag{display:flex;align-items:center;gap:4px}
+.ch-tag b{display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:99px;background:var(--ca);color:#fff;font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.ch-tag i{width:30px;height:30px;border-radius:50%;background:var(--ca);opacity:.32}
+.ch-tag i+i{opacity:.14}
+.ch h3{margin-top:24px;font-size:clamp(2rem,3.7vw,3.25rem);font-weight:600;line-height:1.03;letter-spacing:-.048em;color:var(--ink);text-wrap:balance}
+.ch h3 em{font-style:normal;color:var(--ca)}
+.ch-t>p:not(.ch-tag):not(.ch-note){margin-top:18px;max-width:46ch;font-size:clamp(1rem,1.15vw,1.08rem);line-height:1.62;color:#3B433E}
+.ch-stats{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:26px}
+.ch-stats li{display:flex;flex-direction:column;gap:2px;font-size:.84rem;color:#4F5852}
+.ch-stats b{font-size:clamp(1.4rem,2vw,1.75rem);font-weight:620;letter-spacing:-.045em;color:var(--ca);font-variant-numeric:tabular-nums}
+.ch-acts{margin-top:28px}
+.ch .ch-acts .btn,.ch .try-f .btn{height:50px;padding:0 20px;border-radius:12px;background:var(--ca);color:#fff;box-shadow:0 12px 26px -12px var(--ca)}
+.ch .ch-acts .btn:hover,.ch .try-f .btn:hover{filter:brightness(1.08)}
+.ch-note{margin-top:14px;font-size:.78rem;color:#7a7f6a}
+.ch-v{position:relative;min-height:460px;border-radius:24px;background:var(--cv);overflow:hidden;display:grid;place-items:center}
+.ch-3d{position:absolute;inset:0;border-radius:0;background:none}
+.ch .try-f{margin-top:24px;max-width:520px;background:#fff;border:0;box-shadow:0 14px 34px -22px rgba(30,60,20,.45)}
+.ch .try-ex{margin-top:12px}
+.ch .try-ex .chip{background:rgba(255,255,255,.65);border-color:transparent}
+.ch .try-ex .chip:hover{background:#fff}
+.ch-g .ch-v{padding:28px}
+.ch-g .try-mail{width:100%;max-width:520px;transform:none;border:0;box-shadow:0 30px 60px -30px rgba(30,60,20,.45)}
+/* kapitola 3: portál cez celú šírku */
+.ch-wide{grid-template-columns:1fr;gap:36px}
+.ch-wide .ch-t{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);column-gap:56px;align-items:end}
+.ch-wide .ch-t>.ch-tag,.ch-wide .ch-t>h3{grid-column:1}
+.ch-wide .ch-t>p:not(.ch-tag){grid-column:2;grid-row:1/3;align-self:end;margin:0}
+.ch-wide .ch-acts{grid-column:2;margin-top:20px}
+.ch-wide .ch-v{display:block;min-height:0;padding:40px 40px 0}
+.ch .shot{margin:0;padding:0;max-width:none}
+.ch .shot .win{box-shadow:0 30px 70px -30px rgba(120,50,10,.45);border-radius:16px 16px 0 0}
+.ch .shot-live{display:none}
+.feed{display:none}
+
+/* kalkulačka, porovnanie atď. ako zaoblené karty */
+.frame>.pot{margin:16px max(12px,calc((100% - 1264px)/2)) 0;border-radius:32px;padding:clamp(28px,5vw,72px)!important}
+.frame>.who{border-top:0}
+.label span:only-child{display:none}
+
+@media (max-width:1000px){
+  .ch,.ch-wide .ch-t{grid-template-columns:1fr}
+  .ch-wide .ch-t>p:not(.ch-tag),.ch-wide .ch-acts{grid-column:1;grid-row:auto;margin-top:18px}
+  .ch-v{min-height:380px}
+}
+
+/* ===== telefón ===== */
+@media (max-width:700px){
+  .nav{top:8px;left:8px;right:8px;border-radius:14px}
+  .nav-in{height:52px;padding:0 6px 0 14px!important}
+  .stage{height:auto;min-height:0;max-height:none;padding:0;display:flex;flex-direction:column;background:#0F2A1F}
+  .stage::after{display:none}
+  .stage canvas{position:relative!important;inset:auto!important;order:-1;width:100%!important;height:56svh!important;min-height:330px;max-height:520px;background:linear-gradient(180deg,#C9D9E3,#DCE7EC 55%,#E5EDE8);-webkit-mask:none;mask:none}
+  .stage:not(.gl-on){background:#0F2A1F}
+  .hero .stage .hero-txt{position:relative;display:block;padding:0 20px 96px;background:#0F2A1F}
+  .hero .stage .hero-txt::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:120px;background:linear-gradient(180deg,rgba(15,42,31,0),#0F2A1F);pointer-events:none}
+  .hero .stage .pill{margin-top:-6px}
+  .hero .stage h1{margin-top:16px;font-size:clamp(2.55rem,11.5vw,3.3rem);line-height:1}
+  .ht-r{margin-top:18px}
+  .hero .stage .lead{font-size:1rem}
+  .hero .stage .quick-1{grid-template-columns:1fr;padding:6px;margin-top:20px}
+  .hero .stage .quick-1 .btn{width:100%}
+  .hero .under{margin-top:-60px;padding:0 10px}
+  .kpis li{padding:16px}
+  .frame>.chs{padding:64px 8px 0!important}
+  .chs-h{padding:0 12px}
+  .chs-h h2{font-size:1.9rem}
+  .ch{padding:24px 20px 20px;border-radius:26px;gap:22px;margin-top:10px}
+  .ch h3{margin-top:18px;font-size:clamp(1.85rem,8.4vw,2.3rem)}
+  .ch-t>p:not(.ch-tag):not(.ch-note){font-size:1rem;margin-top:14px}
+  .ch-stats{gap:10px 22px;margin-top:20px}
+  .ch-stats b{font-size:1.35rem}
+  .ch-acts .btn{width:100%}
+  .ch-v{min-height:300px;border-radius:20px}
+  .ch-3d{inset:-6% -10%}
+  .ch .try-f{grid-template-columns:1fr;gap:6px}
+  .ch .try-f .btn{width:100%}
+  .ch-g .ch-v{padding:12px}
+  .ch-wide .ch-v{padding:14px}
+  .ch .shot{display:none}
+  .feed{display:grid;gap:8px}
+  .fd{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px;border-radius:14px;background:#fff;box-shadow:0 10px 24px -18px rgba(120,50,10,.5)}
+  .fd .av{width:34px;height:34px;border-radius:10px;font-size:.7rem}
+  .fd p{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:.82rem;line-height:1.35;color:var(--tx)}
+  .fd b{font-size:.88rem;color:var(--ink)}
+  .fd span{color:var(--mut)}
+  .fd-x{opacity:.55}
+  .fd-x .av{filter:grayscale(1)}
+  .frame>.pot{margin:10px 8px 0;border-radius:26px;padding:28px 18px!important}
+}
+.hero .stage .hero-txt{grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)}
+.hero .stage h1{font-size:clamp(3rem,5.5vw,5.4rem)}
+@media (max-width:700px){.hero .stage h1{font-size:clamp(2.55rem,11.5vw,3.3rem)}}
+@media (max-width:1000px){.frame>.pot{grid-template-columns:minmax(0,1fr)}.pot-l,.pot-r,.pot-f{min-width:0}}
+/* podstránky: nadpis + podnadpis namiesto dlhého dvojfarebného nadpisu */
+.phero h1 .h-mut{display:block;margin-top:18px;max-width:40ch;font-size:clamp(1.05rem,1.4vw,1.25rem);font-weight:400;line-height:1.55;letter-spacing:-.01em;color:#4A5A50}
+@media (max-width:700px){
+  .phero-in{padding:104px 20px 40px!important}
+  .phero h1{font-size:clamp(2.2rem,10vw,2.8rem)}
+  .phero h1 .h-mut{font-size:1rem}
+  .phero-art.g3d{max-width:none;aspect-ratio:auto;height:280px;margin-top:-8px}
+  .phero-acts .btn{flex:1 1 auto}
+}

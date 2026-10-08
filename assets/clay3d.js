@@ -97,7 +97,7 @@ function stage(host, { fov = 30, cam = [0, 6, 18], look = [0, 1.6, 0] } = {}) {
   let mx = 0, my = 0, sx = 0, sy = 0;
   host.addEventListener('pointermove', e => { const r = host.getBoundingClientRect(); mx = (e.clientX - r.left) / r.width - 0.5; my = (e.clientY - r.top) / r.height - 0.5; }, { passive: true });
   host.addEventListener('pointerleave', () => { mx = 0; my = 0; });
-  const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); };
+  const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w / h < 1 ? fov * 1.25 : fov; camera.updateProjectionMatrix(); };
   new ResizeObserver(size).observe(host); size();
   let vidno = false, last = 0, t = 0, tick = () => {}, staticDone = false;
   new IntersectionObserver(es => { vidno = es[0].isIntersecting; }, { rootMargin: '100px' }).observe(host);
@@ -157,7 +157,7 @@ function boxScene(host) {
 
 // ---------- scéna: lievik → mince ----------
 function funnelScene(host) {
-  const S = stage(host, { fov: 30, cam: [0, 5, 19], look: [0, 2.2, 0] }), M = mats(), E = envMats();
+  const S = stage(host, { fov: 30, cam: [0, 5.5, 22], look: [0, 1.5, 0] }), M = mats(), E = envMats();
   const world = new THREE.Group(); S.scene.add(world);
   const isl = island(M, 4.4); isl.position.y = -1.4; world.add(isl);
   // lievik
@@ -211,7 +211,7 @@ function funnelScene(host) {
 
 // ---------- scéna: rastúce stĺpce mincí (obálka dopadne → minca) ----------
 function coinsScene(host) {
-  const S = stage(host, { fov: 30, cam: [0, 6, 19], look: [0, 1.6, 0] }), M = mats(), E = envMats();
+  const S = stage(host, { fov: 30, cam: [0, 6.5, 21], look: [0, 1.1, 0] }), M = mats(), E = envMats();
   const world = new THREE.Group(); S.scene.add(world);
   const isl = island(M, 4.4); isl.position.y = -0.9; world.add(isl);
   const base = -0.9 + 0.36;
@@ -220,7 +220,7 @@ function coinsScene(host) {
   const stlpy = [-1.8, -0.6, 0.6, 1.8].map((x, i) => ({ x, z: 0.4 - Math.abs(x) * 0.15, max: 5 + i * 5, n: 0, list: [] }));
   stlpy.forEach(q => { while (q.n < q.max * 0.5) { const c = sh(new THREE.Mesh(coinG, M.gold)); c.position.set(q.x, base + q.n * 0.16 + 0.08, q.z); c.rotation.y = rnd(0, 6); c.userData.g = 1; world.add(c); q.list.push(c); q.n++; } });
   const geo = new THREE.BoxGeometry(1, 0.66, 0.06), lety = [], pool = [];
-  const cl = [[-3.5, 5.8, -3, 0.7], [3.4, 6.3, -4, 0.75]].map(([x, y, z, s]) => { const c = cloud(M, s); c.position.set(x, y, z); S.scene.add(c); return c; });
+  const cl = [[-3.6, 5.4, -4, 0.55], [3.6, 5.9, -5, 0.6]].map(([x, y, z, s]) => { const c = cloud(M, s); c.position.set(x, y, z); S.scene.add(c); return c; });
   const drop = () => {
     const s = stlpy.filter(q => q.n < q.max); if (!s.length) { stlpy.forEach(q => { q.list.forEach(c => world.remove(c)); q.list = []; q.n = 0; }); return; }
     const q = s[(Math.random() * s.length) | 0];
