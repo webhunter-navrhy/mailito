@@ -28,7 +28,7 @@
 
   // jemné odhalenie
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .end-art, .step-card, .teaser').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  $$('.sec-head, .feat, .fact, .fun, .rep, .meta, .cmp, .qt, .calc, .faq-list, .end-txt, .end-art, .step-card, .teaser, .pot-card, .vs, .risk-l, .teaser-r, .replies').forEach((el, i) => { el.classList.add('rv'); if (el.classList.contains('fact')) el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
 
   // návštevník z nášho e-mailu: „práve ste to zažili“
   const qp = new URLSearchParams(location.search), fm = $('#fromMail');
@@ -82,7 +82,7 @@
 
   // ===== cielenie so skutočnými počtami =====
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg ? qMsg.innerHTML : '';
-  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=ae9f72db').then(r => r.json()).then(d => {
+  if (qSeg || $('#audSeg')) fetch(BASE + 'data/trh.json?v=de998839').then(r => r.json()).then(d => {
     const segs = d.segmenty.filter(x => x !== 'Ostatné');
     // úvodný formulár
     if (qSeg) {
@@ -137,16 +137,60 @@
     tween(el, to, 1300, v => dec ? v.toFixed(1).replace('.', ',') : fmt(v), suf);
   }, .6));
 
-  // úvodný formulár → objednávka (bez dopytu, všetko sa nastaví v objednávke)
+  // úvodný formulár → objednávka (jedno pole: web alebo popis)
   const qf = $('#quickForm');
   if (qf) qf.addEventListener('submit', e => {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(qf));
     if (f.web_url) return;
-    if (!f.ponuka || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email || '')) { qMsg.className = 'hero-note err'; qMsg.textContent = 'Napíšte, čo predávate, a platný e-mail.'; return; }
-    const q = new URLSearchParams(); ['ponuka', 'segment', 'email'].forEach(k => f[k] && q.set(k, f[k].trim()));
+    const v = (f.ponuka || '').trim();
+    if (v.length < 3) { qMsg.className = 'hero-note err'; qMsg.textContent = 'Napíšte adresu webu alebo pár slov o tom, čo predávate.'; qf.ponuka.focus(); return; }
+    const q = new URLSearchParams();
+    if (/^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v) && !/\s/.test(v)) q.set('web', v); else q.set('ponuka', v);
+    if (f.segment) q.set('segment', f.segment);
     location.href = OBJ + '?' + q.toString();
   });
+
+  // ===== potenciál trhu (domov) =====
+  const potSeg = $('#potSeg');
+  if (potSeg) fetch(BASE + 'data/trh.json?v=de998839').then(r => r.json()).then(d => {
+    const segs = d.segmenty.filter(x => x !== 'Ostatné'), kr = d.kraje;
+    const KR = { 'Bratislavský': 'Bratislava', 'Trnavský': 'Trnava', 'Trenčiansky': 'Trenčín', 'Nitriansky': 'Nitra', 'Žilinský': 'Žilina', 'Banskobystrický': 'B. Bystrica', 'Prešovský': 'Prešov', 'Košický': 'Košice' };
+    const selS = new Set(['Výroba a priemysel', 'Logistika a doprava']), selK = new Set();
+    const sum = (s, ks) => (ks.size ? [...ks] : kr).reduce((a, k) => a + ((d.matica[s] || {})[k] || 0), 0);
+    const boxK = $('#potKraj'), vIn = $('#potV');
+    const rng = (a, b, suf = '') => (a === b ? fmt(a) : fmt(a) + ' – ' + fmt(b)) + suf;
+    const draw = () => {
+      potSeg.innerHTML = segs.map(s => `<button type="button" class="chip${selS.has(s) ? ' on' : ''}" data-s="${s}" aria-pressed="${selS.has(s)}">${s}<small>${fmt(sum(s, selK))}</small></button>`).join('');
+      boxK.innerHTML = `<button type="button" class="chip${selK.size ? '' : ' on'}" data-k="">Celé Slovensko</button>` + kr.map(k => `<button type="button" class="chip${selK.has(k) ? ' on' : ''}" data-k="${k}">${KR[k] || k}</button>`).join('');
+      calc();
+    };
+    const calc = () => {
+      const n = [...selS].reduce((a, s) => a + sum(s, selK), 0);
+      const pocet = Math.max(1000, Math.min(3000, Math.floor((n - 100) / 100) * 100)), oslov = pocet + 100, p = cena(pocet);
+      const lo = Math.max(1, Math.round(oslov * .003)), hi = Math.max(2, Math.round(oslov * .012));
+      const dl = Math.max(1, Math.round(lo * .2)), dh = Math.max(1, Math.round(hi * .2)), v = +vIn.value;
+      tween($('#potN'), n, 700);
+      $('#potP').textContent = fmt(pocet); $('#potC').textContent = fmt(p) + '\u00a0€';
+      $('#potL').textContent = rng(lo, hi); $('#potD').textContent = rng(dl, dh);
+      $('#potR').textContent = rng(dl * v, dh * v, '\u00a0€');
+      $('#potVv').textContent = fmt(v) + '\u00a0€';
+      vIn.style.setProperty('--p', ((v - vIn.min) / (vIn.max - vIn.min) * 100) + '%');
+      const x1 = dl * v / p, x2 = dh * v / p, f1 = x => x < 10 ? x.toFixed(1).replace('.', ',') : fmt(x);
+      $('#potX').textContent = x2 < 1 ? 'pri väčšej zákazke' : `${f1(x1)}× až ${f1(x2)}×`;
+      const q = new URLSearchParams({ pocet }); q.set('segment', [...selS].join(', ')); if (selK.size) q.set('kraje', [...selK].join(', '));
+      $('#potCta').href = OBJ + '?' + q.toString();
+      $('#potCta').firstChild.textContent = `Osloviť ${fmt(oslov)} firiem `;
+    };
+    potSeg.addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; const s = b.dataset.s; if (selS.has(s)) { if (selS.size > 1) selS.delete(s); } else selS.add(s); draw(); });
+    boxK.addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; const k = b.dataset.k; if (!k) selK.clear(); else if (selK.has(k)) selK.delete(k); else selK.add(k); if (selK.size === kr.length) selK.clear(); draw(); });
+    vIn.addEventListener('input', calc);
+    draw();
+  }).catch(() => {});
+
+  // ===== AI asistent ukážka (domov) =====
+  const aid = $('#aiDemo');
+  if (aid) once(aid, () => aid.classList.add('play'), .35);
 
   // kalkulačka ceny a zákaziek
   const range = $('#cfgRange'), val = $('#roiVal'), tiers = $$('.tier'), cta = $('#cfgCta');

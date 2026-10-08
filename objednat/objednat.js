@@ -22,7 +22,8 @@
   if (q.get('ponuka')) S.popis = q.get('ponuka');
   if (q.get('email')) S.ucet.email = q.get('email');
   if (q.get('pocet')) S.pocet = Math.max(1000, +q.get('pocet') || 3500);
-  if (q.get('segment') && SEGS.includes(q.get('segment')) && !S.segmenty.length) S.segmenty = [q.get('segment')];
+  if (q.get('segment')) { const qs = q.get('segment').split(/\s*,\s*/).filter(s => SEGS.includes(s)); if (qs.length) { S.chceSeg = qs; if (!S.segmenty.length) S.segmenty = qs; } }
+  if (q.get('kraje')) S.chceKraje = q.get('kraje').split(/\s*,\s*/);
   if (q.get('web')) S.web = q.get('web');
 
   // ---------- AI úlohy (spracuje engine cez Claude) ----------
@@ -110,7 +111,7 @@
     go('ai', { force: true }); work(true);
     say(S.web ? `Idem si prečítať ${S.web}…` : 'Pozerám sa na vaše podklady…');
     try {
-      const r = await job('kampan', { web: S.web, popis: S.popis, dokument: S.dok, subor: S.subor }, 240);
+      const r = await job('kampan', { web: S.web, popis: S.popis, dokument: S.dok, subor: S.subor, chce_segmenty: S.chceSeg || [], chce_kraje: S.chceKraje || [] }, 240);
       if (r.zakazane) { work(false); go(0, { force: true }); say(r.dovod || 'Túto ponuku bohužiaľ nevieme kampaňou podporiť.'); return; }
       Object.assign(S, { ai: true, profil: r.profil || {}, dovod: r.dovod || '', nazov: r.nazov || '', segmenty: r.segmenty || [], aiSeg: r.segmenty || [], kraje: r.kraje || [], obory: r.obory || [], aiOb: r.obory || [],
         obory_moznosti: r.obory_moznosti || [], vylucit: r.vylucit || [], texty: norm(r.texty), odhad: r.odhad || null });
