@@ -15,8 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/site4.css?v=b4c759c0">
-<script defer src="./assets/ev.js?v=b4c759c0"></script>
+<link rel="stylesheet" href="./assets/site4.css?v=f426aa9c">
+<script defer src="./assets/ev.js?v=f426aa9c"></script>
 
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" crossorigin>
 <script type="application/ld+json">
@@ -45,6 +45,13 @@
   <div class="nav-in">
     <a href="./" class="logo" aria-label="Mailito – domov"><span class="logo-m" aria-hidden="true"></span>mailito</a>
     <nav class="menu" id="menu" aria-label="Hlavná navigácia">
+      <div class="mm" id="mm">
+        <a href="./pre/" class="mm-t" aria-haspopup="true">Pre koho<svg><use href="#i-down"/></svg></a>
+        <div class="mm-p" role="menu">
+          <div class="mm-h"><p><b>Nové zákazky pre váš odbor</b>Vyberte, čo robíte, a pozrite sa, koľko zákazníkov na vás čaká.</p><a href="./pre/" class="btn btn-sm">Všetky odbory<svg><use href="#i-arr"/></svg></a></div>
+          <div class="mm-g"><a href="./pre/upratovanie-hal/">Upratovanie hál</a><a href="./pre/uctovnictvo/">Účtovníctvo pre s.r.o.</a><a href="./pre/tvorba-webov/">Tvorba webov</a><a href="./pre/it-sprava/">IT správa</a><a href="./pre/strojarska-vyroba/">Strojárska výroba</a><a href="./pre/bozp-a-po/">BOZP a požiarna ochrana</a><a href="./pre/firemne-skolenia/">Firemné školenia</a><a href="./pre/preklady/">Preklady</a><a href="./pre/ochrana-objektov/">Ochrana objektov</a><a href="./pre/catering/">Catering na akcie</a><a href="./pre/reklamne-predmety/">Reklamné predmety</a><a href="./pre/personalna-agentura/">Personálna agentúra</a><a href="./pre/fotovoltika/">Fotovoltika pre firmy</a><a href="./pre/kamerove-systemy/">Kamerové systémy</a><a href="./pre/pracovne-odevy/">Pracovné odevy</a><a href="./pre/energeticke-audity/">Energetické audity</a><a href="./pre/firemne-darceky/">Firemné darčeky</a><a href="./pre/prenajom-techniky/">Prenájom techniky</a><a href="./pre/kancelarske-potreby/">Kancelárske potreby</a><a href="./pre/autopozicovna/">Autopožičovňa pre firmy</a></div>
+        </div>
+      </div>
       <a href="./ako-to-funguje/">Ako to funguje</a>
       <a href="./vysledky/">Výsledky</a>
       <a href="./cennik/">Cenník</a>
@@ -66,7 +73,7 @@
   <div class="stage" data-hero3d>
     <div class="hero-txt">
       <a href="./cennik/" class="pill"><span class="pill-new">+100</span>100 firiem zadarmo · prví záujemcovia do 24 hodín<svg><use href="#i-arr"/></svg></a>
-      <h1>Vy robíte.<br><span class="h-em">My vám zháňame zákazky.</span></h1>
+      <h1 class="h-rv"><span class="w"><span style="--i:1">Vy</span></span> <span class="w"><span style="--i:2">robíte.</span></span><br><span class="h-em"><span class="w"><span style="--i:3">My</span></span> <span class="w"><span style="--i:4">vám</span></span> <span class="w"><span style="--i:5">zháňame</span></span> <span class="w"><span style="--i:6">zákazky.</span></span></span></h1>
       <p class="lead">Kým sa venujete práci, Mailito osloví stovky firiem, ktoré vaše služby potrebujú. Vy ráno len otvoríte portál a odpíšete tým, ktorí napísali: <b>„Áno, pošlite ponuku.“</b> Žiadne obvolávanie, žiadny obchodník, žiadna reklama.</p>
       <form class="quick quick-1" id="quickForm" novalidate>
         <label class="q-f"><span class="sr">Váš web alebo čo predávate</span><svg class="q-ic"><use href="#i-spark"/></svg><input name="ponuka" required placeholder="Váš web alebo čo predávate, napr. upratovanie hál" autocomplete="off"></label>
@@ -286,6 +293,27 @@
   </div>
 </section>
 
+<!-- PRÍBEH: cesta e-mailu (3D pri skrolovaní; bez WebGL ostáva časová os nižšie) -->
+<section class="story" data-story hidden aria-label="Ako to funguje: od objednávky k zákazkám">
+  <div class="story-pin">
+    <div class="story-gl" aria-hidden="true"></div>
+    <div class="story-ui">
+      <div class="story-head">
+        <p class="label"><span>05</span>Ako to funguje</p>
+        <h2>Od objednávky k zákazkám <span class="h-mut">za 7 dní.</span></h2>
+      </div>
+      <ol class="story-steps">
+        <li class="story-step on"><p class="tl-when"><i>1</i>Dnes · 5 minút</p><h3>AI pripraví celú kampaň</h3><p>Vložíte web. AI pochopí, čo predávate, vyberie firmy, ktoré to potrebujú, a napíše e-maily vaším menom.</p><div class="ss-ui"><span class="ss-chip">Výroba <b>10&nbsp;240</b></span><span class="ss-chip">Logistika <b>2&nbsp;334</b></span><span class="ss-ok"><svg><use href="#i-ok"/></svg>3 e-maily hotové</span></div></li>
+        <li class="story-step"><p class="tl-when"><i>2</i>Do 3 dní</p><h3>Stovky e-mailov letia k firmám</h3><p>Osobné e-maily vaším menom z našich zahriatych schránok. Vaša doména zostane čistá a vy nerobíte nič.</p><div class="ss-ui"><span class="ss-bar"><i></i></span><span class="ss-n"><b>1&nbsp;100</b> / 1&nbsp;100 firiem</span></div></li>
+        <li class="story-step"><p class="tl-when"><i>3</i>Prvých 24 hodín</p><h3>Firmy odpisujú: pošlite ponuku</h3><p>AI prečíta každú odpoveď, odmietnutia vybaví a záujemcov vám pošle do portálu aj na e-mail.</p><div class="ss-ui"><span class="ss-notif"><i class="av" style="--h:152">KZ</i><span><b>Nový záujemca</b>„Pošlite ponuku do piatku.“</span></span></div></li>
+        <li class="story-step"><p class="tl-when"><i>4</i>Prvý týždeň</p><h3>Z odpovedí sú zákazky</h3><p>Odpíšete, pošlete ponuku, fakturujete. Jedna kampaň môže priniesť až 48 nových zákazníkov.</p><div class="ss-ui"><span class="ss-deal">+ 4&nbsp;800&nbsp;€</span><a href="./objednat/" class="btn btn-lime">Chcem nové zákazky<svg><use href="#i-arr"/></svg></a></div></li>
+      </ol>
+      <div class="story-dots" role="tablist" aria-label="Kroky"><button type="button" aria-label="Krok 1" class="on"></button><button type="button" aria-label="Krok 2"></button><button type="button" aria-label="Krok 3"></button><button type="button" aria-label="Krok 4"></button></div>
+    </div>
+    <div class="story-prog" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
 <!-- AKO TO FUNGUJE: 7 dní -->
 <section class="tl-s" id="ako">
   <div class="sec-head">
@@ -383,7 +411,7 @@
   </div>
   <div class="end-art g3d" data-3d="box" aria-label="3D ilustrácia: zelená schránka Mailito posiela obálky"></div>
 </section>
-<script type="module" src="./assets/clay3d.js?v=b4c759c0"></script>
+<script type="module" src="./assets/clay3d.js?v=f426aa9c"></script>
 
 </main>
 
@@ -398,9 +426,10 @@
 </footer>
 
 <a href="./objednat/" class="mcta" id="mcta"><span class="mcta-t"><b>1&nbsp;100 firiem</b> za 149&nbsp;€</span><span class="mcta-b">Chcem zákazky<svg><use href="#i-arr"/></svg></span></a>
-<script src="./assets/plus.js?v=b4c759c0" defer></script>
-<script src="./assets/site4.js?v=b4c759c0" defer></script>
+<script src="./assets/plus.js?v=f426aa9c" defer></script>
+<script src="./assets/site4.js?v=f426aa9c" defer></script>
 
-<script type="module" src="./assets/hero3d.js?v=b4c759c0"></script>
+<script type="module" src="./assets/hero3d.js?v=f426aa9c"></script>
+<script type="module" src="./assets/story3d.js?v=f426aa9c"></script>
 </body>
 </html>

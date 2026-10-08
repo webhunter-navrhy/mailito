@@ -165,4 +165,18 @@
       uloz();
     });
   }
+
+  // ===== remeslo: svetlo pod kurzorom a magnetické tlačidlá (len myš) =====
+  if (matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $$('.tl-i, .proj-c, .promise li, .pp-c, .pot-card, .teaser-r, .kpis li, .step-card, .try-mail, .faq-ask, .mail, .vs, .faq-g').forEach(el => el.classList.add('spot'));
+    document.addEventListener('pointermove', e => {
+      const s = e.target.closest?.('.spot'); if (!s) return;
+      const r = s.getBoundingClientRect(); s.style.setProperty('--mx', (e.clientX - r.left) + 'px'); s.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+    $$('.btn-lg, .btn-lime, .shot-live, .nav-r .btn').forEach(b => {
+      b.classList.add('mag');
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(), x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height; b.style.transform = `translate(${x * 8}px, ${y * 6}px)`; });
+      b.addEventListener('pointerleave', () => { b.style.transform = ''; });
+    });
+  }
 })();

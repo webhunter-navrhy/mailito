@@ -250,6 +250,8 @@ function coinsScene(host) {
 }
 
 const SC = { box: boxScene, funnel: funnelScene, coins: coinsScene };
+// pre story3d.js (príbeh pri skrolovaní)
+export { nacitaj, THREE, mats, envMats, island, tree, cloud, mailbox, sh, rnd, webgl, setri, slabe, reduce };
 if (webgl && !setri) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); nacitaj().then(() => (SC[e.target.dataset['3d']] || boxScene)(e.target)).catch(() => {}); } }), { rootMargin: '400px' });
   document.querySelectorAll('[data-3d]').forEach(el => io.observe(el));
