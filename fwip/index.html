@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FWIP pro provozovny – italské gelato za 7 vteřin</title>
+<meta name="description" content="Stroj na italské gelato, sorbety a frozen yogurt z porčních kapslí. Bez vitríny, bez sanitace, bez odpadu. Spočítejte si, kolik vám FWIP vydělá.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5ace244a">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top"><img src="img/logo.webp" alt="FWIP" width="44" height="41"><span>pro provozovny</span></a>
+  <nav><a href="#jak">Jak to funguje</a><a href="#kalkulacka">Kalkulačka</a><a href="#sestavy">Sestavy</a><a href="#otazky">Otázky</a></nav>
+  <a class="btn sm" href="#cenik">Chci ceník</a>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-in">
+      <div class="hero-copy">
+        <p class="pill" id="osobne" hidden><span class="dot"></span><span id="osobneText">Připraveno pro vás</span></p>
+        <h1>Italské gelato<br>za <em>7 vteřin.</em></h1>
+        <p class="lead">Bez vitríny, bez sanitace a&nbsp;bez vyhozených zbytků. Vložíte kapsli, zmáčknete tlačítko a&nbsp;podáváte. Zvládne to každý z&nbsp;obsluhy.</p>
+        <div class="cta">
+          <a class="btn" href="#kalkulacka">Spočítat, kolik vydělám</a>
+          <a class="btn ghost" href="#cenik">Chci ceník a&nbsp;ukázku</a>
+        </div>
+        <ul class="facts">
+          <li><b>7 s</b><span>porce od kapsle po kelímek</span></li>
+          <li><b>200</b><span>porcí za hodinu ve špičce</span></li>
+          <li><b>0</b><span>vyhozených zbytků</span></li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <div class="blob"></div>
+        <img class="stroj" src="img/stroj.webp" alt="Stroj FWIP Portobello s porcí gelata" width="700" height="1250">
+        <img class="cup cup1" src="img/kelimek.webp" alt="" width="322" height="376">
+        <div class="badge"><b>1 500+</b> míst v&nbsp;Evropě</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCE -->
+  <section class="refs">
+    <p>FWIP už podávají například</p>
+    <ul><li>Donuland</li><li>Drive Garden</li><li>Caffe Arleta</li><li>Country Steak Restaurant</li><li>Letiště Bratislava</li></ul>
+  </section>
+
+  <!-- PROBLÉM -->
+  <section class="sec pain">
+    <div class="wrap two">
+      <div>
+        <p class="kick">Proč provozovny zmrzlinu neprodávají</p>
+        <h2>Klasická zmrzlina je práce na celý den.</h2>
+      </div>
+      <ul class="painlist">
+        <li><b>Vitrína</b> zabere metr pultu a&nbsp;běží celý den, i&nbsp;když nikdo nepřijde.</li>
+        <li><b>Sanitace</b> každý večer, kopečkování a&nbsp;člověk navíc ve špičce.</li>
+        <li><b>Zbytky</b> se vyhazují a&nbsp;nikdy přesně nevíte, kolik vás porce stála.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- JAK -->
+  <section class="sec" id="jak">
+    <div class="wrap">
+      <p class="kick">Jak to funguje</p>
+      <h2>Tři kroky. Žádné zaškolení.</h2>
+      <ol class="steps">
+        <li><span>1</span><h3>Vyberte kapsli</h3><p>Gelato, sorbet nebo frozen yogurt. Kapsle čekají v&nbsp;mrazáku vedle stroje.</p></li>
+        <li><span>2</span><h3>Vložte a&nbsp;zmáčkněte</h3><p>Šuplík, kapsle, tlačítko. Stroj porci vytlačí přímo do kelímku nebo kornoutu.</p></li>
+        <li><span>3</span><h3>Podávejte</h3><p>Za 7 vteřin je porce hotová. Prázdná kapsle jde do koše na recyklaci.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- KALKULAČKA -->
+  <section class="sec calc-sec" id="kalkulacka">
+    <div class="wrap">
+      <p class="kick">Kalkulačka</p>
+      <h2>Kolik vám FWIP vydělá?</h2>
+      <p class="sub">Posuňte jezdci podle svého provozu. Výsledek je orientační, přesná čísla doplníme do nabídky pro váš podnik.</p>
+      <div class="calc">
+        <div class="calc-in">
+          <label class="seg"><span>Typ provozu</span>
+            <select id="cTyp"></select>
+          </label>
+          <label><span>Porcí denně <output id="oPorce"></output></span><input id="cPorce" type="range" min="3" max="150" step="1"></label>
+          <label><span>Prodejní cena porce <output id="oCena"></output></span><input id="cCena" type="range" min="49" max="149" step="1"></label>
+          <label><span>Nákupní cena kapsle a&nbsp;kelímku <output id="oNakup"></output></span><input id="cNakup" type="range" min="15" max="70" step="1"></label>
+          <label><span>Prodejních dní v&nbsp;měsíci <output id="oDny"></output></span><input id="cDny" type="range" min="8" max="31" step="1"></label>
+        </div>
+        <div class="calc-out">
+          <p class="lbl">Hrubý zisk z&nbsp;prodeje za měsíc</p>
+          <p class="big" id="rMesic">–</p>
+          <dl>
+            <div><dt>Zisk na porci</dt><dd id="rPorce">–</dd></div>
+            <div><dt>Porcí za měsíc</dt><dd id="rPocet">–</dd></div>
+            <div><dt>Za letní sezónu (5 měsíců)</dt><dd id="rSezona">–</dd></div>
+          </dl>
+          <a class="btn lime" href="#cenik">Chci přesnou nabídku</a>
+          <p class="fine">Bez DPH a&nbsp;bez ceny stroje. Podmínky koupě nebo pronájmu pošleme v&nbsp;nabídce.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROČ -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="kick">Proč FWIP</p>
+      <h2>Zmrzlina, která se o&nbsp;sebe postará sama.</h2>
+      <div class="grid3">
+        <div class="card"><h3>Malé místo</h3><p>Stroj velikosti kávovaru a&nbsp;mrazák na 144 kapslí. Vejde se na bar i&nbsp;recepci.</p></div>
+        <div class="card"><h3>Nulový odpad</h3><p>Jedna kapsle je jedna porce. Co se neprodá, zůstane zmražené na další den.</p></div>
+        <div class="card"><h3>Hygiena bez starostí</h3><p>Každá porce je zvlášť zabalená a&nbsp;zapečetěná. Denní čištění trvá chvilku.</p></div>
+        <div class="card"><h3>Obslouží každý</h3><p>Brigádník, recepční i&nbsp;pokladní. Žádné kopečkování, každá porce stejná.</p></div>
+        <div class="card"><h3>Přesná marže</h3><p>Víte, kolik vás porce stojí, a&nbsp;můžete ji přesně nacenit.</p></div>
+        <div class="card"><h3>I&nbsp;veganské</h3><p>Sorbety bez mléka, bez umělých barviv a&nbsp;aromat, pro každého hosta.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESTAVY -->
+  <section class="sec tint" id="sestavy">
+    <div class="wrap">
+      <p class="kick">Sestavy</p>
+      <h2>Pro pult, pro akce i&nbsp;pro velký provoz.</h2>
+      <div class="sets">
+        <article><img src="img/mikro.webp" alt="Sestava Mikro jednotka" loading="lazy" width="500" height="625"><h3>Mikro jednotka</h3><p>Stroj usazený na mrazáku, 103 × 58 × 45 cm. Ideální do kavárny a&nbsp;bistra.</p></article>
+        <article><img src="img/mobilni.webp" alt="Mobilní stanice" loading="lazy" width="500" height="707"><h3>Mobilní stanice</h3><p>Na pojízdném stolku s&nbsp;brzdou. K&nbsp;bazénu, na terasu nebo na svatbu.</p></article>
+        <article><img src="img/pult.webp" alt="Kompletní gastro pult" loading="lazy" width="500" height="1097"><h3>Kompletní gastro pult</h3><p>Prodejní místo s&nbsp;menu a&nbsp;reklamní A-cedulí. Pro aquaparky, kina a&nbsp;areály.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PŘÍCHUTĚ -->
+  <section class="sec">
+    <div class="wrap">
+      <p class="kick">Příchutě</p>
+      <h2>Šest příchutí, které hosté znají.</h2>
+      <div class="flav">
+        <figure><img src="img/vanilka.webp" alt="Vanilkové gelato" loading="lazy" width="450" height="800"><figcaption>Vanilkové gelato</figcaption></figure>
+        <figure><img src="img/cokolada.webp" alt="Čokoládové gelato" loading="lazy" width="450" height="800"><figcaption>Čokoládové gelato</figcaption></figure>
+        <figure><img src="img/karamel.webp" alt="Slaný karamel" loading="lazy" width="450" height="800"><figcaption>Slaný karamel</figcaption></figure>
+        <figure><img src="img/mango.webp" alt="Mangový sorbet" loading="lazy" width="450" height="800"><figcaption>Mangový sorbet</figcaption></figure>
+        <figure><img src="img/jahoda.webp" alt="Jahodový sorbet" loading="lazy" width="450" height="800"><figcaption>Jahodový sorbet</figcaption></figure>
+        <figure><img src="img/jogurt.webp" alt="Frozen yogurt" loading="lazy" width="450" height="800"><figcaption>Frozen yogurt</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTÁZKY -->
+  <section class="sec tint" id="otazky">
+    <div class="wrap narrow">
+      <p class="kick">Časté otázky</p>
+      <h2>Na co se provozovny ptají.</h2>
+      <div class="faq">
+        <details><summary>Kolik místa FWIP potřebuje?</summary><p>Stroj je velký asi jako pákový kávovar. Mrazák na 144 kapslí může stát pod pultem nebo pod strojem jako Mikro jednotka (103 × 58 × 45 cm).</p></details>
+        <details><summary>Je to opravdu italské gelato, ne točená zmrzlina?</summary><p>Ano. V&nbsp;kapsli je hotové gelato, sorbet nebo frozen yogurt, stroj ho jen vytlačí do správné konzistence. Příchutě získaly ocenění Great Taste.</p></details>
+        <details><summary>Co čištění a&nbsp;hygiena?</summary><p>Každá kapsle je zvlášť zabalená s&nbsp;hygienickou pečetí. Stačí krátké denní čištění bez složité sanitace, žádná vitrína ani nádoby na zmrzlinu.</p></details>
+        <details><summary>Už mám mrazák od dodavatele nanuků. Má to smysl?</summary><p>FWIP neprodává balené nanuky, ale čerstvě podávané gelato do kelímku nebo kornoutu za cenu porce z&nbsp;cukrárny. Obojí může fungovat vedle sebe.</p></details>
+        <details><summary>Co když se v&nbsp;zimě moc neprodá?</summary><p>Kapsle vydrží zmražené, takže nic nevyhodíte. Objednáváte jen tolik, kolik opravdu prodáte.</p></details>
+        <details><summary>Jak rychle můžeme začít?</summary><p>Po potvrzení objednávky domluvíme dovoz a&nbsp;krátké předvedení obsluze. Příchutě pak objednáváte u&nbsp;distributora, se kterým vás propojíme.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁŘ -->
+  <section class="sec form-sec" id="cenik">
+    <div class="wrap two">
+      <div>
+        <p class="kick">Ceník a&nbsp;ukázka</p>
+        <h2>Pošleme vám nabídku pro váš podnik.</h2>
+        <p class="sub">Ceník, podmínky koupě nebo pronájmu a&nbsp;návrh sestavy. Do jednoho pracovního dne.</p>
+        <p class="contact">FWIP Česká republika · MaPi cafe &amp; food s.r.o., IČO 22399836<br><a href="mailto:czechrepublic@fwip.com">czechrepublic@fwip.com</a></p>
+      </div>
+      <form class="form" id="form" novalidate>
+        <label>Název podniku<input name="podnik" id="fPodnik" required></label>
+        <label>Město<input name="mesto" id="fMesto"></label>
+        <label>E-mail<input name="email" type="email" required></label>
+        <label>Co vás zajímá<select name="zajem"><option>Ceník a&nbsp;podmínky</option><option>Ukázka stroje v&nbsp;mém podniku</option><option>Mobilní stanice na akce</option></select></label>
+        <label class="full">Zpráva (nepovinné)<textarea name="zprava" rows="3"></textarea></label>
+        <input class="hp" name="web" tabindex="-1" autocomplete="off">
+        <button class="btn full" type="submit">Poslat poptávku</button>
+        <p class="ok" id="ok" hidden>Děkujeme. Ozveme se do jednoho pracovního dne.</p>
+        <p class="fine full">Údaje použijeme jen k&nbsp;odpovědi na poptávku. Podnikatelé IČO, pouze B2B.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <img src="img/logo.webp" alt="FWIP" width="36" height="34">
+  <p>Oficiální zastoupení FWIP v&nbsp;ČR · MaPi cafe &amp; food s.r.o. · IČO 22399836 · <a href="https://fwip-czech.cz">fwip-czech.cz</a></p>
+</footer>
+
+<a class="mcta btn" href="#cenik">Chci ceník</a>
+<script src="app.js?v=5ace244a"></script>
+</body>
+</html>
