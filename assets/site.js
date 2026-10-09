@@ -125,7 +125,7 @@
     numRaf = requestAnimationFrame(st);
   }
   if (chipsEl && mapEl) {
-    fetch('data/trh.json?v=e199022e').then(r => r.json()).then(d => {
+    fetch('data/trh.json?v=de52157e').then(r => r.json()).then(d => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s} <small></small></button>`).join('');
       mapEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj" data-k="${k}" style="grid-area:${AREAS[k]}" aria-pressed="false"><span class="kraj-in"><b>${k}</b><small></small></span></button>`).join('');
