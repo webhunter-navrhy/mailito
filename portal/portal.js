@@ -213,7 +213,7 @@
           <dt>Posledná objednávka</dt><dd>${esc(balik(k.balik) || '–')}</dd>
           ${k.balik === 'vykon' ? `<dt>Kredit</dt><dd>${fmt((k.kredit_cent || 0) / 100)} € · ${fmt((k.cena_leadu_cent || 3900) / 100)} € za záujemcu</dd>` : ''}
         </dl>
-        <p class="muted" style="font-size:.85rem;margin-top:1.2rem">Zmenu fakturačných údajov alebo balíka nám napíšte na <a href="mailto:info@mailito.eu" style="color:var(--red)">info@mailito.eu</a>.</p>
+        <p class="muted" style="font-size:.85rem;margin-top:1.2rem">Zmenu fakturačných údajov alebo balíka nám napíšte na <a href="mailto:info.webhunter@email.cz" style="color:var(--red)">info.webhunter@email.cz</a>.</p>
       </div>
       <div class="card">
         <div class="card-h"><h2>Zmena hesla</h2></div>

@@ -325,7 +325,7 @@
       $('#doneMail').textContent = body.firma.email_faktura;
       window.mailitoEv?.('objednavka_odoslana');
       store.set(KEY, null); S = { ...S0, chat: [] }; go('done', { force: true });
-    } catch (err) { m.className = 'form-msg err'; m.textContent = err.message === 'Failed to fetch' ? 'Spojenie zlyhalo. Skúste to znova alebo napíšte na info@mailito.eu.' : err.message; }
+    } catch (err) { m.className = 'form-msg err'; m.textContent = err.message === 'Failed to fetch' ? 'Spojenie zlyhalo. Skúste to znova alebo napíšte na info.webhunter@email.cz.' : err.message; }
     finally { btn.disabled = false; if (S.step !== 'done') btn.textContent = bt; }
   });
   const readMailsSafe = () => { if ($('.mail-c')) readMails(); };
@@ -360,7 +360,7 @@
       const r = await job('chat', { otazka: text, krok: ['Podklady', 'Komu', 'E-maily', 'Rozsah', 'Objednávka'][S.step] || S.step, historia: S.chat.slice(-8),
         stav: { segmenty: S.segmenty, kraje: S.kraje, firmy: S.odhad?.pocet, pocet: S.pocet, cena: cena(S.pocet), profil: S.profil } }, 120);
       t.remove(); say((r.text || '').replace(/\*\*/g, ''));
-    } catch (e) { t.remove(); say('Teraz neviem odpovedať. Skúste to o chvíľu, alebo napíšte na info@mailito.eu.'); }
+    } catch (e) { t.remove(); say('Teraz neviem odpovedať. Skúste to o chvíľu, alebo napíšte na info.webhunter@email.cz.'); }
   }
   $('#aiF').addEventListener('submit', e => { e.preventDefault(); const i = $('#aiIn'); const v = i.value; i.value = ''; ask(v); });
   fab.addEventListener('click', () => { window.mailitoEv?.('asistent_otvoreny'); ai.classList.add('open'); fab.classList.remove('ping'); $('#aiIn').focus(); });

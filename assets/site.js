@@ -125,7 +125,7 @@
     numRaf = requestAnimationFrame(st);
   }
   if (chipsEl && mapEl) {
-    fetch('data/trh.json?v=de52157e').then(r => r.json()).then(d => {
+    fetch('data/trh.json?v=4041b12e').then(r => r.json()).then(d => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s} <small></small></button>`).join('');
       mapEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj" data-k="${k}" style="grid-area:${AREAS[k]}" aria-pressed="false"><span class="kraj-in"><b>${k}</b><small></small></span></button>`).join('');
@@ -216,7 +216,7 @@
         msg.textContent = 'Ďakujeme! Zadanie máme. Do 2 pracovných dní vám pošleme počet firiem a návrh e-mailu.';
       } catch (err) {
         msg.className = 'form-msg err';
-        msg.textContent = (err.message && err.message !== 'Failed to fetch') ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.';
+        msg.textContent = (err.message && err.message !== 'Failed to fetch') ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info.webhunter@email.cz.';
       } finally { btn.disabled = false; btn.firstChild.textContent = 'Poslať zadanie '; }
     });
   }

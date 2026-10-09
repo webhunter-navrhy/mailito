@@ -11,7 +11,7 @@
     const r = await fetch(API + '/api/brief', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json(); if (!j.ok) throw new Error(j.chyba || 'Chyba'); return j;
   };
-  const errText = e => e.message && e.message !== 'Failed to fetch' ? e.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.';
+  const errText = e => e.message && e.message !== 'Failed to fetch' ? e.message : 'Nepodarilo sa odoslať. Napíšte nám na info.webhunter@email.cz.';
 
   // navigácia
   const nav = $('#nav');
@@ -79,7 +79,7 @@
 
   // úvodný formulár: odvetvie → odhad, odoslanie
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=de52157e').then(r => r.json()).then(d => {
+  fetch('data/trh.json?v=4041b12e').then(r => r.json()).then(d => {
     qSeg.innerHTML = '<option value="">Vyberte odvetvie</option>' + d.segmenty.filter(x => x !== 'Ostatné').map(x => `<option>${x}</option>`).join('');
     qSeg.addEventListener('change', () => {
       const v = qSeg.value; qMsg.className = 'hero-note';

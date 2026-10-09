@@ -87,7 +87,7 @@
     setTrh(n);
   };
   if (chipsEl) {
-    Promise.all([fetch('data/trh.json?v=de52157e').then(r => r.json()), fetch('data/sk_mapa.json?v=de52157e').then(r => r.json())]).then(([d, m]) => {
+    Promise.all([fetch('data/trh.json?v=4041b12e').then(r => r.json()), fetch('data/sk_mapa.json?v=4041b12e').then(r => r.json())]).then(([d, m]) => {
       D = d;
       chipsEl.innerHTML = d.segmenty.map(s => `<button type="button" class="chip" data-s="${s}" aria-pressed="false">${s}<small></small></button>`).join('');
       krajEl.innerHTML = d.kraje.map(k => `<button type="button" class="kraj-b" data-k="${k}" aria-pressed="false">${k}<small></small></button>`).join('')
@@ -216,7 +216,7 @@
   const indTabs = $('#indTabs'), indPanel = $('#indPanel');
   if (indTabs) {
     let T = null;
-    fetch('data/trh.json?v=de52157e').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
+    fetch('data/trh.json?v=4041b12e').then(r => r.json()).then(d => { T = d; show(0); }).catch(() => show(0));
     indTabs.innerHTML = IND.map((x, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${x.s}</button>`).join('');
     const show = i => {
       const x = IND[i];
@@ -243,7 +243,7 @@
   // ===== v8: personalizovaný odhad v hero =====
   const qSeg = $('#qSeg'), qLive = $('#qLive');
   if (qSeg) {
-    fetch('data/trh.json?v=de52157e').then(r => r.json()).then(d => {
+    fetch('data/trh.json?v=4041b12e').then(r => r.json()).then(d => {
       qSeg.innerHTML = '<option value="">Vyberte odvetvie</option>' + d.segmenty.filter(x => x !== 'Ostatné').map(x => `<option>${x}</option>`).join('');
       const upd = () => {
         const v = qSeg.value; if (!v) { qLive.classList.remove('on'); return; }
@@ -270,7 +270,7 @@
           body: JSON.stringify({ ...f, segmenty: f.segment ? [f.segment] : [], balik: 'neviem', zdroj: 'hero:' + (qs.get('utm_source') || qs.get('k') || document.referrer || 'web') }) });
         const j = await r.json(); if (!j.ok) throw new Error(j.chyba || 'Chyba');
         qf.reset(); qm.className = 'quick-note ok'; qm.textContent = 'Ďakujeme! Do 2 pracovných dní vám pošleme počet firiem vo vašom odbore a návrh e-mailu.';
-      } catch (err) { qm.className = 'quick-note err'; qm.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.'; }
+      } catch (err) { qm.className = 'quick-note err'; qm.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info.webhunter@email.cz.'; }
       finally { btn.disabled = false; btn.textContent = 'Chcem zákazky'; }
     });
   }
@@ -338,7 +338,7 @@
         form.reset(); cfgRender();
         msg.className = 'form-msg ok'; msg.textContent = 'Ďakujeme! Zadanie máme. Do 2 pracovných dní vám pošleme počet firiem a návrh e-mailu.';
       } catch (err) {
-        msg.className = 'form-msg err'; msg.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info@mailito.eu.';
+        msg.className = 'form-msg err'; msg.textContent = err.message && err.message !== 'Failed to fetch' ? err.message : 'Nepodarilo sa odoslať. Napíšte nám na info.webhunter@email.cz.';
       } finally { btn.disabled = false; btn.textContent = 'Poslať zadanie'; }
     });
   }

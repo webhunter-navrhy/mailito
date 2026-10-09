@@ -164,7 +164,7 @@
       try {
         const r = await job('chat', { otazka: q, stranka: document.title, historia: hist.slice(-8) }, 45);
         const txt = (r.text || '').replace(/\*\*/g, ''); t.remove(); add('ai', txt, true); hist.push({ kto: 'ai', text: txt, cta: true });
-      } catch { t.remove(); const txt = 'Na toto vám radi odpovieme e-mailom na info@mailito.eu. Medzitým si môžete zadarmo pozrieť, koho AI osloví a čo im napíše.'; add('ai', txt, true); hist.push({ kto: 'ai', text: txt, cta: true }); }
+      } catch { t.remove(); const txt = 'Na toto vám radi odpovieme e-mailom na info.webhunter@email.cz. Medzitým si môžete zadarmo pozrieť, koho AI osloví a čo im napíše.'; add('ai', txt, true); hist.push({ kto: 'ai', text: txt, cta: true }); }
       uloz();
     });
   }
