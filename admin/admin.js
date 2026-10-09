@@ -44,10 +44,10 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') zavri(); });
 
   // ---------- smerovanie ----------
-  const R = { prehlad: vPrehlad, objednavky: vObjednavky, kampane: vKampane, kampan: vKampan, klienti: vKlienti, klient: vKlient, faktury: vFaktury, leady: vLeady, rozosielka: vRozosielka, databaza: vDatabaza, ai: vAi, web: vWeb };
+  const R = { analytika: vAnalytika, prehlad: vPrehlad, objednavky: vObjednavky, kampane: vKampane, kampan: vKampan, klienti: vKlienti, klient: vKlient, faktury: vFaktury, leady: vLeady, rozosielka: vRozosielka, databaza: vDatabaza, ai: vAi, web: vWeb };
   async function route() {
     const [v, id] = (location.hash.slice(1) || 'prehlad').split('/');
-    $$('#nav a').forEach(a => a.classList.toggle('on', a.dataset.r === v || (v === 'kampan' && a.dataset.r === 'kampane') || (v === 'klient' && a.dataset.r === 'klienti')));
+    $$('#nav a').forEach(a => a.classList.toggle('on', a.dataset.r === v || (v === 'kampan' && a.dataset.r === 'kampane') || (v === 'klient' && a.dataset.r === 'klienti') || (v === 'analytika' && a.dataset.r === 'analytika')));
     const m = $('#main'); m.innerHTML = '<p class="load">Načítavam…</p>';
     try { m.innerHTML = await (R[v] || vPrehlad)(id); bind(m, v, id); } catch (e) { m.innerHTML = `<p class="note">${esc(e.message)}</p>`; }
     scrollTo(0, 0);
@@ -245,6 +245,31 @@
     return `<div class="ph"><div><h1>Záujemcovia</h1><p>${LEADY.length} záujemcov zo všetkých kampaní</p></div></div><div class="filters"><input id="fL" placeholder="Hľadať firmu, klienta, text"></div><div class="tw" style="padding:6px" id="lBox">${leadTab(LEADY)}</div>`;
   }
 
+  // ---------- analytika ----------
+  const pct = (a, b) => b ? (a / b * 100).toLocaleString('sk-SK', { maximumFractionDigits: 1 }) + ' %' : '–';
+  const pruh = (a, b, max = 10) => `<span class="bar" style="display:inline-block;width:90px;vertical-align:middle;margin-right:8px"><i style="width:${b ? Math.min(100, a / b * 100 / max * 100) : 0}%"></i></span>`;
+  async function vAnalytika(id) {
+    const d = await api('/api/adm/analytika' + (id ? '?kampan=' + encodeURIComponent(id) : ''));
+    const s = d.suhrn || {}, o = Object.fromEntries((d.odpovede || []).map(x => [x.typ, x.n]));
+    const realne = Object.entries(o).filter(([k]) => !['automat', 'bounce', 'neznamy'].includes(k)).reduce((a, [, n]) => a + n, 0);
+    const tab = (rows, kluc, nazov) => rows.length ? `<table><thead><tr><th>${nazov}</th><th class="r">Oslovené</th><th>Odpovede</th><th>Záujem</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r[kluc] || '–')}</td><td class="r">${fmt(r.osl)}</td><td class="nw">${pruh(r.odp, r.osl)}${fmt(r.odp)} · ${pct(r.odp, r.osl)}</td><td class="nw">${pruh(r.zaujem, r.osl, 5)}<b>${fmt(r.zaujem)}</b> · ${pct(r.zaujem, r.osl)}</td></tr>`).join('')}</tbody></table>` : '<p class="mut">Zatiaľ bez dát.</p>';
+    const mx = Math.max(1, ...d.denne.map(x => x.n));
+    return `<div class="ph"><div><h1>Analytika kampaní</h1><p>Doručiteľnosť, odpovede a záujem. Otvorenia e-mailov zámerne nemeriame (sledovacie pixely zhoršujú doručiteľnosť).</p></div>
+        <select id="anK" style="width:auto;min-width:260px"><option value="">Všetky kampane</option>${d.kampane.map(k => `<option value="${k.id}"${k.id === d.kampan ? ' selected' : ''}>${esc(k.nazov || k.id)}</option>`).join('')}</select></div>
+      <div class="grid g4">
+        <div class="card kpi"><small>Oslovené firmy</small><b>${fmt(s.osl)}</b><span>${fmt(s.caka)} čaká na odoslanie</span></div>
+        <div class="card kpi ${s.osl && s.bounce / s.osl > .05 ? 'warn' : ''}"><small>Doručiteľnosť</small><b>${s.osl ? pct(s.osl - (s.bounce || 0), s.osl) : '–'}</b><span>${fmt(s.bounce)} nedoručiteľných · ${d.staznosti} sťažností na spam</span></div>
+        <div class="card kpi"><small>Odpovede</small><b>${pct(realne, s.osl)}</b><span>${fmt(realne)} firiem odpísalo · ${fmt(o.automat || 0)} automatických</span></div>
+        <div class="card kpi dark"><small>Záujem</small><b>${pct(o.zaujem || 0, s.osl)}</b><span>${fmt(o.zaujem || 0)} záujemcov · ${fmt(o.neskor || 0)} neskôr</span></div>
+      </div>
+      <div class="grid g2" style="margin-top:12px">
+        <div class="card"><h2>Typy odpovedí</h2><dl class="dl">${[['zaujem', 'Záujem'], ['neskor', 'Neskôr'], ['nie', 'Nemajú záujem'], ['odhlasit', 'Odhlásenie'], ['riziko', 'GDPR / sťažnosť'], ['ine', 'Na posúdenie'], ['automat', 'Automatická odpoveď']].map(([k, n]) => `<dt>${n}</dt><dd>${fmt(o[k] || 0)}</dd>`).join('')}<dt>Odhlásení celkom</dt><dd>${fmt(s.odhl)} · ${pct(s.odhl, s.osl)}</dd></dl></div>
+        <div class="card"><h2>Odoslané po dňoch</h2>${d.denne.length ? `<div class="chart">${d.denne.map(x => `<i style="height:${Math.max(2, x.n / mx * 100)}%" data-t="${x.d}: ${x.n}"></i>`).join('')}</div>` : '<p class="mut">Zatiaľ nič.</p>'}</div>
+      </div>
+      <div class="card" style="margin-top:12px"><h2>Test A/B predmetov</h2>${d.ab.length ? `<table><thead><tr><th>Predmet</th><th class="r">Odoslané</th><th>Odpovede</th><th>Záujem</th></tr></thead><tbody>${d.ab.map((r, i) => `<tr><td>${i === 0 && d.ab.length > 1 && r.odp / r.osl >= Math.max(...d.ab.map(x => x.odp / x.osl)) && r.odp ? '🏆 ' : ''}${esc(r.predmet)}</td><td class="r">${fmt(r.osl)}</td><td class="nw">${fmt(r.odp)} · ${pct(r.odp, r.osl)}</td><td class="nw"><b>${fmt(r.zaujem)}</b> · ${pct(r.zaujem, r.osl)}</td></tr>`).join('')}</tbody></table><p class="mut" style="margin-top:8px">Spoľahlivý výsledok je zhruba od 300 odoslaných na variant.</p>` : '<p class="mut">Zatiaľ bez dát.</p>'}</div>
+      <div class="grid g2" style="margin-top:12px"><div class="card"><h2>Podľa odvetvia</h2>${tab(d.segmenty, 's', 'Odvetvie')}</div><div class="card"><h2>Podľa kraja</h2>${tab(d.kraje, 'kraj', 'Kraj')}</div></div>`;
+  }
+
   // ---------- rozosielka ----------
   async function vRozosielka() {
     const d = await api('/api/adm/rozosielka'); const e = d.engine || {}; engineStav(d.engine);
@@ -309,6 +334,7 @@
     filt($('#fL', m), LEADY, l => { $('#lBox').innerHTML = leadTab(l); }, x => [x.firma, x.klient_firma, x.zhrnutie, x.odpoved, x.email].join(' '));
     const kf = () => { const q = ($('#fQ', m)?.value || '').toLowerCase(), s = $('#fS', m)?.value; $('#kRows').innerHTML = kRows(KAMPANE.filter(k => (!s || k.stav === s) && [k.nazov, k.klient_firma, k.klient_email, k.id].join(' ').toLowerCase().includes(q))); bind($('#kRows'), v); };
     $('#fQ', m)?.addEventListener('input', kf); $('#fS', m)?.addEventListener('change', kf);
+    $('#anK', m)?.addEventListener('change', e => { location.hash = 'analytika' + (e.target.value ? '/' + e.target.value : ''); });
     $$('[data-a]', m).forEach(b => b.addEventListener('click', () => akcia(b, v, id)));
   }
   const prikaz = async (akcia, data = {}, cid = null) => { const r = await api('/api/adm/prikaz', { akcia, data, campaign_id: cid }); toast(r.hned ? 'Hotovo: ' + r.vysledok : 'Príkaz odoslaný. Engine ho vykoná do 5 minút.'); route(); };
