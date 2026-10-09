@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mailito · Administrácia</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css?v=e199022e">
+</head>
+<body>
+<section class="login" id="login" hidden>
+  <form class="login-c" id="loginF">
+    <p class="logo"><span class="logo-m"></span>mailito <em>admin</em></p>
+    <h1>Administrácia</h1>
+    <label>Heslo<input type="password" name="heslo" autocomplete="current-password" required autofocus></label>
+    <button class="btn btn-p" type="submit">Prihlásiť sa</button>
+    <p class="msg" id="loginMsg"></p>
+  </form>
+</section>
+
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <p class="logo"><span class="logo-m"></span>mailito <em>admin</em></p>
+    <nav id="nav">
+      <a href="#prehlad" data-r="prehlad">Prehľad</a>
+      <a href="#objednavky" data-r="objednavky">Objednávky <b id="nObj"></b></a>
+      <a href="#kampane" data-r="kampane">Kampane</a>
+      <a href="#klienti" data-r="klienti">Klienti</a>
+      <a href="#faktury" data-r="faktury">Faktúry</a>
+      <a href="#leady" data-r="leady">Záujemcovia</a>
+      <p class="nav-h">Prevádzka</p>
+      <a href="#rozosielka" data-r="rozosielka">Rozosielka a schránky</a>
+      <a href="#databaza" data-r="databaza">Databáza a blocklist</a>
+      <a href="#ai" data-r="ai">AI úlohy</a>
+      <a href="#web" data-r="web">Návštevnosť webu</a>
+    </nav>
+    <div class="side-f"><p id="engineStav" class="eng"></p><button class="btn btn-s" id="logout" type="button">Odhlásiť</button></div>
+  </aside>
+  <main class="main" id="main"><p class="load">Načítavam…</p></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="modal" hidden><div class="modal-c" id="modalC"></div></div>
+<script src="admin.js?v=e199022e" defer></script>
+</body>
+</html>

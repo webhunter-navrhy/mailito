@@ -37,8 +37,8 @@
   }
   async function load() {
     if (demo) { S = demoData(); return; }
-    const [me, ld] = await Promise.all([api('/api/me'), api('/api/leads')]);
-    S = { klient: me.klient, kampane: me.kampane, leady: ld.leady, udalosti: me.udalosti, leadStat: me.leady };
+    const [me, ld, fk] = await Promise.all([api('/api/me'), api('/api/leads'), api('/api/faktury').catch(() => ({ faktury: [] }))]);
+    S = { klient: me.klient, kampane: me.kampane, leady: ld.leady, udalosti: me.udalosti, leadStat: me.leady, faktury: fk.faktury || [] };
   }
   function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 2600); }
 
@@ -224,6 +224,10 @@
           <p class="form-msg" id="passMsg"></p>
         </form>
       </div>
+    </div>
+    <div class="card" style="margin-top:1rem">
+      <div class="card-h"><h2>Faktúry</h2></div>
+      ${(S.faktury || []).length ? `<dl class="dl">${S.faktury.map(f => `<dt>č. ${esc(f.cislo)}</dt><dd>${f.suma_eur != null ? fmt(f.suma_eur) + ' € · ' : ''}${f.stav === 'zaplatena' ? 'zaplatená' : f.splatnost ? 'splatná do ' + esc(f.splatnost.split('-').reverse().join('. ')) : ''} · <a href="#" data-faktura="${esc(f.id)}" style="color:var(--red)">Stiahnuť PDF</a></dd>`).join('')}</dl>` : '<p class="muted">Zatiaľ žiadne faktúry. Po objednávke ju tu nájdete a pošleme ju aj e-mailom.</p>'}
     </div>`;
   }
 
@@ -264,6 +268,13 @@
     if (sp) { $$('.stav-pick button').forEach(b => b.classList.toggle('on', b === sp)); $('#leadForm [name=stav]').value = sp.dataset.s; return; }
     if (t.closest('#btnNova') || t.closest('[data-nova]')) { $('#modalNova').hidden = false; return; }
     if (t.closest('#btnCsv')) return csv();
+    const fa = t.closest('[data-faktura]');
+    if (fa) {
+      e.preventDefault();
+      if (demo) { toast('V ukážke faktúry nie sú.'); return; }
+      try { const r = await fetch(API + '/api/faktury/' + fa.dataset.faktura, { headers: { Authorization: 'Bearer ' + (store.get(TK) || '') } }); if (!r.ok) throw 0; open(URL.createObjectURL(await r.blob()), '_blank'); } catch { toast('Faktúru sa nepodarilo stiahnuť.'); }
+      return;
+    }
     const ap = t.closest('[data-approve]');
     if (ap) {
       if (!confirm('Schváliť texty a cieľovú skupinu? Kampaň spustíme po prijatí platby.')) return;

@@ -1,7 +1,7 @@
 // Mailito – príbeh jedného e-mailu pri skrolovaní (Three.js, natívny scroll, bez knižníc).
 // 0 AI pripraví kampaň · 1 obálky letia k firmám · 2 firmy odpisujú · 3 zákazky = mince
-import { nacitaj, mats, envMats, island, tree, cloud, mailbox, sh, rnd, webgl, setri, slabe, reduce } from './clay3d.js?v=b2ef5b1e';
-import * as M3 from './clay3d.js?v=b2ef5b1e';
+import { nacitaj, mats, envMats, island, tree, cloud, mailbox, sh, rnd, webgl, setri, slabe, reduce } from './clay3d.js?v=e199022e';
+import * as M3 from './clay3d.js?v=e199022e';
 
 const sec = document.querySelector('[data-story]');
 const fallback = document.getElementById('ako');
