@@ -1622,3 +1622,72 @@ html{scroll-padding-top:84px}
   .mq a{font-size:1.1rem}
 }
 .risk-s .sticker{left:auto;right:22px;top:-26px}
+
+/* ===== v31: cenové balíčky, záruka, ponuka pri odchode ===== */
+.pr-h{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:32px;align-items:end;margin-bottom:clamp(28px,4vw,44px)}
+.pr-sub{font-size:1.02rem;line-height:1.6;color:#3B433E}
+.pr-sub b{color:var(--ink)}
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+.tier-c{position:relative;display:flex;flex-direction:column;padding:clamp(22px,2.6vw,32px);border-radius:26px;background:rgba(255,255,255,.72)}
+.tc-top{background:var(--forest);color:#fff;box-shadow:0 40px 80px -36px rgba(15,42,31,.75);transform:translateY(-10px)}
+.tc-badge{position:absolute;top:-13px;left:24px;height:26px;display:inline-flex;align-items:center;padding:0 12px;border-radius:99px;background:var(--lime);color:var(--forest);font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;box-shadow:0 10px 20px -10px rgba(60,90,20,.6)}
+.tc-k{font:600 .74rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.tc-top .tc-k{color:var(--lime)}
+.tc-n{margin-top:12px;font-size:1.1rem;font-weight:560;letter-spacing:-.02em;color:var(--ink)}
+.tc-n span{display:block;margin-top:2px;font-size:.82rem;font-weight:500;color:#4C8A1E}
+.tc-top .tc-n{color:#fff}.tc-top .tc-n span{color:var(--lime)}
+.tc-p{display:flex;align-items:flex-start;gap:4px;margin-top:18px;font-size:clamp(3rem,4.6vw,4rem);font-weight:620;letter-spacing:-.06em;line-height:.95;color:var(--ink)}
+.tc-p i{font-style:normal;font-size:.42em;margin-top:.15em;color:var(--mut)}
+.tc-top .tc-p{color:#fff}.tc-top .tc-p i{color:rgba(255,255,255,.6)}
+.tc-per{margin-top:8px;font-size:.84rem;color:var(--mut)}
+.tc-per b{margin-left:6px;padding:2px 7px;border-radius:6px;background:var(--lime2);color:#3A6B12;font-weight:600}
+.tc-top .tc-per{color:rgba(255,255,255,.65)}.tc-top .tc-per b{background:var(--lime);color:var(--forest)}
+.tc-exp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px;padding:14px;border-radius:14px;background:#F2F6EA}
+.tc-top .tc-exp{background:rgba(255,255,255,.07)}
+.tc-exp dt{font-size:.74rem;color:var(--mut)}
+.tc-exp dd{margin-top:2px;font-size:1.2rem;font-weight:620;letter-spacing:-.035em;color:#3A7A17}
+.tc-top .tc-exp dt{color:rgba(255,255,255,.6)}.tc-top .tc-exp dd{color:var(--lime)}
+.tier-c ul{display:grid;gap:9px;margin:20px 0 24px;font-size:.9rem;color:var(--tx)}
+.tier-c li{display:flex;align-items:center;gap:8px}
+.tier-c li svg{width:15px;height:15px;color:var(--ok);flex:none}
+.tc-top ul{color:rgba(255,255,255,.88)}.tc-top li svg{color:var(--lime)}
+.tier-c .btn{margin-top:auto;height:50px;border-radius:12px}
+.guar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;margin-top:16px;padding:20px 26px 20px 20px;border-radius:24px;background:#fff}
+.guar .seal{margin:0;width:96px;height:96px}
+.guar .seal>span{inset:19px}.guar .seal>span svg{width:26px;height:26px}
+.guar-t h3{font-size:1.3rem;letter-spacing:-.03em}
+.guar-t p{margin-top:4px;font-size:.92rem;line-height:1.55;color:var(--mut)}
+.guar .more{margin:0;white-space:nowrap}
+@media (max-width:900px){
+  .pr-h{grid-template-columns:1fr;gap:12px}
+  .tiers{grid-template-columns:1fr;gap:18px}
+  .tc-top{order:-1;transform:none;margin-top:10px}
+  .guar{grid-template-columns:1fr;justify-items:start;padding:22px}
+}
+
+/* ponuka pri odchode */
+.exit{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:rgba(8,20,14,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:exIn .3s var(--ease)}
+.exit[hidden]{display:none}
+@keyframes exIn{from{opacity:0}}
+.exit-c{position:relative;width:min(560px,100%);padding:clamp(26px,4vw,40px);border-radius:28px;background:radial-gradient(ellipse 80% 60% at 100% 0%,rgba(200,241,105,.25),transparent 70%),var(--forest);color:rgba(255,255,255,.78);box-shadow:0 50px 100px -40px rgba(0,0,0,.7);animation:exUp .45s var(--ease)}
+@keyframes exUp{from{transform:translateY(20px) scale(.98);opacity:0}}
+.exit-c .pill-new{display:inline-grid}
+.exit-c h3{margin-top:18px;font-size:clamp(1.6rem,3.4vw,2.2rem);letter-spacing:-.045em;line-height:1.08;color:#fff}
+.exit-c h3 em{font-style:normal;color:var(--lime)}
+.exit-c>p{margin-top:12px;font-size:1rem;line-height:1.55}
+.exit-f{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;margin-top:22px;padding:6px;border-radius:14px;background:#fff}
+.exit-f input{height:48px;padding:0 12px;border:0;outline:0;font-size:1rem;border-radius:9px;color:var(--ink)}
+.exit-f .btn{height:48px}
+.exit-n{margin-top:12px;font-size:.8rem;color:rgba(255,255,255,.55)}
+.exit-x{position:absolute;right:14px;top:14px;width:34px;height:34px;border:0;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font-size:1.3rem;cursor:pointer}
+@media (max-width:600px){.exit-f{grid-template-columns:1fr}.exit-f .btn{width:100%}}
+
+/* ako to funguje: plátna ako farebné kapitoly */
+.prod .canvas{border:0;border-radius:28px;background-image:none}
+.prod .canvas::before{display:none}
+.prod .feat:nth-of-type(1) .canvas{background:#E7F1DA}
+.prod .feat:nth-of-type(2) .canvas{background:#E3EBF6}
+.prod .feat:nth-of-type(3) .canvas{background:#F6EFCF}
+.prod .feat:nth-of-type(4) .canvas{background:#FBE8DC}
+.prod .feat:nth-of-type(5) .canvas{background:#E9E6F6}
+@media (min-width:701px){.mcta{display:none!important}}

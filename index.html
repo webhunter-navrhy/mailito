@@ -15,8 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/site4.css?v=e29357ba">
-<script defer src="./assets/ev.js?v=e29357ba"></script>
+<link rel="stylesheet" href="./assets/site4.css?v=b2ef5b1e">
+<script defer src="./assets/ev.js?v=b2ef5b1e"></script>
 
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" crossorigin>
 <script type="application/ld+json">
@@ -296,29 +296,49 @@
   </div>
 </section>
 
-<!-- ZÁRUKA + CENA -->
-<section class="risk-s" id="cena">
-  <div class="risk">
-    <div class="risk-l">
-      <div class="seal" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="sealP" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#sealP" textLength="486" lengthAdjust="spacing">ZÁRUKA PRVEJ KAMPANE · BEZ RIZIKA · </textPath></text></svg><span><svg><use href="#i-shield"/></svg></span></div>
-      <p class="label"><span>●</span>Bez rizika</p>
-      <h2>Nemáte čo stratiť. <span class="h-mut">Riziko nesieme my, vy zbierate zákazky.</span></h2>
-      <ul class="promise">
-        <li><svg><use href="#i-shield"/></svg><p><b>Záruka prvej kampane.</b> Ak z prvých 1&nbsp;000 firiem neodpíše ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo.</p></li>
-        <li><svg><use href="#i-ok"/></svg><p><b>Nič neodíde bez vás.</b> Cieľovku aj každý e-mail vidíte a schválite pred spustením.</p></li>
-        <li><svg><use href="#i-ok"/></svg><p><b>Žiadna viazanosť.</b> Platíte raz za kampaň. Žiadne licencie, mesačné poplatky ani provízie zo zákaziek. Všetko, čo zarobíte, je vaše.</p></li>
-      </ul>
+<!-- CENNÍK + ZÁRUKA -->
+<section class="risk-s price-s" id="cena">
+  <div class="pr-h">
+    <div>
+      <p class="label"><span>●</span>Cenník</p>
+      <h2>Zaplatíte raz. <span class="h-mut">Zákazky vám nosí celý rok.</span></h2>
     </div>
-    <div class="teaser-r">
-      <span class="sticker" aria-hidden="true"><b>+100</b>firiem<br>zadarmo</span>
-      <p class="c-lbl">Test · 1&nbsp;000 firiem</p>
-      <p class="c-price"><span>149</span><i>€</i></p>
-      <p class="c-sub">jednorazovo · bez DPH · oslovíme 1&nbsp;100 firiem</p>
-      <p class="c-anchor"><s>Obchodník 2&nbsp;100&nbsp;€ / mesiac</s></p>
-      <p class="c-roi">Pri zákazke za 1&nbsp;500&nbsp;€ stačí <b>jeden nový zákazník</b> a máte kampaň 10× zaplatenú.</p>
-      <ul class="c-inc"><li><svg><use href="#i-ok"/></svg>AI cieľovka a 3 e-maily vaším menom</li><li><svg><use href="#i-ok"/></svg>Úvodný e-mail + 2 pripomienky</li><li><svg><use href="#i-ok"/></svg>AI triedenie odpovedí a portál</li><li><svg><use href="#i-ok"/></svg>Všetci záujemcovia bez príplatku</li></ul>
-      <div class="teaser-acts"><a href="./objednat/?pocet=1000" class="btn btn-lime btn-block">Chcem prvých záujemcov<svg><use href="#i-arr"/></svg></a><a href="./cennik/" class="btn btn-ghost btn-block">Väčšia kampaň = nižšia cena za firmu</a></div>
-    </div>
+    <p class="pr-sub">Jednorazovo, bez DPH a bez viazanosti. Ku každej kampani <b>100 firiem zadarmo</b> a všetci záujemcovia bez príplatku.</p>
+  </div>
+  <div class="tiers">
+    <article class="tier-c">
+      <p class="tc-k">Test</p>
+      <p class="tc-n">1&nbsp;000 firiem <span>+100 zadarmo</span></p>
+      <p class="tc-p">149<i>€</i></p>
+      <p class="tc-per">0,149&nbsp;€ za firmu</p>
+      <dl class="tc-exp"><div><dt>Záujemcovia</dt><dd>22 – 44</dd></div><div><dt>Noví zákazníci</dt><dd>7 – 15</dd></div></dl>
+      <ul><li><svg><use href="#i-ok"/></svg>AI cieľovka a 3 e-maily</li><li><svg><use href="#i-ok"/></svg>AI triedenie odpovedí a portál</li><li><svg><use href="#i-ok"/></svg>Záruka prvej kampane</li></ul>
+      <a href="./objednat/?pocet=1000" class="btn btn-ghost btn-block">Začať testom<svg><use href="#i-arr"/></svg></a>
+    </article>
+    <article class="tier-c tc-top">
+      <p class="tc-badge">Najobľúbenejšie</p>
+      <p class="tc-k">Kampaň</p>
+      <p class="tc-n">3&nbsp;000 firiem <span>+100 zadarmo</span></p>
+      <p class="tc-p">349<i>€</i></p>
+      <p class="tc-per">0,116&nbsp;€ za firmu <b>−22&nbsp;%</b></p>
+      <dl class="tc-exp"><div><dt>Záujemcovia</dt><dd>62 – 124</dd></div><div><dt>Noví zákazníci</dt><dd>20 – 41</dd></div></dl>
+      <ul><li><svg><use href="#i-ok"/></svg>Všetko z Testu</li><li><svg><use href="#i-ok"/></svg>A/B test predmetov e-mailov</li><li><svg><use href="#i-ok"/></svg>Viac krajov aj odvetví naraz</li></ul>
+      <a href="./objednat/?pocet=3000" class="btn btn-lime btn-block">Chcem túto kampaň<svg><use href="#i-arr"/></svg></a>
+    </article>
+    <article class="tier-c">
+      <p class="tc-k">Rast</p>
+      <p class="tc-n">10&nbsp;000 firiem <span>+100 zadarmo</span></p>
+      <p class="tc-p">909<i>€</i></p>
+      <p class="tc-per">0,091&nbsp;€ za firmu <b>−39&nbsp;%</b></p>
+      <dl class="tc-exp"><div><dt>Záujemcovia</dt><dd>202 – 404</dd></div><div><dt>Noví zákazníci</dt><dd>67 – 133</dd></div></dl>
+      <ul><li><svg><use href="#i-ok"/></svg>Všetko z Kampane</li><li><svg><use href="#i-ok"/></svg>Celé Slovensko, všetky odvetvia</li><li><svg><use href="#i-ok"/></svg>Najnižšia cena za firmu</li></ul>
+      <a href="./objednat/?pocet=10000" class="btn btn-ghost btn-block">Chcem rásť<svg><use href="#i-arr"/></svg></a>
+    </article>
+  </div>
+  <div class="guar">
+    <div class="seal" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="sealP" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#sealP" textLength="486" lengthAdjust="spacing">ZÁRUKA PRVEJ KAMPANE · BEZ RIZIKA · </textPath></text></svg><span><svg><use href="#i-shield"/></svg></span></div>
+    <div class="guar-t"><h3>Nemáte čo stratiť.</h3><p>Ak z prvých 1&nbsp;000 firiem neodpíše ani jeden záujemca, ďalších 1&nbsp;000 oslovíme zadarmo. Cieľovku aj každý e-mail schválite pred spustením. Žiadne licencie ani provízie, všetko, čo zarobíte, je vaše.</p></div>
+    <a href="./cennik/" class="more">Iný počet firiem? Spočítajte si cenu<svg><use href="#i-arr"/></svg></a>
   </div>
 </section>
 
@@ -355,7 +375,7 @@
   </div>
   <div class="end-art g3d" data-3d="box" aria-label="3D ilustrácia: zelená schránka Mailito posiela obálky"></div>
 </section>
-<script type="module" src="./assets/clay3d.js?v=e29357ba"></script>
+<script type="module" src="./assets/clay3d.js?v=b2ef5b1e"></script>
 
 </main>
 
@@ -370,9 +390,9 @@
 </footer>
 
 <a href="./objednat/" class="mcta" id="mcta"><span class="mcta-t"><b>1&nbsp;100 firiem</b> za 149&nbsp;€</span><span class="mcta-b">Chcem zákazky<svg><use href="#i-arr"/></svg></span></a>
-<script src="./assets/plus.js?v=e29357ba" defer></script>
-<script src="./assets/site4.js?v=e29357ba" defer></script>
+<script src="./assets/plus.js?v=b2ef5b1e" defer></script>
+<script src="./assets/site4.js?v=b2ef5b1e" defer></script>
 
-<script type="module" src="./assets/hero3d.js?v=e29357ba"></script>
+<script type="module" src="./assets/hero3d.js?v=b2ef5b1e"></script>
 </body>
 </html>

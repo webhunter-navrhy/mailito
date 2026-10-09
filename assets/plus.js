@@ -182,4 +182,32 @@
       b.addEventListener('pointerleave', () => { b.style.transform = ''; });
     });
   }
+
+  // ===== ponuka pri odchode (desktop, raz za návštevu, nie v objednávke a portáli) =====
+  if (matchMedia('(pointer: fine)').matches && !/\/(objednat|portal)/.test(location.pathname) && !ss.get('mailito_exit')) {
+    const t0 = Date.now();
+    const ukaz = () => {
+      if (ss.get('mailito_exit') || Date.now() - t0 < 7000) return;
+      ss.set('mailito_exit', 1); ev('exit_ponuka');
+      const d = document.createElement('div'); d.className = 'exit'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'Ponuka');
+      d.innerHTML = `<div class="exit-c"><button type="button" class="exit-x" aria-label="Zavrieť">×</button>
+        <span class="pill-new">+100 firiem zadarmo</span>
+        <h3>Skôr než odídete: <em>pozrite sa zadarmo, koľko firiem vás potrebuje.</em></h3>
+        <p>Vložte web alebo napíšte, čo predávate. AI vám za pár minút ukáže cieľovku aj e-maily. Bez registrácie a bez platby.</p>
+        <form class="exit-f"><input name="v" placeholder="Váš web alebo čo predávate" aria-label="Váš web alebo čo predávate" autocomplete="off"><button class="btn btn-lime" type="submit">Ukázať zadarmo<svg><use href="#i-arr"/></svg></button></form>
+        <p class="exit-n">Platíte, až keď sa rozhodnete objednať. Záruka prvej kampane.</p></div>`;
+      document.body.appendChild(d);
+      const zavri = () => d.remove();
+      d.addEventListener('click', e => { if (e.target === d || e.target.closest('.exit-x')) zavri(); });
+      addEventListener('keydown', e => { if (e.key === 'Escape') zavri(); }, { once: true });
+      $('input', d).focus();
+      $('form', d).addEventListener('submit', e => {
+        e.preventDefault(); const v = $('input', d).value.trim(); if (v.length < 3) { $('input', d).focus(); return; }
+        ev('exit_odoslane');
+        const web = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i.test(v) && !/\s/.test(v);
+        location.href = BASE + 'objednat/?' + new URLSearchParams(web ? { web: v } : { ponuka: v });
+      });
+    };
+    document.addEventListener('mouseout', e => { if (!e.relatedTarget && e.clientY <= 4) ukaz(); });
+  }
 })();
