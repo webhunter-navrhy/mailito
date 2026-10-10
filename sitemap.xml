@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mailito.eu/</loc></url>
-  <url><loc>https://mailito.eu/ako-to-funguje/</loc></url>
-  <url><loc>https://mailito.eu/vysledky/</loc></url>
-  <url><loc>https://mailito.eu/cennik/</loc></url>
-  <url><loc>https://mailito.eu/otazky/</loc></url>
-  <url><loc>https://mailito.eu/objednat/</loc></url>
-  <url><loc>https://mailito.eu/pre/</loc></url>
-  <url><loc>https://mailito.eu/podmienky/</loc></url>
-  <url><loc>https://mailito.eu/preco/</loc></url>
-  <url><loc>https://mailito.eu/pre/upratovanie-hal/</loc></url>
-  <url><loc>https://mailito.eu/pre/uctovnictvo/</loc></url>
-  <url><loc>https://mailito.eu/pre/tvorba-webov/</loc></url>
-  <url><loc>https://mailito.eu/pre/it-sprava/</loc></url>
-  <url><loc>https://mailito.eu/pre/strojarska-vyroba/</loc></url>
-  <url><loc>https://mailito.eu/pre/bozp-a-po/</loc></url>
-  <url><loc>https://mailito.eu/pre/firemne-skolenia/</loc></url>
-  <url><loc>https://mailito.eu/pre/preklady/</loc></url>
-  <url><loc>https://mailito.eu/pre/ochrana-objektov/</loc></url>
-  <url><loc>https://mailito.eu/pre/catering/</loc></url>
-  <url><loc>https://mailito.eu/pre/reklamne-predmety/</loc></url>
-  <url><loc>https://mailito.eu/pre/personalna-agentura/</loc></url>
-  <url><loc>https://mailito.eu/pre/fotovoltika/</loc></url>
-  <url><loc>https://mailito.eu/pre/kamerove-systemy/</loc></url>
-  <url><loc>https://mailito.eu/pre/pracovne-odevy/</loc></url>
-  <url><loc>https://mailito.eu/pre/energeticke-audity/</loc></url>
-  <url><loc>https://mailito.eu/pre/firemne-darceky/</loc></url>
-  <url><loc>https://mailito.eu/pre/prenajom-techniky/</loc></url>
-  <url><loc>https://mailito.eu/pre/kancelarske-potreby/</loc></url>
-  <url><loc>https://mailito.eu/pre/autopozicovna/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url><loc>https://mailito.eu/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/></url>
+<url><loc>https://mailito.eu/sk/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/></url>
+<url><loc>https://mailito.eu/poptavka/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/></url>
+<url><loc>https://mailito.eu/sk/dopyt/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/></url>
+<url><loc>https://mailito.eu/podminky/</loc></url>
+<url><loc>https://mailito.eu/sk/podmienky/</loc></url>
+<url><loc>https://mailito.eu/odhlaseni/</loc></url>
+<url><loc>https://mailito.eu/preco/</loc></url>
 </urlset>

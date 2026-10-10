@@ -79,7 +79,7 @@
 
   // úvodný formulár: odvetvie → odhad, odoslanie
   const qSeg = $('#qSeg'), qMsg = $('#quickMsg'), q0 = qMsg.innerHTML;
-  fetch('data/trh.json?v=383eb46b').then(r => r.json()).then(d => {
+  fetch('data/trh.json?v=c0a0aa6f').then(r => r.json()).then(d => {
     qSeg.innerHTML = '<option value="">Vyberte odvetvie</option>' + d.segmenty.filter(x => x !== 'Ostatné').map(x => `<option>${x}</option>`).join('');
     qSeg.addEventListener('change', () => {
       const v = qSeg.value; qMsg.className = 'hero-note';

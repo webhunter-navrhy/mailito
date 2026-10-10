@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="sk">
+<html lang="cs">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Klientsky portál – Mailito</title>
+<title>Klientský portál – Mailito</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site2.css?v=383eb46b">
-<link rel="stylesheet" href="portal.css?v=383eb46b">
-<script defer src="../assets/ev.js?v=383eb46b" data-pv-only></script>
+<link rel="stylesheet" href="../assets/site2.css?v=c0a0aa6f">
+<link rel="stylesheet" href="portal.css?v=c0a0aa6f">
+<script defer src="../assets/ev.js?v=c0a0aa6f" data-pv-only></script>
 </head>
 <body class="app-body">
 
@@ -22,20 +22,20 @@
       <span class="logo-m" aria-hidden="true"></span>
       mailito
     </a>
-    <h1>Klientsky portál</h1>
-    <p class="muted">Prihláste sa údajmi, ktoré ste dostali e-mailom pri spustení kampane.</p>
+    <h1 data-t="portal">Klientský portál</h1>
+    <p class="muted" data-t="loginTxt"></p>
     <form id="loginForm" class="form login-form">
       <label>E-mail<input name="email" type="email" autocomplete="username" required></label>
-      <label>Heslo<input name="heslo" type="password" autocomplete="current-password" required></label>
-      <button class="btn btn-red btn-block" type="submit">Prihlásiť sa <span aria-hidden="true">→</span></button>
+      <label><span data-t="heslo">Heslo</span><input name="heslo" type="password" autocomplete="current-password" required></label>
+      <button class="btn btn-red btn-block" type="submit"><span data-t="prihlasit"></span> <span aria-hidden="true">→</span></button>
       <p class="form-msg" id="loginMsg" role="status"></p>
     </form>
-    <p class="login-alt">Ešte nemáte kampaň? <a href="./?demo=1">Pozrite si ukážku portálu</a> alebo <a href="../objednat/">objednajte kampaň</a>.</p>
-    <p class="login-alt">Zabudli ste heslo? Napíšte na <a href="mailto:info.webhunter@email.cz">info.webhunter@email.cz</a>.</p>
+    <p class="login-alt" data-t="loginAlt1"></p>
+    <p class="login-alt" data-t="loginAlt2"></p>
   </div>
   <div class="login-art" aria-hidden="true">
     <div class="la-3d g3d" data-3d="box"></div>
-    <p class="la-big">Vaši záujemcovia<br><em>na jednom mieste.</em></p>
+    <p class="la-big" data-t="laBig"></p>
   </div>
 </section>
 
@@ -47,23 +47,23 @@
       mailito
     </a>
     <nav class="side-nav" aria-label="Portál">
-      <a href="#prehlad" data-v="prehlad"><i class="ic ic-home"></i>Prehľad</a>
-      <a href="#zaujemcovia" data-v="zaujemcovia"><i class="ic ic-lead"></i>Záujemcovia <b class="badge" id="badgeNew" hidden></b></a>
-      <a href="#kampane" data-v="kampane"><i class="ic ic-camp"></i>Kampane</a>
-      <a href="#ucet" data-v="ucet"><i class="ic ic-user"></i>Účet</a>
+      <a href="#prehlad" data-v="prehlad"><i class="ic ic-home"></i><span data-t="prehlad"></span></a>
+      <a href="#zaujemcovia" data-v="zaujemcovia"><i class="ic ic-lead"></i><span data-t="zaujemcovia"></span> <b class="badge" id="badgeNew" hidden></b></a>
+      <a href="#kampane" data-v="kampane"><i class="ic ic-camp"></i><span data-t="kampane"></span></a>
+      <a href="#ucet" data-v="ucet"><i class="ic ic-user"></i><span data-t="ucet"></span></a>
     </nav>
-    <button class="btn btn-red btn-block" id="btnNova" type="button">+ Nová kampaň</button>
+    <button class="btn btn-red btn-block" id="btnNova" type="button" data-t="nova"></button>
     <div class="side-foot">
       <p class="side-client" id="sideClient"></p>
-      <button class="linkbtn" id="btnLogout" type="button">Odhlásiť sa</button>
+      <button class="linkbtn" id="btnLogout" type="button" data-t="odhlasit"></button>
     </div>
   </aside>
 
   <div class="main">
     <header class="top">
       <button class="burger side-burger" id="sideBurger" aria-label="Menu"><span></span><span></span></button>
-      <h1 class="top-h" id="topH">Preh<span class="dk">ľ</span>ad</h1>
-      <p class="demo-flag" id="demoFlag" hidden>Ukážka · zmeny sa neukladajú · <a href="../#zadanie">Chcem vlastnú kampaň</a></p>
+      <h1 class="top-h" id="topH"></h1>
+      <p class="demo-flag" id="demoFlag" hidden data-t="demoFlag"></p>
     </header>
     <div class="view" id="view"></div>
   </div>
@@ -73,7 +73,7 @@
 <div class="drawer" id="drawer" hidden>
   <div class="drawer-bg" data-close></div>
   <aside class="drawer-in" role="dialog" aria-modal="true" aria-labelledby="dwTitle">
-    <button class="drawer-x" data-close aria-label="Zavrieť">×</button>
+    <button class="drawer-x" data-close aria-label="×">×</button>
     <div id="drawerBody"></div>
   </aside>
 </div>
@@ -83,17 +83,17 @@
   <div class="drawer-bg" data-close></div>
   <aside class="drawer-in" role="dialog" aria-modal="true" aria-labelledby="nkTitle">
     <button class="drawer-x" data-close aria-label="Zavrieť">×</button>
-    <p class="kicker">Nová kampaň</p>
-    <h2 id="nkTitle" class="dw-h">Komu chcete predávať teraz?</h2>
-    <p class="muted">Návrh cieľovky a textov vám pripravíme do 2 pracovných dní. Objaví sa v sekcii Kampane na schválenie.</p>
+    <p class="kicker" data-t="novaKicker"></p>
+    <h2 id="nkTitle" class="dw-h" data-t="novaH"></h2>
+    <p class="muted" data-t="novaTxt"></p>
     <form id="novaForm" class="form form-flat">
-      <label>Čo ponúkate?<textarea name="ponuka" rows="3" required></textarea></label>
-      <label>Kto je ideálny zákazník?<textarea name="zakaznik" rows="3"></textarea></label>
-      <label>Počet firiem
-        <select name="balik" id="nkPocet"></select>
+      <label><span data-t="ponuka"></span><textarea name="ponuka" rows="3" required></textarea></label>
+      <label><span data-t="zakaznik"></span><textarea name="zakaznik" rows="3"></textarea></label>
+      <label><span data-t="objem"></span>
+        <select name="objem" id="nkObjem"></select>
       </label>
-      <label>Poznámka<textarea name="poznamka" rows="2" placeholder="Kraje, veľkosť firiem, čo sa osvedčilo…"></textarea></label>
-      <button class="btn btn-red btn-block" type="submit">Poslať zadanie</button>
+      <label><span data-t="poznamka"></span><textarea name="poznamka" rows="2" data-tp="poznPh"></textarea></label>
+      <button class="btn btn-red btn-block" type="submit" data-t="poslatZad"></button>
       <p class="form-msg" id="novaMsg" role="status"></p>
     </form>
   </aside>
@@ -101,7 +101,7 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="portal.js?v=383eb46b" defer></script>
-<script type="module" src="../assets/clay3d.js?v=383eb46b"></script>
+<script src="portal.js?v=c0a0aa6f" defer></script>
+<script type="module" src="../assets/clay3d.js?v=c0a0aa6f"></script>
 </body>
 </html>
