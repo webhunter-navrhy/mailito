@@ -92,6 +92,23 @@
     setTimeout(() => { ukaz(); setInterval(ukaz, 6500); }, 2200);
   }
 
+  // ===== v8: živý přísun zájemců v rámu úvodu =====
+  const feed = $('#feed');
+  if (feed && !reduce) {
+    const dalsi = SK ? [['Elektro Košice s.r.o.', '„Koľko by to stálo pre 3 prevádzky?“'], ['Kovo Prešov s.r.o.', '„Áno, máme záujem. Zavolajte.“'], ['Obaly Senec a.s.', '„Pošlite ponuku na budúci týždeň.“']]
+                     : [['Elektro Ostrava s.r.o.', '„Kolik by to stálo pro 3 provozovny?“'], ['Kovo Jihlava s.r.o.', '„Ano, máme zájem. Ozvěte se.“'], ['Obaly Plzeň a.s.', '„Pošlete nabídku na příští týden.“']];
+    const ted = SK ? 'práve teraz' : 'právě teď';
+    let k = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      const [f, t] = dalsi[k++ % dalsi.length];
+      const li = document.createElement('li'); li.className = 'fc new';
+      li.innerHTML = `<span class="fc-av">${esc(f[0])}</span><div><b>${esc(f)}</b><p>${esc(t)}</p></div><time>${ted}</time>`;
+      feed.prepend(li);
+      while (feed.children.length > 4) feed.lastElementChild.remove();
+    }, 5200);
+  }
+
   // ===== návštěvník z našeho e-mailu =====
   const fm = $('#fromMail');
   if (fm && (qp.get('z') === 'mail' || /mail/i.test(qp.get('utm_medium') || ''))) {
