@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url><loc>https://mailito.eu/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/></url>
-<url><loc>https://mailito.eu/sk/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/></url>
-<url><loc>https://mailito.eu/poptavka/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/></url>
-<url><loc>https://mailito.eu/sk/dopyt/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/></url>
-<url><loc>https://mailito.eu/podminky/</loc></url>
-<url><loc>https://mailito.eu/sk/podmienky/</loc></url>
+<url><loc>https://mailito.eu/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/"/></url>
+<url><loc>https://mailito.eu/sk/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/"/></url>
+<url><loc>https://mailito.eu/en/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/"/></url>
+<url><loc>https://mailito.eu/poptavka/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/contact/"/></url>
+<url><loc>https://mailito.eu/sk/dopyt/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/contact/"/></url>
+<url><loc>https://mailito.eu/en/contact/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/poptavka/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/dopyt/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/contact/"/></url>
+<url><loc>https://mailito.eu/podminky/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/podminky/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/podmienky/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/terms/"/></url>
+<url><loc>https://mailito.eu/sk/podmienky/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/podminky/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/podmienky/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/terms/"/></url>
+<url><loc>https://mailito.eu/en/terms/</loc><xhtml:link rel="alternate" hreflang="cs" href="https://mailito.eu/podminky/"/><xhtml:link rel="alternate" hreflang="sk" href="https://mailito.eu/sk/podmienky/"/><xhtml:link rel="alternate" hreflang="en" href="https://mailito.eu/en/terms/"/></url>
 <url><loc>https://mailito.eu/odhlaseni/</loc></url>
 <url><loc>https://mailito.eu/preco/</loc></url>
 </urlset>

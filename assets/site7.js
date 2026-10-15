@@ -5,11 +5,18 @@
   const API = 'https://mailito-api.webhunter.workers.dev';
   const BASE = new URL('../', (document.currentScript || {}).src || location.href);
   const SK = document.documentElement.lang === 'sk';
+  const EN = document.documentElement.lang === 'en';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const qp = new URLSearchParams(location.search);
   const store = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const T = SK ? {
+  const T = EN ? {
+    posielam: 'Sending…', chyba: 'Could not send. Please try again or write to info.webhunter@email.cz.',
+    meno: 'Please enter your name.', email: 'Please enter a valid e-mail.', ponuka: 'Please tell us what you sell.',
+    ahoj: f => `${f}, we find companies that could buy from you and hand you only the interested ones.`,
+    novy: 'New lead',
+    toasty: [['Stavby Brno s.r.o.', '“Please send us an offer, we need it this month.”'], ['Logistika Kolín a.s.', '“Can we meet on Tuesday?”'], ['Plasty Zlín s.r.o.', '“Yes, send the price list.”']],
+  } : SK ? {
     posielam: 'Odosielam…', chyba: 'Nepodarilo sa odoslať. Skúste to znova alebo napíšte na info.webhunter@email.cz.',
     meno: 'Napíšte, prosím, svoje meno.', email: 'Zadajte platný e-mail.', ponuka: 'Napíšte, čo predávate.',
     ahoj: f => `${f}, nájdeme firmy, ktoré od vás môžu kúpiť, a odovzdáme vám len záujemcov.`,
@@ -97,7 +104,7 @@
   if (feed && !reduce) {
     const dalsi = SK ? [['Elektro Košice s.r.o.', '„Koľko by to stálo pre 3 prevádzky?“'], ['Kovo Prešov s.r.o.', '„Áno, máme záujem. Zavolajte.“'], ['Obaly Senec a.s.', '„Pošlite ponuku na budúci týždeň.“']]
                      : [['Elektro Ostrava s.r.o.', '„Kolik by to stálo pro 3 provozovny?“'], ['Kovo Jihlava s.r.o.', '„Ano, máme zájem. Ozvěte se.“'], ['Obaly Plzeň a.s.', '„Pošlete nabídku na příští týden.“']];
-    const ted = SK ? 'práve teraz' : 'právě teď';
+    const ted = EN ? 'just now' : SK ? 'práve teraz' : 'právě teď';
     let k = 0;
     setInterval(() => {
       if (document.hidden) return;
@@ -129,7 +136,7 @@
   if (ja?.firma && sub) sub.innerHTML = T.ahoj(`<b style="color:var(--brass2);font-weight:400">${esc(ja.firma.replace(/,?\s*(s\.\s?r\.\s?o\.|a\.\s?s\.|spol\..*)$/i, ''))}</b>`);
 
   // ===== plovoucí výzva (mobil) =====
-  const mcta = $('#mcta'), hero = $('.hero'), inq = $('#poptavka');
+  const mcta = $('#mcta'), hero = $('.hero, .hero9'), inq = $('#poptavka');
   if (mcta) {
     let vHero = !!hero, vInq = false;
     const upd = () => mcta.classList.toggle('on', !vHero && !vInq);
@@ -158,7 +165,7 @@
       msg.className = 'form-msg'; msg.textContent = T.posielam;
       const d = {
         meno: f.meno.value.trim(), firma: ja?.firma || '', email: f.email.value.trim(), web: ja?.web || '',
-        ponuka: f.ponuka.value.trim(), zeme: [f.zeme.value], objem: ($('[name=balik]:checked', f) || {}).value || '', jazyk: SK ? 'sk' : 'cs',
+        ponuka: f.ponuka.value.trim(), zeme: String(f.zeme.value || '').split('+'), objem: ($('[name=balik]:checked', f) || {}).value || '', jazyk: EN ? 'en' : SK ? 'sk' : 'cs',
         zdroj: [location.pathname, qp.get('z') && 'z=' + qp.get('z'), qp.get('utm_source') && 'utm=' + qp.get('utm_source'), ja?.firma && 'odkaz:' + ja.firma,
           document.referrer && !document.referrer.includes(location.host) && 'ref=' + new URL(document.referrer).hostname].filter(Boolean).join(' · ').slice(0, 200),
       };
