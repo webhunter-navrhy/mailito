@@ -20,13 +20,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/site7.css?v=234200c7">
-<link rel="stylesheet" href="./assets/site9.css?v=234200c7">
-<script defer src="./assets/ev.js?v=234200c7"></script>
+<link rel="stylesheet" href="./assets/site7.css?v=f77d607e">
+<link rel="stylesheet" href="./assets/site9.css?v=f77d607e">
+<script defer src="./assets/ev.js?v=f77d607e"></script>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"Mailito – B2B outreach na míru","serviceType":"B2B lead generation, cold e-mail outreach","url":"https://mailito.eu/","areaServed":["CZ","SK"],"inLanguage":"cs","provider":{"@type":"Organization","name":"Mailito","url":"https://mailito.eu/","email":"info@mailito.eu"},
-"offers":[{"@type":"Offer","name":"Start – 3 000 e-mailů","price":"9900","priceCurrency":"CZK"},{"@type":"Offer","name":"Růst – 9 000 e-mailů","price":"19900","priceCurrency":"CZK"},{"@type":"Offer","name":"Celý trh – 30 000 e-mailů","price":"49900","priceCurrency":"CZK"}]}
+{"@context":"https://schema.org","@type":"Service","name":"Mailito – B2B outreach na míru","serviceType":"B2B lead generation, cold e-mail outreach","url":"https://mailito.eu/","areaServed":["CZ","SK"],"inLanguage":"cs","provider":{"@type":"Organization","name":"Mailito","url":"https://mailito.eu/","email":"info@mailito.eu"}}
 </script>
 </head>
 <body>
@@ -60,7 +59,7 @@
     <a href="./" class="logo" aria-label="Mailito – domů"><span class="mono" aria-hidden="true">M</span>Mailito</a>
     <nav class="menu" id="menu" aria-label="Hlavní navigace">
       <a href="./#postup">Jak to funguje</a>
-      <a href="./#balicky">Balíčky</a>
+      <a href="./#balicky">Cena</a>
       <a href="./#garance">Garance</a>
       <a href="./#otazky">Otázky</a>
       <a href="./portal/">Přihlásit se</a>
@@ -150,7 +149,7 @@
     </div>
     <div class="calc-r rv" aria-live="polite">
       <p class="cr-n"><b id="cN">0</b><span>firem v naší databázi</span></p>
-      <div class="cr-row"><div><small>Doporučujeme</small><b id="cBal">–</b><em id="cCena"></em></div><div><small>odhad zájemců z doporučeného balíčku</small><b id="cZaj">–</b></div></div>
+      <div class="cr-row"><div><small>Doporučený rozsah</small><b id="cBal">–</b><em id="cCena"></em></div><div><small>odhad zájemců při tomto rozsahu</small><b id="cZaj">–</b></div></div>
       <div class="cr-bar"><i id="cBar"></i></div>
       <a href="#poptavka" class="btn btn-block" id="cCta" data-ev="kalkulacka_cta">Chci mapu trhu pro tento výběr</a>
       <p class="cr-pozn" id="cPozn">Odhad pro dobře cílenou kampaň (2–4 % oslovených). Přesná čísla pošleme v mapě trhu.</p>
@@ -161,14 +160,14 @@
 <section class="sec9 tint" id="balicky">
   <div class="wrap">
     <div class="head9 c">
-      <span class="label9 rv">— Balíčky</span>
-      <h2 class="h9 rv">Platíte za e-maily. <span>Ne za měsíce.</span></h2>
-      <p class="lead9 rv">Jednorázově, bez předplatného. V ceně databáze, texty, rozesílání, třídění odpovědí a klientský portál.</p>
+      <span class="label9 rv">— Cena</span>
+      <h2 class="h9 rv">Cena na míru. <span>Podle vašeho trhu.</span></h2>
+      <p class="lead9 rv">Každý trh je jinak velký, proto nemáme ceník. Z mapy trhu spočítáme, kolik firem má smysl oslovit, a pošleme vám konkrétní cenu. Jednorázově, bez předplatného.</p>
     </div>
-    <div class="pk9-g"><div class="pk9 rv"><div class="pk9-top"><h3>Start</h3></div><p class="vol">3 000</p><p class="vs">e-mailů · 1 000 firem</p><p class="price">9 900 Kč<small>bez DPH</small></p><p class="est">20–40 zájemců*</p><a href="#poptavka" class="btn btn-soft btn-block" data-balik="Start" data-ev="balik_start">Vybrat</a></div><div class="pk9 hl rv"><div class="pk9-top"><h3>Růst</h3><span class="pk-flag">Nejčastější</span></div><p class="vol">9 000</p><p class="vs">e-mailů · 3 000 firem</p><p class="price">19 900 Kč<small>bez DPH</small></p><p class="est">60–120 zájemců*</p><a href="#poptavka" class="btn btn-block" data-balik="Růst" data-ev="balik_rust">Vybrat</a></div><div class="pk9 rv"><div class="pk9-top"><h3>Celý trh</h3></div><p class="vol">30 000</p><p class="vs">e-mailů · 10 000 firem</p><p class="price">49 900 Kč<small>bez DPH</small></p><p class="est">200–400 zájemců*</p><a href="#poptavka" class="btn btn-soft btn-block" data-balik="Celý trh" data-ev="balik_cely">Vybrat</a></div></div>
-    <div class="vcene rv"><p class="vcene-h">V každém balíčku</p><ul><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Mapa trhu</b><span>kolik firem z Vaší cílovky existuje</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Texty na míru</b><span>3 e-maily Vaším jménem, schválíte je Vy</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Strážce doručitelnosti</b><span>ověřené adresy a zahřáté schránky</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Třídění odpovědí</b><span>odmítnutí a automaty odfiltrujeme</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Zájemce hned</b><span>upozornění, jakmile firma odpoví</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Klientský portál</b><span>zájemci, průběh a faktury na jednom místě</span></div></li></ul></div>
-    <div class="dal9 rv"><p class="vcene-h">Když budete chtít pokračovat</p><ul><li><span class="dal-i">1</span><b>Přechod na větší balíček</b><p>Do 30 dnů od spuštění Startu přejdete na Růst nebo Celý trh a cenu Startu Vám odečteme.</p></li><li><span class="dal-i">2</span><b>Další vlna o 10 % levněji</b><p>Další firmy ze stejné cílovky a znovu ti, kdo neodpověděli, novým textem. Sleva platí při objednání před koncem běžící kampaně.</p></li><li><span class="dal-i">3</span><b>Doplňky na míru</b><p>Vlastní odesílací doména na Vaše jméno, druhá cílovka nebo rychlejší start.</p></li></ul></div>
-    <p class="pk-note9 rv">Větší objem <a href="#poptavka" data-balik="Na míru">na míru</a>. * Odhad pro dobře cílenou kampaň, záleží na oboru a nabídce.</p>
+    <div class="dal9 rv"><p class="vcene-h">Jak vzniká cena</p><ul><li><span class="dal-i">1</span><b>Mapa trhu zdarma</b><p>Spočítáme, kolik firem z vaší cílovky existuje, podle krajů a oborů.</p></li><li><span class="dal-i">2</span><b>Návrh s cenou</b><p>Rozsah, ukázka textů a cena podle počtu firem a náročnosti cílovky.</p></li><li><span class="dal-i">3</span><b>Platíte až po schválení</b><p>Jednorázově fakturou, až když schválíte texty. Bez závazku.</p></li></ul></div>
+    <div class="vcene rv"><p class="vcene-h">V každé kampani</p><ul><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Mapa trhu</b><span>kolik firem z Vaší cílovky existuje</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Texty na míru</b><span>3 e-maily Vaším jménem, schválíte je Vy</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Strážce doručitelnosti</b><span>ověřené adresy a zahřáté schránky</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Třídění odpovědí</b><span>odmítnutí a automaty odfiltrujeme</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Zájemce hned</b><span>upozornění, jakmile firma odpoví</span></div></li><li><svg class="ic"><use href="#i-ok"/></svg><div><b>Klientský portál</b><span>zájemci, průběh a faktury na jednom místě</span></div></li></ul></div>
+    <div class="dal9 rv"><p class="vcene-h">Když budete chtít pokračovat</p><ul><li><span class="dal-i">1</span><b>Další vlna o 10 % levněji</b><p>Další firmy ze stejné cílovky a znovu ti, kdo neodpověděli, novým textem. Sleva platí při objednání před koncem běžící kampaně.</p></li><li><span class="dal-i">2</span><b>Rozšíření kdykoli</b><p>Další kraje, obory nebo Slovensko. Naceníme stejně jako první kampaň.</p></li><li><span class="dal-i">3</span><b>Doplňky na míru</b><p>Vlastní odesílací doména na Vaše jméno, druhá cílovka nebo rychlejší start.</p></li></ul></div>
+    <p class="pk-note9 rv"><a href="#poptavka" class="btn" data-ev="cena_cta">Chci cenu pro svůj trh<svg><use href="#i-arr"/></svg></a><br>Cenu dostanete do 2 pracovních dnů spolu s mapou trhu. Zdarma a bez závazku.</p>
   </div>
 </section>
 
@@ -178,7 +177,7 @@
       <span class="label9 rv">— Srovnání</span>
       <h2 class="h9 rv">Kolik stojí nový zákazník. <span>Tři cesty.</span></h2>
     </div>
-    <div class="sv-g"><div class="sv rv"><h3>Obchodník</h3><p class="sv-c">45–60 tis. Kč<small>měsíčně</small></p><ul><li><i></i>mzda, auto, telefon</li><li><i></i>obvolá stovky firem měsíčně</li><li><i></i>zaučení a odchody</li></ul></div><div class="sv rv"><h3>Reklama</h3><p class="sv-c">od 15 tis. Kč<small>měsíčně</small></p><ul><li><i></i>platíte za kliky, ne za zájemce</li><li><i></i>firmy se špatně cílí</li><li><i></i>konkurence v aukci</li></ul></div><div class="sv hl rv"><h3>Mailito</h3><p class="sv-c">od 9 900 Kč<small>jednorázově</small></p><ul><li><svg class="ic"><use href="#i-ok"/></svg>1 000 až 10 000 firem</li><li><svg class="ic"><use href="#i-ok"/></svg>jen zájemci do portálu</li><li><svg class="ic"><use href="#i-ok"/></svg>platíte až po schválení textů</li></ul><a href="#poptavka" class="btn btn-block" data-ev="srov_cta">Mapa trhu zdarma</a></div></div>
+    <div class="sv-g"><div class="sv rv"><h3>Obchodník</h3><p class="sv-c">45–60 tis. Kč<small>měsíčně</small></p><ul><li><i></i>mzda, auto, telefon</li><li><i></i>obvolá stovky firem měsíčně</li><li><i></i>zaučení a odchody</li></ul></div><div class="sv rv"><h3>Reklama</h3><p class="sv-c">od 15 tis. Kč<small>měsíčně</small></p><ul><li><i></i>platíte za kliky, ne za zájemce</li><li><i></i>firmy se špatně cílí</li><li><i></i>konkurence v aukci</li></ul></div><div class="sv hl rv"><h3>Mailito</h3><p class="sv-c">Na míru<small>jednorázově, podle trhu</small></p><ul><li><svg class="ic"><use href="#i-ok"/></svg>1 000 až 10 000 firem</li><li><svg class="ic"><use href="#i-ok"/></svg>jen zájemci do portálu</li><li><svg class="ic"><use href="#i-ok"/></svg>platíte až po schválení textů</li></ul><a href="#poptavka" class="btn btn-block" data-ev="srov_cta">Mapa trhu zdarma</a></div></div>
   </div>
 </section>
 
@@ -198,7 +197,7 @@
 <section class="sec9" id="otazky">
   <div class="wrap faq9">
     <div><span class="label9 rv">— Otázky</span><h2 class="h9 rv">Krátce <span>a jasně.</span></h2><p class="lead9 rv">Něco dalšího? Napište na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.</p></div>
-    <div class="faq rv"><details><summary>Co musím dělat já?</summary><p>Schválit texty a odpovídat zájemcům. Všechno ostatní děláme my.</p></details><details><summary>Nepoškodí to naši doménu?</summary><p>Ne. Rozesíláme z naší infrastruktury, ne z vaší firemní pošty.</p></details><details><summary>Je to legální?</summary><p>Oslovujeme jen firmy a jejich zveřejněné kontakty. Každý e-mail má identifikaci odesílatele a odhlášení jedním krokem.</p></details><details><summary>Kdo je zájemce?</summary><p>Firma, která odepíše, že chce nabídku, ceník nebo schůzku. Odmítnutí ani automatické odpovědi se nepočítají.</p></details><details><summary>Jak se platí?</summary><p>Jednorázově fakturou, až po schválení textů. Bez předplatného a závazku.</p></details><details><summary>Co když budu chtít pokračovat?</summary><p>Do 30 dnů od spuštění Startu přejdete na větší balíček a cenu Startu odečteme. Další vlnu objednanou před koncem běžící kampaně máte o 10 % levněji.</p></details></div>
+    <div class="faq rv"><details><summary>Co musím dělat já?</summary><p>Schválit texty a odpovídat zájemcům. Všechno ostatní děláme my.</p></details><details><summary>Nepoškodí to naši doménu?</summary><p>Ne. Rozesíláme z naší infrastruktury, ne z vaší firemní pošty.</p></details><details><summary>Je to legální?</summary><p>Oslovujeme jen firmy a jejich zveřejněné kontakty. Každý e-mail má identifikaci odesílatele a odhlášení jedním krokem.</p></details><details><summary>Kdo je zájemce?</summary><p>Firma, která odepíše, že chce nabídku, ceník nebo schůzku. Odmítnutí ani automatické odpovědi se nepočítají.</p></details><details><summary>Jak se platí?</summary><p>Jednorázově fakturou, až po schválení textů. Bez předplatného a závazku.</p></details><details><summary>Kolik to stojí?</summary><p>Cenu děláme každému na míru podle velikosti cílovky a počtu oslovených firem. Pošleme ji spolu s mapou trhu do 2 pracovních dnů, zdarma a bez závazku.</p></details><details><summary>Co když budu chtít pokračovat?</summary><p>Další vlnu objednanou před koncem běžící kampaně máte o 10 % levněji. Rozšíření na další kraje nebo obory naceníme na míru.</p></details></div>
   </div>
 </section>
 
@@ -218,10 +217,10 @@
       <label class="fld"><input name="meno" autocomplete="name" placeholder=" " required><span>Jméno</span></label>
       <label class="fld"><input name="email" type="email" autocomplete="email" placeholder=" " required><span>E-mail</span></label>
       <label class="fld"><textarea name="ponuka" rows="2" placeholder=" " required></textarea><span>Co prodáváte a komu?</span></label>
-      <fieldset class="chips"><legend>Balíček</legend>
-        <label><input type="radio" name="balik" value="Start (3 000 e-mailů)"><span>Start</span></label>
-        <label><input type="radio" name="balik" value="Růst (9 000 e-mailů)"><span>Růst</span></label>
-        <label><input type="radio" name="balik" value="Celý trh (30 000 e-mailů)"><span>Celý trh</span></label>
+      <fieldset class="chips"><legend>Kolik firem chcete oslovit?</legend>
+        <label><input type="radio" name="balik" value="1 000 firem"><span>1 000 firem</span></label>
+        <label><input type="radio" name="balik" value="3 000 firem"><span>3 000 firem</span></label>
+        <label><input type="radio" name="balik" value="10 000 firem"><span>10 000 firem</span></label>
         <label><input type="radio" name="balik" value="Zatím nevím" checked><span>Zatím nevím</span></label>
       </fieldset>
       <input type="hidden" name="zeme" value="CZ">
@@ -238,19 +237,19 @@
     </div>
   </div></div>
 </section>
-<script type="application/json" id="d9">{"calc": {"l": "Spočítejte si trh", "h": "Kolik firem od Vás může koupit? <span>Zkuste to.<\/span>", "q1": "Komu prodáváte?", "q2": "Kde?", "zeme": [["CZ", "Česko"], ["SK", "Slovensko"], ["CZ+SK", "Obojí"]], "vse": "Všechny kraje", "firem": "firem v naší databázi", "zaj": "odhad zájemců z doporučeného balíčku", "dop": "Doporučujeme", "cta": "Chci mapu trhu pro tento výběr", "pozn": "Odhad pro dobře cílenou kampaň (2–4 % oslovených). Přesná čísla pošleme v mapě trhu.", "vyber": "Vyberte aspoň jeden obor.", "prefill": "Prodávám firmám z oborů: {o}. Region: {r}.", "bal": [["Start", "9 900 Kč", 1000], ["Růst", "19 900 Kč", 3000], ["Celý trh", "49 900 Kč", 10000]]}, "obory": {"stav": "Stavebnictví a řemesla", "vyr": "Výroba a průmysl", "sluz": "Služby firmám", "vo": "Velkoobchod a distribuce", "it": "IT, marketing a média", "gas": "Gastro a ubytování", "auto": "Auto-moto", "log": "Logistika a doprava"}, "portal": {"h": "Portál · Zájemci", "novy": "nový", "leads": [["Stavby Brno s.r.o.", "chce ceník bednění", "před 2 min"], ["Logistika Kolín a.s.", "schůzka v úterý", "před 1 h"], ["Plasty Zlín s.r.o.", "pošlete nabídku", "včera"]], "dalsi": [["Elektro Ostrava s.r.o.", "kolik stojí 3 provozovny?"], ["Kovo Jihlava s.r.o.", "máme zájem, ozvěte se"], ["Obaly Plzeň a.s.", "nabídku na příští týden"], ["Úklid Praha s.r.o.", "pošlete ceník"]], "ted": "právě teď"}, "odpovedi": [["Stavby Brno s.r.o.", "„Pošlete prosím nabídku.“"], ["Logistika Kolín a.s.", "„Můžeme se potkat v úterý?“"], ["Plasty Zlín s.r.o.", "„Ano, pošlete ceník.“"]], "lang": "cs"}</script>
+<script type="application/json" id="d9">{"calc": {"l": "Spočítejte si trh", "h": "Kolik firem od Vás může koupit? <span>Zkuste to.<\/span>", "q1": "Komu prodáváte?", "q2": "Kde?", "zeme": [["CZ", "Česko"], ["SK", "Slovensko"], ["CZ+SK", "Obojí"]], "vse": "Všechny kraje", "firem": "firem v naší databázi", "zaj": "odhad zájemců při tomto rozsahu", "dop": "Doporučujeme", "cta": "Chci mapu trhu pro tento výběr", "pozn": "Odhad pro dobře cílenou kampaň (2–4 % oslovených). Přesná čísla pošleme v mapě trhu.", "vyber": "Vyberte aspoň jeden obor.", "prefill": "Prodávám firmám z oborů: {o}. Region: {r}.", "bal": [["1 000 firem", "", 1000], ["3 000 firem", "", 3000], ["10 000 firem", "", 10000]]}, "obory": {"stav": "Stavebnictví a řemesla", "vyr": "Výroba a průmysl", "sluz": "Služby firmám", "vo": "Velkoobchod a distribuce", "it": "IT, marketing a média", "gas": "Gastro a ubytování", "auto": "Auto-moto", "log": "Logistika a doprava"}, "portal": {"h": "Portál · Zájemci", "novy": "nový", "leads": [["Stavby Brno s.r.o.", "chce ceník bednění", "před 2 min"], ["Logistika Kolín a.s.", "schůzka v úterý", "před 1 h"], ["Plasty Zlín s.r.o.", "pošlete nabídku", "včera"]], "dalsi": [["Elektro Ostrava s.r.o.", "kolik stojí 3 provozovny?"], ["Kovo Jihlava s.r.o.", "máme zájem, ozvěte se"], ["Obaly Plzeň a.s.", "nabídku na příští týden"], ["Úklid Praha s.r.o.", "pošlete ceník"]], "ted": "právě teď"}, "odpovedi": [["Stavby Brno s.r.o.", "„Pošlete prosím nabídku.“"], ["Logistika Kolín a.s.", "„Můžeme se potkat v úterý?“"], ["Plasty Zlín s.r.o.", "„Ano, pošlete ceník.“"]], "lang": "cs"}</script>
 </main>
 <footer class="foot">
   <p class="foot-word" aria-hidden="true">Mailito</p>
   <div class="foot-in">
     <a href="./" class="logo"><span class="mono" aria-hidden="true">M</span>Mailito</a>
-    <nav aria-label="Patička"><a href="./#balicky">Balíčky</a><a href="./portal/">Portál</a><a href="./podminky/">Podmínky</a><a href="./odhlaseni/">Proč jste dostali e-mail</a><a href="./sk/" hreflang="sk" data-lang="sk">Slovensky</a><a href="./en/" hreflang="en" data-lang="en">English</a><a href="mailto:info@mailito.eu">Kontakt</a></nav>
+    <nav aria-label="Patička"><a href="./#balicky">Cena</a><a href="./portal/">Portál</a><a href="./podminky/">Podmínky</a><a href="./odhlaseni/">Proč jste dostali e-mail</a><a href="./sk/" hreflang="sk" data-lang="sk">Slovensky</a><a href="./en/" hreflang="en" data-lang="en">English</a><a href="mailto:info@mailito.eu">Kontakt</a></nav>
   </div>
   <p class="foot-small">© 2026 Mailito · <a href="mailto:info@mailito.eu">info@mailito.eu</a></p>
 </footer>
 <a href="./#poptavka" class="mcta" id="mcta" data-ev="cta_poptavka_mcta">Mapa trhu zdarma<svg><use href="#i-arr"/></svg></a>
-<script src="./assets/site7.js?v=234200c7" defer></script>
-<script src="./assets/site9.js?v=234200c7" defer></script>
+<script src="./assets/site7.js?v=f77d607e" defer></script>
+<script src="./assets/site9.js?v=f77d607e" defer></script>
 
 </body>
 </html>
