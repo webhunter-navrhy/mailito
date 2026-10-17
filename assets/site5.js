@@ -9,11 +9,11 @@
   const qp = new URLSearchParams(location.search);
   const store = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
   const T = SK ? {
-    posielam: 'Odosielam…', chyba: 'Nepodarilo sa odoslať. Skúste to znova alebo napíšte na info.webhunter@email.cz.',
+    posielam: 'Odosielam…', chyba: 'Nepodarilo sa odoslať. Skúste to znova alebo napíšte na info@mailito.eu.',
     meno: 'Napíšte, prosím, svoje meno.', email: 'Zadajte platný e-mail.', ponuka: 'Napíšte, čo predávate.', zeme: 'Vyberte, kde chcete oslovovať.',
     ahoj: f => `Dobrý deň, <b>${f}</b>`,
   } : {
-    posielam: 'Odesílám…', chyba: 'Nepodařilo se odeslat. Zkuste to znovu nebo napište na info.webhunter@email.cz.',
+    posielam: 'Odesílám…', chyba: 'Nepodařilo se odeslat. Zkuste to znovu nebo napište na info@mailito.eu.',
     meno: 'Napište prosím své jméno.', email: 'Zadejte platný e-mail.', ponuka: 'Napište, co prodáváte.', zeme: 'Vyberte, kde chcete oslovovat.',
     ahoj: f => `Dobrý den, <b>${f}</b>`,
   };

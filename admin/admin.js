@@ -46,7 +46,7 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') zavri(); });
 
   // ---------- smerovanie ----------
-  const R = { analytika: vAnalytika, prehlad: vPrehlad, poptavky: vPoptavky, objednavky: vObjednavky, kampane: vKampane, kampan: vKampan, klienti: vKlienti, klient: vKlient, faktury: vFaktury, leady: vLeady, rozosielka: vRozosielka, databaza: vDatabaza, ai: vAi, web: vWeb };
+  const R = { analytika: vAnalytika, prehlad: vPrehlad, poptavky: vPoptavky, objednavky: vObjednavky, kampane: vKampane, kampan: vKampan, klienti: vKlienti, klient: vKlient, faktury: vFaktury, leady: vLeady, posta: vPosta, rozosielka: vRozosielka, databaza: vDatabaza, ai: vAi, web: vWeb };
   async function route() {
     const [v, id] = (location.hash.slice(1) || 'prehlad').split('/');
     $$('#nav a').forEach(a => a.classList.toggle('on', a.dataset.r === v || (v === 'kampan' && a.dataset.r === 'kampane') || (v === 'klient' && a.dataset.r === 'klienti') || (v === 'analytika' && a.dataset.r === 'analytika')));
@@ -284,8 +284,7 @@
     </tbody></table></div>` : '<p class="empty">Zatiaľ žiadne faktúry.</p>';
   async function vFaktury() {
     const d = await api('/api/adm/faktury');
-    return `<div class="ph"><div><h1>Faktúry</h1><p>Faktúru vystavíte vo svojom programe, tu nahráte PDF. Klient ju uvidí v portáli a dostane ju e-mailom z info.webhunter@email.cz.</p></div><button class="btn btn-p" data-a="nova-faktura">Nahrať faktúru</button></div>
-      ${(ENGINE?.schranky || []).some(s => s.ucel === 'notif') ? '' : '<p class="note" style="margin-bottom:12px">Notifikačná schránka (info.webhunter@email.cz) ešte nie je nastavená, preto faktúry zatiaľ neodchádzajú e-mailom. Klient ich vidí v portáli; PDF môžete poslať aj ručne a kliknúť „Poslal som ručne“.</p>'}
+    return `<div class="ph"><div><h1>Faktúry</h1><p>Faktúru vystavíte vo svojom programe, tu nahráte PDF. Klient ju uvidí v portáli a dostane ju e-mailom z info@mailito.eu.</p></div><button class="btn btn-p" data-a="nova-faktura">Nahrať faktúru</button></div>
       <div class="tw" style="padding:6px">${fTab(d.faktury)}</div>`;
   }
   async function novaFaktura(pre = {}) {
@@ -296,7 +295,7 @@
       <label>Kampaň (nepovinné)<select name="kampan"></select></label>
       <div class="f2"><label>Číslo faktúry<input name="cislo" required placeholder="2026001"></label><label>Suma s DPH alebo bez (€)<input name="suma" type="number" step="0.01" value="${esc(pre.suma || '')}"></label></div>
       <div class="f2"><label>Splatnosť<input name="splatnost" type="date" value="${new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10)}"></label><label>PDF faktúry<input name="subor" type="file" accept="application/pdf"></label></div>
-      <label style="display:flex;gap:8px;align-items:center;color:var(--tx)"><input name="poslat" type="checkbox" checked style="width:auto">Poslať klientovi e-mailom (z info.webhunter@email.cz)</label>
+      <label style="display:flex;gap:8px;align-items:center;color:var(--tx)"><input name="poslat" type="checkbox" checked style="width:auto">Poslať klientovi e-mailom (z info@mailito.eu)</label>
       <p class="msg" id="fMsg"></p><div class="acts"><button class="btn btn-p" id="fGo">Nahrať</button><button class="btn" data-zavri>Zrušiť</button></div>`);
     const selK = $('[name=klient]', c), selC = $('[name=kampan]', c);
     const plnK = () => { selC.innerHTML = '<option value="">– bez kampane –</option>' + KAMPANE.filter(x => x.client_id === selK.value).map(x => `<option value="${x.id}"${x.id === pre.kampan ? ' selected' : ''}>${esc(x.nazov || x.id)}${x.cena_eur != null ? ' · ' + eur(x.cena_eur) : ''}</option>`).join(''); };
@@ -320,6 +319,25 @@
   async function vLeady() {
     LEADY = (await api('/api/adm/leady')).leady;
     return `<div class="ph"><div><h1>Záujemcovia</h1><p>${LEADY.length} záujemcov zo všetkých kampaní</p></div></div><div class="filters"><input id="fL" placeholder="Hľadať firmu, klienta, text"></div><div class="tw" style="padding:6px" id="lBox">${leadTab(LEADY)}</div>`;
+  }
+
+  // ---------- pošta info@mailito.eu ----------
+  const POSTAV = { nova: ['Nová', 'st-warn'], precitana: ['Prečítaná', ''], odpovedana: ['Odpovedaná', 'st-ok'], vybavena: ['Vybavená', 'st-ok'] };
+  async function vPosta(id) {
+    if (id) {
+      const d = await api('/api/adm/posta?id=' + encodeURIComponent(id)), s = d.sprava;
+      if (s.stav === 'nova') api('/api/adm/posta-stav', { id: s.id, stav: 'precitana' }).catch(() => {});
+      const pr = JSON.parse(s.prilohy || '[]');
+      return `<div class="ph"><div><p><a href="#posta">← Pošta</a></p><h1>${esc(s.predmet || '(bez predmetu)')}</h1><p>Od ${esc(s.od)} · pre ${esc(s.komu)} · ${dt(s.ts)}</p></div>
+        <button class="btn" data-a="posta-vybavena" data-id="${s.id}">Označiť ako vybavené</button></div>
+        <div class="card"><pre style="white-space:pre-wrap;font:inherit;margin:0">${esc(s.text || '')}</pre>${pr.length ? `<p class="mut" style="margin-top:12px">Prílohy: ${pr.map(esc).join(', ')} (stiahnuť v Resende → Receiving)</p>` : ''}</div>
+        ${d.odpovede.map(o => `<div class="card" style="margin-top:12px"><h2>Naša odpoveď · ${dt(o.ts)}</h2><pre style="white-space:pre-wrap;font:inherit;margin:0">${esc(o.text)}</pre></div>`).join('')}
+        <div class="card" style="margin-top:12px"><h2>Odpovedať z info@mailito.eu</h2><textarea id="poOdp" rows="9" placeholder="Dobrý deň, …"></textarea>
+        <p style="margin-top:10px"><button class="btn btn-p" data-a="posta-odpoved" data-id="${s.id}">Odoslať odpoveď</button></p></div>`;
+    }
+    const d = await api('/api/adm/posta');
+    return `<div class="ph"><div><h1>Pošta</h1><p>Všetko, čo príde na info@mailito.eu a ďalšie adresy na mailito.eu (okrem odpovedí na kampane). Každú správu ti pošle aj Aneta do Telegramu.</p></div></div>
+      <div class="tw" style="padding:6px">${d.posta.length ? `<table><thead><tr><th>#</th><th>Od</th><th>Predmet</th><th>Stav</th><th>Prišlo</th></tr></thead><tbody>${d.posta.map(x => `<tr class="cl" data-href="posta/${x.id}"><td class="mut">${x.id}</td><td>${esc(x.od)}</td><td><b>${esc(x.predmet || '(bez predmetu)')}</b><br><span class="mut">${esc(x.ukazka || '')}</span></td><td>${st(POSTAV, x.stav)}</td><td class="mut nw">${dt(x.ts)}</td></tr>`).join('')}</tbody></table>` : '<p class="empty">Zatiaľ žiadna pošta.</p>'}</div>`;
   }
 
   // ---------- analytika ----------
@@ -362,7 +380,7 @@
       <div class="card" style="margin-top:12px"><h2>Kde beží engine <button class="btn btn-s ${d.nastavenia?.rezim === 'cloud' ? '' : 'btn-p'}" data-a="rezim" data-v="${d.nastavenia?.rezim === 'cloud' ? 'mac' : 'cloud'}">${d.nastavenia?.rezim === 'cloud' ? 'Vrátiť na Mac' : 'Prepnúť do cloudu'}</button></h2>
         <p class="mut">${d.nastavenia?.rezim === 'cloud' ? '<span class="st st-ok">v cloude</span> Odosielanie, odpovede, objednávky a faktúry robí Cloudflare každé 2 minúty. Mac nemusí byť zapnutý.' : '<span class="st st-warn">na Macu</span> Kým je Mac vypnutý, nič neodchádza a odpovede sa nečítajú.'}</p></div>
       <div class="card" style="margin-top:12px"><h2>Ostré odosielanie <button class="btn btn-s ${e.ostro ? 'btn-d' : 'btn-p'}" data-a="ostro" data-v="${e.ostro ? 0 : 1}">${e.ostro ? 'Vypnúť (nanečisto)' : 'Zapnúť ostro'}</button></h2><p class="mut">Kým je vypnuté, engine všetko pripraví, ale e-maily len uloží do outboxu. Zapnite, keď sú schránky zahriate a texty schválené.</p></div>
-      <div class="card" style="margin-top:12px"><h2>Schránky</h2>${sch.length ? `<table><thead><tr><th>E-mail</th><th>Účel</th><th>Stav</th><th class="r">Dnes</th><th class="r">Limit / deň</th><th>Odosiela od</th><th></th></tr></thead><tbody>${sch.map(s => `<tr><td><b>${esc(s.email)}</b><br><span class="mut">${esc(s.meno || '')} · ${esc(s.smtp_host || '')}</span></td><td>${s.ucel === 'notif' ? '<span class="st st-blue">notifikácie a faktúry</span>' : 'odosielanie'}</td><td>${s.aktivna ? '<span class="st st-ok">aktívna</span>' : '<span class="st">vypnutá</span>'}</td><td class="r">${fmt(s.dnes || 0)}</td><td class="r">${fmt(s.denny_limit)}</td><td>${esc(s.start || '–')}</td><td><button class="btn btn-s" data-a="schranka-stav" data-email="${esc(s.email)}" data-v="${s.aktivna ? 0 : 1}">${s.aktivna ? 'Vypnúť' : 'Zapnúť'}</button></td></tr>`).join('')}</tbody></table>` : '<p class="note">Zatiaľ nemáme žiadnu schránku. Pridajte odosielacie schránky (napr. rafael@getmailito.eu) a jednu notifikačnú (info.webhunter@email.cz) na upozornenia a faktúry.</p>'}</div>
+      <div class="card" style="margin-top:12px"><h2>Schránky</h2>${sch.length ? `<table><thead><tr><th>E-mail</th><th>Účel</th><th>Stav</th><th class="r">Dnes</th><th class="r">Limit / deň</th><th>Odosiela od</th><th></th></tr></thead><tbody>${sch.map(s => `<tr><td><b>${esc(s.email)}</b><br><span class="mut">${esc(s.meno || '')} · ${esc(s.smtp_host || '')}</span></td><td>${s.ucel === 'notif' ? '<span class="st st-blue">notifikácie a faktúry</span>' : 'odosielanie'}</td><td>${s.aktivna ? '<span class="st st-ok">aktívna</span>' : '<span class="st">vypnutá</span>'}</td><td class="r">${fmt(s.dnes || 0)}</td><td class="r">${fmt(s.denny_limit)}</td><td>${esc(s.start || '–')}</td><td><button class="btn btn-s" data-a="schranka-stav" data-email="${esc(s.email)}" data-v="${s.aktivna ? 0 : 1}">${s.aktivna ? 'Vypnúť' : 'Zapnúť'}</button></td></tr>`).join('')}</tbody></table>` : '<p class="note">Zatiaľ nemáme žiadnu schránku. Pridajte odosielacie schránky (napr. rafael@getmailito.eu) a jednu notifikačnú (info@mailito.eu) na upozornenia a faktúry.</p>'}</div>
       <div class="card" style="margin-top:12px"><h2>Odoslané za 30 dní</h2>${dni.length ? `<div class="chart">${dni.map(([dd, x]) => `<i style="height:${Math.max(2, x.odoslane / mx * 100)}%" data-t="${dd}: ${x.odoslane} odoslaných, ${x.zaujemcovia} záujemcov"></i>`).join('')}</div>` : '<p class="mut">Zatiaľ nič neodišlo.</p>'}</div>
       ${(d.outbox || []).length ? `<div class="card" style="margin-top:12px"><h2>Nanečisto: takto by odišlo (${d.outbox.length})</h2><table><tbody>${d.outbox.map((o, i) => `<tr class="cl" data-a="outbox" data-i="${i}"><td class="mut nw">${dt(o.ts)}</td><td>${esc(o.schranka)} → <b>${esc(o.email)}</b></td><td>${o.krok ? 'pripomienka ' + o.krok : 'prvý e-mail'}</td><td>${esc(o.predmet)}</td></tr>`).join('')}</tbody></table></div>` : ''}
       ${(d.log || []).length ? `<div class="card" style="margin-top:12px"><h2>Log enginu</h2><pre class="mail" style="max-height:260px;overflow:auto">${esc(d.log.join('\n'))}</pre></div>` : ''}
@@ -420,6 +438,8 @@
   async function akcia(b, v, id) {
     const a = b.dataset.a;
     try {
+      if (a === 'posta-odpoved') { const text = $('#poOdp').value.trim(); if (!text) return toast('Napíšte odpoveď.'); if (!confirm('Odoslať odpoveď z info@mailito.eu?')) return; b.disabled = true; const r = await api('/api/adm/posta-odpoved', { id: +b.dataset.id, text }); toast('Odoslané na ' + r.komu); return route(); }
+      if (a === 'posta-vybavena') { await api('/api/adm/posta-stav', { id: +b.dataset.id, stav: 'vybavena' }); toast('Vybavené.'); location.hash = 'posta'; return; }
       if (a === 'nova-faktura') return novaFaktura({ klient: b.dataset.klient, kampan: b.dataset.kampan, suma: b.dataset.suma });
       if (a === 'zaplatene') { if (!confirm('Označiť objednávku ako zaplatenú? Engine potom kampaň sám spustí.')) return; await api('/api/adm/platba', { id: b.dataset.id, platba: 'zaplatene' }); toast('Označené ako zaplatené.'); return route(); }
       if (a === 'fakt-udaje') { const d = await api('/api/adm/klient?id=' + b.dataset.id); const f = d.klient.fakturacne || {}; const txt = [f.firma || d.klient.firma, f.ulica, [f.psc, f.mesto].filter(Boolean).join(' '), 'IČO: ' + (f.ico || '–'), f.dic ? 'DIČ: ' + f.dic : '', f.icdph ? 'IČ DPH: ' + f.icdph : '', 'E-mail: ' + (f.email || d.klient.email)].filter(Boolean).join('\n'); modal(`<h2>Fakturačné údaje</h2><pre class="mail">${esc(txt)}</pre><div class="acts"><button class="btn btn-p" id="cp">Kopírovať</button><button class="btn" data-zavri>Zavrieť</button></div>`); $('#cp').onclick = () => { navigator.clipboard.writeText(txt); toast('Skopírované.'); }; return; }
@@ -450,7 +470,7 @@
           <label>IMAP server<input name="imap_host" placeholder="imap.example.com"></label><label>IMAP port<input name="imap_port" value="993"></label>
           <label>Prihlasovacie meno<input name="user" placeholder="zvyčajne e-mail"></label><label>Heslo<input name="heslo" type="password" autocomplete="new-password"></label>
           <label>Denný limit<input name="denny_limit" type="number" value="40"></label><label>Odosielať od (zahrievanie)<input name="start" type="date" value="${new Date().toISOString().slice(0, 10)}"></label>
-          <label>Účel<select name="ucel"><option value="">Odosielanie kampaní</option><option value="notif">Notifikácie a faktúry (info.webhunter@email.cz)</option></select></label><label>Stav<select name="aktivna"><option value="1">aktívna</option><option value="0">vypnutá</option></select></label></div>
+          <label>Účel<select name="ucel"><option value="">Odosielanie kampaní</option><option value="notif">Notifikácie a faktúry (info@mailito.eu)</option></select></label><label>Stav<select name="aktivna"><option value="1">aktívna</option><option value="0">vypnutá</option></select></label></div>
           <p class="msg" id="sMsg"></p><div class="acts"><button class="btn btn-p" id="sGo">Uložiť</button><button class="btn" data-zavri>Zrušiť</button></div>`);
         $('#sGo', c).onclick = async () => { const d = Object.fromEntries($$('input,select', c).map(i => [i.name, i.value.trim()])); d.smtp_port = +d.smtp_port || 465; d.imap_port = +d.imap_port || 993; d.denny_limit = +d.denny_limit || 40; d.aktivna = d.aktivna === '1'; if (!d.user) d.user = d.email; if (!d.ucel) delete d.ucel; try { await api('/api/adm/prikaz', { akcia: 'schranka', data: d }); zavri(); toast('Schránka odoslaná enginu.'); route(); } catch (e) { $('#sMsg', c).textContent = e.message; } };
         return;

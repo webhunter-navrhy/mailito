@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site7.css?v=2c00ae8d">
-<link rel="stylesheet" href="../assets/site9.css?v=2c00ae8d">
-<script defer src="../assets/ev.js?v=2c00ae8d"></script>
+<link rel="stylesheet" href="../assets/site7.css?v=234200c7">
+<link rel="stylesheet" href="../assets/site9.css?v=234200c7">
+<script defer src="../assets/ev.js?v=234200c7"></script>
 
 </head>
 <body>
@@ -94,26 +94,26 @@
 </div>
 
 <h2>Kdo jsme</h2>
-<p>Mailito provozuje WebHunter s.r.o., IČO 29498511, se sídlem v Praze. Kontakt: <a href="mailto:info.webhunter@email.cz">info.webhunter@email.cz</a>. Pokud máte otázku ke zpracování údajů, žádost o přístup nebo výmaz, napište nám a vyřídíme ji do 30 dnů. Můžete se obrátit i na Úřad pro ochranu osobních údajů.</p>
+<p>Mailito provozuje tým Mailito. Kontakt: <a href="mailto:info@mailito.eu">info@mailito.eu</a>. Pokud máte otázku ke zpracování údajů, žádost o přístup nebo výmaz, napište nám a vyřídíme ji do 30 dnů. Můžete se obrátit i na Úřad pro ochranu osobních údajů.</p>
 </div></section>
 </main>
 <script>
 document.getElementById('optForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=document.getElementById('optMsg');const d=Object.fromEntries(new FormData(f));d.cela_domena=!!f.cela_domena.checked;m.className='form-msg';m.textContent='Odhlašuji…';
 try{const r=await fetch('https://mailito-api.webhunter.workers.dev/api/odhlasit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json();if(!j.ok)throw new Error(j.chyba);f.reset();m.className='form-msg ok';m.textContent='Hotovo. Už vám nic nepošleme.';}
-catch(err){m.className='form-msg err';m.textContent='Nepodařilo se. Napište nám na info.webhunter@email.cz.';}});
+catch(err){m.className='form-msg err';m.textContent='Nepodařilo se. Napište nám na info@mailito.eu.';}});
 const q=new URLSearchParams(location.search).get('e');if(q)document.querySelector('#optForm [name=email]').value=q;
 </script>
 <footer class="foot">
   <p class="foot-word" aria-hidden="true">Mailito</p>
   <div class="foot-in">
     <a href="../" class="logo"><span class="mono" aria-hidden="true">M</span>Mailito</a>
-    <nav aria-label="Patička"><a href="../#balicky">Balíčky</a><a href="../portal/">Portál</a><a href="../podminky/">Podmínky</a><a href="../odhlaseni/">Proč jste dostali e-mail</a><a href="../sk/" hreflang="sk" data-lang="sk">Slovensky</a><a href="../en/" hreflang="en" data-lang="en">English</a><a href="mailto:info.webhunter@email.cz">Kontakt</a></nav>
+    <nav aria-label="Patička"><a href="../#balicky">Balíčky</a><a href="../portal/">Portál</a><a href="../podminky/">Podmínky</a><a href="../odhlaseni/">Proč jste dostali e-mail</a><a href="../sk/" hreflang="sk" data-lang="sk">Slovensky</a><a href="../en/" hreflang="en" data-lang="en">English</a><a href="mailto:info@mailito.eu">Kontakt</a></nav>
   </div>
-  <p class="foot-small">© 2026 Mailito · WebHunter s.r.o. · IČO 29498511 · Praha</p>
+  <p class="foot-small">© 2026 Mailito · <a href="mailto:info@mailito.eu">info@mailito.eu</a></p>
 </footer>
 <a href="../#poptavka" class="mcta" id="mcta" data-ev="cta_poptavka_mcta">Mapa trhu zdarma<svg><use href="#i-arr"/></svg></a>
-<script src="../assets/site7.js?v=2c00ae8d" defer></script>
-<script src="../assets/site9.js?v=2c00ae8d" defer></script>
+<script src="../assets/site7.js?v=234200c7" defer></script>
+<script src="../assets/site9.js?v=234200c7" defer></script>
 
 </body>
 </html>

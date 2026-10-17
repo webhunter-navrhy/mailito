@@ -11,19 +11,19 @@
   const store = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const T = EN ? {
-    posielam: 'Sending…', chyba: 'Could not send. Please try again or write to info.webhunter@email.cz.',
+    posielam: 'Sending…', chyba: 'Could not send. Please try again or write to info@mailito.eu.',
     meno: 'Please enter your name.', email: 'Please enter a valid e-mail.', ponuka: 'Please tell us what you sell.',
     ahoj: f => `${f}, we find companies that could buy from you and hand you only the interested ones.`,
     novy: 'New lead',
     toasty: [['Stavby Brno s.r.o.', '“Please send us an offer, we need it this month.”'], ['Logistika Kolín a.s.', '“Can we meet on Tuesday?”'], ['Plasty Zlín s.r.o.', '“Yes, send the price list.”']],
   } : SK ? {
-    posielam: 'Odosielam…', chyba: 'Nepodarilo sa odoslať. Skúste to znova alebo napíšte na info.webhunter@email.cz.',
+    posielam: 'Odosielam…', chyba: 'Nepodarilo sa odoslať. Skúste to znova alebo napíšte na info@mailito.eu.',
     meno: 'Napíšte, prosím, svoje meno.', email: 'Zadajte platný e-mail.', ponuka: 'Napíšte, čo predávate.',
     ahoj: f => `${f}, nájdeme firmy, ktoré od vás môžu kúpiť, a odovzdáme vám len záujemcov.`,
     novy: 'Nový záujemca',
     toasty: [['Stavby Trnava s.r.o.', '„Pošlite ponuku, riešime to ešte tento mesiac.“'], ['Logistika Žilina a.s.', '„Môžeme sa stretnúť v utorok?“'], ['Plasty Nitra s.r.o.', '„Áno, pošlite cenník.“']],
   } : {
-    posielam: 'Odesílám…', chyba: 'Nepodařilo se odeslat. Zkuste to znovu nebo napište na info.webhunter@email.cz.',
+    posielam: 'Odesílám…', chyba: 'Nepodařilo se odeslat. Zkuste to znovu nebo napište na info@mailito.eu.',
     meno: 'Napište prosím své jméno.', email: 'Zadejte platný e-mail.', ponuka: 'Napište, co prodáváte.',
     ahoj: f => `${f}, najdeme firmy, které od vás můžou koupit, a předáme vám jen zájemce.`,
     novy: 'Nový zájemce',
