@@ -9,9 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site2.css?v=229605e3">
-<link rel="stylesheet" href="portal.css?v=229605e3">
-<script defer src="../assets/ev.js?v=229605e3" data-pv-only></script>
+<link rel="stylesheet" href="../assets/site2.css?v=d7a1c934">
+<link rel="stylesheet" href="portal.css?v=d7a1c934">
+<link rel="stylesheet" href="portal9.css?v=d7a1c934">
+<link rel="preload" as="image" href="../assets/v9/louka.webp">
+<script defer src="../assets/ev.js?v=d7a1c934" data-pv-only></script>
 </head>
 <body class="app-body">
 
@@ -19,8 +21,7 @@
 <section class="login" id="login" hidden>
   <div class="login-card">
     <a href="../" class="logo">
-      <span class="logo-m" aria-hidden="true"></span>
-      mailito
+      <span class="mono" aria-hidden="true">M</span>Mailito
     </a>
     <h1 data-t="portal">Klientský portál</h1>
     <p class="muted" data-t="loginTxt"></p>
@@ -34,8 +35,11 @@
     <p class="login-alt" data-t="loginAlt2"></p>
   </div>
   <div class="login-art" aria-hidden="true">
-    <div class="la-3d g3d" data-3d="box"></div>
+    <img class="la-bg" src="../assets/v9/louka.webp" alt="">
+    <p class="la-eyebrow">Mailito · <span data-t="portal">Klientský portál</span></p>
     <p class="la-big" data-t="laBig"></p>
+    <div class="la-glass la-card"><small data-t="laKarta">Zájemci tento měsíc</small><div class="big"><b>38</b><em>+62 %</em></div><div class="la-bars"><i style="height:30%"></i><i style="height:44%"></i><i style="height:38%"></i><i style="height:58%"></i><i style="height:52%"></i><i style="height:76%"></i><i style="height:100%"></i></div></div>
+    <div class="la-glass la-lead"><span class="av">S</span><span><b>Stavby Brno s.r.o.</b><span data-t="laLead">„Pošlete prosím nabídku.“</span></span></div>
   </div>
 </section>
 
@@ -43,8 +47,7 @@
 <div class="app" id="app" hidden>
   <aside class="side" id="side">
     <a href="../" class="logo logo-side">
-      <span class="logo-m" aria-hidden="true"></span>
-      mailito
+      <span class="mono" aria-hidden="true">M</span>Mailito
     </a>
     <nav class="side-nav" aria-label="Portál">
       <a href="#prehlad" data-v="prehlad"><i class="ic ic-home"></i><span data-t="prehlad"></span></a>
@@ -101,7 +104,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="portal.js?v=229605e3" defer></script>
-<script type="module" src="../assets/clay3d.js?v=229605e3"></script>
+<script src="portal.js?v=d7a1c934" defer></script>
 </body>
 </html>

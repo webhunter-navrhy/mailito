@@ -15,7 +15,7 @@
     cs: {
       loc: 'cs-CZ', portal: 'Klientský portál', loginTxt: 'Přihlaste se údaji, které jsme vám poslali e-mailem.', heslo: 'Heslo', prihlasit: 'Přihlásit se', prihlasujem: 'Přihlašuji…',
       loginAlt1: 'Ještě s námi nespolupracujete? <a href="./?demo=1">Prohlédněte si ukázku portálu</a> nebo <a href="../#poptavka">napište nezávaznou poptávku</a>.',
-      loginAlt2: 'Zapomněli jste heslo? Napište na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.', laBig: 'Vaši zájemci<br><em>na jednom místě.</em>',
+      loginAlt2: 'Zapomněli jste heslo? Napište na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.', laBig: 'Vaši zájemci<br><em>na jednom místě.</em>', laKarta: 'Zájemci tento měsíc', laLead: '„Pošlete prosím nabídku.“',
       prehlad: 'Přehled', zaujemcovia: 'Zájemci', kampane: 'Kampaně', kampan: 'Kampaň', ucet: 'Účet', nova: '+ Nová kampaň', odhlasit: 'Odhlásit se',
       demoFlag: 'Ukázka · změny se neukládají · <a href="../#poptavka">Chci vlastní kampaň</a>',
       STAVY: { novy: 'Nový', kontaktovany: 'Kontaktován', stretnutie: 'Schůzka', ponuka: 'Nabídka', obchod: 'Obchod', neaktualny: 'Neaktuální', reklamacia: 'Reklamace' },
@@ -57,7 +57,7 @@
     sk: {
       loc: 'sk-SK', portal: 'Klientsky portál', loginTxt: 'Prihláste sa údajmi, ktoré sme vám poslali e-mailom.', heslo: 'Heslo', prihlasit: 'Prihlásiť sa', prihlasujem: 'Prihlasujem…',
       loginAlt1: 'Ešte s nami nespolupracujete? <a href="./?demo=1&jazyk=sk">Pozrite si ukážku portálu</a> alebo <a href="../sk/#poptavka">napíšte nezáväzný dopyt</a>.',
-      loginAlt2: 'Zabudli ste heslo? Napíšte na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.', laBig: 'Vaši záujemcovia<br><em>na jednom mieste.</em>',
+      loginAlt2: 'Zabudli ste heslo? Napíšte na <a href="mailto:info@mailito.eu">info@mailito.eu</a>.', laBig: 'Vaši záujemcovia<br><em>na jednom mieste.</em>', laKarta: 'Záujemcovia tento mesiac', laLead: '„Pošlite prosím ponuku.“',
       prehlad: 'Prehľad', zaujemcovia: 'Záujemcovia', kampane: 'Kampane', kampan: 'Kampaň', ucet: 'Účet', nova: '+ Nová kampaň', odhlasit: 'Odhlásiť sa',
       demoFlag: 'Ukážka · zmeny sa neukladajú · <a href="../sk/#poptavka">Chcem vlastnú kampaň</a>',
       STAVY: { novy: 'Nový', kontaktovany: 'Kontaktovaný', stretnutie: 'Stretnutie', ponuka: 'Ponuka', obchod: 'Obchod', neaktualny: 'Neaktuálny', reklamacia: 'Reklamácia' },
